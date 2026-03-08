@@ -1,57 +1,50 @@
 import Link from "next/link";
 import { FileText } from "lucide-react";
+import Image from "next/image";
+import { db } from "@/lib/firebase";
+import { collection, getDocs, query, where, orderBy } from "firebase/firestore";
 
 export const metadata = {
   title: "Blog - Engineering & Manufacturing Insights",
   description:
     "Expert articles on engineering fabrication, metal manufacturing, LED lighting, and industrial manufacturing in Aurangabad. Stay informed with Sudeep Engineers blog.",
   alternates: { canonical: "https://sudeepengineers.com/blog" },
+  revalidate: 60 // Revalidate cache every minute or as needed
 };
 
-const blogPosts = [
-  {
-    slug: "engineering-fabrication-services-aurangabad",
-    title: "Engineering Fabrication Services in Aurangabad: A Complete Guide",
-    excerpt: "Discover the full range of engineering fabrication services available in Aurangabad and how Waluj MIDC has become a hub for precision manufacturing.",
-    date: "March 1, 2025",
-    readTime: "8 min read",
-    tag: "Fabrication",
-  },
-  {
-    slug: "metal-fabrication-industrial-projects",
-    title: "Metal Fabrication for Industrial Projects: What You Need to Know",
-    excerpt: "A comprehensive overview of metal fabrication processes, materials, and best practices for industrial projects of all scales.",
-    date: "February 20, 2025",
-    readTime: "10 min read",
-    tag: "Manufacturing",
-  },
-  {
-    slug: "best-led-lighting-industrial-use",
-    title: "Choosing the Best LED Lighting for Industrial Use",
-    excerpt: "Expert guide to selecting the right LED lighting solutions for factories, warehouses, and industrial facilities. Energy savings and ROI analysis included.",
-    date: "February 10, 2025",
-    readTime: "9 min read",
-    tag: "LED Lighting",
-  },
-  {
-    slug: "benefits-local-manufacturing-waluj-midc",
-    title: "Benefits of Local Manufacturing in Waluj MIDC",
-    excerpt: "Why choosing a local manufacturer in Waluj MIDC, Aurangabad offers advantages in quality, cost, and delivery for your engineering projects.",
-    date: "January 28, 2025",
-    readTime: "7 min read",
-    tag: "Industry",
-  },
-  {
-    slug: "structural-fabrication-infrastructure",
-    title: "Structural Fabrication for Infrastructure Projects",
-    excerpt: "How structural metal fabrication supports India's growing infrastructure sector, from bridges to industrial plants.",
-    date: "January 15, 2025",
-    readTime: "8 min read",
-    tag: "Infrastructure",
-  },
-];
+// Next.js page component
+export default async function BlogPage() {
+  // Fetch posts from Firebase Server-Side
+  let blogPosts = [];
+  try {
+    const q = query(
+      collection(db, "blogs"), 
+      where("status", "==", "Published")
+    );
+    const querySnapshot = await getDocs(q);
+    
+    querySnapshot.forEach((doc) => {
+      blogPosts.push({ id: doc.id, ...doc.data() });
+    });
+    
+    // Sort manually by createdAt timestamp since Firestore requires composite indexes for orderBy + where
+    blogPosts.sort((a, b) => {
+       const dateA = a.createdAt?.seconds || 0;
+       const dateB = b.createdAt?.seconds || 0;
+       return dateB - dateA;
+    });
 
-export default function BlogPage() {
+  } catch (error) {
+    console.error("Error fetching blog posts from Firebase:", error);
+  }
+
+  // Format date helper
+  const formatDate = (timestamp) => {
+    if (!timestamp) return "Recent Update";
+    const date = new Date(timestamp.seconds * 1000);
+    return date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+  };
+
   return (
     <>
       <script
@@ -76,15 +69,15 @@ export default function BlogPage() {
         <div className="absolute -top-[30%] -right-[20%] w-[500px] h-[500px] rounded-full pointer-events-none"
           style={{ background: "radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%)" }} />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <nav className="text-xs text-[color:var(--color-text-muted)] mb-6 flex gap-2">
-            <Link href="/" className="hover:text-blue-400 no-underline text-[color:var(--color-text-muted)]">Home</Link>
-            <span>/</span><span className="text-[color:var(--color-text-secondary)]">Blog</span>
+          <nav className="text-xs text-[#94A3B8] mb-6 flex gap-2">
+            <Link href="/" className="hover:text-blue-400 no-underline text-[#94A3B8]">Home</Link>
+            <span>/</span><span className="text-[#64748B]">Blog</span>
           </nav>
           <h1 className="text-[clamp(2rem,4vw,3rem)] font-heading font-extrabold mb-4"
             style={{ animation: "fade-in-up 0.6s ease forwards" }}>
             Engineering <span className="gradient-text">Insights</span>
           </h1>
-          <p className="text-[color:var(--color-text-secondary)] text-lg max-w-[600px]"
+          <p className="text-[#94A3B8] text-lg max-w-[600px]"
             style={{ animation: "fade-in-up 0.6s ease 0.1s forwards", opacity: 0 }}>
             Expert articles on fabrication, manufacturing, and LED lighting from our team.
           </p>
@@ -92,34 +85,51 @@ export default function BlogPage() {
       </section>
 
       {/* Blog Cards */}
-      <section className="py-20 bg-[color:var(--color-bg-secondary)]">
+      <section className="py-20 bg-[#F8FAFC]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {blogPosts.map((post, i) => (
               <Link
                 href={`/blog/${post.slug}`}
-                key={i}
-                className={`glass-card overflow-hidden no-underline group animate-on-scroll delay-${(i % 5) + 1}`}
+                key={post.id || i}
+                className={`bg-white border border-[#E2E8F0] rounded-xl overflow-hidden no-underline group shadow-sm hover:shadow-md transition-shadow animate-on-scroll delay-${(i % 5) + 1}`}
               >
-                <div className="h-[200px] bg-gradient-to-br from-[#111827] to-[#0f172a] flex items-center justify-center text-slate-700 opacity-50 group-hover:opacity-70 group-hover:text-slate-600 transition-colors">
-                  <FileText className="w-16 h-16" />
+                <div className="h-[200px] bg-gradient-to-br from-[#1E293B] to-[#0F172A] relative overflow-hidden flex items-center justify-center text-slate-700">
+                  {post.featuredImage ? (
+                    <Image 
+                      src={post.featuredImage} 
+                      alt={post.title} 
+                      fill
+                      className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" 
+                    />
+                  ) : (
+                    <FileText className="w-16 h-16 opacity-30 text-white" />
+                  )}
                 </div>
                 <div className="p-6">
-                  <span className="inline-block bg-blue-500/10 border border-blue-500/15 rounded-full px-3 py-0.5 text-[0.72rem] text-blue-400 font-semibold mb-3">
-                    {post.tag}
-                  </span>
-                  <h3 className="font-heading font-bold text-base mb-2 text-[color:var(--color-foreground)] group-hover:text-blue-400 transition-colors leading-snug">
+                  {post.tag && (
+                    <span className="inline-block bg-blue-500/10 border border-blue-500/15 rounded-full px-3 py-0.5 text-[0.72rem] text-[#2563EB] font-bold uppercase tracking-wider mb-3">
+                      {post.tag}
+                    </span>
+                  )}
+                  <h3 className="font-heading font-bold text-lg mb-2 text-[#0F172A] group-hover:text-[#2563EB] transition-colors leading-snug line-clamp-2">
                     {post.title}
                   </h3>
-                  <p className="text-[color:var(--color-text-secondary)] text-sm leading-relaxed mb-3">{post.excerpt}</p>
-                  <div className="flex items-center gap-4 text-xs text-[color:var(--color-text-muted)]">
-                    <span>{post.date}</span>
-                    <span>·</span>
-                    <span>{post.readTime}</span>
+                  <p className="text-[#475569] text-sm leading-relaxed mb-4 line-clamp-3">{post.excerpt}</p>
+                  <div className="flex items-center gap-2 text-xs text-[#94A3B8] font-medium border-t border-[#F1F5F9] pt-4 mt-auto">
+                    <span>{formatDate(post.createdAt)}</span>
                   </div>
                 </div>
               </Link>
             ))}
+            
+            {blogPosts.length === 0 && (
+              <div className="col-span-full py-20 text-center border-2 border-dashed border-[#CBD5E1] rounded-2xl bg-white">
+                 <FileText className="w-12 h-12 mx-auto text-[#94A3B8] mb-4" />
+                 <h3 className="text-xl font-bold text-[#1E293B]">Check back later</h3>
+                 <p className="text-[#64748B]">We are currently preparing new insights and articles. Stay tuned!</p>
+              </div>
+            )}
           </div>
         </div>
       </section>

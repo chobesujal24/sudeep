@@ -1,12 +1,30 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Icons } from "@/components/Icons";
+import BlogManager from "@/components/admin/BlogManager";
 
 export default function AdminDashboard() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [authError, setAuthError] = useState("");
+
+  const [activeTab, setActiveTab] = useState("products");
+  
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editingIndex, setEditingIndex] = useState(null);
   const [formData, setFormData] = useState({});
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (username === "sudep" && password === "sudeep24") {
+      setIsAuthenticated(true);
+      setAuthError("");
+    } else {
+      setAuthError("Invalid credentials");
+    }
+  };
 
   useEffect(() => {
     fetchProducts();
@@ -121,6 +139,53 @@ export default function AdminDashboard() {
 
   if (loading) return <div className="min-h-screen flex text-white items-center justify-center bg-[#0F172A] p-10 font-bold">Initializing CMS...</div>;
 
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#F8FAFC]">
+        <div className="bg-white p-10 rounded-2xl shadow-lg border border-[#E2E8F0] w-full max-w-md">
+          <div className="text-center mb-8">
+            <h1 className="text-2xl font-bold text-[#0F172A] mb-2">Admin Portal</h1>
+            <p className="text-sm text-[#64748B]">Please sign in to access the CMS.</p>
+          </div>
+          
+          <form onSubmit={handleLogin} className="space-y-5">
+            <div>
+              <label className="block text-xs font-bold text-[#475569] uppercase mb-1">Username</label>
+              <input 
+                type="text" 
+                value={username} 
+                onChange={(e) => setUsername(e.target.value)} 
+                className="w-full p-3 border border-[#CBD5E1] rounded-lg focus:ring-2 focus:ring-[#38BDF8] outline-none text-[#0F172A]" 
+                placeholder="Enter username"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-bold text-[#475569] uppercase mb-1">Password</label>
+              <input 
+                type="password" 
+                value={password} 
+                onChange={(e) => setPassword(e.target.value)} 
+                className="w-full p-3 border border-[#CBD5E1] rounded-lg focus:ring-2 focus:ring-[#38BDF8] outline-none text-[#0F172A]" 
+                placeholder="Enter password"
+              />
+            </div>
+            
+            {authError && (
+              <p className="text-red-500 text-xs font-bold text-center bg-red-50 py-2 rounded">{authError}</p>
+            )}
+            
+            <button 
+              type="submit" 
+              className="w-full py-3 bg-[#0F172A] hover:bg-[#1E293B] text-white rounded-lg font-bold shadow-md transition-all"
+            >
+              Secure Login
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] font-sans pt-24 pb-20">
       {/* Top Admin Header */}
@@ -132,7 +197,7 @@ export default function AdminDashboard() {
             </h1>
             <span className="text-xs text-[#94A3B8]">Manage your digital inventory and catalogs</span>
           </div>
-          {Object.keys(formData).length > 0 && (
+          {(activeTab === "products" && Object.keys(formData).length > 0) && (
             <div className="flex gap-3">
               <button 
                 onClick={() => {setEditingIndex(null); setFormData({});}}
@@ -149,12 +214,32 @@ export default function AdminDashboard() {
             </div>
           )}
         </div>
+        
+        {/* Tabs */}
+        <div className="max-w-[1400px] mx-auto mt-4 flex gap-4">
+           <button 
+             onClick={() => setActiveTab("products")}
+             className={`px-4 py-2 font-bold text-sm rounded-md transition-colors ${activeTab === "products" ? "bg-[#38BDF8] text-white" : "bg-[#334155] text-[#94A3B8] hover:text-white"}`}
+           >
+             Product Catalog CMS
+           </button>
+           <button 
+             onClick={() => setActiveTab("blog")}
+             className={`px-4 py-2 font-bold text-sm rounded-md transition-colors ${activeTab === "blog" ? "bg-[#10B981] text-white" : "bg-[#334155] text-[#94A3B8] hover:text-white"}`}
+           >
+             Blog CMS
+           </button>
+        </div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-6 flex flex-col lg:flex-row gap-8">
+      <div className="max-w-[1400px] mx-auto px-6 mt-8">
         
-        {/* LEFT COLUMN - PRODUCT LISTING (Sidebar) */}
-        <div className="w-full lg:w-1/4 flex flex-col gap-4">
+        {activeTab === "blog" ? (
+           <BlogManager />
+        ) : (
+           <div className="flex flex-col lg:flex-row gap-8">
+             {/* LEFT COLUMN - PRODUCT LISTING (Sidebar) */}
+             <div className="w-full lg:w-1/4 flex flex-col gap-4">
           <button 
             onClick={startAdd}
             className="w-full py-4 border-2 border-dashed border-[#CBD5E1] bg-white text-[#38BDF8] rounded-xl font-bold hover:bg-[#F0F9FF] hover:border-[#38BDF8] transition-all flex items-center justify-center gap-2 shadow-sm"
@@ -345,9 +430,11 @@ export default function AdminDashboard() {
           )}
         </div>
       </div>
+      )}
+      </div>
       
       {/* Footer / Status bar (only shows if editing) */}
-      {editingIndex !== null && (
+      {(activeTab === "products" && editingIndex !== null) && (
          <div className="fixed bottom-0 left-0 w-full bg-[#1E293B] text-white p-2 text-center text-xs border-t border-[#334155] z-50 animate-pulse">
            🟢 Database is currently open for edits. Be sure to hit "Publish Form" to commit changes to JSON!
          </div>
