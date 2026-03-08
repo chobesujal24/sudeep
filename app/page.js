@@ -211,8 +211,13 @@ export default function HomePage() {
               </ul>
             </div>
             <div className="animate-on-scroll delay-2">
-              <div className="rounded-2xl overflow-hidden border border-[#E2E8F0] bg-gradient-to-br from-blue-50 to-[#F8FAFC] h-[400px] flex items-center justify-center text-blue-200">
-                <Icons.Factory className="w-32 h-32 opacity-50" />
+              <div className="rounded-2xl overflow-hidden shadow-lg h-[400px] relative">
+                <Image
+                  src="/about_metal_poles.jpg"
+                  alt="Sudeep Engineers Manufacturing Poles"
+                  fill
+                  className="object-cover hover:scale-105 transition-transform duration-700"
+                />
               </div>
             </div>
           </div>

@@ -36,13 +36,9 @@ export default function FAQ() {
   return (
     <div className="space-y-3">
       {faqs.map((faq, i) => (
-        <div
-          key={i}
-          className={`glass-card overflow-hidden animate-on-scroll delay-${(i % 5) + 1} ${
-            openIndex === i ? "faq-open" : ""
-          }`}
-        >
-          <button
+        <div key={i} className={`animate-on-scroll delay-${(i % 5) + 1}`}>
+          <div className={`glass-card overflow-hidden ${openIndex === i ? "faq-open" : ""}`}>
+            <button
             onClick={() => toggle(i)}
             className="w-full flex items-center justify-between px-6 py-5 bg-transparent border-none text-[color:var(--color-foreground)] text-[0.95rem] font-semibold cursor-pointer text-left font-[inherit] hover:text-[color:var(--color-accent)] transition-colors"
           >
@@ -54,6 +50,7 @@ export default function FAQ() {
               {faq.a}
             </div>
           </div>
+        </div>
         </div>
       ))}
 

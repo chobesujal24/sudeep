@@ -43,17 +43,19 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? "bg-[color:var(--color-bg-secondary)] border-b border-[color:var(--color-border)] shadow-[0_4px_30px_rgba(0,0,0,0.3)]"
-            : "bg-[color:var(--color-bg-secondary)] border-b border-transparent"
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
+          ? "bg-[color:var(--color-bg-secondary)] border-b border-[color:var(--color-border)] shadow-[0_4px_30px_rgba(0,0,0,0.3)]"
+          : "bg-[color:var(--color-bg-secondary)] border-b border-transparent"
+          }`}
         style={{ backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)" }}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
-          {/* Brand */}
           <Link href="/" className="flex items-center gap-3 no-underline group -ml-2">
-            <img src="/logo.png" alt="Sudeep Lights" className="h-[42px] w-auto object-contain" />
+            <img
+              src="/logo.png"
+              alt="Sudeep Lights"
+              className="h-[100px] w-auto object-contain transition-transform group-hover:scale-105"
+            />
           </Link>
 
           {/* Desktop Nav */}
@@ -62,11 +64,10 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`px-3.5 py-2 rounded-md text-sm font-medium transition-all no-underline ${
-                  pathname === link.href
-                    ? "text-blue-700 bg-blue-50"
-                    : "text-slate-600 hover:text-blue-700 hover:bg-blue-50"
-                }`}
+                className={`px-3.5 py-2 rounded-md text-sm font-medium transition-all no-underline ${pathname === link.href
+                  ? "text-blue-700 bg-blue-50"
+                  : "text-slate-600 hover:text-blue-700 hover:bg-blue-50"
+                  }`}
               >
                 {link.label}
               </Link>
@@ -86,19 +87,16 @@ export default function Navbar() {
             aria-label="Toggle menu"
           >
             <span
-              className={`block w-6 h-0.5 bg-[color:var(--color-foreground)] rounded transition-all ${
-                mobileOpen ? "rotate-45 translate-y-[7px]" : ""
-              }`}
+              className={`block w-6 h-0.5 bg-[color:var(--color-foreground)] rounded transition-all ${mobileOpen ? "rotate-45 translate-y-[7px]" : ""
+                }`}
             />
             <span
-              className={`block w-6 h-0.5 bg-[color:var(--color-foreground)] rounded transition-all ${
-                mobileOpen ? "opacity-0" : ""
-              }`}
+              className={`block w-6 h-0.5 bg-[color:var(--color-foreground)] rounded transition-all ${mobileOpen ? "opacity-0" : ""
+                }`}
             />
             <span
-              className={`block w-6 h-0.5 bg-[color:var(--color-foreground)] rounded transition-all ${
-                mobileOpen ? "-rotate-45 -translate-y-[7px]" : ""
-              }`}
+              className={`block w-6 h-0.5 bg-[color:var(--color-foreground)] rounded transition-all ${mobileOpen ? "-rotate-45 -translate-y-[7px]" : ""
+                }`}
             />
           </button>
         </div>
@@ -114,9 +112,8 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed top-0 right-0 w-[300px] h-full bg-[color:var(--color-bg-secondary)] z-50 transition-transform duration-300 lg:hidden ${
-          mobileOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed top-0 right-0 w-[300px] h-full bg-[color:var(--color-bg-secondary)] z-50 transition-transform duration-300 lg:hidden ${mobileOpen ? "translate-x-0" : "translate-x-full"
+          }`}
         style={{ boxShadow: "-5px 0 30px rgba(0,0,0,0.5)" }}
       >
         <div className="pt-20 px-6">
@@ -125,11 +122,10 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={closeMobile}
-              className={`block px-4 py-3 rounded-md text-base font-medium transition-all no-underline mb-1 ${
-                pathname === link.href
-                  ? "text-blue-700 bg-blue-50"
-                  : "text-slate-600 hover:text-blue-700 hover:bg-blue-50"
-              }`}
+              className={`block px-4 py-3 rounded-md text-base font-medium transition-all no-underline mb-1 ${pathname === link.href
+                ? "text-blue-700 bg-blue-50"
+                : "text-slate-600 hover:text-blue-700 hover:bg-blue-50"
+                }`}
             >
               {link.label}
             </Link>

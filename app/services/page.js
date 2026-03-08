@@ -31,6 +31,7 @@ const services = [
       "Comprehensive quality control",
     ],
     industries: ["Construction", "Infrastructure", "Industrial Plants", "Manufacturing", "Government Projects"],
+    image: "/general_industry_fabrication_1772904248397.png"
   },
   {
     id: "structural-metal-manufacturing",
@@ -48,6 +49,7 @@ const services = [
       "On-site installation support",
     ],
     industries: ["Building Construction", "Bridge & Flyover Projects", "Industrial Sheds", "Warehousing", "Water Treatment Plants"],
+    image: "/industry_construction_1772907669191.png"
   },
   {
     id: "industrial-job-work",
@@ -65,6 +67,7 @@ const services = [
       "Flexible capacity scaling",
     ],
     industries: ["Automobile Companies", "Machine Manufacturers", "Agricultural Equipment", "Power & Energy", "General Engineering"],
+    image: "/industry_manufacturing_1772907702259.png"
   },
   {
     id: "custom-engineering-solutions",
@@ -82,6 +85,7 @@ const services = [
       "Ongoing technical support",
     ],
     industries: ["R&D Departments", "Startups & Innovators", "Specialized Machinery", "Defense & Aerospace", "Medical Equipment"],
+    image: "/industry_plant_1772907685804.png"
   },
   {
     id: "led-lighting-manufacturing",
@@ -99,6 +103,7 @@ const services = [
       "Comprehensive warranty support",
     ],
     industries: ["Municipal Corporations", "Highway Authorities", "Industrial Complexes", "Commercial Buildings", "Sports Facilities"],
+    image: "/industry_government_1772907719581.png"
   },
 ];
 
@@ -196,7 +201,7 @@ export default function ServicesPage() {
               <div className={`animate-on-scroll delay-2 ${idx % 2 !== 0 ? "lg:order-1" : ""}`}>
                 <div className="rounded-2xl overflow-hidden border border-[#E2E8F0] lg:h-[400px] h-[320px] relative mb-6 group bg-[#FFFFFF]">
                   <Image 
-                    src="/general_industry_fabrication_1772904248397.png" 
+                    src={service.image} 
                     alt={service.title} 
                     fill 
                     className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-90" 

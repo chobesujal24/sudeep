@@ -1,43 +1,40 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 export default function ScrollAnimations() {
+  const pathname = usePathname();
+  const observerRef = useRef(null);
+
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    // Cleanup previous observer
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+    }
+
+    observerRef.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("animated");
-            observer.unobserve(entry.target);
+            observerRef.current.unobserve(entry.target);
           }
         });
       },
       { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
     );
 
-    document.querySelectorAll(".animate-on-scroll").forEach((el) => observer.observe(el));
+    // Initial observe
+    document.querySelectorAll(".animate-on-scroll:not(.animated)").forEach((el) => {
+      observerRef.current.observe(el);
+    });
 
-    return () => observer.disconnect();
-  }, []);
-
-  // Re-run on route change
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("animated");
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
-      );
-      document.querySelectorAll(".animate-on-scroll:not(.animated)").forEach((el) => observer.observe(el));
-    }, 100);
-    return () => clearTimeout(timer);
-  });
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
+  }, [pathname]);
 
   return null;
 }

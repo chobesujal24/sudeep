@@ -7,8 +7,8 @@ export default function ImageGallery({ images, productName }) {
 
   if (!images || images.length === 0) {
     return (
-      <div className="w-full h-full min-h-[400px] flex items-center justify-center bg-gradient-to-br from-[#111827] to-[#0f172a] rounded-2xl border border-[color:var(--color-border)]">
-        <span className="text-slate-700 text-6xl">💡</span>
+      <div className="w-full h-full min-h-[400px] flex items-center justify-center bg-[#F8FAFC] rounded-2xl border border-[#E2E8F0]">
+        <span className="text-[#38BDF8] text-6xl">💡</span>
       </div>
     );
   }
@@ -16,11 +16,12 @@ export default function ImageGallery({ images, productName }) {
   return (
     <div className="flex flex-col gap-4 sticky top-24">
       {/* Main Large Image */}
-      <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-[color:var(--color-bg-secondary)] border border-[color:var(--color-border)] group">
+      <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-[#FFFFFF] border border-[#E2E8F0] group">
         <Image
-          src={mainImage}
+          src={encodeURI(mainImage)}
           alt={productName}
           fill
+          unoptimized
           className="object-contain p-4 group-hover:scale-110 transition-transform duration-500 ease-in-out"
           priority
         />
@@ -40,9 +41,10 @@ export default function ImageGallery({ images, productName }) {
               }`}
             >
               <Image
-                src={img}
+                src={encodeURI(img)}
                 alt={`${productName} thumbnail ${idx + 1}`}
                 fill
+                unoptimized
                 className="object-contain p-1"
               />
             </button>

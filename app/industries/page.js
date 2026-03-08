@@ -15,30 +15,35 @@ const industries = [
     title: "Construction",
     desc: "Structural steel fabrication, metal frameworks, roofing systems, and building components for residential, commercial, and industrial construction projects across Aurangabad and Maharashtra.",
     services: ["Structural steel beams & columns", "Metal roofing systems", "Staircase fabrication", "Railing & handrails", "Cladding support structures"],
+    image: "/industry_construction_1772907669191.png"
   },
   {
     icon: <Globe color="currentColor" size={48} />,
     title: "Infrastructure",
     desc: "Heavy-duty fabricated components for infrastructure development including bridges, flyovers, water treatment plants, and public utility projects. Trusted by government agencies and contractors.",
     services: ["Bridge components", "Flyover structural elements", "Water tank structures", "Pipeline supports", "LED street lighting systems"],
+    image: "/general_industry_fabrication_1772904248397.png"
   },
   {
     icon: <Factory color="currentColor" size={48} />,
     title: "Industrial Plants",
     desc: "Custom fabrication and job work for industrial facilities. We supply machine components, industrial fixtures, conveyor systems, and maintenance parts to keep plants running efficiently.",
     services: ["Machine guards & enclosures", "Conveyor system components", "Industrial platforms & walkways", "Duct fabrication", "LED industrial lighting"],
+    image: "/industry_plant_1772907685804.png"
   },
   {
     icon: <Settings color="currentColor" size={48} />,
     title: "Manufacturing Companies",
     desc: "Precision parts and assemblies for manufacturing companies. From CNC-machined components to complete sub-assemblies, we serve as an extension of your production capability.",
     services: ["CNC machined components", "Jigs & fixtures", "Assembly sub-contracts", "Tool & die components", "Prototype development"],
+    image: "/industry_manufacturing_1772907702259.png"
   },
   {
     icon: <Landmark color="currentColor" size={48} />,
     title: "Government Projects",
     desc: "As an MSME registered company, we are qualified for government tenders and projects. We have experience delivering fabrication and LED lighting solutions for municipal and state government initiatives.",
     services: ["Smart city LED lighting", "Government building fabrication", "Public infrastructure works", "Solar structure fabrication", "Street light installation"],
+    image: "/industry_government_1772907719581.png"
   },
 ];
 
@@ -122,7 +127,7 @@ export default function IndustriesPage() {
               <div className={`animate-on-scroll delay-2 ${idx % 2 !== 0 ? "lg:order-1" : ""}`}>
                 <div className="rounded-2xl overflow-hidden border border-[#E2E8F0] lg:h-[400px] h-[350px] relative group bg-[#FFFFFF]">
                   <Image 
-                    src="/general_industry_fabrication_1772904248397.png" 
+                    src={ind.image} 
                     alt={ind.title} 
                     fill 
                     className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-90" 

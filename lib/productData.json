@@ -1,0 +1,936 @@
+[
+  {
+    "id": "bulk-head-light",
+    "slug": "bulk-head-light",
+    "name": "Bulk Head Light",
+    "category": "Industrial Lighting",
+    "description": "Heavy-duty Industrial Bulk Head Lights designed for harsh environments and industrial corridors ensuring maximum safety and visibility.",
+    "specs": [
+      {
+        "label": "Wattage",
+        "value": "10W - 40W"
+      },
+      {
+        "label": "Material",
+        "value": "Die Cast Aluminium"
+      },
+      {
+        "label": "IP Rating",
+        "value": "IP65 / IP66"
+      },
+      {
+        "label": "Input Voltage",
+        "value": "120-277V AC"
+      },
+      {
+        "label": "Lifespan",
+        "value": "50,000+ Hours"
+      }
+    ],
+    "applications": [
+      "Corridors",
+      "Staircases",
+      "Basements",
+      "Industrial Walkways",
+      "Mining Areas"
+    ],
+    "images": [
+      "/products/bulk-head-light/download (1).jpeg",
+      "/products/bulk-head-light/download (2).jpeg",
+      "/products/bulk-head-light/download.jpeg"
+    ],
+    "catalogs": []
+  },
+  {
+    "id": "flame-proof-light",
+    "slug": "flame-proof-light",
+    "name": "Flame Proof Light",
+    "category": "Hazardous Lighting",
+    "description": "Explosion-proof LED lighting solutions certified for use in hazardous areas like chemical plants, oil refineries, and mines.",
+    "specs": [
+      {
+        "label": "Wattage",
+        "value": "20W - 150W"
+      },
+      {
+        "label": "Housing",
+        "value": "Aluminum Alloy with Exd IIB/IIC certification"
+      },
+      {
+        "label": "IP Rating",
+        "value": "IP66 waterproof"
+      },
+      {
+        "label": "Certifications",
+        "value": "ATEX / PESO / CMRI"
+      },
+      {
+        "label": "Glass",
+        "value": "Toughened Borosilicate Glass"
+      }
+    ],
+    "applications": [
+      "Oil Refineries",
+      "Chemical Plants",
+      "Petrochemical Facilities",
+      "Mines"
+    ],
+    "images": [
+      "/products/flame-proof-light/4121iTsviUL._SR600,315_PIWhiteStrip,BottomLeft,0,35_SCLZZZZZZZ_FMpng_BG255,255,255 - Copy.png",
+      "/products/flame-proof-light/4121iTsviUL._SR600,315_PIWhiteStrip,BottomLeft,0,35_SCLZZZZZZZ_FMpng_BG255,255,255.png",
+      "/products/flame-proof-light/CLOSE VIEW.jpg",
+      "/products/flame-proof-light/floodlightflameproof.jpeg.e1c848518e.999x185x185 (1).jpg",
+      "/products/flame-proof-light/floodlightflameproof.jpeg.e1c848518e.999x185x185 (2).jpg",
+      "/products/flame-proof-light/floodlightflameproof.jpeg.e1c848518e.999x185x185.jpg",
+      "/products/flame-proof-light/images (1).jpg",
+      "/products/flame-proof-light/images (2).jpg",
+      "/products/flame-proof-light/images (3).jpg",
+      "/products/flame-proof-light/images (4).jpg",
+      "/products/flame-proof-light/images.jpg",
+      "/products/flame-proof-light/led-well-glass-500x500.jpg",
+      "/products/flame-proof-light/led-wellglassnonflp-2-500x500.jpg",
+      "/products/flame-proof-light/product-jpeg-500x500.jpg"
+    ],
+    "catalogs": []
+  },
+  {
+    "id": "fresnel-light",
+    "slug": "fresnel-light",
+    "name": "Fresnel Light",
+    "category": "Specialized Lighting",
+    "description": "High-intensity Fresnel LED lights offering focused and adjustable illumination, ideal for stages, studios, and architectural highlighting.",
+    "specs": [
+      {
+        "label": "Wattage",
+        "value": "50W - 300W"
+      },
+      {
+        "label": "Beam Angle",
+        "value": "Adjustable 15° to 60°"
+      },
+      {
+        "label": "Color Temperature",
+        "value": "3200K / 5600K"
+      },
+      {
+        "label": "Dimming",
+        "value": "DMX512 / Manual"
+      }
+    ],
+    "applications": [
+      "Auditoriums",
+      "Theaters",
+      "TV Studios",
+      "Architectural Highlighting"
+    ],
+    "images": [
+      "/products/fresnel-light/100 W F.jpg",
+      "/products/fresnel-light/100 W.jpg",
+      "/products/fresnel-light/100 WA.jpg"
+    ],
+    "catalogs": []
+  },
+  {
+    "id": "gi-octagonal-poles",
+    "slug": "gi-octagonal-poles",
+    "name": "GI / Octagonal Poles",
+    "category": "Infrastructure",
+    "description": "Galvanized Iron (GI) and Octagonal steel poles engineered for maximum wind resistance and durability. Perfect for street lights, CCTV, and high masts.",
+    "specs": [
+      {
+        "label": "Height",
+        "value": "3 meters to 12 meters"
+      },
+      {
+        "label": "Material",
+        "value": "Hot Dip Galvanized Iron (GI)"
+      },
+      {
+        "label": "Shape",
+        "value": "Octagonal / Tubular / Conical"
+      },
+      {
+        "label": "Coating",
+        "value": "PU Paint / Powder Coated"
+      },
+      {
+        "label": "Wind Speed Resistance",
+        "value": "Up to 300 Kmph"
+      }
+    ],
+    "applications": [
+      "Street Lighting",
+      "CCTV Mounting",
+      "Sports Complexes",
+      "Highway Lighting",
+      "Smart Cities"
+    ],
+    "images": [
+      "/products/gi-octagonal-poles/1.jpg",
+      "/products/gi-octagonal-poles/222.jpg",
+      "/products/gi-octagonal-poles/333 - Copy - Copy.png",
+      "/products/gi-octagonal-poles/333 - Copy.png",
+      "/products/gi-octagonal-poles/333.png",
+      "/products/gi-octagonal-poles/bajaj-octagonal-poles-500x500.jpg",
+      "/products/gi-octagonal-poles/download.png",
+      "/products/gi-octagonal-poles/extra-07705807.jpg",
+      "/products/gi-octagonal-poles/high-mast-pole-1512468790-3498311 (1).jpg",
+      "/products/gi-octagonal-poles/high-mast-pole-1512468790-3498311.jpg",
+      "/products/gi-octagonal-poles/images (1).png",
+      "/products/gi-octagonal-poles/images (2).png",
+      "/products/gi-octagonal-poles/images.png",
+      "/products/gi-octagonal-poles/Screenshot 2026-02-28 190418.png",
+      "/products/gi-octagonal-poles/Screenshot 2026-02-28 190526.png",
+      "/products/gi-octagonal-poles/Screenshot 2026-02-28 190559.png",
+      "/products/gi-octagonal-poles/U BEND POLES - Copy (2).jpg",
+      "/products/gi-octagonal-poles/U BEND POLES - Copy.jpg",
+      "/products/gi-octagonal-poles/U BEND POLES.jpg"
+    ],
+    "catalogs": []
+  },
+  {
+    "id": "high-mast-pole",
+    "slug": "high-mast-pole",
+    "name": "High Mast Pole",
+    "category": "Infrastructure",
+    "description": "Towering High Mast lighting poles ranging from 12m to 30m, fully equipped with automated motorized lowering mechanism for easy maintenance.",
+    "specs": [
+      {
+        "label": "Height Range",
+        "value": "12m, 16m, 20m, 25m, 30m"
+      },
+      {
+        "label": "Material",
+        "value": "High Tensile Steel Sheet (HTSS)"
+      },
+      {
+        "label": "Operation",
+        "value": "Motorized Winch Mechanism"
+      },
+      {
+        "label": "Lantern Carriage",
+        "value": "Customizable for 4, 6, 8 or 12 fixtures"
+      },
+      {
+        "label": "Finish",
+        "value": "Hot Dip Galvanized"
+      }
+    ],
+    "applications": [
+      "Airports",
+      "Railway Yards",
+      "Highways",
+      "Industrial Plants",
+      "Ports and Docks",
+      "Toll Plazas"
+    ],
+    "images": [
+      "/products/high-mast-pole/111.jpg",
+      "/products/high-mast-pole/11111.jpg",
+      "/products/high-mast-pole/20221223100132-894445b3-db08-411e-89c8-140767bd5f00 - Copy.jpg",
+      "/products/high-mast-pole/20221223100132-894445b3-db08-411e-89c8-140767bd5f00.jpg",
+      "/products/high-mast-pole/22222.jpg",
+      "/products/high-mast-pole/222222.jpg",
+      "/products/high-mast-pole/High-Mast-Pole.jpg",
+      "/products/high-mast-pole/HIGHMAST 9 MTR.jpg",
+      "/products/high-mast-pole/HIGHMAST CLOSE 9 MTR.jpg",
+      "/products/high-mast-pole/HIGHMAST.jpg",
+      "/products/high-mast-pole/images (1).jpg",
+      "/products/high-mast-pole/OIP (1).jpg",
+      "/products/high-mast-pole/OIP.jpg",
+      "/products/high-mast-pole/Screenshot_2026-02-28_190418-removebg-preview.png",
+      "/products/high-mast-pole/STREET LIGHT POLE.jpg"
+    ],
+    "catalogs": []
+  },
+  {
+    "id": "hpsv-twin-light-fitting",
+    "slug": "hpsv-twin-light-fitting",
+    "name": "HPSV Twin Light Fitting",
+    "category": "Industrial Lighting",
+    "description": "High Pressure Sodium Vapor (HPSV) twin light fittings designed for rugged industrial conditions providing high lumen output.",
+    "specs": [
+      {
+        "label": "Wattage",
+        "value": "2x 250W / 2x 400W"
+      },
+      {
+        "label": "Housing",
+        "value": "Die cast aluminum"
+      },
+      {
+        "label": "Reflector",
+        "value": "High purity anodized aluminum"
+      },
+      {
+        "label": "IP Rating",
+        "value": "IP65"
+      }
+    ],
+    "applications": [
+      "Heavy Industry",
+      "Warehouses",
+      "Roadways",
+      "Factory Floors"
+    ],
+    "images": [
+      "/products/hpsv-twin-light-fitting/1.jpg",
+      "/products/hpsv-twin-light-fitting/2.jpg",
+      "/products/hpsv-twin-light-fitting/3.jpg"
+    ],
+    "catalogs": []
+  },
+  {
+    "id": "led-flood-light",
+    "slug": "led-flood-light",
+    "name": "LED Flood Light",
+    "category": "Outdoor Lighting",
+    "description": "Premium architectural and industrial LED Flood Lights. Delivering powerful, uniform outdoor illumination with superior heat dissipation.",
+    "specs": [
+      {
+        "label": "Wattage Range",
+        "value": "50W, 100W, 150W, 200W, 300W, 400W, up to 1000W"
+      },
+      {
+        "label": "Lumen Efficacy",
+        "value": "120 - 140 Lumens/Watt"
+      },
+      {
+        "label": "Housing",
+        "value": "Heavy-duty extruded aluminum"
+      },
+      {
+        "label": "Surge Protection",
+        "value": "10kV Inbuilt"
+      },
+      {
+        "label": "Beam Angle",
+        "value": "60°, 90°, 120° Asymmetric/Symmetric"
+      }
+    ],
+    "applications": [
+      "Stadiums",
+      "High Masts",
+      "Billboards",
+      "Building Facades",
+      "Parking Lots",
+      "Security Lighting"
+    ],
+    "images": [
+      "/products/led-flood-light/1 - Copy - Copy.jpg",
+      "/products/led-flood-light/1 - Copy.jpg",
+      "/products/led-flood-light/1.jpg",
+      "/products/led-flood-light/120W C.jpg",
+      "/products/led-flood-light/316yhAUYZBL._SX38_SY50_CR,0,0,38,50_.jpg",
+      "/products/led-flood-light/419NV+C-4RL._SX38_SY50_CR,0,0,38,50_.jpg",
+      "/products/led-flood-light/51H6MtZTVqL._SX38_SY50_CR,0,0,38,50_.jpg",
+      "/products/led-flood-light/81T6SmffOML._SX679_.jpg",
+      "/products/led-flood-light/BACK VIEW F.jpg",
+      "/products/led-flood-light/CLOSE VIEW F 120.jpg",
+      "/products/led-flood-light/CLOSE.jpg",
+      "/products/led-flood-light/download (1).jpeg",
+      "/products/led-flood-light/FLOOD LIGHT P - Copy - Copy.jpg",
+      "/products/led-flood-light/FLOOD LIGHT P - Copy.jpg",
+      "/products/led-flood-light/FLOOD LIGHT P.jpg",
+      "/products/led-flood-light/images (1) - Copy.jpg",
+      "/products/led-flood-light/images (1).jpg",
+      "/products/led-flood-light/images.jpeg",
+      "/products/led-flood-light/images.jpg",
+      "/products/led-flood-light/IMG-20210829-.jpg",
+      "/products/led-flood-light/IMG-20210829-WA0036.jpg",
+      "/products/led-flood-light/IMG-20210919-WA0077 - Copy (2).jpg",
+      "/products/led-flood-light/IMG-20210919-WA0077 - Copy.jpg",
+      "/products/led-flood-light/IMG-20210919-WA0077.jpg",
+      "/products/led-flood-light/IMG-20210920-WA0045 (1).jpg",
+      "/products/led-flood-light/IMG-20210922-.jpg",
+      "/products/led-flood-light/IMG-20210922-WA0070.jpg",
+      "/products/led-flood-light/IMG-20210927-WA0028.jpeg",
+      "/products/led-flood-light/IMG_20210920_160608 (1).jpg",
+      "/products/led-flood-light/IMG_20210920_160608__01.jpg",
+      "/products/led-flood-light/IMG_20210920_160645.jpg",
+      "/products/led-flood-light/LED FLOOD 300 W.jpg",
+      "/products/led-flood-light/LED FLOOD 400.jpg",
+      "/products/led-flood-light/w150.jpg"
+    ],
+    "catalogs": [
+      "/catalogs/TDS Flood Light 50W - SEFLDW50 2Y.pdf",
+      "/catalogs/TDS Flood Light 80W - SEFLDW80.pdf",
+      "/catalogs/TDS Flood Light 90W - SELMNW90.pdf",
+      "/catalogs/TDS Flood Light 100W - SEFLDW100.pdf",
+      "/catalogs/TDS Flood Light 110W - SELMNW110.pdf",
+      "/catalogs/TDS Flood Light 120 WATT - SEFLDW120.pdf",
+      "/catalogs/TDS Flood Light 150W - SEFLDW150.pdf",
+      "/catalogs/TDS Flood Light 200W - SEFLDW200.pdf",
+      "/catalogs/TDS Flood Light 200W - SEFLDW200 2Y.pdf",
+      "/catalogs/TDS Flood Light 200W - SEFLDW200 2Y 3000K.pdf",
+      "/catalogs/TDS Flood Light 200W - SEFLDW200 3Y SPD.pdf",
+      "/catalogs/TDS Flood Light 300W - SEFLDW300 3Y SPD.pdf",
+      "/catalogs/TDS Flood Light 350W - SEFLDW350 2Y.pdf",
+      "/catalogs/TDS Flood Light 400W - SEFLDW400 2 YEARS SPD.pdf",
+      "/catalogs/TDS Flood Light 400W - SEFLDW400 3Y SPD.pdf",
+      "/catalogs/TDS Flood Light 1000W - SEFLDW1000 2Y SPD.pdf",
+      "/catalogs/Dimentional Drawing.pdf"
+    ],
+    "models": [
+      {
+        "wattage": "50W",
+        "tds": "/catalogs/TDS Flood Light 50W - SEFLDW50 2Y.pdf"
+      },
+      {
+        "wattage": "80W",
+        "tds": "/catalogs/TDS Flood Light 80W - SEFLDW80.pdf"
+      },
+      {
+        "wattage": "90W",
+        "tds": "/catalogs/TDS Flood Light 90W - SELMNW90.pdf"
+      },
+      {
+        "wattage": "100W",
+        "tds": "/catalogs/TDS Flood Light 100W - SEFLDW100.pdf"
+      },
+      {
+        "wattage": "110W",
+        "tds": "/catalogs/TDS Flood Light 110W - SELMNW110.pdf"
+      },
+      {
+        "wattage": "120W",
+        "tds": "/catalogs/TDS Flood Light 120 WATT - SEFLDW120.pdf"
+      },
+      {
+        "wattage": "150W",
+        "tds": "/catalogs/TDS Flood Light 150W - SEFLDW150.pdf"
+      },
+      {
+        "wattage": "200W",
+        "tds": "/catalogs/TDS Flood Light 200W - SEFLDW200.pdf"
+      },
+      {
+        "wattage": "300W",
+        "tds": "/catalogs/TDS Flood Light 300W - SEFLDW300 3Y SPD.pdf"
+      },
+      {
+        "wattage": "350W",
+        "tds": "/catalogs/TDS Flood Light 350W - SEFLDW350 2Y.pdf"
+      },
+      {
+        "wattage": "400W",
+        "tds": "/catalogs/TDS Flood Light 400W - SEFLDW400 3Y SPD.pdf"
+      },
+      {
+        "wattage": "1000W",
+        "tds": "/catalogs/TDS Flood Light 1000W - SEFLDW1000 2Y SPD.pdf"
+      }
+    ]
+  },
+  {
+    "id": "led-high-bay-light",
+    "slug": "led-high-bay-light",
+    "name": "LED High Bay Light",
+    "category": "Industrial Lighting",
+    "description": "UFO and Linear LED High Bay lights formulated for high ceiling applications, ensuring bright, non-flickering light with immense energy savings.",
+    "specs": [
+      {
+        "label": "Wattage",
+        "value": "100W, 150W, 200W, 250W"
+      },
+      {
+        "label": "Lumen Output",
+        "value": "Up to 35,000 Lumens"
+      },
+      {
+        "label": "Mounting Heights",
+        "value": "6 meters to 20 meters"
+      },
+      {
+        "label": "CRI",
+        "value": ">80"
+      },
+      {
+        "label": "Operating Temps",
+        "value": "-20°C to +50°C"
+      }
+    ],
+    "applications": [
+      "Warehouses",
+      "Manufacturing Plants",
+      "Indoor Stadiums",
+      "Supermarkets",
+      "Airplane Hangars"
+    ],
+    "images": [
+      "/products/led-high-bay-light/00.jpg",
+      "/products/led-high-bay-light/00000 - Copy (2).jpg",
+      "/products/led-high-bay-light/00000.jpg",
+      "/products/led-high-bay-light/150 CLOSE.jpg",
+      "/products/led-high-bay-light/3-150-200w-high-bay-housing-1000x1000.jpeg",
+      "/products/led-high-bay-light/BBBBBBBBBB.jpeg",
+      "/products/led-high-bay-light/images (1).jpeg",
+      "/products/led-high-bay-light/images.jpeg",
+      "/products/led-high-bay-light/images.jpg",
+      "/products/led-high-bay-light/VVVVVVVVV.jpg"
+    ],
+    "catalogs": [
+      "/catalogs/TDS High Bay Light 80W - SEHBLW80.pdf",
+      "/catalogs/TDS High Bay Light 100W - SEHBLW100.pdf",
+      "/catalogs/TDS High Bay Light 150W - SEHBLW150.pdf",
+      "/catalogs/TDS High Bay Light 200W - SEHBLW200.pdf"
+    ],
+    "models": [
+      {
+        "wattage": "80W",
+        "tds": "/catalogs/TDS High Bay Light 80W - SEHBLW80.pdf"
+      },
+      {
+        "wattage": "100W",
+        "tds": "/catalogs/TDS High Bay Light 100W - SEHBLW100.pdf"
+      },
+      {
+        "wattage": "150W",
+        "tds": "/catalogs/TDS High Bay Light 150W - SEHBLW150.pdf"
+      },
+      {
+        "wattage": "200W",
+        "tds": "/catalogs/TDS High Bay Light 200W - SEHBLW200.pdf"
+      }
+    ]
+  },
+  {
+    "id": "led-recessed-luminaire",
+    "slug": "led-recessed-luminaire",
+    "name": "LED Recessed Luminaire",
+    "category": "Indoor Lighting",
+    "description": "Sleek and highly efficient LED recessed luminaires designed for modern office spaces, delivering unified glare rating (UGR) complaint lighting.",
+    "specs": [
+      {
+        "label": "Wattage",
+        "value": "36W, 40W, 48W"
+      },
+      {
+        "label": "Dimensions",
+        "value": "2x2 ft (595x595mm)"
+      },
+      {
+        "label": "Mounting",
+        "value": "Grid ceiling / Flange"
+      },
+      {
+        "label": "Light Quality",
+        "value": "Flicker-free, UGR < 19"
+      }
+    ],
+    "applications": [
+      "Offices",
+      "Hospitals",
+      "Schools",
+      "Retail Spaces",
+      "Conference Rooms"
+    ],
+    "images": [
+      "/products/led-recessed-luminaire/222.jpeg",
+      "/products/led-recessed-luminaire/index 1.jpeg",
+      "/products/led-recessed-luminaire/index.jpeg"
+    ],
+    "catalogs": []
+  },
+  {
+    "id": "led-street-light",
+    "slug": "led-street-light",
+    "name": "LED Street Light",
+    "category": "Outdoor Lighting",
+    "description": "State-of-the-art LED street lighting fixtures featuring aerodynamic housings, high surge protection, and superior optics for uniform road illumination.",
+    "specs": [
+      {
+        "label": "Wattage",
+        "value": "18W to 250W"
+      },
+      {
+        "label": "Housing Material",
+        "value": "High-pressure Aluminum Die-cast"
+      },
+      {
+        "label": "Surge Protection",
+        "value": "10kV inbuilt"
+      },
+      {
+        "label": "IP Rating",
+        "value": "IP66"
+      },
+      {
+        "label": "Optics",
+        "value": "Secondary Lens with Batwing spread"
+      }
+    ],
+    "applications": [
+      "Highways",
+      "City Roads",
+      "Rural Roads",
+      "Industrial Campuses",
+      "Residential Societies"
+    ],
+    "images": [
+      "/products/led-street-light/0000.jpg",
+      "/products/led-street-light/0000000.png",
+      "/products/led-street-light/1 - Copy (2).jpg",
+      "/products/led-street-light/1 - Copy.jpg",
+      "/products/led-street-light/1.jpg",
+      "/products/led-street-light/1500.png",
+      "/products/led-street-light/3 - Copy - Copy.jpg",
+      "/products/led-street-light/3 - Copy.jpg",
+      "/products/led-street-light/3.jpg",
+      "/products/led-street-light/36 WATT.jpg",
+      "/products/led-street-light/BACK SIDE.jpg",
+      "/products/led-street-light/back view (2).jpg",
+      "/products/led-street-light/BACK VIEW.jpg",
+      "/products/led-street-light/CLOSE 100.jpg",
+      "/products/led-street-light/CLOSE VIEW.jpg",
+      "/products/led-street-light/FRONT VI.jpg",
+      "/products/led-street-light/front view (2).jpg",
+      "/products/led-street-light/FRONT VIEW.jpg",
+      "/products/led-street-light/FRONT.jpg",
+      "/products/led-street-light/FROUNT VIEW.jpg",
+      "/products/led-street-light/images (1).jpeg",
+      "/products/led-street-light/images (2).jpeg",
+      "/products/led-street-light/images.jpeg",
+      "/products/led-street-light/images.jpg",
+      "/products/led-street-light/IMG-20210920-WA0047 (1).jpg",
+      "/products/led-street-light/IMG-20210920-WA0047__01.jpg",
+      "/products/led-street-light/IMG-20210920-WA0049 (1).jpg",
+      "/products/led-street-light/IMG_20220702_173440 - Copy.jpg",
+      "/products/led-street-light/IMG_20220702_173440.jpg",
+      "/products/led-street-light/IMG_20220702_173453.jpg",
+      "/products/led-street-light/SIDE WIEW.jpg"
+    ],
+    "catalogs": [
+      "/catalogs/TDS Street Light 30W - SELMNW30.pdf",
+      "/catalogs/Brilliant 80-watt-led-canopy-light.pdf",
+      "/catalogs/TDS Canopy Light 80W - SEHBLW80.pdf"
+    ],
+    "models": [
+      {
+        "wattage": "30W",
+        "tds": "/catalogs/TDS Street Light 30W - SELMNW30.pdf"
+      },
+      {
+        "wattage": "80W (Canopy)",
+        "tds": "/catalogs/Brilliant 80-watt-led-canopy-light.pdf"
+      },
+      {
+        "wattage": "80W",
+        "tds": "/catalogs/TDS Canopy Light 80W - SEHBLW80.pdf"
+      }
+    ]
+  },
+  {
+    "id": "post-top-lantern",
+    "slug": "post-top-lantern",
+    "name": "Post Top Lantern",
+    "category": "Landscape Lighting",
+    "description": "Aesthetic LED Post Top Lanterns creating visually pleasing landscapes in parks, pathways, and gardens while ensuring 360-degree light distribution.",
+    "specs": [
+      {
+        "label": "Wattage",
+        "value": "30W - 60W"
+      },
+      {
+        "label": "Diffuser",
+        "value": "UV Stabilized Polycarbonate / Acrylic"
+      },
+      {
+        "label": "Mounting",
+        "value": "Top on 60mm / 76mm dia pipe"
+      },
+      {
+        "label": "Design",
+        "value": "Classic and Contemporary Models"
+      }
+    ],
+    "applications": [
+      "Parks",
+      "Walkways",
+      "Resorts",
+      "Residential Complexes",
+      "Gardens"
+    ],
+    "images": [
+      "/products/post-top-lantern/images (1).jpeg",
+      "/products/post-top-lantern/images - Copy.jpeg",
+      "/products/post-top-lantern/images.jpeg"
+    ],
+    "catalogs": []
+  },
+  {
+    "id": "recessed-light-panel",
+    "slug": "recessed-light-panel",
+    "name": "Recessed Light Panel",
+    "category": "Indoor Lighting",
+    "description": "Ultra-slim edge-lit and back-lit LED panels for dropped ceilings. Designed for maximum light uniformity and modern aesthetic appeal.",
+    "specs": [
+      {
+        "label": "Form Factor",
+        "value": "Round / Square Slim Panels"
+      },
+      {
+        "label": "Wattage",
+        "value": "3W to 24W"
+      },
+      {
+        "label": "Body",
+        "value": "Aluminum Frame with LGP"
+      },
+      {
+        "label": "Cutout Size",
+        "value": "75mm to 200mm"
+      }
+    ],
+    "applications": [
+      "Homes",
+      "Offices",
+      "Hotels",
+      "Showrooms",
+      "Malls"
+    ],
+    "images": [
+      "/products/recessed-light-panel/111.jpg",
+      "/products/recessed-light-panel/22222222.jpg",
+      "/products/recessed-light-panel/3333333333.jpg",
+      "/products/recessed-light-panel/44444444.jpg",
+      "/products/recessed-light-panel/download (1).jpeg",
+      "/products/recessed-light-panel/download (2).jpeg",
+      "/products/recessed-light-panel/download (3).jpeg",
+      "/products/recessed-light-panel/download (4).jpeg",
+      "/products/recessed-light-panel/download (5).jpeg",
+      "/products/recessed-light-panel/download (6).jpeg",
+      "/products/recessed-light-panel/download (7).jpeg",
+      "/products/recessed-light-panel/download.jpeg",
+      "/products/recessed-light-panel/images (1).jpeg",
+      "/products/recessed-light-panel/images (2).jpeg",
+      "/products/recessed-light-panel/images.jpeg",
+      "/products/recessed-light-panel/images.jpg"
+    ],
+    "catalogs": []
+  },
+  {
+    "id": "solar-blinker",
+    "slug": "solar-blinker",
+    "name": "Solar Traffic Blinker",
+    "category": "Solar Solutions",
+    "description": "Self-sustaining Solar LED Traffic Blinkers designed to alert drivers of diversions, crossings, and danger zones operating 24x7 off-grid.",
+    "specs": [
+      {
+        "label": "LED Color",
+        "value": "Amber / Red"
+      },
+      {
+        "label": "Solar Panel",
+        "value": "10W / 20W Monocrystalline"
+      },
+      {
+        "label": "Battery",
+        "value": "LiFePO4 12.8V"
+      },
+      {
+        "label": "Flashing Rate",
+        "value": "40-50 flashes per minute"
+      },
+      {
+        "label": "Autonomy",
+        "value": "3 Days during overcast"
+      }
+    ],
+    "applications": [
+      "Highway Intersections",
+      "Toll Booths",
+      "Construction Zones",
+      "Sharp Curves",
+      "Pedestrian Crossings"
+    ],
+    "images": [
+      "/products/solar-blinker/solar-road-signal-solar-blinker-light.jpg",
+      "/products/solar-blinker/solar-traffic-blinker-set4.jpg"
+    ],
+    "catalogs": []
+  },
+  {
+    "id": "solar-high-mast",
+    "slug": "solar-high-mast",
+    "name": "Solar High Mast",
+    "category": "Solar Solutions",
+    "description": "Mega off-grid illumination system combining towering high masts with powerful solar panels and lithium battery banks for 100% green energy lighting.",
+    "specs": [
+      {
+        "label": "Height",
+        "value": "12m to 20m"
+      },
+      {
+        "label": "Luminaire",
+        "value": "Multiples of 50W/100W DC LED Floods"
+      },
+      {
+        "label": "Solar Array",
+        "value": "Custom engineered based on load"
+      },
+      {
+        "label": "Battery Tech",
+        "value": "High-capacity LiFePO4"
+      },
+      {
+        "label": "Controller",
+        "value": "MPPT Charge Controller"
+      }
+    ],
+    "applications": [
+      "Remote Industrial Sites",
+      "Village Squares",
+      "Railway Yards",
+      "Off-grid Mining Sites"
+    ],
+    "images": [
+      "/products/solar-high-mast/20221114093500-f535649a-f89c-4297-a3f0-afaa00b1f483.jpg",
+      "/products/solar-high-mast/222 - Copy.jpg",
+      "/products/solar-high-mast/222.jpg",
+      "/products/solar-high-mast/download (1).jpeg",
+      "/products/solar-high-mast/download (2).jpeg",
+      "/products/solar-high-mast/download.jpeg",
+      "/products/solar-high-mast/images (1).jpg",
+      "/products/solar-high-mast/images (2).jpg",
+      "/products/solar-high-mast/images.jpg"
+    ],
+    "catalogs": []
+  },
+  {
+    "id": "solar-inverter",
+    "slug": "solar-inverter",
+    "name": "Solar Inverter",
+    "category": "Solar Solutions",
+    "description": "High-efficiency Solar Inverters (PCUs) tailored for both residential and commercial rooftops, converting DC solar power to usable AC grid power flawlessly.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "On-grid / Off-grid / Hybrid"
+      },
+      {
+        "label": "Capacity",
+        "value": "1kW to 100kW"
+      },
+      {
+        "label": "Efficiency",
+        "value": ">97%"
+      },
+      {
+        "label": "Interface",
+        "value": "LCD Display + WiFi Monitoring"
+      }
+    ],
+    "applications": [
+      "Residential Rooftops",
+      "Commercial Buildings",
+      "Factories",
+      "Schools"
+    ],
+    "images": [
+      "/products/solar-inverter/download (1).jpeg",
+      "/products/solar-inverter/download (2).jpeg",
+      "/products/solar-inverter/download.jpeg"
+    ],
+    "catalogs": []
+  },
+  {
+    "id": "solar-portable-lighting-tower",
+    "slug": "solar-portable-lighting-tower",
+    "name": "Solar Portable Lighting Tower",
+    "category": "Solar Solutions",
+    "description": "Mobile and silent Solar Lighting Towers equipped with telescopic pneumatic masts. Perfect for temporary nighttime construction and emergency sites.",
+    "specs": [
+      {
+        "label": "Mast Height",
+        "value": "Up to 9 meters (Telescopic)"
+      },
+      {
+        "label": "Towing",
+        "value": "Heavy-duty trailer with suspensions"
+      },
+      {
+        "label": "Lighting Load",
+        "value": "4x 100W / 4x 200W High Efficiency LEDs"
+      },
+      {
+        "label": "Solar Panel",
+        "value": "Deployable Array"
+      },
+      {
+        "label": "Autonomy",
+        "value": "2 Nights backup"
+      }
+    ],
+    "applications": [
+      "Construction Sites",
+      "Open Cast Mining",
+      "Disaster Relief",
+      "Night Events",
+      "Military Camps"
+    ],
+    "images": [
+      "/products/solar-portable-lighting-tower/4X460W-Solar-Power-Mobile-Light-Tower-9m-Height-Electric-Mast-Mobile-Lighting-Tower.jpg"
+    ],
+    "catalogs": []
+  },
+  {
+    "id": "solar-street-light",
+    "slug": "solar-street-light",
+    "name": "Solar Street Light",
+    "category": "Solar Solutions",
+    "description": "Integrated (All-in-One) and Semi-integrated Solar Street Lights. Features dusk-to-dawn sensors and PIR motion detection for maximum battery optimization.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "All-In-One / Two-in-One"
+      },
+      {
+        "label": "Wattage",
+        "value": "12W, 15W, 20W, 30W, 40W, 60W, 100W"
+      },
+      {
+        "label": "Battery",
+        "value": "Inbuilt LiFePO4"
+      },
+      {
+        "label": "Sensors",
+        "value": "Motion Sensor (PIR/Radar) and LDR"
+      },
+      {
+        "label": "Autonomy",
+        "value": "Up to 3 Days"
+      }
+    ],
+    "applications": [
+      "Gram Panchayats",
+      "Smart City Projects",
+      "Farm Houses",
+      "Industrial Roads"
+    ],
+    "images": [
+      "/products/solar-street-light/download (1).jpeg",
+      "/products/solar-street-light/download (2).jpeg",
+      "/products/solar-street-light/download.jpeg",
+      "/products/solar-street-light/images (2) - Copy.jpg",
+      "/products/solar-street-light/images (2).jpg",
+      "/products/solar-street-light/images (3) - Copy.jpg",
+      "/products/solar-street-light/images (3).jpg",
+      "/products/solar-street-light/images (4) - Copy.jpg"
+    ],
+    "catalogs": [
+      "/catalogs/SUDEEP_SOLAR_STREET_LIGHT_CATALOGUE.pdf",
+      "/catalogs/500 LPD.pdf"
+    ],
+    "models": [
+      {
+        "wattage": "All Models",
+        "tds": "/catalogs/SUDEEP_SOLAR_STREET_LIGHT_CATALOGUE.pdf"
+      },
+      {
+        "wattage": "500 LPD",
+        "tds": "/catalogs/500 LPD.pdf"
+      }
+    ]
+  }
+]

@@ -20,8 +20,8 @@
   --color-text-muted: #475569;
   --color-border: #E2E8F0;
   --color-border-accent: #38BDF8;
-  --font-heading: var(--font-outfit);
-  --font-body: var(--font-inter);
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
 }
 
 /* --- Base Styles --- */
@@ -140,12 +140,16 @@ h1, h2, h3, h4, h5, h6 {
 
 /* FAQ */
 .faq-answer {
-  max-height: 0;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.faq-answer > div {
+  min-height: 0;
   overflow: hidden;
-  transition: max-height 0.4s ease;
 }
 .faq-open .faq-answer {
-  max-height: 500px;
+  grid-template-rows: 1fr;
 }
 .faq-icon-rotate {
   transition: transform 0.3s ease;

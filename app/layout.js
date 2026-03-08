@@ -1,27 +1,14 @@
-import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
 import ScrollAnimations from "@/components/ScrollAnimations";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const outfit = Outfit({
-  variable: "--font-outfit",
-  subsets: ["latin"],
-  display: "swap",
-});
-
 export const metadata = {
   metadataBase: new URL("https://sudeepengineers.com"),
   title: {
-    default: "Sudeep Lights | Premium LED Lighting & Engineering Fabrication in Aurangabad",
-    template: "%s | Sudeep Lights",
+    default: "Sudeep Engineers | LED Lighting & Engineering Fabrication in Aurangabad",
+    template: "%s | Sudeep Engineers",
   },
   description:
     "Leading LED light manufacturer, engineering fabrication, and solar lighting solutions company in Waluj MIDC, Aurangabad. MSME registered. Custom industrial solutions since 2019.",
@@ -62,6 +49,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="light">
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -105,7 +95,7 @@ export default function RootLayout({ children }) {
           }}
         />
       </head>
-      <body className={`${inter.variable} ${outfit.variable} antialiased`}>
+      <body className="antialiased">
         <Navbar />
         <main>{children}</main>
         <Footer />
