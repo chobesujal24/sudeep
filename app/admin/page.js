@@ -1,9 +1,15 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import { Icons } from "@/components/Icons";
-import BlogManager from "@/components/admin/BlogManager";
 import { db } from "@/lib/firebase";
 import { doc, setDoc } from "firebase/firestore";
+
+// Dynamic import: BlogManager uses firebase/storage which may be disabled
+const BlogManager = dynamic(() => import("@/components/admin/BlogManager"), {
+  loading: () => <div className="p-10 text-center font-bold text-[#64748B]">Loading Blog CMS...</div>,
+  ssr: false
+});
 
 export default function AdminDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -55,17 +61,25 @@ export default function AdminDashboard() {
         updatedProducts.push(formData);
       }
 
+      console.log("Saving products to Firebase...", updatedProducts.length, "products");
+      console.log("Firebase db instance:", db);
+
       // Save directly to Firebase Firestore
       const docRef = doc(db, 'settings', 'productData');
+      console.log("Document reference created:", docRef.path);
+
       await setDoc(docRef, { products: updatedProducts }, { merge: true });
 
+      console.log("Save successful!");
       setProducts(updatedProducts);
       setEditingIndex(null);
       setFormData({});
       alert("Products updated successfully!");
     } catch (error) {
-      console.error("Save error:", error);
-      alert("Error saving data to Firebase.");
+      console.error("Save error full details:", error);
+      console.error("Error code:", error.code);
+      console.error("Error message:", error.message);
+      alert("Error saving to Firebase.\n\nCode: " + (error.code || "unknown") + "\nMessage: " + (error.message || error.toString()));
     }
   };
 

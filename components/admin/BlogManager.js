@@ -3,7 +3,17 @@ import { useState, useRef, useEffect } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { db, storage } from "@/lib/firebase";
 import { collection, addDoc, getDocs, doc, updateDoc, deleteDoc, Timestamp } from "firebase/firestore";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+
+// Storage functions - only import if storage is available
+let ref, uploadBytesResumable, getDownloadURL;
+try {
+  const storageModule = require("firebase/storage");
+  ref = storageModule.ref;
+  uploadBytesResumable = storageModule.uploadBytesResumable;
+  getDownloadURL = storageModule.getDownloadURL;
+} catch (e) {
+  console.warn("Firebase Storage module not available");
+}
 
 export default function BlogManager() {
   const [posts, setPosts] = useState([]);
@@ -56,6 +66,11 @@ export default function BlogManager() {
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return;
+
+    if (!storage || !ref) {
+      alert("Firebase Storage is not enabled. Please paste an image URL instead.");
+      return;
+    }
 
     setUploading(true);
     const storageRef = ref(storage, `blog_images/${Date.now()}_${file.name}`);
