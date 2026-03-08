@@ -13,17 +13,5 @@ export async function GET() {
   }
 }
 
-// POST to update the entire products array
-export async function POST(req) {
-  try {
-    const products = await req.json();
-    
-    // Save to Firebase Firestore
-    const docRef = doc(db, 'settings', 'productData');
-    await setDoc(docRef, { products }, { merge: true });
-    
-    return NextResponse.json({ success: true });
-  } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
-  }
-}
+// POST is intentionally removed.
+// The Admin CMS now manages writes directly via the Firebase Client SDK to bypass Vercel serverless timeouts.

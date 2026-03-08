@@ -1,7 +1,9 @@
 "use client";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Icons } from "@/components/Icons";
 import BlogManager from "@/components/admin/BlogManager";
+import { db } from "@/lib/firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function AdminDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -53,23 +55,17 @@ export default function AdminDashboard() {
         updatedProducts.push(formData);
       }
 
-      const res = await fetch("/api/products", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updatedProducts),
-      });
+      // Save directly to Firebase Firestore
+      const docRef = doc(db, 'settings', 'productData');
+      await setDoc(docRef, { products: updatedProducts }, { merge: true });
 
-      if (res.ok) {
-        setProducts(updatedProducts);
-        setEditingIndex(null);
-        setFormData({});
-        alert("Products updated successfully!");
-      } else {
-        alert("Failed to save changes.");
-      }
+      setProducts(updatedProducts);
+      setEditingIndex(null);
+      setFormData({});
+      alert("Products updated successfully!");
     } catch (error) {
       console.error("Save error:", error);
-      alert("Error saving data.");
+      alert("Error saving data to Firebase.");
     }
   };
 
@@ -77,18 +73,15 @@ export default function AdminDashboard() {
     if (!confirm("Are you sure you want to delete this product?")) return;
     try {
       const updatedProducts = products.filter((_, i) => i !== index);
-      const res = await fetch("/api/products", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updatedProducts),
-      });
+      
+      const docRef = doc(db, 'settings', 'productData');
+      await setDoc(docRef, { products: updatedProducts }, { merge: true });
 
-      if (res.ok) {
-        setProducts(updatedProducts);
-        alert("Product deleted!");
-      }
+      setProducts(updatedProducts);
+      alert("Product deleted!");
     } catch (error) {
       console.error("Delete error:", error);
+      alert("Error deleting product from Firebase.");
     }
   };
 

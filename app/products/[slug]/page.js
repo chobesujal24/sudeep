@@ -10,8 +10,9 @@ export default async function ProductPage({ params }) {
   
   // Fetch from the API to get the latest CMS-controlled JSON data
   const products = await getProductData();
+  const productsArray = Array.isArray(products) ? products : [];
   
-  const product = products.find((p) => p.slug === resolvedParams.slug);
+  const product = productsArray.find((p) => p.slug === resolvedParams.slug);
 
   if (!product) {
     notFound();

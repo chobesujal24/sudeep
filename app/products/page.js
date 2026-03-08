@@ -12,7 +12,10 @@ export default async function Products() {
   const products = await getProductData();
   
   // Group products by category dynamically
-  const categories = products.reduce((acc, current) => {
+  // Defensive check: ensure products is an array
+  const productsArray = Array.isArray(products) ? products : [];
+
+  const categories = productsArray.reduce((acc, current) => {
     if (!acc[current.category]) acc[current.category] = [];
     acc[current.category].push(current);
     return acc;
@@ -58,7 +61,7 @@ export default async function Products() {
       <section className="py-20 bg-[#F8FAFC]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {products.map((product, i) => (
+            {productsArray.map((product, i) => (
               <div key={i} className={`bg-[#FFFFFF] border border-[#E2E8F0] shadow-sm rounded-xl overflow-hidden flex flex-col animate-on-scroll delay-${(i % 5) + 1} group`}>
                 {/* Image placeholder */}
                 <div className="h-[240px] bg-[#F8FAFC] relative overflow-hidden flex items-center justify-center">
