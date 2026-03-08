@@ -6,9 +6,13 @@ export const metadata = {
   description: "Browse our extensive range of high-performance LED industrial and outdoor lighting solutions. Flame proof, High Mast, Solar, and more.",
 };
 
+import fs from "fs/promises";
+import path from "path";
+
 export default async function Products() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/products`, { cache: 'no-store' });
-  const products = await res.json();
+  const PRODUCT_DATA_PATH = path.join(process.cwd(), 'lib/productData.json');
+  const fileContent = await fs.readFile(PRODUCT_DATA_PATH, 'utf8');
+  const products = JSON.parse(fileContent);
   
   // Group products by category dynamically
   const categories = products.reduce((acc, current) => {
