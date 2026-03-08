@@ -1,14 +1,12 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
-
-const PRODUCT_DATA_PATH = path.join(process.cwd(), 'lib/productData.json');
+import { db } from '@/lib/firebase';
+import { doc, setDoc } from 'firebase/firestore';
+import { getProductData } from '@/lib/getProductData';
 
 // GET all products
 export async function GET() {
   try {
-    const fileContent = fs.readFileSync(PRODUCT_DATA_PATH, 'utf8');
-    const data = JSON.parse(fileContent);
+    const data = await getProductData();
     return NextResponse.json(data);
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
@@ -19,7 +17,11 @@ export async function GET() {
 export async function POST(req) {
   try {
     const products = await req.json();
-    fs.writeFileSync(PRODUCT_DATA_PATH, JSON.stringify(products, null, 2), 'utf8');
+    
+    // Save to Firebase Firestore
+    const docRef = doc(db, 'settings', 'productData');
+    await setDoc(docRef, { products }, { merge: true });
+    
     return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });

@@ -6,13 +6,10 @@ export const metadata = {
   description: "Browse our extensive range of high-performance LED industrial and outdoor lighting solutions. Flame proof, High Mast, Solar, and more.",
 };
 
-import fs from "fs/promises";
-import path from "path";
+import { getProductData } from "@/lib/getProductData";
 
 export default async function Products() {
-  const PRODUCT_DATA_PATH = path.join(process.cwd(), 'lib/productData.json');
-  const fileContent = await fs.readFile(PRODUCT_DATA_PATH, 'utf8');
-  const products = JSON.parse(fileContent);
+  const products = await getProductData();
   
   // Group products by category dynamically
   const categories = products.reduce((acc, current) => {

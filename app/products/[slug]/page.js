@@ -3,16 +3,13 @@ import { notFound } from "next/navigation";
 import ImageGallery from "@/components/ImageGallery";
 import { Icons } from "@/components/Icons";
 
-import fs from "fs/promises";
-import path from "path";
+import { getProductData } from "@/lib/getProductData";
 
 export default async function ProductPage({ params }) {
   const resolvedParams = await params;
   
   // Fetch from the API to get the latest CMS-controlled JSON data
-  const PRODUCT_DATA_PATH = path.join(process.cwd(), 'lib/productData.json');
-  const fileContent = await fs.readFile(PRODUCT_DATA_PATH, 'utf8');
-  const products = JSON.parse(fileContent);
+  const products = await getProductData();
   
   const product = products.find((p) => p.slug === resolvedParams.slug);
 
