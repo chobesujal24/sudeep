@@ -1,22 +1,25 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { db } from "@/lib/firebase";
-import { collection, query, where, getDocs, limit } from "firebase/firestore";
+import { supabase } from "@/lib/supabase";
 
 export const revalidate = 60; // Revalidate every 60 seconds
 
 export async function generateStaticParams() {
   const params = [];
   try {
-    const q = query(collection(db, "blogs"), where("status", "==", "Published"));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      const data = doc.data();
-      if (data.slug) {
-        params.push({ slug: data.slug });
-      }
-    });
+    const { data, error } = await supabase
+      .from('blogs')
+      .select('slug')
+      .eq('status', 'Published');
+      
+    if (data) {
+      data.forEach((post) => {
+        if (post.slug) {
+          params.push({ slug: post.slug });
+        }
+      });
+    }
   } catch (error) {
     console.error("Error generating static params for blog:", error);
   }
@@ -25,19 +28,18 @@ export async function generateStaticParams() {
 
 async function getPostBySlug(slug) {
   try {
-    const q = query(
-      collection(db, "blogs"), 
-      where("slug", "==", slug), 
-      limit(1)
-    );
-    const querySnapshot = await getDocs(q);
-    
-    if (querySnapshot.empty) {
+    const { data, error } = await supabase
+      .from('blogs')
+      .select('*')
+      .eq('slug', slug)
+      .limit(1)
+      .single();
+      
+    if (error || !data) {
       return null;
     }
     
-    const docData = querySnapshot.docs[0].data();
-    return { id: querySnapshot.docs[0].id, ...docData };
+    return data;
   } catch (error) {
     console.error("Error fetching post by slug:", error);
     return null;
@@ -71,10 +73,10 @@ export default async function BlogPost({ params }) {
     notFound();
   }
 
-  // Format date correctly from Firestore Timestamp
+  // Format date correctly from Supabase ISO string
   const formatDate = (timestamp) => {
     if (!timestamp) return "";
-    const date = new Date(timestamp.seconds * 1000);
+    const date = new Date(timestamp);
     return date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
   };
 

@@ -2,8 +2,7 @@
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { Icons } from "@/components/Icons";
-import { db } from "@/lib/firebase";
-import { doc, setDoc } from "firebase/firestore";
+import { supabase } from "@/lib/supabase";
 
 // Dynamic import: BlogManager uses firebase/storage which may be disabled
 const BlogManager = dynamic(() => import("@/components/admin/BlogManager"), {
@@ -61,14 +60,14 @@ export default function AdminDashboard() {
         updatedProducts.push(formData);
       }
 
-      console.log("Saving products to Firebase...", updatedProducts.length, "products");
-      console.log("Firebase db instance:", db);
+      console.log("Saving products to Supabase...", updatedProducts.length, "products");
 
-      // Save directly to Firebase Firestore
-      const docRef = doc(db, 'settings', 'productData');
-      console.log("Document reference created:", docRef.path);
+      // Save directly to Supabase Postgres JSON
+      const { error: supabaseError } = await supabase
+        .from('settings')
+        .upsert({ id: 'productData', data: { products: updatedProducts } });
 
-      await setDoc(docRef, { products: updatedProducts }, { merge: true });
+      if (supabaseError) throw supabaseError;
 
       console.log("Save successful!");
       setProducts(updatedProducts);
@@ -79,7 +78,7 @@ export default function AdminDashboard() {
       console.error("Save error full details:", error);
       console.error("Error code:", error.code);
       console.error("Error message:", error.message);
-      alert("Error saving to Firebase.\n\nCode: " + (error.code || "unknown") + "\nMessage: " + (error.message || error.toString()));
+      alert("Error saving to Supabase.\n\nCode: " + (error.code || "unknown") + "\nMessage: " + (error.message || error.toString()));
     }
   };
 
@@ -88,14 +87,17 @@ export default function AdminDashboard() {
     try {
       const updatedProducts = products.filter((_, i) => i !== index);
       
-      const docRef = doc(db, 'settings', 'productData');
-      await setDoc(docRef, { products: updatedProducts }, { merge: true });
+      const { error: supabaseError } = await supabase
+        .from('settings')
+        .upsert({ id: 'productData', data: { products: updatedProducts } });
+
+      if (supabaseError) throw supabaseError;
 
       setProducts(updatedProducts);
       alert("Product deleted!");
     } catch (error) {
       console.error("Delete error:", error);
-      alert("Error deleting product from Firebase.");
+      alert("Error deleting product from Supabase.");
     }
   };
 

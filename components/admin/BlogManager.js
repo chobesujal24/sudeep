@@ -1,19 +1,7 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { Editor } from "@tinymce/tinymce-react";
-import { db, storage } from "@/lib/firebase";
-import { collection, addDoc, getDocs, doc, updateDoc, deleteDoc, Timestamp } from "firebase/firestore";
-
-// Storage functions - only import if storage is available
-let ref, uploadBytesResumable, getDownloadURL;
-try {
-  const storageModule = require("firebase/storage");
-  ref = storageModule.ref;
-  uploadBytesResumable = storageModule.uploadBytesResumable;
-  getDownloadURL = storageModule.getDownloadURL;
-} catch (e) {
-  console.warn("Firebase Storage module not available");
-}
+import { supabase } from "@/lib/supabase";
 
 export default function BlogManager() {
   const [posts, setPosts] = useState([]);
@@ -43,57 +31,41 @@ export default function BlogManager() {
   const fetchPosts = async () => {
     setLoading(true);
     try {
-      const querySnapshot = await getDocs(collection(db, "blogs"));
-      const fetchedPosts = [];
-      querySnapshot.forEach((doc) => {
-        fetchedPosts.push({ id: doc.id, ...doc.data() });
-      });
-      // Sort by date created (descending)
-      fetchedPosts.sort((a, b) => {
-         const dateA = a.createdAt?.seconds || 0;
-         const dateB = b.createdAt?.seconds || 0;
-         return dateB - dateA;
-      });
-      setPosts(fetchedPosts);
+      const { data, error } = await supabase
+        .from('blogs')
+        .select('*')
+        .order('created_at', { ascending: false });
+        
+      if (error) throw error;
+      setPosts(data || []);
     } catch (error) {
       console.error("Error fetching posts:", error);
-      alert("Error fetching posts. Please check Firebase config.");
+      alert("Error fetching posts. Please check Supabase config.");
     } finally {
       setLoading(false);
     }
   };
 
-  const handleImageUpload = (e) => {
+  const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
-    if (!storage || !ref) {
-      alert("Firebase Storage is not enabled. Please paste an image URL instead.");
-      return;
-    }
-
     setUploading(true);
-    const storageRef = ref(storage, `blog_images/${Date.now()}_${file.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, file);
-
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        setUploadProgress(progress);
-      },
-      (error) => {
-        console.error("Upload failed", error);
-        alert("Image upload failed");
-        setUploading(false);
-      },
-      async () => {
-        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-        setFeaturedImage(downloadURL);
-        setUploading(false);
-        setUploadProgress(0);
-      }
-    );
+    setUploadProgress(50); // Just a visual indicator for Supabase
+    try {
+      const fileName = `${Date.now()}_${file.name}`;
+      const { data, error } = await supabase.storage.from('images').upload(`blog_images/${fileName}`, file);
+      if (error) throw error;
+      
+      const { data: publicUrlData } = supabase.storage.from('images').getPublicUrl(`blog_images/${fileName}`);
+      setFeaturedImage(publicUrlData.publicUrl);
+    } catch (error) {
+      console.error("Upload failed", error);
+      alert("Image upload failed: " + error.message);
+    } finally {
+      setUploading(false);
+      setUploadProgress(0);
+    }
   };
 
   const generateSlug = (text) => {
@@ -158,33 +130,35 @@ export default function BlogManager() {
       metaDescription,
       status,
       featuredImage,
-      updatedAt: Timestamp.now(),
+      updated_at: new Date().toISOString(),
     };
 
     try {
       if (editingPost) {
         // Update existing document
-        const postRef = doc(db, "blogs", editingPost);
-        await updateDoc(postRef, postData);
+        const { error } = await supabase.from('blogs').update(postData).eq('id', editingPost);
+        if (error) throw error;
         alert("Post updated successfully!");
       } else {
         // Create new document
-        postData.createdAt = Timestamp.now();
-        await addDoc(collection(db, "blogs"), postData);
+        postData.created_at = new Date().toISOString();
+        const { error } = await supabase.from('blogs').insert([postData]);
+        if (error) throw error;
         alert("New post created successfully!");
       }
       resetForm();
       fetchPosts();
     } catch (error) {
       console.error("Error saving post:", error);
-      alert("Failed to save post. Did you set up Firestore?");
+      alert("Failed to save post. Did you set up Supabase?");
     }
   };
 
   const handleDelete = async (id) => {
     if (!confirm("Are you sure you want to delete this blog post?")) return;
     try {
-      await deleteDoc(doc(db, "blogs", id));
+      const { error } = await supabase.from('blogs').delete().eq('id', id);
+      if (error) throw error;
       alert("Post deleted!");
       if (editingPost === id) {
         resetForm();

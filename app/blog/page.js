@@ -1,8 +1,7 @@
 import Link from "next/link";
-import { FileText } from "lucide-react";
 import Image from "next/image";
-import { db } from "@/lib/firebase";
-import { collection, getDocs, query, where, orderBy } from "firebase/firestore";
+import { Icons } from "@/components/Icons";
+import { supabase } from "@/lib/supabase";
 
 export const metadata = {
   title: "Blog - Engineering & Manufacturing Insights",
@@ -14,34 +13,26 @@ export const metadata = {
 
 // Next.js page component
 export default async function BlogPage() {
-  // Fetch posts from Firebase Server-Side
-  let blogPosts = [];
-  try {
-    const q = query(
-      collection(db, "blogs"), 
-      where("status", "==", "Published")
-    );
-    const querySnapshot = await getDocs(q);
-    
-    querySnapshot.forEach((doc) => {
-      blogPosts.push({ id: doc.id, ...doc.data() });
-    });
-    
-    // Sort manually by createdAt timestamp since Firestore requires composite indexes for orderBy + where
-    blogPosts.sort((a, b) => {
-       const dateA = a.createdAt?.seconds || 0;
-       const dateB = b.createdAt?.seconds || 0;
-       return dateB - dateA;
-    });
+  // Fetch posts from Supabase Server-Side
+  let posts = [];
 
+  try {
+    const { data, error } = await supabase
+      .from('blogs')
+      .select('*')
+      .eq('status', 'Published')
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+    if (data) posts = data;
   } catch (error) {
-    console.error("Error fetching blog posts from Firebase:", error);
+    console.error("Error fetching blogs from Supabase:", error);
   }
 
   // Format date helper
   const formatDate = (timestamp) => {
     if (!timestamp) return "Recent Update";
-    const date = new Date(timestamp.seconds * 1000);
+    const date = new Date(timestamp); // Supabase 'created_at' is typically an ISO string
     return date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
   };
 
@@ -88,7 +79,7 @@ export default async function BlogPage() {
       <section className="py-20 bg-[#F8FAFC]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {blogPosts.map((post, i) => (
+            {posts.map((post, i) => (
               <Link
                 href={`/blog/${post.slug}`}
                 key={post.id || i}
@@ -103,7 +94,7 @@ export default async function BlogPage() {
                       className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" 
                     />
                   ) : (
-                    <FileText className="w-16 h-16 opacity-30 text-white" />
+                    <svg className="w-16 h-16 opacity-30 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
                   )}
                 </div>
                 <div className="p-6">
@@ -117,15 +108,15 @@ export default async function BlogPage() {
                   </h3>
                   <p className="text-[#475569] text-sm leading-relaxed mb-4 line-clamp-3">{post.excerpt}</p>
                   <div className="flex items-center gap-2 text-xs text-[#94A3B8] font-medium border-t border-[#F1F5F9] pt-4 mt-auto">
-                    <span>{formatDate(post.createdAt)}</span>
+                    <span>{formatDate(post.created_at)}</span>
                   </div>
                 </div>
               </Link>
             ))}
             
-            {blogPosts.length === 0 && (
+            {posts.length === 0 && (
               <div className="col-span-full py-20 text-center border-2 border-dashed border-[#CBD5E1] rounded-2xl bg-white">
-                 <FileText className="w-12 h-12 mx-auto text-[#94A3B8] mb-4" />
+                 <svg className="w-12 h-12 mx-auto text-[#94A3B8] mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
                  <h3 className="text-xl font-bold text-[#1E293B]">Check back later</h3>
                  <p className="text-[#64748B]">We are currently preparing new insights and articles. Stay tuned!</p>
               </div>
