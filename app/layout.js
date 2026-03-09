@@ -63,7 +63,7 @@ export default function RootLayout({ children }) {
               description:
                 "Engineering fabrication, structural metal manufacturing and LED lighting company in Waluj MIDC, Aurangabad, Maharashtra.",
               url: "https://sudeepengineers.com",
-              telephone: "+91-XXXXXXXXXX",
+              telephone: "+91-9922996236",
               email: "info@sudeepengineers.com",
               address: {
                 "@type": "PostalAddress",

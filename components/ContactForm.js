@@ -90,7 +90,7 @@ export default function ContactForm() {
       </button>
 
       <p className="text-xs text-slate-600 text-center">
-        Or call us directly at <a href="tel:+91XXXXXXXXXX" className="text-blue-400 no-underline">+91-XXXXXXXXXX</a>
+        Or call us directly at <a href="tel:+919922996236" className="text-blue-400 no-underline">+91 9922996236</a>
       </p>
     </form>
   );

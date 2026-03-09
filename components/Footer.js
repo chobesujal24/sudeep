@@ -49,7 +49,7 @@ export default function Footer() {
               </p>
               <p className="flex items-center gap-3 group">
                 <span className="text-[#38BDF8]"><Icons.Phone className="w-4 h-4" /></span>
-                <a href="tel:+91XXXXXXXXXX" className="text-inherit no-underline group-hover:text-[#38BDF8] transition-colors">+91-XXXXXXXXXX</a>
+                <a href="tel:+919922996236" className="text-inherit no-underline group-hover:text-[#38BDF8] transition-colors">+91 9922996236</a>
               </p>
               <p className="flex items-center gap-3 group">
                 <span className="text-[#38BDF8]"><Icons.Envelope className="w-4 h-4" /></span>

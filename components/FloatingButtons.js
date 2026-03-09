@@ -26,7 +26,7 @@ export default function FloatingButtons() {
           <Icons.WhatsApp className="w-6 h-6" />
         </a>
         <a
-          href="tel:+91XXXXXXXXXX"
+          href="tel:+919922996236"
           className="w-[52px] h-[52px] rounded-full bg-blue-500 text-[color:var(--color-foreground)] flex items-center justify-center text-2xl shadow-[0_4px_15px_rgba(0,0,0,0.3)] hover:scale-110 transition-transform no-underline"
           aria-label="Call us"
           title="Call us"

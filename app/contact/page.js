@@ -18,8 +18,8 @@ const contactInfo = [
   {
     icon: <Phone color="currentColor" size={24} />,
     title: "Call Us",
-    content: "+91-XXXXXXXXXX",
-    link: "tel:+91XXXXXXXXXX",
+    content: "+91 9922996236",
+    link: "tel:+919922996236",
   },
   {
     icon: <Mail color="currentColor" size={24} />,
@@ -31,7 +31,7 @@ const contactInfo = [
     icon: <MessageCircle color="currentColor" size={24} />,
     title: "WhatsApp",
     content: "Chat with us on WhatsApp",
-    link: "https://wa.me/91XXXXXXXXXX",
+    link: "https://api.whatsapp.com/send/?phone=919922996236&text=Hello%20Sudeep%20Engineers,%20I%20have%20an%20enquiry",
   },
 ];
 

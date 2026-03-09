@@ -106,11 +106,11 @@ export default function HomePage() {
               style={{ animation: "fade-in-up 0.6s ease 0.3s forwards", opacity: 0 }}>
               <Link href="/contact"
                 className="px-8 py-3.5 rounded-md border border-[#2563EB] bg-[#2563EB] text-[#FFFFFF] font-semibold shadow-[0_2px_10px_rgba(37,99,235,0.15)] hover:-translate-y-0.5 transition-all no-underline">
-                Primary Button
+                Request a Quote
               </Link>
               <Link href="/services"
                 className="px-8 py-3.5 rounded-md border border-[#2563EB] text-[#2563EB] bg-transparent font-semibold hover:bg-blue-50 transition-all no-underline">
-                Secondary Button
+                Explore Services
               </Link>
             </div>
 
@@ -156,7 +156,7 @@ export default function HomePage() {
           <div className="text-center mt-10 animate-on-scroll">
             <Link href="/services"
               className="px-8 py-3 rounded-md border border-[#2563EB] text-[#2563EB] font-semibold hover:bg-blue-50 transition-all no-underline text-sm">
-              Secondary Button →
+              View All Services →
             </Link>
           </div>
         </div>
