@@ -127,7 +127,14 @@ export default function AdminDashboard() {
 
   const startEdit = (index) => {
     setEditingIndex(index);
-    setFormData(JSON.parse(JSON.stringify(products[index]))); // Deep copy safely
+    const productCopy = JSON.parse(JSON.stringify(products[index]));
+    // Ensure all array fields exist to prevent rendering issues
+    productCopy.images = productCopy.images || [];
+    productCopy.specs = productCopy.specs || [];
+    productCopy.applications = productCopy.applications || [];
+    productCopy.models = productCopy.models || [];
+    productCopy.catalogs = productCopy.catalogs || [];
+    setFormData(productCopy);
   };
 
   const startAdd = () => {
@@ -479,7 +486,7 @@ export default function AdminDashboard() {
                           </div>
                         </div>
 
-                        {/* Specific Wattage Models */}
+                        {/* Specific Wattage Models with Catalog Upload */}
                         <div className="bg-[#F0F9FF] border border-[#BAE6FD] shadow-sm rounded-xl p-6 relative overflow-hidden">
                           <div className="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
                             <Icons.Engineering className="w-32 h-32 text-[#0284C7]" />
@@ -487,9 +494,9 @@ export default function AdminDashboard() {
                           <div className="flex items-center justify-between mb-4 relative z-10">
                             <div className="flex flex-col">
                               <h4 className="font-bold text-[#0369A1] text-lg">Product Models & Catalogs</h4>
-                              <span className="text-xs text-[#0284C7] max-w-lg">Assign specific models (e.g. 50W, 100W) to their PDF TDS Document mappings.</span>
+                              <span className="text-xs text-[#0284C7] max-w-lg">Assign specific models (e.g. 50W, 100W) to their PDF TDS Document. Drag & drop PDFs or browse to upload.</span>
                             </div>
-                            <button onClick={() => addObjectItem('models', { wattage: "100W", tds: "/catalogs/sheet.pdf" })} className="text-xs bg-[#0284C7] text-white font-bold px-4 py-2 rounded-md hover:bg-[#0369A1] shadow-sm transition-colors">Add Variation +</button>
+                            <button onClick={() => addObjectItem('models', { wattage: "100W", tds: "" })} className="text-xs bg-[#0284C7] text-white font-bold px-4 py-2 rounded-md hover:bg-[#0369A1] shadow-sm transition-colors">Add Variation +</button>
                           </div>
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 relative z-10 mt-6">
                             {(formData.models || []).map((model, idx) => (
@@ -500,11 +507,57 @@ export default function AdminDashboard() {
                                 </div>
                                 <div className="flex gap-2 items-center mt-2">
                                   <label className="text-xs font-bold w-16 uppercase text-[#64748B]">Name</label>
-                                  <input type="text" value={model.wattage} onChange={(e) => handleObjectChange('models', idx, 'wattage', e.target.value)} className="flex-1 text-sm p-1.5 border border-[#E2E8F0] rounded outline-none" placeholder="e.g. 100W Flood" />
+                                  <input type="text" value={model.wattage || ''} onChange={(e) => handleObjectChange('models', idx, 'wattage', e.target.value)} className="flex-1 text-sm p-1.5 border border-[#E2E8F0] rounded outline-none" placeholder="e.g. 100W Flood" />
                                 </div>
-                                <div className="flex gap-2 items-center">
-                                  <label className="text-xs font-bold w-16 uppercase text-[#64748B]">PDF Sheet</label>
-                                  <input type="text" value={model.tds} onChange={(e) => handleObjectChange('models', idx, 'tds', e.target.value)} className="flex-1 text-sm p-1.5 border border-[#E2E8F0] rounded outline-none" placeholder="/catalogs/sheet.pdf" />
+                                <div className="flex gap-2 items-start">
+                                  <label className="text-xs font-bold w-16 uppercase text-[#64748B] mt-2">PDF</label>
+                                  <div className="flex-1">
+                                    {model.tds ? (
+                                      <div className="flex items-center gap-2 p-2 bg-green-50 border border-green-200 rounded-md">
+                                        <svg className="w-5 h-5 text-green-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                                        <span className="text-xs text-green-700 truncate flex-1">{model.tds.split('/').pop()}</span>
+                                        <button onClick={() => handleObjectChange('models', idx, 'tds', '')} className="text-xs text-red-500 hover:underline shrink-0">Remove</button>
+                                      </div>
+                                    ) : (
+                                      <div
+                                        className="border-2 border-dashed border-[#CBD5E1] rounded-md p-3 text-center transition-colors hover:border-[#0284C7] hover:bg-[#F0F9FF] cursor-pointer"
+                                        onDragOver={(e) => { e.preventDefault(); e.currentTarget.classList.add('border-[#0284C7]', 'bg-[#F0F9FF]'); }}
+                                        onDragLeave={(e) => { e.currentTarget.classList.remove('border-[#0284C7]', 'bg-[#F0F9FF]'); }}
+                                        onDrop={async (e) => {
+                                          e.preventDefault();
+                                          e.currentTarget.classList.remove('border-[#0284C7]', 'bg-[#F0F9FF]');
+                                          const file = e.dataTransfer.files[0];
+                                          if (!file) return;
+                                          const fileName = `catalogs/${formData.slug || 'new'}/${Date.now()}_${file.name}`;
+                                          const { error } = await supabase.storage.from('images').upload(fileName, file);
+                                          if (!error) {
+                                            const { data: urlData } = supabase.storage.from('images').getPublicUrl(fileName);
+                                            handleObjectChange('models', idx, 'tds', urlData.publicUrl);
+                                          } else {
+                                            alert('Upload failed: ' + error.message);
+                                          }
+                                        }}
+                                      >
+                                        <label className="cursor-pointer">
+                                          <svg className="w-5 h-5 mx-auto text-[#94A3B8] mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
+                                          <span className="text-[10px] text-[#64748B]">Drop PDF or click to browse</span>
+                                          <input type="file" accept=".pdf,.doc,.docx" className="hidden" onChange={async (e) => {
+                                            const file = e.target.files[0];
+                                            if (!file) return;
+                                            const fileName = `catalogs/${formData.slug || 'new'}/${Date.now()}_${file.name}`;
+                                            const { error } = await supabase.storage.from('images').upload(fileName, file);
+                                            if (!error) {
+                                              const { data: urlData } = supabase.storage.from('images').getPublicUrl(fileName);
+                                              handleObjectChange('models', idx, 'tds', urlData.publicUrl);
+                                            } else {
+                                              alert('Upload failed: ' + error.message);
+                                            }
+                                          }} />
+                                        </label>
+                                      </div>
+                                    )}
+                                    <input type="text" value={model.tds || ''} onChange={(e) => handleObjectChange('models', idx, 'tds', e.target.value)} className="w-full text-[10px] p-1 mt-1 border border-transparent hover:border-[#E2E8F0] focus:border-[#38BDF8] rounded outline-none text-[#94A3B8]" placeholder="Or paste URL manually" />
+                                  </div>
                                 </div>
                               </div>
                             ))}
