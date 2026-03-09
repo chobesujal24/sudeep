@@ -39,13 +39,37 @@ export default function AdminDashboard() {
 
   const fetchProducts = async () => {
     try {
-      const res = await fetch("/api/products");
-      const data = await res.json();
-      if (Array.isArray(data)) {
-        setProducts(data);
+      // Try Supabase first
+      const { data: dbData, error } = await supabase
+        .from('settings')
+        .select('data')
+        .eq('id', 'productData')
+        .single();
+
+      if (dbData && dbData.data && dbData.data.products && dbData.data.products.length > 0) {
+        setProducts(dbData.data.products);
+      } else {
+        // Fallback: fetch from API route (uses local JSON)
+        const res = await fetch("/api/products");
+        const data = await res.json();
+        if (Array.isArray(data) && data.length > 0) {
+          setProducts(data);
+          // Also seed Supabase with this data for future use
+          await supabase
+            .from('settings')
+            .upsert({ id: 'productData', data: { products: data } });
+        }
       }
     } catch (error) {
       console.error("Failed to fetch products:", error);
+      // Final fallback: try API route
+      try {
+        const res = await fetch("/api/products");
+        const data = await res.json();
+        if (Array.isArray(data)) setProducts(data);
+      } catch (e) {
+        console.error("API fallback also failed:", e);
+      }
     } finally {
       setLoading(false);
     }
@@ -346,20 +370,85 @@ export default function AdminDashboard() {
                         </div>
                       </div>
 
-                      {/* Images */}
+                      {/* Images - Drag & Drop Upload */}
                       <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-5">
                         <div className="flex items-center justify-between mb-4">
                           <h3 className="font-bold">Image Gallery</h3>
-                          <button onClick={() => addArrayItem('images', "/images/placeholder.jpg")} className="text-xs bg-white border border-[#CBD5E1] px-2 py-1 shadow-sm rounded hover:border-[#38BDF8]">Add Image +</button>
+                          <label className="text-xs bg-white border border-[#CBD5E1] px-2 py-1 shadow-sm rounded hover:border-[#38BDF8] cursor-pointer">
+                            Browse Files
+                            <input type="file" accept="image/*" multiple className="hidden" onChange={async (e) => {
+                              const files = Array.from(e.target.files);
+                              for (const file of files) {
+                                const fileName = `products/${formData.slug || 'new'}/${Date.now()}_${file.name}`;
+                                const { data, error } = await supabase.storage.from('images').upload(fileName, file);
+                                if (!error) {
+                                  const { data: urlData } = supabase.storage.from('images').getPublicUrl(fileName);
+                                  setFormData(prev => ({ ...prev, images: [...(prev.images || []), urlData.publicUrl] }));
+                                } else {
+                                  alert('Upload failed: ' + error.message);
+                                }
+                              }
+                            }} />
+                          </label>
                         </div>
-                        <div className="space-y-3 max-h-[250px] overflow-y-auto pr-2 custom-scrollbar">
+
+                        {/* Drop Zone */}
+                        <div
+                          className="border-2 border-dashed border-[#CBD5E1] rounded-lg p-6 text-center mb-4 transition-colors hover:border-[#38BDF8] hover:bg-[#F0F9FF] cursor-pointer"
+                          onDragOver={(e) => { e.preventDefault(); e.currentTarget.classList.add('border-[#38BDF8]', 'bg-[#F0F9FF]'); }}
+                          onDragLeave={(e) => { e.currentTarget.classList.remove('border-[#38BDF8]', 'bg-[#F0F9FF]'); }}
+                          onDrop={async (e) => {
+                            e.preventDefault();
+                            e.currentTarget.classList.remove('border-[#38BDF8]', 'bg-[#F0F9FF]');
+                            const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
+                            for (const file of files) {
+                              const fileName = `products/${formData.slug || 'new'}/${Date.now()}_${file.name}`;
+                              const { data, error } = await supabase.storage.from('images').upload(fileName, file);
+                              if (!error) {
+                                const { data: urlData } = supabase.storage.from('images').getPublicUrl(fileName);
+                                setFormData(prev => ({ ...prev, images: [...(prev.images || []), urlData.publicUrl] }));
+                              } else {
+                                alert('Upload failed: ' + error.message);
+                              }
+                            }
+                          }}
+                          onClick={(e) => {
+                            // Only trigger if clicking the dropzone itself (not child elements)
+                            if (e.target === e.currentTarget || e.target.closest('[data-dropzone]')) {
+                              e.currentTarget.querySelector('input[type="file"]')?.click();
+                            }
+                          }}
+                        >
+                          <svg className="w-8 h-8 mx-auto text-[#94A3B8] mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
+                          <p data-dropzone className="text-sm text-[#64748B] font-medium">Drag & drop images here</p>
+                          <p data-dropzone className="text-xs text-[#94A3B8] mt-1">or click "Browse Files" above</p>
+                        </div>
+
+                        {/* Image Previews */}
+                        <div className="grid grid-cols-3 gap-3 max-h-[300px] overflow-y-auto pr-2">
                           {(formData.images || []).map((img, idx) => (
-                            <div key={idx} className="flex gap-2 items-center bg-white p-2 border rounded-md">
-                              <img src={img} onError={(e) => { e.target.src = "https://via.placeholder.com/50" }} alt="" className="w-10 h-10 object-cover bg-gray-100 rounded border border-[#E2E8F0] block" />
-                              <input type="text" value={img} onChange={(e) => handleArrayChange('images', idx, e.target.value)} className="flex-1 p-1.5 text-xs text-[#64748B] border border-transparent hover:border-[#CBD5E1] focus:border-[#38BDF8] rounded-md outline-none" placeholder="/assets/img.jpg" />
-                              <button onClick={() => removeArrayItem('images', idx)} className="text-[#EF4444] hover:bg-[#FEE2E2] rounded px-2">✕</button>
+                            <div key={idx} className="relative group rounded-lg overflow-hidden border border-[#E2E8F0] bg-white aspect-square">
+                              <img src={img} onError={(e) => { e.target.src = "https://placehold.co/200x200/f1f5f9/64748b?text=No+Image" }} alt="" className="w-full h-full object-cover" />
+                              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2">
+                                <button onClick={() => removeArrayItem('images', idx)} className="bg-red-500 text-white text-xs font-bold px-3 py-1.5 rounded-md shadow">Remove</button>
+                              </div>
+                              <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-[10px] p-1.5 truncate">
+                                {img.split('/').pop()}
+                              </div>
                             </div>
                           ))}
+                        </div>
+
+                        {/* Manual URL input */}
+                        <div className="mt-3 flex gap-2">
+                          <input type="text" id="manual-image-url" placeholder="Or paste image URL here..." className="flex-1 p-2 text-xs border border-[#CBD5E1] rounded-md outline-none focus:border-[#38BDF8]" />
+                          <button onClick={() => {
+                            const input = document.getElementById('manual-image-url');
+                            if (input.value) {
+                              setFormData(prev => ({ ...prev, images: [...(prev.images || []), input.value] }));
+                              input.value = '';
+                            }
+                          }} className="text-xs bg-[#0F172A] text-white px-3 py-1.5 rounded-md">Add URL</button>
                         </div>
                       </div>
                     </section>

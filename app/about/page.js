@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Building2, Settings, Wrench, Lightbulb, PenTool, TestTube, Factory, Target, Telescope } from "lucide-react";
+import Image from "next/image";
+import { Settings, Wrench, Lightbulb, PenTool, TestTube, Factory, Target, Telescope } from "lucide-react";
 
 export const metadata = {
   title: "About Us - Engineering Fabrication Company in Aurangabad",
@@ -80,8 +81,8 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="animate-on-scroll delay-2">
-              <div className="rounded-2xl overflow-hidden border border-[#E2E8F0] bg-[#FFFFFF] h-[400px] flex items-center justify-center text-[#2563EB]">
-                <Building2 className="w-32 h-32 opacity-20" />
+              <div className="rounded-2xl overflow-hidden border border-[#E2E8F0] h-[400px] relative">
+                <Image src="/about_factory.png" alt="Sudeep Engineers Factory" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
               </div>
             </div>
           </div>
@@ -129,8 +130,8 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="animate-on-scroll delay-2">
-              <div className="rounded-2xl overflow-hidden border border-[#E2E8F0] bg-[#FFFFFF] h-[400px] flex items-center justify-center text-[#2563EB]">
-                <Settings className="w-32 h-32 opacity-20" />
+              <div className="rounded-2xl overflow-hidden border border-[#E2E8F0] h-[400px] relative">
+                <Image src="/about_manufacturing.png" alt="Manufacturing Capabilities" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
               </div>
             </div>
             <div className="animate-on-scroll">

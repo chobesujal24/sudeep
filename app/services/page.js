@@ -31,7 +31,7 @@ const services = [
       "Comprehensive quality control",
     ],
     industries: ["Construction", "Infrastructure", "Industrial Plants", "Manufacturing", "Government Projects"],
-    image: "/general_industry_fabrication_1772904248397.png"
+    image: "/service_fabrication.png"
   },
   {
     id: "structural-metal-manufacturing",
@@ -49,7 +49,7 @@ const services = [
       "On-site installation support",
     ],
     industries: ["Building Construction", "Bridge & Flyover Projects", "Industrial Sheds", "Warehousing", "Water Treatment Plants"],
-    image: "/industry_construction_1772907669191.png"
+    image: "/service_structural.png"
   },
   {
     id: "industrial-job-work",
@@ -103,7 +103,7 @@ const services = [
       "Comprehensive warranty support",
     ],
     industries: ["Municipal Corporations", "Highway Authorities", "Industrial Complexes", "Commercial Buildings", "Sports Facilities"],
-    image: "/industry_government_1772907719581.png"
+    image: "/service_led.png"
   },
 ];
 
