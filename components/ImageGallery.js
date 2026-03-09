@@ -18,7 +18,7 @@ export default function ImageGallery({ images, productName }) {
       {/* Main Large Image */}
       <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-[#FFFFFF] border border-[#E2E8F0] group">
         <Image
-          src={encodeURI(mainImage)}
+          src={mainImage}
           alt={productName}
           fill
           unoptimized
@@ -41,7 +41,7 @@ export default function ImageGallery({ images, productName }) {
               }`}
             >
               <Image
-                src={encodeURI(img)}
+                src={img}
                 alt={`${productName} thumbnail ${idx + 1}`}
                 fill
                 unoptimized
