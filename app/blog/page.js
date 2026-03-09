@@ -53,22 +53,19 @@ export default async function BlogPage() {
       />
 
       {/* Page Hero */}
-      <section
-        className="pt-32 pb-16 relative overflow-hidden"
-        style={{ background: "linear-gradient(135deg, #0a0e17 0%, #111827 50%, #0f172a 100%)" }}
-      >
+      <section className="pt-32 pb-16 relative overflow-hidden bg-[#FFFFFF]">
         <div className="absolute -top-[30%] -right-[20%] w-[500px] h-[500px] rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%)" }} />
+          style={{ background: "radial-gradient(circle, rgba(37,99,235,0.06) 0%, transparent 70%)" }} />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <nav className="text-xs text-[#94A3B8] mb-6 flex gap-2">
-            <Link href="/" className="hover:text-blue-400 no-underline text-[#94A3B8]">Home</Link>
-            <span>/</span><span className="text-[#64748B]">Blog</span>
+          <nav className="text-xs text-[#475569] mb-6 flex gap-2">
+            <Link href="/" className="hover:text-[#38BDF8] no-underline text-[#475569]">Home</Link>
+            <span>/</span><span className="text-[#1E293B]">Blog</span>
           </nav>
-          <h1 className="text-[clamp(2rem,4vw,3rem)] font-heading font-extrabold mb-4"
+          <h1 className="text-[clamp(2rem,4vw,3rem)] font-heading font-extrabold mb-4 text-[#1E293B]"
             style={{ animation: "fade-in-up 0.6s ease forwards" }}>
-            Engineering <span className="gradient-text">Insights</span>
+            Engineering <span className="text-[#2563EB]">Insights</span>
           </h1>
-          <p className="text-[#94A3B8] text-lg max-w-[600px]"
+          <p className="text-[#1E293B] opacity-80 text-lg max-w-[600px]"
             style={{ animation: "fade-in-up 0.6s ease 0.1s forwards", opacity: 0 }}>
             Expert articles on fabrication, manufacturing, and LED lighting from our team.
           </p>

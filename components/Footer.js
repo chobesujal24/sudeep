@@ -33,10 +33,11 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <Link href="/" className="flex items-center no-underline mb-4 group -ml-1">
-              <span className="font-heading font-extrabold text-2xl tracking-tight text-white flex items-center gap-2">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#38BDF8] to-white">SUDEEP</span>
-                <span className="font-light tracking-wide text-white">Lights</span>
-              </span>
+              <img
+                src="/logo.png"
+                alt="Sudeep Lights"
+                className="h-[80px] w-auto object-contain transition-transform group-hover:scale-105 brightness-0 invert opacity-90"
+              />
             </Link>
             <p className="text-[#E2E8F0] text-sm leading-relaxed max-w-[300px]">
               Premium LED lighting and solar solutions manufactured in Waluj MIDC,

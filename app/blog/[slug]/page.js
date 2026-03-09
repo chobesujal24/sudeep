@@ -101,19 +101,16 @@ export default async function BlogPost({ params }) {
         }}
       />
 
-      <section
-        className="pt-32 pb-16 relative overflow-hidden"
-        style={{ background: "linear-gradient(135deg, #0a0e17 0%, #111827 50%, #0f172a 100%)" }}
-      >
+      <section className="pt-32 pb-16 relative overflow-hidden bg-[#FFFFFF]">
         <div className="absolute -top-[30%] -right-[20%] w-[500px] h-[500px] rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%)" }} />
+          style={{ background: "radial-gradient(circle, rgba(37,99,235,0.06) 0%, transparent 70%)" }} />
         <div className="max-w-4xl mx-auto px-6 relative z-10">
-          <nav className="text-xs text-[#94A3B8] mb-6 flex gap-2 overflow-x-auto whitespace-nowrap hide-scrollbar">
-            <Link href="/" className="hover:text-blue-400 no-underline text-[#94A3B8] shrink-0">Home</Link>
+          <nav className="text-xs text-[#475569] mb-6 flex gap-2 overflow-x-auto whitespace-nowrap hide-scrollbar">
+            <Link href="/" className="hover:text-blue-400 no-underline text-[#475569] shrink-0">Home</Link>
             <span className="shrink-0">/</span>
-            <Link href="/blog" className="hover:text-blue-400 no-underline text-[#94A3B8] shrink-0">Blog</Link>
+            <Link href="/blog" className="hover:text-blue-400 no-underline text-[#475569] shrink-0">Blog</Link>
             <span className="shrink-0">/</span>
-            <span className="text-[#64748B] truncate max-w-[200px] sm:max-w-none">{post.title}</span>
+            <span className="text-[#1E293B] truncate max-w-[200px] sm:max-w-none">{post.title}</span>
           </nav>
           
           {post.tag && (
@@ -122,12 +119,12 @@ export default async function BlogPost({ params }) {
              </span>
           )}
           
-          <h1 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-heading font-extrabold mb-4 leading-tight text-white"
+          <h1 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-heading font-extrabold mb-4 leading-tight text-[#1E293B]"
             style={{ animation: "fade-in-up 0.6s ease forwards" }}>
             {post.title}
           </h1>
           
-          <div className="flex items-center gap-4 text-sm text-[#94A3B8] font-medium">
+          <div className="flex items-center gap-4 text-sm text-[#475569] font-medium">
             {publishDate && <span>{publishDate}</span>}
           </div>
         </div>
