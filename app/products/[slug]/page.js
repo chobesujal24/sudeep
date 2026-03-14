@@ -120,7 +120,7 @@ export default async function ProductPage({ params }) {
                   Request Detailed Quote
                 </Link>
                 <a
-                  href={`https://wa.me/91XXXXXXXXXX?text=Hello%2C%20I%20am%20interested%20in%20the%20${encodeURIComponent(product.name)}.`}
+                  href={`https://wa.me/919922996236?text=Hello%2C%20I%20am%20interested%20in%20the%20${encodeURIComponent(product.name)}.`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1 min-w-[200px] flex items-center justify-center gap-2 text-center px-8 py-3.5 rounded-md border border-[#25d366] bg-[#25d366]/10 text-[#1E293B] font-bold hover:-translate-y-0.5 hover:bg-[#25d366]/20 transition-all no-underline shrink-0"

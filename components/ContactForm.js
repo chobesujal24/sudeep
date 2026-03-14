@@ -84,7 +84,7 @@ export default function ContactForm() {
 
       <button
         type="submit"
-        className="w-full px-6 py-3.5 rounded-lg bg-gradient-to-r from-blue-500 to-blue-700 text-[color:var(--color-foreground)] font-semibold hover:-translate-y-0.5 hover:shadow-[0_6px_25px_rgba(59,130,246,0.25)] transition-all cursor-pointer border-none text-sm"
+        className="w-full px-6 py-3.5 rounded-lg bg-gradient-to-r from-blue-500 to-blue-700 text-white font-semibold hover:-translate-y-0.5 hover:shadow-[0_6px_25px_rgba(59,130,246,0.25)] transition-all cursor-pointer border-none text-sm"
       >
         Submit Enquiry →
       </button>

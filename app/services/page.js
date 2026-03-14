@@ -192,7 +192,7 @@ export default function ServicesPage() {
 
                 <Link
                   href="/contact"
-                  className="inline-flex px-6 py-3 rounded-md bg-gradient-to-r from-blue-500 to-blue-700 text-[color:var(--color-foreground)] font-semibold hover:-translate-y-0.5 transition-all no-underline text-sm"
+                  className="inline-flex px-6 py-3 rounded-md bg-gradient-to-r from-blue-500 to-blue-700 text-white font-semibold hover:-translate-y-0.5 transition-all no-underline text-sm"
                 >
                   Get Quote for {service.title} →
                 </Link>
@@ -233,10 +233,10 @@ export default function ServicesPage() {
           <div className="bg-gradient-to-r from-blue-700 to-blue-500 rounded-3xl p-12 md:p-16 text-center relative overflow-hidden animate-on-scroll">
             <div className="absolute -top-1/2 -right-[30%] w-[400px] h-[400px] rounded-full pointer-events-none"
               style={{ background: "radial-gradient(circle, rgba(255,255,255,0.1), transparent 70%)" }} />
-            <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-heading font-bold text-[color:var(--color-foreground)] mb-4 relative z-10">
+            <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-heading font-bold text-white mb-4 relative z-10">
               Need Engineering Fabrication Services?
             </h2>
-            <p className="text-[color:var(--color-foreground)]/85 text-[1.05rem] mb-8 max-w-[500px] mx-auto relative z-10">
+            <p className="text-white/90 text-[1.05rem] mb-8 max-w-[500px] mx-auto relative z-10">
               Contact us today for a free consultation and competitive quote. We deliver quality from Waluj MIDC, Aurangabad.
             </p>
             <Link href="/contact"

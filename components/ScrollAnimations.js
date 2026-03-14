@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
+import { animate } from "framer-motion";
 
 export default function ScrollAnimations() {
   const pathname = usePathname();
@@ -16,6 +17,12 @@ export default function ScrollAnimations() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            // Use framer-motion's animate for smooth spring animations
+            animate(
+              entry.target,
+              { opacity: 1, y: 0 },
+              { type: "spring", stiffness: 80, damping: 20, duration: 0.6 }
+            );
             entry.target.classList.add("animated");
             observerRef.current.unobserve(entry.target);
           }

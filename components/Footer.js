@@ -1,5 +1,4 @@
 import Link from "next/link";
-
 import { Icons } from "./Icons";
 
 const footerLinks = {
@@ -27,47 +26,47 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer className="bg-[#1E293B] border-t border-[#1E293B]">
-      <div className="max-w-7xl mx-auto px-6 pt-16 pb-0">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+    <footer style={{ background: "#0F172A" }}>
+      <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "80px 32px 0" }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
           <div>
-            <Link href="/" className="flex items-center no-underline mb-4 group -ml-1">
+            <Link href="/" className="flex items-center no-underline mb-6 group">
               <img
                 src="/logo.png"
-                alt="Sudeep Lights"
+                alt="Sudeep Engineers"
                 className="h-[80px] w-auto object-contain transition-transform group-hover:scale-105 brightness-0 invert opacity-90"
               />
             </Link>
-            <p className="text-[#E2E8F0] text-sm leading-relaxed max-w-[300px]">
+            <p className="text-[#94A3B8] text-sm leading-relaxed max-w-[280px] mb-6">
               Premium LED lighting and solar solutions manufactured in Waluj MIDC,
               Aurangabad. Trusted MSME partner since 2019.
             </p>
-            <div className="mt-5 space-y-3 text-sm text-[#E2E8F0]">
+            <div className="space-y-3 text-sm">
               <p className="flex items-center gap-3 group">
                 <span className="text-[#38BDF8]"><Icons.Location className="w-4 h-4" /></span>
-                <span className="group-hover:text-[#38BDF8] transition-colors">Waluj MIDC, Aurangabad, Maharashtra</span>
+                <span className="text-[#94A3B8] group-hover:text-[#38BDF8] transition-colors">Waluj MIDC, Aurangabad, Maharashtra</span>
               </p>
               <p className="flex items-center gap-3 group">
                 <span className="text-[#38BDF8]"><Icons.Phone className="w-4 h-4" /></span>
-                <a href="tel:+919922996236" className="text-inherit no-underline group-hover:text-[#38BDF8] transition-colors">+91 9922996236</a>
+                <a href="tel:+919922996236" className="text-[#94A3B8] no-underline group-hover:text-[#38BDF8] transition-colors">+91 9922996236</a>
               </p>
               <p className="flex items-center gap-3 group">
                 <span className="text-[#38BDF8]"><Icons.Envelope className="w-4 h-4" /></span>
-                <a href="mailto:info@sudeepengineers.com" className="text-inherit no-underline group-hover:text-[#38BDF8] transition-colors">info@sudeepengineers.com</a>
+                <a href="mailto:info@sudeepengineers.com" className="text-[#94A3B8] no-underline group-hover:text-[#38BDF8] transition-colors">info@sudeepengineers.com</a>
               </p>
             </div>
           </div>
 
-          {/* Services */}
+          {/* Products */}
           <div>
-            <h4 className="font-heading font-bold text-white text-sm mb-5">Our Services</h4>
-            <ul className="space-y-2.5">
+            <h4 className="font-heading font-bold text-white text-sm mb-6 uppercase tracking-wider">Products</h4>
+            <ul className="space-y-3">
               {footerLinks.services.map((link, i) => (
                 <li key={i}>
                   <Link
                     href={link.href}
-                    className="text-[#E2E8F0] hover:text-[#38BDF8] text-sm transition-colors no-underline"
+                    className="text-[#94A3B8] hover:text-white text-sm transition-colors no-underline"
                   >
                     {link.label}
                   </Link>
@@ -78,13 +77,13 @@ export default function Footer() {
 
           {/* Company */}
           <div>
-            <h4 className="font-heading font-bold text-white text-sm mb-5">Company</h4>
-            <ul className="space-y-2.5">
+            <h4 className="font-heading font-bold text-white text-sm mb-6 uppercase tracking-wider">Company</h4>
+            <ul className="space-y-3">
               {footerLinks.company.map((link, i) => (
                 <li key={i}>
                   <Link
                     href={link.href}
-                    className="text-[#E2E8F0] hover:text-[#38BDF8] text-sm transition-colors no-underline"
+                    className="text-[#94A3B8] hover:text-white text-sm transition-colors no-underline"
                   >
                     {link.label}
                   </Link>
@@ -95,13 +94,13 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-heading font-bold text-white text-sm mb-5">Quick Links</h4>
-            <ul className="space-y-2.5">
+            <h4 className="font-heading font-bold text-white text-sm mb-6 uppercase tracking-wider">Quick Links</h4>
+            <ul className="space-y-3">
               {footerLinks.seo.map((link, i) => (
                 <li key={i}>
                   <Link
                     href={link.href}
-                    className="text-[#E2E8F0] hover:text-[#38BDF8] text-sm transition-colors no-underline"
+                    className="text-[#94A3B8] hover:text-white text-sm transition-colors no-underline"
                   >
                     {link.label}
                   </Link>
@@ -111,12 +110,13 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom */}
-        <div className="border-t border-slate-700 py-6 flex flex-wrap items-center justify-between gap-4 text-xs text-[#E2E8F0] opacity-80">
-          <p>&copy; {new Date().getFullYear()} Sudeep Lights. All rights reserved.</p>
+        {/* Bottom bar */}
+        <div
+          className="border-t border-white/10 py-8 flex flex-wrap items-center justify-between gap-4 text-xs text-[#64748B]"
+        >
+          <p>&copy; {new Date().getFullYear()} Sudeep Engineers. All rights reserved.</p>
           <p>
-            Premium LED Lighting &amp; Solar Solutions Manufacturer in Waluj MIDC, Aurangabad,
-            Maharashtra, India
+            Premium LED Lighting &amp; Solar Solutions — Waluj MIDC, Aurangabad
           </p>
         </div>
       </div>
