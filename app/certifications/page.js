@@ -91,7 +91,7 @@ export default function CertificationsPage() {
           </nav>
           <h1 className="text-[clamp(2rem,4vw,3rem)] font-heading font-extrabold mb-4 text-[#1E293B]"
             style={{ animation: "fade-in-up 0.6s ease forwards" }}>
-            Certifications &amp; <span className="text-[#2563EB]">Quality</span>
+            Certifications &amp; <span className="text-[#1E40AF]">Quality</span>
           </h1>
           <p className="text-[#1E293B] opacity-80 text-lg max-w-[600px]"
             style={{ animation: "fade-in-up 0.6s ease 0.1s forwards", opacity: 0 }}>
@@ -117,7 +117,7 @@ export default function CertificationsPage() {
                     </span>
                   </div>
                   <p className="text-[#1E293B] opacity-80 leading-relaxed mb-4">{cert.desc}</p>
-                  <h3 className="font-heading font-semibold text-sm mb-3 text-[#2563EB]">Key Benefits</h3>
+                  <h3 className="font-heading font-semibold text-sm mb-3 text-[#1E40AF]">Key Benefits</h3>
                   <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
                     {cert.benefits.map((b, i) => (
                       <li key={i} className="flex items-start gap-2 text-[#1E293B] opacity-80 text-sm">
@@ -136,7 +136,7 @@ export default function CertificationsPage() {
       {/* ====== CTA ====== */}
       <section className="py-20 bg-[#F8FAFC] border-t border-[#E2E8F0]">
         <div className="max-w-5xl mx-auto px-6">
-          <div className="bg-[#2563EB] rounded-3xl p-12 md:p-16 text-center relative overflow-hidden animate-on-scroll">
+          <div className="bg-[#1E40AF] rounded-3xl p-12 md:p-16 text-center relative overflow-hidden animate-on-scroll">
             <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-heading font-bold text-[#FFFFFF] mb-4 relative z-10">
               Work With a Certified Partner
             </h2>

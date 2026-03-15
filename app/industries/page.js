@@ -143,7 +143,7 @@ export default function IndustriesPage() {
       {/* ====== CTA ====== */}
       <section className="py-20 bg-[#F8FAFC] border-t border-[#E2E8F0]">
         <div className="max-w-5xl mx-auto px-6">
-          <div className="bg-[#2563EB] rounded-3xl p-12 md:p-16 text-center relative overflow-hidden animate-on-scroll">
+          <div className="bg-[#1E40AF] rounded-3xl p-12 md:p-16 text-center relative overflow-hidden animate-on-scroll">
             <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-heading font-bold text-[#FFFFFF] mb-4 relative z-10">
               Your Industry, Our Expertise
             </h2>

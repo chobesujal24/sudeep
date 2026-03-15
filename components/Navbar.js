@@ -93,9 +93,9 @@ export default function Navbar() {
               href="/contact"
               className="hidden lg:inline-flex items-center justify-center px-6 py-2.5 rounded-full text-sm font-semibold transition-all no-underline"
               style={{
-                background: isTransparent ? "rgba(255,255,255,0.12)" : "#2563EB",
+                background: isTransparent ? "rgba(255,255,255,0.12)" : "#1E40AF",
                 color: isTransparent ? "#FFFFFF" : "#FFFFFF",
-                border: isTransparent ? "1px solid rgba(255,255,255,0.3)" : "1px solid #2563EB",
+                border: isTransparent ? "1px solid rgba(255,255,255,0.3)" : "1px solid #1E40AF",
                 backdropFilter: isTransparent ? "blur(8px)" : "none",
                 transition: "all 0.4s ease",
               }}
@@ -107,7 +107,7 @@ export default function Navbar() {
               }}
               onMouseOut={(e) => {
                 if (!isTransparent) {
-                  e.currentTarget.style.background = "#2563EB";
+                  e.currentTarget.style.background = "#1E40AF";
                   e.currentTarget.style.transform = "scale(1)";
                 }
               }}
@@ -173,8 +173,8 @@ export default function Navbar() {
               onClick={closeMobile}
               className={`block px-4 py-3.5 rounded-xl text-base font-medium transition-all no-underline mb-1 ${
                 pathname === link.href
-                  ? "text-[#2563EB] bg-blue-50"
-                  : "text-[#1E293B] hover:text-[#2563EB] hover:bg-[#F8FAFC]"
+                  ? "text-[#1E40AF] bg-blue-50"
+                  : "text-[#1E293B] hover:text-[#1E40AF] hover:bg-[#F8FAFC]"
               }`}
             >
               {link.label}
@@ -183,7 +183,7 @@ export default function Navbar() {
           <Link
             href="/contact"
             onClick={closeMobile}
-            className="mt-4 block w-full text-center px-5 py-3.5 rounded-full bg-[#2563EB] text-white font-semibold no-underline hover:bg-[#1D4ED8] transition-all"
+            className="mt-4 block w-full text-center px-5 py-3.5 rounded-full bg-[#1E40AF] text-white font-semibold no-underline hover:bg-[#1D4ED8] transition-all"
           >
             Contact Us
           </Link>

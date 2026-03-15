@@ -154,7 +154,7 @@ export default async function BlogPost({ params }) {
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
           <div className="mt-16 pt-8 border-t border-[#E2E8F0] flex flex-col sm:flex-row items-center justify-between gap-6 animate-on-scroll">
-            <Link href="/blog" className="text-[#2563EB] text-sm font-bold no-underline hover:text-[#1D4ED8] flex items-center gap-2">
+            <Link href="/blog" className="text-[#1E40AF] text-sm font-bold no-underline hover:text-[#1D4ED8] flex items-center gap-2">
               ← Back to all articles
             </Link>
             <Link href="/contact"

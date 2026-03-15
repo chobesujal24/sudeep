@@ -63,7 +63,7 @@ export default async function BlogPage() {
           </nav>
           <h1 className="text-[clamp(2rem,4vw,3rem)] font-heading font-extrabold mb-4 text-[#1E293B]"
             style={{ animation: "fade-in-up 0.6s ease forwards" }}>
-            Engineering <span className="text-[#2563EB]">Insights</span>
+            Engineering <span className="text-[#1E40AF]">Insights</span>
           </h1>
           <p className="text-[#1E293B] opacity-80 text-lg max-w-[600px]"
             style={{ animation: "fade-in-up 0.6s ease 0.1s forwards", opacity: 0 }}>
@@ -96,11 +96,11 @@ export default async function BlogPage() {
                 </div>
                 <div className="p-6">
                   {post.tag && (
-                    <span className="inline-block bg-blue-500/10 border border-blue-500/15 rounded-full px-3 py-0.5 text-[0.72rem] text-[#2563EB] font-bold uppercase tracking-wider mb-3">
+                    <span className="inline-block bg-blue-500/10 border border-blue-500/15 rounded-full px-3 py-0.5 text-[0.72rem] text-[#1E40AF] font-bold uppercase tracking-wider mb-3">
                       {post.tag}
                     </span>
                   )}
-                  <h3 className="font-heading font-bold text-lg mb-2 text-[#0F172A] group-hover:text-[#2563EB] transition-colors leading-snug line-clamp-2">
+                  <h3 className="font-heading font-bold text-lg mb-2 text-[#0F172A] group-hover:text-[#1E40AF] transition-colors leading-snug line-clamp-2">
                     {post.title}
                   </h3>
                   <p className="text-[#475569] text-sm leading-relaxed mb-4 line-clamp-3">{post.excerpt}</p>

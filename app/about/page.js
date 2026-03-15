@@ -43,7 +43,7 @@ export default function AboutPage() {
           </nav>
           <h1 className="text-[clamp(2rem,4vw,3rem)] font-heading font-extrabold mb-4 text-[#1E293B]"
             style={{ animation: "fade-in-up 0.6s ease forwards" }}>
-            About <span className="text-[#2563EB]">Sudeep Engineers</span>
+            About <span className="text-[#1E40AF]">Sudeep Engineers</span>
           </h1>
           <p className="text-[#1E293B] opacity-80 text-lg max-w-[600px]"
             style={{ animation: "fade-in-up 0.6s ease 0.1s forwards", opacity: 0 }}>
@@ -57,11 +57,11 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="animate-on-scroll">
-              <span className="inline-flex items-center gap-2 bg-[#2563EB]/10 border border-[#2563EB]/20 rounded-full px-4 py-1 text-[0.8rem] font-semibold text-[#2563EB] uppercase tracking-wider mb-4">
+              <span className="inline-flex items-center gap-2 bg-[#1E40AF]/10 border border-[#1E40AF]/20 rounded-full px-4 py-1 text-[0.8rem] font-semibold text-[#1E40AF] uppercase tracking-wider mb-4">
                 Our Story
               </span>
               <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-heading font-bold mb-4 text-[#1E293B]">
-                Built on Precision, Driven by <span className="text-[#2563EB]">Innovation</span>
+                Built on Precision, Driven by <span className="text-[#1E40AF]">Innovation</span>
               </h2>
               <p className="text-[#1E293B] opacity-80 leading-relaxed mb-4">
                 Founded in 2019, Sudeep Engineers was established with a vision to provide
@@ -82,7 +82,7 @@ export default function AboutPage() {
             </div>
             <div className="animate-on-scroll delay-2">
               <div className="rounded-2xl overflow-hidden border border-[#E2E8F0] h-[400px] relative">
-                <Image src="/about_factory.png" alt="Sudeep Engineers Factory" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+                <Image src="/sudeep_factory_exterior.png" alt="Sudeep Engineers Factory" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
               </div>
             </div>
           </div>
@@ -93,11 +93,11 @@ export default function AboutPage() {
       <section className="py-20 bg-[#FFFFFF] border-t border-[#E2E8F0]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-[700px] mx-auto mb-14 animate-on-scroll">
-            <span className="inline-flex items-center gap-2 bg-[#2563EB]/10 border border-[#2563EB]/20 rounded-full px-4 py-1 text-[0.8rem] font-semibold text-[#2563EB] uppercase tracking-wider mb-4">
+            <span className="inline-flex items-center gap-2 bg-[#1E40AF]/10 border border-[#1E40AF]/20 rounded-full px-4 py-1 text-[0.8rem] font-semibold text-[#1E40AF] uppercase tracking-wider mb-4">
               Our Expertise
             </span>
             <h2 className="text-[clamp(1.8rem,4vw,2.5rem)] font-heading font-bold mb-4 text-[#1E293B]">
-              Engineering <span className="text-[#2563EB]">Expertise</span>
+              Engineering <span className="text-[#1E40AF]">Expertise</span>
             </h2>
             <p className="text-[#1E293B] opacity-80 text-[1.05rem]">
               Deep domain knowledge across multiple engineering disciplines.
@@ -114,7 +114,7 @@ export default function AboutPage() {
               { icon: <Factory className="w-6 h-6" />, title: "Manufacturing Engineering", desc: "Process optimization, production planning, and lean manufacturing practices." },
             ].map((item, i) => (
               <div key={i} className={`bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-8 animate-on-scroll delay-${(i % 5) + 1}`}>
-                <div className="w-[52px] h-[52px] rounded-lg bg-[#2563EB]/10 border border-[#2563EB]/15 flex items-center justify-center text-[#2563EB] text-2xl mb-5">
+                <div className="w-[52px] h-[52px] rounded-lg bg-[#1E40AF]/10 border border-[#1E40AF]/15 flex items-center justify-center text-[#1E40AF] text-2xl mb-5">
                   {item.icon}
                 </div>
                 <h3 className="font-heading font-bold text-lg mb-3 text-[#1E293B]">{item.title}</h3>
@@ -131,15 +131,15 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="animate-on-scroll delay-2">
               <div className="rounded-2xl overflow-hidden border border-[#E2E8F0] h-[400px] relative">
-                <Image src="/about_manufacturing.png" alt="Manufacturing Capabilities" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+                <Image src="/precision_manufacturing_capabilities_v2.png" alt="Manufacturing Capabilities" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
               </div>
             </div>
             <div className="animate-on-scroll">
-              <span className="inline-flex items-center gap-2 bg-[#2563EB]/10 border border-[#2563EB]/20 rounded-full px-4 py-1 text-[0.8rem] font-semibold text-[#2563EB] uppercase tracking-wider mb-4">
+              <span className="inline-flex items-center gap-2 bg-[#1E40AF]/10 border border-[#1E40AF]/20 rounded-full px-4 py-1 text-[0.8rem] font-semibold text-[#1E40AF] uppercase tracking-wider mb-4">
                 Our Capabilities
               </span>
               <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-heading font-bold mb-6 text-[#1E293B]">
-                Manufacturing <span className="text-[#2563EB]">Capabilities</span>
+                Manufacturing <span className="text-[#1E40AF]">Capabilities</span>
               </h2>
               <ul className="space-y-4">
                 {[
@@ -168,11 +168,11 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="animate-on-scroll">
-              <span className="inline-flex items-center gap-2 bg-[#2563EB]/10 border border-[#2563EB]/20 rounded-full px-4 py-1 text-[0.8rem] font-semibold text-[#2563EB] uppercase tracking-wider mb-4">
+              <span className="inline-flex items-center gap-2 bg-[#1E40AF]/10 border border-[#1E40AF]/20 rounded-full px-4 py-1 text-[0.8rem] font-semibold text-[#1E40AF] uppercase tracking-wider mb-4">
                 Our Location
               </span>
               <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-heading font-bold mb-4 text-[#1E293B]">
-                Waluj MIDC, <span className="text-[#2563EB]">Aurangabad</span>
+                Waluj MIDC, <span className="text-[#1E40AF]">Aurangabad</span>
               </h2>
               <p className="text-[#1E293B] opacity-80 leading-relaxed mb-4">
                 Our manufacturing facility is strategically located in Waluj MIDC — one of the
@@ -192,7 +192,7 @@ export default function AboutPage() {
                   { label: "Location", val: "Waluj MIDC" },
                 ].map((s, i) => (
                   <div key={i} className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-4 text-center">
-                    <h4 className="text-[#2563EB] font-bold text-lg">{s.val}</h4>
+                    <h4 className="text-[#1E40AF] font-bold text-lg">{s.val}</h4>
                     <p className="text-[#475569] text-xs font-medium uppercase mt-1 tracking-wide">{s.label}</p>
                   </div>
                 ))}
@@ -217,7 +217,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-[#FFFFFF] border border-[#E2E8F0] rounded-xl p-10 animate-on-scroll">
-              <div className="w-14 h-14 rounded-lg bg-[#2563EB]/10 border border-[#2563EB]/15 flex items-center justify-center text-[#2563EB] mb-6">
+              <div className="w-14 h-14 rounded-lg bg-[#1E40AF]/10 border border-[#1E40AF]/15 flex items-center justify-center text-[#1E40AF] mb-6">
                 <Target className="w-7 h-7" />
               </div>
               <h2 className="font-heading font-bold text-2xl mb-4 text-[#1E293B]">Our Mission</h2>
@@ -229,7 +229,7 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="bg-[#FFFFFF] border border-[#E2E8F0] rounded-xl p-10 animate-on-scroll delay-2">
-              <div className="w-14 h-14 rounded-lg bg-[#2563EB]/10 border border-[#2563EB]/15 flex items-center justify-center text-[#2563EB] mb-6">
+              <div className="w-14 h-14 rounded-lg bg-[#1E40AF]/10 border border-[#1E40AF]/15 flex items-center justify-center text-[#1E40AF] mb-6">
                 <Telescope className="w-7 h-7" />
               </div>
               <h2 className="font-heading font-bold text-2xl mb-4 text-[#1E293B]">Our Vision</h2>
@@ -247,7 +247,7 @@ export default function AboutPage() {
       {/* ====== CTA ====== */}
       <section className="py-20 bg-[#F8FAFC] border-t border-[#E2E8F0]">
         <div className="max-w-5xl mx-auto px-6">
-          <div className="bg-[#2563EB] rounded-3xl p-12 md:p-16 text-center relative overflow-hidden animate-on-scroll">
+          <div className="bg-[#1E40AF] rounded-3xl p-12 md:p-16 text-center relative overflow-hidden animate-on-scroll">
             <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-heading font-bold text-[#FFFFFF] mb-4 relative z-10">
               Partner with Sudeep Engineers
             </h2>

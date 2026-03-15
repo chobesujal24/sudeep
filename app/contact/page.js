@@ -63,7 +63,7 @@ export default function ContactPage() {
           </nav>
           <h1 className="text-[clamp(2rem,4vw,3rem)] font-heading font-extrabold mb-4 text-[#1E293B]"
             style={{ animation: "fade-in-up 0.6s ease forwards" }}>
-            Get in <span className="text-[#2563EB]">Touch</span>
+            Get in <span className="text-[#1E40AF]">Touch</span>
           </h1>
           <p className="text-[#1E293B] opacity-80 text-lg max-w-[600px]"
             style={{ animation: "fade-in-up 0.6s ease 0.1s forwards", opacity: 0 }}>
@@ -123,6 +123,48 @@ export default function ContactPage() {
                 />
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Online Presence (Marketplaces) */}
+      <section className="py-12 bg-white border-t border-[color:var(--color-border)]">
+        <div className="max-w-7xl mx-auto px-6 text-center animate-on-scroll">
+          <h2 className="font-heading font-bold text-2xl mb-2">Find Us Online</h2>
+          <p className="text-[color:var(--color-text-secondary)] text-sm mb-8">
+            Connect with us on India&apos;s leading B2B marketplaces.
+          </p>
+          
+          <div className="flex flex-wrap justify-center items-center gap-4 md:gap-8">
+            {/* IndiaMart */}
+            <a 
+              href="https://www.indiamart.com/eveready-solar-energy/" 
+              target="_blank" rel="noopener noreferrer"
+              className="group flex flex-col items-center justify-center p-5 rounded-xl transition-all duration-300 hover:bg-white border border-gray-100 hover:border-[#00A699]/30 shadow-sm w-full md:w-auto hover:shadow-md"
+            >
+              <img src="/indiamart-clean.svg" alt="IndiaMart" className="w-[140px] h-auto object-contain mb-2" />
+              <span className="text-gray-400 text-[10px] font-bold uppercase tracking-widest group-hover:text-[#00A699] transition-colors">Verified Supplier</span>
+            </a>
+
+            {/* JustDial */}
+            <a 
+              href="https://www.justdial.com/Aurangabad-Maharashtra/SUDEEP-ENGINEERS-Waluj-Midc/9999PX240-X240-250509132009-B4K6_BZDET" 
+              target="_blank" rel="noopener noreferrer"
+              className="group flex flex-col items-center justify-center p-5 rounded-xl transition-all duration-300 hover:bg-white border border-gray-100 hover:border-[#F96A00]/30 shadow-sm w-full md:w-auto hover:shadow-md"
+            >
+              <img src="/justdial-clean.svg" alt="JustDial" className="w-[140px] h-auto object-contain mb-2" />
+              <span className="text-gray-400 text-[10px] font-bold uppercase tracking-widest group-hover:text-[#F96A00] transition-colors">Top Rated Profile</span>
+            </a>
+
+            {/* GeM */}
+            <a 
+              href="https://mkp.gem.gov.in/browse_nodes/browse_list#!/categories_for_brand?brand=SUDEEP" 
+              target="_blank" rel="noopener noreferrer"
+              className="group flex flex-col items-center justify-center p-5 rounded-xl transition-all duration-300 hover:bg-white border border-gray-100 hover:border-[#212529]/30 shadow-sm w-full md:w-auto hover:shadow-md h-[104px]"
+            >
+              <img src="/gem-official.svg" alt="GeM Marketplace" className="w-[130px] h-[50px] object-contain mb-2" />
+              <span className="text-gray-400 text-[10px] font-bold uppercase tracking-widest group-hover:text-[#212529] transition-colors">Registered OEM</span>
+            </a>
           </div>
         </div>
       </section>

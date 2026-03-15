@@ -22,15 +22,20 @@ const footerLinks = {
     { href: "/industrial-fabrication-services", label: "Industrial Fabrication" },
     { href: "/led-light-manufacturer-aurangabad", label: "LED Manufacturer" },
   ],
+  marketplaces: [
+    { href: "https://www.indiamart.com/eveready-solar-energy/", label: "IndiaMart" },
+    { href: "https://www.justdial.com/Aurangabad-Maharashtra/SUDEEP-ENGINEERS-Waluj-Midc/9999PX240-X240-250509132009-B4K6_BZDET", label: "JustDial" },
+    { href: "https://mkp.gem.gov.in/browse_nodes/browse_list#!/categories_for_brand?brand=SUDEEP", label: "GeM Marketplace" },
+  ],
 };
 
 export default function Footer() {
   return (
     <footer style={{ background: "#0F172A" }}>
       <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "80px 32px 0" }}>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
-          <div>
+          <div className="lg:col-span-1">
             <Link href="/" className="flex items-center no-underline mb-6 group">
               <img
                 src="/logo.png"
@@ -107,6 +112,24 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
+          </div>
+        </div>
+
+        {/* Find Us On Marketplaces Row */}
+        <div className="border-t border-white/10 pt-8 pb-4 mb-8 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
+          <div className="text-white/60 text-sm font-medium uppercase tracking-wider flex-shrink-0 text-center md:text-left">
+            Find Us On Top Marketplaces
+          </div>
+          <div className="flex flex-wrap justify-center md:justify-end items-center gap-8 md:gap-12">
+            <a href="https://www.indiamart.com/eveready-solar-energy/" target="_blank" rel="noopener noreferrer" className="block transition-transform hover:scale-105 group">
+              <img src="/indiamart-clean.svg" alt="IndiaMart" className="h-8 md:h-10 w-auto object-contain brightness-0 invert opacity-60 group-hover:opacity-100 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300" />
+            </a>
+            <a href="https://www.justdial.com/Aurangabad-Maharashtra/SUDEEP-ENGINEERS-Waluj-Midc/9999PX240-X240-250509132009-B4K6_BZDET" target="_blank" rel="noopener noreferrer" className="block transition-transform hover:scale-105 group">
+              <img src="/justdial-clean.svg" alt="JustDial" className="h-8 md:h-10 w-auto object-contain brightness-0 invert opacity-60 group-hover:opacity-100 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300" />
+            </a>
+            <a href="https://mkp.gem.gov.in/browse_nodes/browse_list#!/categories_for_brand?brand=SUDEEP" target="_blank" rel="noopener noreferrer" className="block transition-transform hover:scale-105 group flex items-center justify-center">
+              <img src="/gem-footer.svg" alt="GeM Marketplace Logo" className="h-8 md:h-10 lg:h-12 w-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
+            </a>
           </div>
         </div>
 

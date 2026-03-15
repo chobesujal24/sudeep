@@ -31,7 +31,7 @@ const services = [
       "Comprehensive quality control",
     ],
     industries: ["Construction", "Infrastructure", "Industrial Plants", "Manufacturing", "Government Projects"],
-    image: "/service_fabrication.png"
+    image: "/service_fabrication_unique.png"
   },
   {
     id: "structural-metal-manufacturing",
@@ -49,7 +49,7 @@ const services = [
       "On-site installation support",
     ],
     industries: ["Building Construction", "Bridge & Flyover Projects", "Industrial Sheds", "Warehousing", "Water Treatment Plants"],
-    image: "/service_structural.png"
+    image: "/service_structural_unique.png"
   },
   {
     id: "industrial-job-work",
@@ -67,7 +67,7 @@ const services = [
       "Flexible capacity scaling",
     ],
     industries: ["Automobile Companies", "Machine Manufacturers", "Agricultural Equipment", "Power & Energy", "General Engineering"],
-    image: "/industry_manufacturing_1772907702259.png"
+    image: "/service_industrial_job_work.png"
   },
   {
     id: "custom-engineering-solutions",
@@ -85,7 +85,7 @@ const services = [
       "Ongoing technical support",
     ],
     industries: ["R&D Departments", "Startups & Innovators", "Specialized Machinery", "Defense & Aerospace", "Medical Equipment"],
-    image: "/industry_plant_1772907685804.png"
+    image: "/service_custom_engineering.png"
   },
   {
     id: "led-lighting-manufacturing",
@@ -103,7 +103,7 @@ const services = [
       "Comprehensive warranty support",
     ],
     industries: ["Municipal Corporations", "Highway Authorities", "Industrial Complexes", "Commercial Buildings", "Sports Facilities"],
-    image: "/service_led.png"
+    image: "/service_led_lighting.png"
   },
 ];
 

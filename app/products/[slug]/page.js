@@ -60,7 +60,7 @@ export default async function ProductPage({ params }) {
 
             {/* Right: Product Information */}
             <div className="flex flex-col">
-              <div className="inline-flex items-center gap-2 bg-[#2563EB]/10 border border-[#2563EB]/25 rounded-full px-3 py-1 text-[0.7rem] font-bold text-[#2563EB] uppercase tracking-widest mb-4 w-fit">
+              <div className="inline-flex items-center gap-2 bg-[#1E40AF]/10 border border-[#1E40AF]/25 rounded-full px-3 py-1 text-[0.7rem] font-bold text-[#1E40AF] uppercase tracking-widest mb-4 w-fit">
                 {product.category}
               </div>
 
@@ -75,7 +75,7 @@ export default async function ProductPage({ params }) {
               {/* Technical Specifications */}
               <div className="mb-10">
                 <h3 className="text-lg font-heading font-bold text-[#1E293B] mb-4 flex items-center gap-2">
-                  <Icons.Engineering className="w-5 h-5 text-[#2563EB]" /> Technical Specifications
+                  <Icons.Engineering className="w-5 h-5 text-[#1E40AF]" /> Technical Specifications
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {product.specs.map((spec, idx) => (
@@ -97,13 +97,13 @@ export default async function ProductPage({ params }) {
               {/* Applications */}
               <div className="mb-10">
                 <h3 className="text-lg font-heading font-bold text-[#1E293B] mb-4 flex items-center gap-2">
-                  <Icons.Factory className="w-5 h-5 text-[#2563EB]" /> Ideal Applications
+                  <Icons.Factory className="w-5 h-5 text-[#1E40AF]" /> Ideal Applications
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {product.applications.map((app, idx) => (
                     <span
                       key={idx}
-                      className="bg-[#2563EB]/5 border border-[#2563EB]/10 text-[#2563EB] text-sm px-3 py-1.5 rounded-md"
+                      className="bg-[#1E40AF]/5 border border-[#1E40AF]/10 text-[#1E40AF] text-sm px-3 py-1.5 rounded-md"
                     >
                       ✔ {app}
                     </span>
@@ -133,7 +133,7 @@ export default async function ProductPage({ params }) {
               {(product.models?.length > 0 || (product.catalogs && product.catalogs.length > 0)) && (
                 <div className="mt-8 pt-8 border-t border-[#E2E8F0]">
                   <h3 className="text-lg font-heading font-bold text-[#1E293B] mb-4 flex items-center gap-2">
-                    <Icons.Structure className="w-5 h-5 text-[#2563EB]" /> Available Models & Documentation
+                    <Icons.Structure className="w-5 h-5 text-[#1E40AF]" /> Available Models & Documentation
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {product.models && product.models.length > 0 ? (
@@ -169,7 +169,7 @@ export default async function ProductPage({ params }) {
                           className="flex items-center justify-between px-4 py-3 rounded-lg bg-[#FFFFFF] border border-[#E2E8F0] hover:border-[#38BDF8] hover:shadow-sm transition-all text-[#1E293B] text-sm font-medium no-underline group col-span-1 sm:col-span-2"
                         >
                           <div className="flex items-center gap-3">
-                            <span className="p-2 bg-[#2563EB]/10 text-[#2563EB] rounded-md">
+                            <span className="p-2 bg-[#1E40AF]/10 text-[#1E40AF] rounded-md">
                               <Icons.Envelope className="w-4 h-4" /> 
                             </span>
                             <span className="truncate max-w-[250px] sm:max-w-xs">{catalog.split('/').pop().replace(/%20/g, ' ')}</span>

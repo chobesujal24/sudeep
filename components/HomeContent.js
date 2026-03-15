@@ -87,24 +87,59 @@ export default function HomeContent() {
         </div>
       </section>
 
-      {/* ═══ STATS STRIP — Premium separator ═══ */}
+      {/* ═══ FIND US ON (MARKETPLACES) ═══ */}
       <section className="relative" style={{ background: "linear-gradient(135deg, #0F172A 0%, #1E293B 100%)" }}>
         <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(56,189,248,0.4), transparent)" }} />
         <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(56,189,248,0.4), transparent)" }} />
         <div className="py-12 px-6" style={{ maxWidth: "1400px", margin: "0 auto" }}>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            {[
-              { num: "5+", label: "Years of Excellence" },
-              { num: "200+", label: "Projects Delivered" },
-              { num: "50+", label: "Happy Clients" },
-              { num: "100%", label: "Quality Commitment" },
-            ].map((s, i) => (
-              <div key={i} className="relative px-4">
-                {i > 0 && <div className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 w-px h-10" style={{ background: "rgba(255,255,255,0.1)" }} />}
-                <h3 className="text-3xl md:text-4xl font-extrabold mb-1" style={{ color: "#38BDF8" }}>{s.num}</h3>
-                <p className="text-white/50 text-xs font-medium uppercase tracking-widest">{s.label}</p>
+
+          <div className="text-center mb-8">
+            <h2 className="text-white/80 text-sm md:text-base font-bold uppercase tracking-[0.2em]">Find Us On Top Marketplaces</h2>
+          </div>
+
+          <div className="flex flex-wrap justify-center items-center gap-6 md:gap-12">
+
+            {/* IndiaMart */}
+            <a
+              href="https://www.indiamart.com/eveready-solar-energy/"
+              target="_blank" rel="noopener noreferrer"
+              className="group flex flex-col items-center gap-2 p-4 rounded-xl transition-all duration-300 hover:bg-white/5"
+            >
+              <div className="h-16 w-48 bg-white rounded-lg flex items-center justify-center border border-white/10 group-hover:border-[#00A699]/50 shadow-lg px-4 transition-colors">
+                <img src="/indiamart-clean.svg" alt="IndiaMart" className="w-[90px] h-auto object-contain" />
               </div>
-            ))}
+              <span className="text-white/50 text-[10px] font-bold uppercase tracking-widest group-hover:text-[#00A699] transition-colors">Verified Supplier</span>
+            </a>
+
+            {/* JustDial */}
+            <a
+              href="https://www.justdial.com/Aurangabad-Maharashtra/SUDEEP-ENGINEERS-Waluj-Midc/9999PX240-X240-250509132009-B4K6_BZDET"
+              target="_blank" rel="noopener noreferrer"
+              className="group flex flex-col items-center gap-2 p-4 rounded-xl transition-all duration-300 hover:bg-white/5 relative"
+            >
+              {/* Divider vertical line (hidden on mobile) */}
+              <div className="hidden md:block absolute -left-6 top-1/2 -translate-y-1/2 w-px h-16 bg-white/10" />
+
+              <div className="h-16 w-48 bg-white rounded-lg flex items-center justify-center border border-white/10 group-hover:border-[#F96A00]/50 shadow-lg px-4 transition-colors">
+                <img src="/justdial-clean.svg" alt="JustDial" className="w-[120px] h-auto object-contain" />
+              </div>
+              <span className="text-white/50 text-[10px] font-bold uppercase tracking-widest group-hover:text-[#F96A00] transition-colors">Top Rated</span>
+            </a>
+
+            {/* GeM */}
+            <a
+              href="https://mkp.gem.gov.in/browse_nodes/browse_list#!/categories_for_brand?brand=SUDEEP"
+              target="_blank" rel="noopener noreferrer"
+              className="group flex flex-col items-center gap-2 p-4 rounded-xl transition-all duration-300 hover:bg-white/5 relative"
+            >
+              <div className="hidden md:block absolute -left-6 top-1/2 -translate-y-1/2 w-px h-16 bg-white/10" />
+
+              <div className="h-16 w-48 bg-white rounded-lg flex items-center justify-center border border-white/10 group-hover:border-[#212529]/50 shadow-lg px-4 transition-colors">
+                <img src="/gem-official.svg" alt="GeM Marketplace" className="w-[110px] h-auto object-contain" />
+              </div>
+              <span className="text-white/50 text-[10px] font-bold uppercase tracking-widest group-hover:text-white transition-colors">Registered OEM</span>
+            </a>
+
           </div>
         </div>
       </section>
@@ -152,7 +187,7 @@ export default function HomeContent() {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                     </div>
                     <div className="p-6">
-                      <h3 className="font-heading font-bold text-lg mb-2 text-[#1E293B] group-hover:text-[#2563EB] transition-colors">{p.title}</h3>
+                      <h3 className="font-heading font-bold text-lg mb-2 text-[#1E293B] group-hover:text-[#1E40AF] transition-colors">{p.title}</h3>
                       <p className="text-[#475569] text-sm leading-relaxed">{p.desc}</p>
                     </div>
                   </div>
@@ -190,12 +225,12 @@ export default function HomeContent() {
         <div className="relative z-10 w-full px-6 py-20" style={{ maxWidth: "1400px", margin: "0 auto" }}>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}>
-              <h2 className="font-heading font-bold text-[#1E293B] mb-6" style={{ fontSize: "clamp(2rem, 4vw, 2.5rem)" }}>About <span className="text-[#2563EB]">Sudeep Engineers</span></h2>
+              <h2 className="font-heading font-bold text-[#1E293B] mb-6" style={{ fontSize: "clamp(2rem, 4vw, 2.5rem)" }}>About <span className="text-[#1E40AF]">Sudeep Engineers</span></h2>
               <p className="text-[#334155] text-lg leading-relaxed mb-6">Trusted engineering fabrication company located in Waluj MIDC, Aurangabad. Our state-of-the-art facility delivers precision lighting and structural solutions.</p>
               <ul className="space-y-3 mb-8">
                 {["Semi-automated production lines", "MIG/TIG welding and fabrication", "Sheet metal forming and bending", "In-house powder coating", "LED PCB assembly and testing", "Quality inspection lab"].map((item, i) => (
                   <li key={i} className="flex items-center gap-3 text-[#334155] text-sm">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB] shrink-0" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#1E40AF] shrink-0" />
                     {item}
                   </li>
                 ))}
