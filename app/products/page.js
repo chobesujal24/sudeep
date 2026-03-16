@@ -168,7 +168,7 @@ export default async function Products() {
               We manufacture custom LED lighting and solar solutions tailored to your exact specifications.
             </p>
             <Link href="/contact"
-              className="relative z-10 inline-flex px-8 py-3.5 rounded-md bg-[#38BDF8] text-[#0F172A] font-bold hover:opacity-90 transition-all no-underline">
+              className="relative z-10 inline-flex px-8 py-3.5 rounded-md bg-[#FFFFFF] text-[#1E40AF] font-bold hover:opacity-90 transition-all no-underline">
               Request Product Quote →
             </Link>
           </div>

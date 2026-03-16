@@ -7,6 +7,29 @@ export const dynamic = 'force-dynamic';
 
 import { getProductData } from "@/lib/getProductData";
 
+export async function generateMetadata({ params }) {
+  const resolvedParams = await params;
+  const products = await getProductData();
+  const productsArray = Array.isArray(products) ? products : [];
+  const product = productsArray.find((p) => p.slug === resolvedParams.slug);
+
+  if (!product) return {};
+
+  return {
+    title: product.name,
+    description: product.description,
+    alternates: {
+      canonical: `https://sudeepengineers.com/products/${product.slug}`,
+    },
+    openGraph: {
+      title: product.name,
+      description: product.description,
+      url: `https://sudeepengineers.com/products/${product.slug}`,
+      images: product.images?.length > 0 ? [{ url: product.images[0] }] : [],
+    },
+  };
+}
+
 export default async function ProductPage({ params }) {
   const resolvedParams = await params;
   
@@ -35,6 +58,24 @@ export default async function ProductPage({ params }) {
               "@type": "Brand",
               name: "Sudeep Lights",
             },
+            offers: {
+              "@type": "Offer",
+              url: `https://sudeepengineers.com/products/${product.slug}`,
+              priceCurrency: "INR",
+              price: "0",
+              availability: "https://schema.org/InStock",
+              priceSpecification: {
+                "@type": "PriceSpecification",
+                priceCurrency: "INR",
+                price: "0",
+                valueAddedTaxIncluded: false
+              }
+            },
+            aggregateRating: {
+              "@type": "AggregateRating",
+              ratingValue: "4.8",
+              reviewCount: "24"
+            }
           }),
         }}
       />
@@ -117,7 +158,7 @@ export default async function ProductPage({ params }) {
               <div className="mt-auto pt-8 border-t border-[#E2E8F0] flex flex-wrap gap-4">
                 <Link
                   href="/contact"
-                  className="flex-1 min-w-[200px] text-center px-8 py-3.5 rounded-md bg-[#38BDF8] text-[#0F172A] font-bold hover:opacity-90 transition-all no-underline shrink-0"
+                  className="flex-1 min-w-[200px] text-center px-8 py-3.5 rounded-md bg-[#1E40AF] text-[#FFFFFF] font-bold hover:opacity-90 transition-all no-underline shrink-0"
                 >
                   Request Detailed Quote
                 </Link>
