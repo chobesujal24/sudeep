@@ -7,11 +7,11 @@ import ScrollAnimations from "@/components/ScrollAnimations";
 export const metadata = {
   metadataBase: new URL("https://sudeepengineers.com"),
   title: {
-    default: "Sudeep Engineers | LED Lighting & Engineering Fabrication in Aurangabad",
+    default: "Sudeep Engineers | LED Lighting & Fabrication Aurangabad",
     template: "%s | Sudeep Engineers",
   },
   description:
-    "Leading LED light manufacturer, engineering fabrication, and solar lighting solutions company in Waluj MIDC, Aurangabad. MSME registered. Custom industrial solutions since 2019.",
+    "Leading LED manufacturer & engineering fabrication in Waluj MIDC, Aurangabad. MSME registered company delivering custom industrial solutions since 2019.",
   keywords: [
     "engineering fabrication aurangabad",
     "metal fabrication waluj midc",
@@ -29,16 +29,16 @@ export const metadata = {
     locale: "en_IN",
     url: "https://sudeepengineers.com",
     siteName: "Sudeep Lights",
-    title: "Sudeep Lights | Premium LED Lighting & Engineering Fabrication",
+    title: "Sudeep Lights | Premium LED Lighting & Fabrication",
     description:
-      "Leading LED light manufacturer & engineering fabrication in Waluj MIDC, Aurangabad, Maharashtra.",
+      "Leading LED manufacturer & engineering fabrication in Waluj MIDC, Aurangabad, Maharashtra.",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Sudeep Lights" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sudeep Engineers | Engineering Fabrication & LED Manufacturing",
+    title: "Sudeep Engineers | Fabrication & LED Manufacturing",
     description:
-      "Leading engineering fabrication & LED lighting manufacturer in Waluj MIDC, Aurangabad.",
+      "Leading engineering fabrication & LED lighting manufacturer in Aurangabad.",
     images: ["/og-image.jpg"],
   },
   robots: { index: true, follow: true },
