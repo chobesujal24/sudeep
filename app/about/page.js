@@ -232,12 +232,11 @@ export default function AboutPage() {
               <div className="w-14 h-14 rounded-lg bg-[#1E40AF]/10 border border-[#1E40AF]/15 flex items-center justify-center text-[#1E40AF] mb-6">
                 <Telescope className="w-7 h-7" />
               </div>
-              <h2 className="font-heading font-bold text-2xl mb-4 text-[#1E293B]">Our Vision</h2>
+              <h2 className="font-heading font-bold text-2xl mb-4 text-[#1E293B]">Short description</h2>
               <p className="text-[#1E293B] opacity-80 leading-relaxed">
-                To become a leading engineering fabrication and LED lighting manufacturer recognized
-                across India for innovation, quality, and sustainable manufacturing practices. We aim
-                to expand our capabilities while maintaining the personalized service our clients
-                value.
+                Sudeep Engineers is a 6 years 9 months old Proprietorship Firm incorporated on 04-Jun-2019, having its registered office located at Aurangabad, Maharashtra.
+                The major activity of Sudeep Engineers is Manufacturing, Sub-classified into Manufacture of fabricated metal products except machinery and equipment and is primarily engaged in the Manufacture of metal frameworks or skeletons for construction and parts thereof towers masts trusses bridges etc .
+                Sudeep Engineers is classified as Micro enterprise in the financial year 2024-25. It has its unit situated at Aurangabad, Maharashtra.
               </p>
             </div>
           </div>

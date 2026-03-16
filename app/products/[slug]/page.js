@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import ImageGallery from "@/components/ImageGallery";
 import { Icons } from "@/components/Icons";
 
+export const dynamic = 'force-dynamic';
+
 import { getProductData } from "@/lib/getProductData";
 
 export default async function ProductPage({ params }) {

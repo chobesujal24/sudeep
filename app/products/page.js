@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   title: "Industrial Lighting Products | Sudeep Lights",
   description: "Browse our extensive range of high-performance LED industrial and outdoor lighting solutions. Flame proof, High Mast, Solar, and more.",
