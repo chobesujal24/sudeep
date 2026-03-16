@@ -1,0 +1,2279 @@
+﻿
+> sudeepe@0.1.0 build
+> next build
+
+Γû▓ Next.js 16.1.6 (Turbopack)
+- Environments: .env.local
+
+  Creating an optimized production build ...
+node.exe : 
+At line:1 char:1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~
+    + CategoryInfo          :  
+   NotSpecified: (:String) []  
+  , RemoteException
+    + FullyQualifiedErrorId :  
+   NativeCommandError
+ 
+> Build error occurred
+Error: Turbopack build failed 
+with 29 errors:
+./app/layout.js:6:1
+Module not found: Can't 
+resolve '@/components/Chatbot'
+[0m [90m 4 |[39m 
+[36mimport[39m 
+[33mFloatingButtons[39m 
+[36mfrom[39m [32m"@/componen
+ts/FloatingButtons"[39m[33m;
+[39m
+ [90m 5 |[39m 
+[36mimport[39m 
+[33mScrollAnimations[39m 
+[36mfrom[39m [32m"@/componen
+ts/ScrollAnimations"[39m[33m;
+[39m
+[31m[1m>[22m[39m[90m 6 
+|[39m [36mimport[39m 
+[33mChatbot[39m 
+[36mfrom[39m [32m"@/componen
+ts/Chatbot"[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m
+ [90m 7 |[39m
+ [90m 8 |[39m 
+[36mexport[39m 
+[36mconst[39m metadata 
+[33m=[39m {
+ [90m 9 |[39m   
+metadataBase[33m:[39m 
+[36mnew[39m [33mURL[39m([3
+2m"https://sudeepengineers.com"
+[39m)[33m,[39m[0m
+
+
+
+https://nextjs.org/docs/message
+s/module-not-found
+
+
+./app/contact/page.js:2:1
+Module not found: Can't 
+resolve 
+'@/components/ContactForm'
+[0m [90m 1 |[39m 
+[36mimport[39m 
+[33mLink[39m [36mfrom[39m 
+[32m"next/link"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 2 
+|[39m [36mimport[39m 
+[33mContactForm[39m 
+[36mfrom[39m [32m"@/componen
+ts/ContactForm"[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m
+ [90m 3 |[39m 
+[36mimport[39m { 
+[33mMapPin[39m[33m,[39m 
+[33mPhone[39m[33m,[39m 
+[33mMail[39m[33m,[39m 
+[33mMessageCircle[39m } 
+[36mfrom[39m [32m"lucide-rea
+ct"[39m[33m;[39m
+ [90m 4 |[39m
+ [90m 5 |[39m 
+[36mexport[39m 
+[36mconst[39m metadata 
+[33m=[39m {[0m
+
+
+
+https://nextjs.org/docs/message
+s/module-not-found
+
+
+./app/fabrication-aurangabad/pa
+ge.js:2:1
+Module not found: Can't 
+resolve '@/components/FAQ'
+[0m [90m 1 |[39m 
+[36mimport[39m 
+[33mLink[39m [36mfrom[39m 
+[32m"next/link"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 2 
+|[39m [36mimport[39m 
+[33mFAQ[39m [36mfrom[39m [
+32m"@/components/FAQ"[39m[33m
+;[39m
+ [90m   |[39m [31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m
+ [90m 3 |[39m
+ [90m 4 |[39m 
+[36mexport[39m 
+[36mconst[39m metadata 
+[33m=[39m {
+ [90m 5 |[39m   
+title[33m:[39m 
+[32m"Engineering Fabrication 
+in Aurangabad | #1 Fabrication 
+Company"[39m[33m,[39m[0m
+
+
+
+https://nextjs.org/docs/message
+s/module-not-found
+
+
+./app/metal-fabrication-waluj-m
+idc/page.js:2:1
+Module not found: Can't 
+resolve '@/components/FAQ'
+[0m [90m 1 |[39m 
+[36mimport[39m 
+[33mLink[39m [36mfrom[39m 
+[32m"next/link"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 2 
+|[39m [36mimport[39m 
+[33mFAQ[39m [36mfrom[39m [
+32m"@/components/FAQ"[39m[33m
+;[39m
+ [90m   |[39m [31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m
+ [90m 3 |[39m
+ [90m 4 |[39m 
+[36mexport[39m 
+[36mconst[39m metadata 
+[33m=[39m {
+ [90m 5 |[39m   
+title[33m:[39m [32m"Metal 
+Fabrication in Waluj MIDC | 
+Top Manufacturer 
+Aurangabad"[39m[33m,[39m[0m
+
+
+
+https://nextjs.org/docs/message
+s/module-not-found
+
+
+./app/layout.js:4:1
+Module not found: Can't 
+resolve 
+'@/components/FloatingButtons'
+[0m [90m 2 |[39m 
+[36mimport[39m 
+[33mNavbar[39m 
+[36mfrom[39m [32m"@/componen
+ts/Navbar"[39m[33m;[39m
+ [90m 3 |[39m 
+[36mimport[39m 
+[33mFooter[39m 
+[36mfrom[39m [32m"@/componen
+ts/Footer"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 4 
+|[39m [36mimport[39m 
+[33mFloatingButtons[39m 
+[36mfrom[39m [32m"@/componen
+ts/FloatingButtons"[39m[33m;
+[39m
+ [90m   |[39m [31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m
+ [90m 5 |[39m 
+[36mimport[39m 
+[33mScrollAnimations[39m 
+[36mfrom[39m [32m"@/componen
+ts/ScrollAnimations"[39m[33m;
+[39m
+ [90m 6 |[39m 
+[36mimport[39m 
+[33mChatbot[39m 
+[36mfrom[39m [32m"@/componen
+ts/Chatbot"[39m[33m;[39m
+ [90m 7 |[39m[0m
+
+
+
+https://nextjs.org/docs/message
+s/module-not-found
+
+
+./app/layout.js:3:1
+Module not found: Can't 
+resolve '@/components/Footer'
+[0m [90m 1 |[39m 
+[36mimport[39m [32m"./global
+s.css"[39m[33m;[39m
+ [90m 2 |[39m 
+[36mimport[39m 
+[33mNavbar[39m 
+[36mfrom[39m [32m"@/componen
+ts/Navbar"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 3 
+|[39m [36mimport[39m 
+[33mFooter[39m 
+[36mfrom[39m [32m"@/componen
+ts/Footer"[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+ [90m 4 |[39m 
+[36mimport[39m 
+[33mFloatingButtons[39m 
+[36mfrom[39m [32m"@/componen
+ts/FloatingButtons"[39m[33m;
+[39m
+ [90m 5 |[39m 
+[36mimport[39m 
+[33mScrollAnimations[39m 
+[36mfrom[39m [32m"@/componen
+ts/ScrollAnimations"[39m[33m;
+[39m
+ [90m 6 |[39m 
+[36mimport[39m 
+[33mChatbot[39m 
+[36mfrom[39m [32m"@/componen
+ts/Chatbot"[39m[33m;[39m[0m
+
+
+
+https://nextjs.org/docs/message
+s/module-not-found
+
+
+./app/page.js:1:1
+Module not found: Can't 
+resolve 
+'@/components/HomeContent'
+[0m[31m[1m>[22m[39m[90m 
+1 |[39m [36mimport[39m 
+[33mHomeContent[39m 
+[36mfrom[39m [32m"@/componen
+ts/HomeContent"[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m
+ [90m 2 |[39m
+ [90m 3 |[39m 
+[36mexport[39m 
+[36mdefault[39m 
+[36mfunction[39m 
+[33mHomePage[39m() {
+ [90m 4 |[39m   
+[36mreturn[39m [33m<[39m[3
+3mHomeContent[39m [33m/[39m
+[33m>[39m[33m;[39m[0m
+
+
+
+https://nextjs.org/docs/message
+s/module-not-found
+
+
+./app/admin/page.js:4:1
+Module not found: Can't 
+resolve '@/components/Icons'
+[0m [90m 2 |[39m 
+[36mimport[39m 
+[33mReact[39m[33m,[39m { 
+useState[33m,[39m useEffect 
+} [36mfrom[39m 
+[32m"react"[39m[33m;[39m
+ [90m 3 |[39m 
+[36mimport[39m dynamic 
+[36mfrom[39m [32m"next/dynam
+ic"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 4 
+|[39m [36mimport[39m { 
+[33mIcons[39m } 
+[36mfrom[39m [32m"@/componen
+ts/Icons"[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m
+ [90m 5 |[39m 
+[36mimport[39m { supabase } 
+[36mfrom[39m [32m"@/lib/supa
+base"[39m[33m;[39m
+ [90m 6 |[39m 
+[36mimport[39m 
+[33mAdminSidebar[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/AdminSidebar"[39m[33
+m;[39m
+ [90m 7 |[39m 
+[36mimport[39m 
+[33mDashboard[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/Dashboard"[39m[33m;
+[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./app/admin/page.js 
+[Client Component Browser]
+    ./app/admin/page.js 
+[Server Component]
+
+  Client Component SSR:
+    ./app/admin/page.js 
+[Client Component SSR]
+    ./app/admin/page.js 
+[Server Component]
+
+https://nextjs.org/docs/message
+s/module-not-found
+
+
+./app/blog/page.js:3:1
+Module not found: Can't 
+resolve '@/components/Icons'
+[0m [90m 1 |[39m 
+[36mimport[39m 
+[33mLink[39m [36mfrom[39m 
+[32m"next/link"[39m[33m;[39m
+ [90m 2 |[39m 
+[36mimport[39m 
+[33mImage[39m [36mfrom[39m 
+[32m"next/image"[39m[33m;[3
+9m
+[31m[1m>[22m[39m[90m 3 
+|[39m [36mimport[39m { 
+[33mIcons[39m } 
+[36mfrom[39m [32m"@/componen
+ts/Icons"[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m
+ [90m 4 |[39m 
+[36mimport[39m { supabase } 
+[36mfrom[39m [32m"@/lib/supa
+base"[39m[33m;[39m
+ [90m 5 |[39m
+ [90m 6 |[39m 
+[36mexport[39m 
+[36mconst[39m metadata 
+[33m=[39m {[0m
+
+
+
+https://nextjs.org/docs/message
+s/module-not-found
+
+
+./app/products/[slug]/page.js:4
+:1
+Module not found: Can't 
+resolve '@/components/Icons'
+[0m [90m 2 |[39m 
+[36mimport[39m { notFound } 
+[36mfrom[39m [32m"next/navig
+ation"[39m[33m;[39m
+ [90m 3 |[39m 
+[36mimport[39m 
+[33mImageGallery[39m 
+[36mfrom[39m [32m"@/componen
+ts/ImageGallery"[39m[33m;[39
+m
+[31m[1m>[22m[39m[90m 4 
+|[39m [36mimport[39m { 
+[33mIcons[39m } 
+[36mfrom[39m [32m"@/componen
+ts/Icons"[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m
+ [90m 5 |[39m
+ [90m 6 |[39m 
+[36mexport[39m 
+[36mconst[39m dynamic 
+[33m=[39m [32m'force-dynamic
+'[39m[33m;[39m
+ [90m 7 |[39m[0m
+
+
+
+https://nextjs.org/docs/message
+s/module-not-found
+
+
+./app/products/[slug]/page.js:3
+:1
+Module not found: Can't 
+resolve 
+'@/components/ImageGallery'
+[0m [90m 1 |[39m 
+[36mimport[39m 
+[33mLink[39m [36mfrom[39m 
+[32m"next/link"[39m[33m;[39m
+ [90m 2 |[39m 
+[36mimport[39m { notFound } 
+[36mfrom[39m [32m"next/navig
+ation"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 3 
+|[39m [36mimport[39m 
+[33mImageGallery[39m 
+[36mfrom[39m [32m"@/componen
+ts/ImageGallery"[39m[33m;[39
+m
+ [90m   |[39m [31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m
+ [90m 4 |[39m 
+[36mimport[39m { 
+[33mIcons[39m } 
+[36mfrom[39m [32m"@/componen
+ts/Icons"[39m[33m;[39m
+ [90m 5 |[39m
+ [90m 6 |[39m 
+[36mexport[39m 
+[36mconst[39m dynamic 
+[33m=[39m [32m'force-dynamic
+'[39m[33m;[39m[0m
+
+
+
+https://nextjs.org/docs/message
+s/module-not-found
+
+
+./app/layout.js:2:1
+Module not found: Can't 
+resolve '@/components/Navbar'
+[0m [90m 1 |[39m 
+[36mimport[39m [32m"./global
+s.css"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 2 
+|[39m [36mimport[39m 
+[33mNavbar[39m 
+[36mfrom[39m [32m"@/componen
+ts/Navbar"[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+ [90m 3 |[39m 
+[36mimport[39m 
+[33mFooter[39m 
+[36mfrom[39m [32m"@/componen
+ts/Footer"[39m[33m;[39m
+ [90m 4 |[39m 
+[36mimport[39m 
+[33mFloatingButtons[39m 
+[36mfrom[39m [32m"@/componen
+ts/FloatingButtons"[39m[33m;
+[39m
+ [90m 5 |[39m 
+[36mimport[39m 
+[33mScrollAnimations[39m 
+[36mfrom[39m [32m"@/componen
+ts/ScrollAnimations"[39m[33m;
+[39m[0m
+
+
+
+https://nextjs.org/docs/message
+s/module-not-found
+
+
+./app/layout.js:5:1
+Module not found: Can't 
+resolve 
+'@/components/ScrollAnimations'
+[0m [90m 3 |[39m 
+[36mimport[39m 
+[33mFooter[39m 
+[36mfrom[39m [32m"@/componen
+ts/Footer"[39m[33m;[39m
+ [90m 4 |[39m 
+[36mimport[39m 
+[33mFloatingButtons[39m 
+[36mfrom[39m [32m"@/componen
+ts/FloatingButtons"[39m[33m;
+[39m
+[31m[1m>[22m[39m[90m 5 
+|[39m [36mimport[39m 
+[33mScrollAnimations[39m 
+[36mfrom[39m [32m"@/componen
+ts/ScrollAnimations"[39m[33m;
+[39m
+ [90m   |[39m [31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m
+ [90m 6 |[39m 
+[36mimport[39m 
+[33mChatbot[39m 
+[36mfrom[39m [32m"@/componen
+ts/Chatbot"[39m[33m;[39m
+ [90m 7 |[39m
+ [90m 8 |[39m 
+[36mexport[39m 
+[36mconst[39m metadata 
+[33m=[39m {[0m
+
+
+
+https://nextjs.org/docs/message
+s/module-not-found
+
+
+./app/admin/page.js:6:1
+Module not found: Can't 
+resolve '@/components/admin/Adm
+inSidebar'
+[0m [90m 4 |[39m 
+[36mimport[39m { 
+[33mIcons[39m } 
+[36mfrom[39m [32m"@/componen
+ts/Icons"[39m[33m;[39m
+ [90m 5 |[39m 
+[36mimport[39m { supabase } 
+[36mfrom[39m [32m"@/lib/supa
+base"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 6 
+|[39m [36mimport[39m 
+[33mAdminSidebar[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/AdminSidebar"[39m[33
+m;[39m
+ [90m   |[39m [31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m
+ [90m 7 |[39m 
+[36mimport[39m 
+[33mDashboard[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/Dashboard"[39m[33m;
+[39m
+ [90m 8 |[39m 
+[36mimport[39m 
+[33mCategoriesManager[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/CategoriesManager"[39
+m[33m;[39m
+ [90m 9 |[39m 
+[36mimport[39m 
+[33mMediaLibrary[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/MediaLibrary"[39m[33
+m;[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./app/admin/page.js 
+[Client Component Browser]
+    ./app/admin/page.js 
+[Server Component]
+
+  Client Component SSR:
+    ./app/admin/page.js 
+[Client Component SSR]
+    ./app/admin/page.js 
+[Server Component]
+
+https://nextjs.org/docs/message
+s/module-not-found
+
+
+./app/admin/page.js
+Module not found: Can't 
+resolve '@/components/admin/Blo
+gManager'
+
+
+Import traces:
+  Client Component Browser:
+    ./app/admin/page.js 
+[Client Component Browser]
+    ./app/admin/page.js 
+[Server Component]
+
+  Client Component SSR:
+    ./app/admin/page.js 
+[Client Component SSR]
+    ./app/admin/page.js 
+[Server Component]
+
+https://nextjs.org/docs/message
+s/module-not-found
+
+
+./app/admin/page.js:14:35
+Module not found: Can't 
+resolve '@/components/admin/Blo
+gManager'
+[0m [90m 12 |[39m 
+[36mimport[39m 
+[33mSiteSettings[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/SiteSettings"[39m[33
+m;[39m
+ [90m 13 |[39m
+[31m[1m>[22m[39m[90m 14 
+|[39m [36mconst[39m 
+[33mBlogManager[39m 
+[33m=[39m dynamic(() 
+[33m=>[39m [36mimport[39m(
+[32m"@/components/admin/BlogMan
+ager"[39m)[33m,[39m {
+ [90m    |[39m               
+                    [31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m
+ [90m 15 |[39m   
+loading[33m:[39m () 
+[33m=>[39m 
+[33m<[39m[33mdiv[39m 
+className[33m=[39m[32m"p-10 
+text-center font-bold text-[#64
+748B]"[39m[33m>[39m[33mLoad
+ing[39m [33mBlog[39m [33mCM
+S[39m[33m...[39m[33m<[39m
+[33m/[39m[33mdiv[39m[33m>[
+39m[33m,[39m
+ [90m 16 |[39m   
+ssr[33m:[39m 
+[36mfalse[39m[33m,[39m
+ [90m 17 |[39m 
+})[33m;[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./app/admin/page.js 
+[Client Component Browser]
+    ./app/admin/page.js 
+[Server Component]
+
+  Client Component SSR:
+    ./app/admin/page.js 
+[Client Component SSR]
+    ./app/admin/page.js 
+[Server Component]
+
+https://nextjs.org/docs/message
+s/module-not-found
+
+
+./app/admin/page.js:8:1
+Module not found: Can't 
+resolve '@/components/admin/Cat
+egoriesManager'
+[0m [90m  6 |[39m 
+[36mimport[39m 
+[33mAdminSidebar[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/AdminSidebar"[39m[33
+m;[39m
+ [90m  7 |[39m 
+[36mimport[39m 
+[33mDashboard[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/Dashboard"[39m[33m;
+[39m
+[31m[1m>[22m[39m[90m  8 
+|[39m [36mimport[39m 
+[33mCategoriesManager[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/CategoriesManager"[39
+m[33m;[39m
+ [90m    |[39m [31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m
+ [90m  9 |[39m 
+[36mimport[39m 
+[33mMediaLibrary[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/MediaLibrary"[39m[33
+m;[39m
+ [90m 10 |[39m 
+[36mimport[39m 
+[33mLeadsManager[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/LeadsManager"[39m[33
+m;[39m
+ [90m 11 |[39m 
+[36mimport[39m 
+[33mSeoSettings[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/SeoSettings"[39m[33m
+;[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./app/admin/page.js 
+[Client Component Browser]
+    ./app/admin/page.js 
+[Server Component]
+
+  Client Component SSR:
+    ./app/admin/page.js 
+[Client Component SSR]
+    ./app/admin/page.js 
+[Server Component]
+
+https://nextjs.org/docs/message
+s/module-not-found
+
+
+./app/admin/page.js:7:1
+Module not found: Can't 
+resolve 
+'@/components/admin/Dashboard'
+[0m [90m  5 |[39m 
+[36mimport[39m { supabase } 
+[36mfrom[39m [32m"@/lib/supa
+base"[39m[33m;[39m
+ [90m  6 |[39m 
+[36mimport[39m 
+[33mAdminSidebar[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/AdminSidebar"[39m[33
+m;[39m
+[31m[1m>[22m[39m[90m  7 
+|[39m [36mimport[39m 
+[33mDashboard[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/Dashboard"[39m[33m;
+[39m
+ [90m    |[39m [31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m
+ [90m  8 |[39m 
+[36mimport[39m 
+[33mCategoriesManager[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/CategoriesManager"[39
+m[33m;[39m
+ [90m  9 |[39m 
+[36mimport[39m 
+[33mMediaLibrary[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/MediaLibrary"[39m[33
+m;[39m
+ [90m 10 |[39m 
+[36mimport[39m 
+[33mLeadsManager[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/LeadsManager"[39m[33
+m;[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./app/admin/page.js 
+[Client Component Browser]
+    ./app/admin/page.js 
+[Server Component]
+
+  Client Component SSR:
+    ./app/admin/page.js 
+[Client Component SSR]
+    ./app/admin/page.js 
+[Server Component]
+
+https://nextjs.org/docs/message
+s/module-not-found
+
+
+./app/admin/page.js:10:1
+Module not found: Can't 
+resolve '@/components/admin/Lea
+dsManager'
+[0m [90m  8 |[39m 
+[36mimport[39m 
+[33mCategoriesManager[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/CategoriesManager"[39
+m[33m;[39m
+ [90m  9 |[39m 
+[36mimport[39m 
+[33mMediaLibrary[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/MediaLibrary"[39m[33
+m;[39m
+[31m[1m>[22m[39m[90m 10 
+|[39m [36mimport[39m 
+[33mLeadsManager[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/LeadsManager"[39m[33
+m;[39m
+ [90m    |[39m [31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m
+ [90m 11 |[39m 
+[36mimport[39m 
+[33mSeoSettings[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/SeoSettings"[39m[33m
+;[39m
+ [90m 12 |[39m 
+[36mimport[39m 
+[33mSiteSettings[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/SiteSettings"[39m[33
+m;[39m
+ [90m 13 |[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./app/admin/page.js 
+[Client Component Browser]
+    ./app/admin/page.js 
+[Server Component]
+
+  Client Component SSR:
+    ./app/admin/page.js 
+[Client Component SSR]
+    ./app/admin/page.js 
+[Server Component]
+
+https://nextjs.org/docs/message
+s/module-not-found
+
+
+./app/admin/page.js:9:1
+Module not found: Can't 
+resolve '@/components/admin/Med
+iaLibrary'
+[0m [90m  7 |[39m 
+[36mimport[39m 
+[33mDashboard[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/Dashboard"[39m[33m;
+[39m
+ [90m  8 |[39m 
+[36mimport[39m 
+[33mCategoriesManager[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/CategoriesManager"[39
+m[33m;[39m
+[31m[1m>[22m[39m[90m  9 
+|[39m [36mimport[39m 
+[33mMediaLibrary[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/MediaLibrary"[39m[33
+m;[39m
+ [90m    |[39m [31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m
+ [90m 10 |[39m 
+[36mimport[39m 
+[33mLeadsManager[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/LeadsManager"[39m[33
+m;[39m
+ [90m 11 |[39m 
+[36mimport[39m 
+[33mSeoSettings[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/SeoSettings"[39m[33m
+;[39m
+ [90m 12 |[39m 
+[36mimport[39m 
+[33mSiteSettings[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/SiteSettings"[39m[33
+m;[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./app/admin/page.js 
+[Client Component Browser]
+    ./app/admin/page.js 
+[Server Component]
+
+  Client Component SSR:
+    ./app/admin/page.js 
+[Client Component SSR]
+    ./app/admin/page.js 
+[Server Component]
+
+https://nextjs.org/docs/message
+s/module-not-found
+
+
+./app/admin/page.js:11:1
+Module not found: Can't 
+resolve '@/components/admin/Seo
+Settings'
+[0m [90m  9 |[39m 
+[36mimport[39m 
+[33mMediaLibrary[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/MediaLibrary"[39m[33
+m;[39m
+ [90m 10 |[39m 
+[36mimport[39m 
+[33mLeadsManager[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/LeadsManager"[39m[33
+m;[39m
+[31m[1m>[22m[39m[90m 11 
+|[39m [36mimport[39m 
+[33mSeoSettings[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/SeoSettings"[39m[33m
+;[39m
+ [90m    |[39m [31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m
+ [90m 12 |[39m 
+[36mimport[39m 
+[33mSiteSettings[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/SiteSettings"[39m[33
+m;[39m
+ [90m 13 |[39m
+ [90m 14 |[39m 
+[36mconst[39m 
+[33mBlogManager[39m 
+[33m=[39m dynamic(() 
+[33m=>[39m [36mimport[39m(
+[32m"@/components/admin/BlogMan
+ager"[39m)[33m,[39m {[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./app/admin/page.js 
+[Client Component Browser]
+    ./app/admin/page.js 
+[Server Component]
+
+  Client Component SSR:
+    ./app/admin/page.js 
+[Client Component SSR]
+    ./app/admin/page.js 
+[Server Component]
+
+https://nextjs.org/docs/message
+s/module-not-found
+
+
+./app/admin/page.js:12:1
+Module not found: Can't 
+resolve '@/components/admin/Sit
+eSettings'
+[0m [90m 10 |[39m 
+[36mimport[39m 
+[33mLeadsManager[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/LeadsManager"[39m[33
+m;[39m
+ [90m 11 |[39m 
+[36mimport[39m 
+[33mSeoSettings[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/SeoSettings"[39m[33m
+;[39m
+[31m[1m>[22m[39m[90m 12 
+|[39m [36mimport[39m 
+[33mSiteSettings[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/SiteSettings"[39m[33
+m;[39m
+ [90m    |[39m [31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m
+ [90m 13 |[39m
+ [90m 14 |[39m 
+[36mconst[39m 
+[33mBlogManager[39m 
+[33m=[39m dynamic(() 
+[33m=>[39m [36mimport[39m(
+[32m"@/components/admin/BlogMan
+ager"[39m)[33m,[39m {
+ [90m 15 |[39m   
+loading[33m:[39m () 
+[33m=>[39m 
+[33m<[39m[33mdiv[39m 
+className[33m=[39m[32m"p-10 
+text-center font-bold text-[#64
+748B]"[39m[33m>[39m[33mLoad
+ing[39m [33mBlog[39m [33mCM
+S[39m[33m...[39m[33m<[39m
+[33m/[39m[33mdiv[39m[33m>[
+39m[33m,[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./app/admin/page.js 
+[Client Component Browser]
+    ./app/admin/page.js 
+[Server Component]
+
+  Client Component SSR:
+    ./app/admin/page.js 
+[Client Component SSR]
+    ./app/admin/page.js 
+[Server Component]
+
+https://nextjs.org/docs/message
+s/module-not-found
+
+
+./app/api/products/route.js:2:1
+Module not found: Can't 
+resolve '@/lib/getProductData'
+[0m [90m 1 |[39m 
+[36mimport[39m { 
+[33mNextResponse[39m } 
+[36mfrom[39m [32m'next/serve
+r'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 2 
+|[39m [36mimport[39m { 
+getProductData } 
+[36mfrom[39m [32m'@/lib/getP
+roductData'[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m
+ [90m 3 |[39m
+ [90m 4 |[39m 
+[36mexport[39m 
+[36mconst[39m dynamic 
+[33m=[39m [32m'force-dynamic
+'[39m[33m;[39m
+ [90m 5 |[39m[0m
+
+
+
+https://nextjs.org/docs/message
+s/module-not-found
+
+
+./app/products/[slug]/page.js:8
+:1
+Module not found: Can't 
+resolve '@/lib/getProductData'
+[0m [90m  6 |[39m 
+[36mexport[39m 
+[36mconst[39m dynamic 
+[33m=[39m [32m'force-dynamic
+'[39m[33m;[39m
+ [90m  7 |[39m
+[31m[1m>[22m[39m[90m  8 
+|[39m [36mimport[39m { 
+getProductData } 
+[36mfrom[39m [32m"@/lib/getP
+roductData"[39m[33m;[39m
+ [90m    |[39m [31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m
+ [90m  9 |[39m
+ [90m 10 |[39m 
+[36mexport[39m 
+[36masync[39m 
+[36mfunction[39m 
+generateMetadata({ params }) {
+ [90m 11 |[39m   
+[36mconst[39m resolvedParams 
+[33m=[39m [36mawait[39m 
+params[33m;[39m[0m
+
+
+
+https://nextjs.org/docs/message
+s/module-not-found
+
+
+./app/products/page.js:11:1
+Module not found: Can't 
+resolve '@/lib/getProductData'
+[0m [90m  9 |[39m 
+}[33m;[39m
+ [90m 10 |[39m
+[31m[1m>[22m[39m[90m 11 
+|[39m [36mimport[39m { 
+getProductData } 
+[36mfrom[39m [32m"@/lib/getP
+roductData"[39m[33m;[39m
+ [90m    |[39m [31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m
+ [90m 12 |[39m
+ [90m 13 |[39m 
+[36mimport[39m { supabase } 
+[36mfrom[39m [32m"@/lib/supa
+base"[39m[33m;[39m
+ [90m 14 |[39m[0m
+
+
+
+https://nextjs.org/docs/message
+s/module-not-found
+
+
+./app/admin/page.js:5:1
+Module not found: Can't 
+resolve '@/lib/supabase'
+[0m [90m 3 |[39m 
+[36mimport[39m dynamic 
+[36mfrom[39m [32m"next/dynam
+ic"[39m[33m;[39m
+ [90m 4 |[39m 
+[36mimport[39m { 
+[33mIcons[39m } 
+[36mfrom[39m [32m"@/componen
+ts/Icons"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 5 
+|[39m [36mimport[39m { 
+supabase } [36mfrom[39m [32m
+"@/lib/supabase"[39m[33m;[39
+m
+ [90m   |[39m [31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m
+ [90m 6 |[39m 
+[36mimport[39m 
+[33mAdminSidebar[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/AdminSidebar"[39m[33
+m;[39m
+ [90m 7 |[39m 
+[36mimport[39m 
+[33mDashboard[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/Dashboard"[39m[33m;
+[39m
+ [90m 8 |[39m 
+[36mimport[39m 
+[33mCategoriesManager[39m 
+[36mfrom[39m [32m"@/componen
+ts/admin/CategoriesManager"[39
+m[33m;[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./app/admin/page.js 
+[Client Component Browser]
+    ./app/admin/page.js 
+[Server Component]
+
+  Client Component SSR:
+    ./app/admin/page.js 
+[Client Component SSR]
+    ./app/admin/page.js 
+[Server Component]
+
+https://nextjs.org/docs/message
+s/module-not-found
+
+
+./app/blog/[slug]/page.js:4:1
+Module not found: Can't 
+resolve '@/lib/supabase'
+[0m [90m 2 |[39m 
+[36mimport[39m { notFound } 
+[36mfrom[39m [32m"next/navig
+ation"[39m[33m;[39m
+ [90m 3 |[39m 
+[36mimport[39m 
+[33mImage[39m [36mfrom[39m 
+[32m"next/image"[39m[33m;[3
+9m
+[31m[1m>[22m[39m[90m 4 
+|[39m [36mimport[39m { 
+supabase } [36mfrom[39m [32m
+"@/lib/supabase"[39m[33m;[39
+m
+ [90m   |[39m [31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m
+ [90m 5 |[39m
+ [90m 6 |[39m 
+[36mexport[39m 
+[36mconst[39m revalidate 
+[33m=[39m 
+[35m60[39m[33m;[39m 
+[90m// Revalidate every 60 
+seconds[39m
+ [90m 7 |[39m[0m
+
+
+
+https://nextjs.org/docs/message
+s/module-not-found
+
+
+./app/blog/page.js:4:1
+Module not found: Can't 
+resolve '@/lib/supabase'
+[0m [90m 2 |[39m 
+[36mimport[39m 
+[33mImage[39m [36mfrom[39m 
+[32m"next/image"[39m[33m;[3
+9m
+ [90m 3 |[39m 
+[36mimport[39m { 
+[33mIcons[39m } 
+[36mfrom[39m [32m"@/componen
+ts/Icons"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 4 
+|[39m [36mimport[39m { 
+supabase } [36mfrom[39m [32m
+"@/lib/supabase"[39m[33m;[39
+m
+ [90m   |[39m [31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m
+ [90m 5 |[39m
+ [90m 6 |[39m 
+[36mexport[39m 
+[36mconst[39m metadata 
+[33m=[39m {
+ [90m 7 |[39m   
+title[33m:[39m [32m"Blog - 
+Engineering & Manufacturing 
+Insights"[39m[33m,[39m[0m
+
+
+
+https://nextjs.org/docs/message
+s/module-not-found
+
+
+./app/products/page.js:13:1
+Module not found: Can't 
+resolve '@/lib/supabase'
+[0m [90m 11 |[39m 
+[36mimport[39m { 
+getProductData } 
+[36mfrom[39m [32m"@/lib/getP
+roductData"[39m[33m;[39m
+ [90m 12 |[39m
+[31m[1m>[22m[39m[90m 13 
+|[39m [36mimport[39m { 
+supabase } [36mfrom[39m [32m
+"@/lib/supabase"[39m[33m;[39
+m
+ [90m    |[39m [31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^[2
+2m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m[
+39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m[1m
+^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m
+ [90m 14 |[39m
+ [90m 15 |[39m 
+[36mexport[39m 
+[36mdefault[39m 
+[36masync[39m 
+[36mfunction[39m 
+[33mProducts[39m() {
+ [90m 16 |[39m   
+[36mconst[39m products 
+[33m=[39m [36mawait[39m 
+getProductData()[33m;[39m[0m
+
+
+
+https://nextjs.org/docs/message
+s/module-not-found
+
+
+    at <unknown> 
+(./app/layout.js:6:1)
+    at <unknown> (https://nextj
+s.org/docs/messages/module-not-
+found)
+    at <unknown> 
+(./app/contact/page.js:2:1)
+    at <unknown> (https://nextj
+s.org/docs/messages/module-not-
+found)
+    at <unknown> (./app/fabrica
+tion-aurangabad/page.js:2:1)
+    at <unknown> (https://nextj
+s.org/docs/messages/module-not-
+found)
+    at <unknown> (./app/metal-f
+abrication-waluj-midc/page.js:2
+:1)
+    at <unknown> (https://nextj
+s.org/docs/messages/module-not-
+found)
+    at <unknown> 
+(./app/layout.js:4:1)
+    at <unknown> (https://nextj
+s.org/docs/messages/module-not-
+found)
+    at <unknown> 
+(./app/layout.js:3:1)
+    at <unknown> (https://nextj
+s.org/docs/messages/module-not-
+found)
+    at <unknown> 
+(./app/page.js:1:1)
+    at <unknown> (https://nextj
+s.org/docs/messages/module-not-
+found)
+    at <unknown> 
+(./app/admin/page.js:4:1)
+    at <unknown> (https://nextj
+s.org/docs/messages/module-not-
+found)
+    at <unknown> 
+(./app/blog/page.js:3:1)
+    at <unknown> (https://nextj
+s.org/docs/messages/module-not-
+found)
+    at <unknown> (./app/product
+s/[slug]/page.js:4:1)
+    at <unknown> (https://nextj
+s.org/docs/messages/module-not-
+found)
+    at <unknown> (./app/product
+s/[slug]/page.js:3:1)
+    at <unknown> (https://nextj
+s.org/docs/messages/module-not-
+found)
+    at <unknown> 
+(./app/layout.js:2:1)
+    at <unknown> (https://nextj
+s.org/docs/messages/module-not-
+found)
+    at <unknown> 
+(./app/layout.js:5:1)
+    at <unknown> (https://nextj
+s.org/docs/messages/module-not-
+found)
+    at <unknown> 
+(./app/admin/page.js:6:1)
+    at <unknown> (https://nextj
+s.org/docs/messages/module-not-
+found)
+    at <unknown> (https://nextj
+s.org/docs/messages/module-not-
+found)
+    at <unknown> 
+(./app/admin/page.js:14:35)
+    at <unknown> (https://nextj
+s.org/docs/messages/module-not-
+found)
+    at <unknown> 
+(./app/admin/page.js:8:1)
+    at <unknown> (https://nextj
+s.org/docs/messages/module-not-
+found)
+    at <unknown> 
+(./app/admin/page.js:7:1)
+    at <unknown> (https://nextj
+s.org/docs/messages/module-not-
+found)
+    at <unknown> 
+(./app/admin/page.js:10:1)
+    at <unknown> (https://nextj
+s.org/docs/messages/module-not-
+found)
+    at <unknown> 
+(./app/admin/page.js:9:1)
+    at <unknown> (https://nextj
+s.org/docs/messages/module-not-
+found)
+    at <unknown> 
+(./app/admin/page.js:11:1)
+    at <unknown> (https://nextj
+s.org/docs/messages/module-not-
+found)
+    at <unknown> 
+(./app/admin/page.js:12:1)
+    at <unknown> (https://nextj
+s.org/docs/messages/module-not-
+found)
+    at <unknown> (./app/api/pro
+ducts/route.js:2:1)
+    at <unknown> (https://nextj
+s.org/docs/messages/module-not-
+found)
+    at <unknown> (./app/product
+s/[slug]/page.js:8:1)
+    at <unknown> (https://nextj
+s.org/docs/messages/module-not-
+found)
+    at <unknown> 
+(./app/products/page.js:11:1)
+    at <unknown> (https://nextj
+s.org/docs/messages/module-not-
+found)
+    at <unknown> 
+(./app/admin/page.js:5:1)
+    at <unknown> (https://nextj
+s.org/docs/messages/module-not-
+found)
+    at <unknown> 
+(./app/blog/[slug]/page.js:4:1)
+    at <unknown> (https://nextj
+s.org/docs/messages/module-not-
+found)
+    at <unknown> 
+(./app/blog/page.js:4:1)
+    at <unknown> (https://nextj
+s.org/docs/messages/module-not-
+found)
+    at <unknown> 
+(./app/products/page.js:13:1)
+    at <unknown> (https://nextj
+s.org/docs/messages/module-not-
+found)

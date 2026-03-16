@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
 import ScrollAnimations from "@/components/ScrollAnimations";
+import Chatbot from "@/components/Chatbot";
 
 export const metadata = {
   metadataBase: new URL("https://sudeepengineers.com"),
@@ -101,6 +102,7 @@ export default function RootLayout({ children }) {
         <Footer />
         <FloatingButtons />
         <ScrollAnimations />
+        <Chatbot />
       </body>
     </html>
   );

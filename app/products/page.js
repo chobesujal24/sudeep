@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import ProductFilterView from "@/components/ProductFilterView";
 
 export const dynamic = 'force-dynamic';
 
@@ -73,87 +74,10 @@ export default async function Products() {
         </div>
       </section>
 
-      {/* Products By Category */}
-      <section className="py-20 bg-[#F8FAFC]">
+      {/* Interactive Products Grid */}
+      <section className="py-12 md:py-20 bg-[#F8FAFC]">
         <div className="max-w-7xl mx-auto px-6">
-          {Object.entries(categories).length === 0 ? (
-            <div className="text-center text-[#64748B] py-10">No products available at the moment.</div>
-          ) : (
-            Object.entries(categories).map(([categoryName, catProducts], idx) => {
-              const dbCat = dbCatMap[categoryName];
-              return (
-                <div key={idx} className="mb-24 last:mb-0">
-                  <div className="mb-12 text-center">
-                    <h2 className="text-[clamp(1.8rem,3vw,2.5rem)] font-heading font-bold text-[#1E293B] mb-4">
-                      {categoryName}
-                    </h2>
-                    {dbCat?.description && (
-                      <p className="text-[#475569] text-lg max-w-3xl mx-auto leading-relaxed">
-                        {dbCat.description}
-                      </p>
-                    )}
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {catProducts.map((product, i) => (
-                      <div key={i} className={`bg-[#FFFFFF] border border-[#E2E8F0] shadow-sm rounded-xl overflow-hidden flex flex-col group`}>
-                        {/* Image placeholder */}
-                        <div className="h-[240px] bg-[#F8FAFC] relative overflow-hidden flex items-center justify-center">
-                          {product.images?.[0] ? (
-                            <Image 
-                              src={product.images[0]} 
-                              alt={product.name}
-                              fill
-                              unoptimized
-                              className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
-                            />
-                          ) : (
-                            <svg className="w-12 h-12 text-[#1E293B] opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
-                          )}
-                          <div className="absolute top-3 right-3 bg-[#1E40AF]/10 backdrop-blur-md border border-[#1E40AF]/20 text-[#1E40AF] text-[0.65rem] font-bold px-2 py-1 rounded-full uppercase tracking-wider">
-                            {product.category}
-                          </div>
-                        </div>
-                        <div className="p-6 flex flex-col flex-1">
-                          <h3 className="font-heading font-bold text-lg mb-2 text-[#1E293B] group-hover:text-[#1E40AF] transition-colors">
-                            {product.name}
-                          </h3>
-                          <p className="text-[#1E293B] opacity-80 text-sm leading-relaxed mb-5 line-clamp-2">
-                            {product.description}
-                          </p>
-
-                          {/* Specs */}
-                          <div className="flex flex-wrap gap-2 mb-6">
-                            {(product.specs || []).slice(0, 3).map((spec, j) => (
-                              <span
-                                key={j}
-                                className="bg-[#1E40AF]/10 border border-[#1E40AF]/20 rounded-full px-3 py-1 text-[0.7rem] text-[#1E40AF] font-medium"
-                              >
-                                {spec.value}
-                              </span>
-                            ))}
-                            {(product.specs || []).length > 3 && (
-                              <span className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-full px-2 py-1 text-[0.7rem] text-[#475569] font-medium">
-                                +{(product.specs || []).length - 3} more
-                              </span>
-                            )}
-                          </div>
-
-                          <div className="mt-auto">
-                            <Link
-                              href={`/products/${product.slug}`}
-                              className="w-full block text-center px-4 py-2.5 rounded-md border border-[#E2E8F0] group-hover:border-[#38BDF8]/50 bg-[#F8FAFC] group-hover:bg-[#38BDF8]/10 text-[#1E293B] font-semibold text-sm transition-all no-underline"
-                            >
-                              View Details →
-                            </Link>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              );
-            })
-          )}
+           <ProductFilterView products={productsArray} dbCatMap={dbCatMap} />
         </div>
       </section>
 
