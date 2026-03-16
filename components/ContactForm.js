@@ -1,16 +1,38 @@
 "use client";
 import { useState } from "react";
+import { supabase } from "@/lib/supabase";
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
+    setLoading(true);
+    setError(null);
+
+    const formData = new FormData(e.target);
+    const leadData = {
+      name: formData.get("name"),
+      phone: formData.get("phone"),
+      email: formData.get("email") || "—",
+      message: `[Service: ${formData.get("service")}] ${formData.get("details")}`,
+    };
+
+    try {
+      const { data, error: sbError } = await supabase.from("leads").insert([leadData]);
+      if (sbError) throw sbError;
+      
+      setSubmitted(true);
       e.target.reset();
-    }, 3000);
+      setTimeout(() => setSubmitted(false), 5000);
+    } catch (err) {
+      console.error("Error submitting lead:", JSON.stringify(err, null, 2));
+      setError(`Database Error: ${err.message || "Failed to insert lead"}. Make sure the 'leads' table exists in Supabase with RLS policies allowing anon inserts.`);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -76,17 +98,24 @@ export default function ContactForm() {
         />
       </div>
 
+      {error && (
+        <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 text-red-500 text-sm text-center">
+          ⚠️ {error}
+        </div>
+      )}
+
       {submitted && (
-        <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4 text-green-400 text-sm text-center">
-          ✅ Thank you! We&apos;ll get back to you within 24 hours.
+        <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4 text-green-500 font-medium text-sm text-center">
+          ✅ Thank you for your enquiry! We&apos;ll get back to you within 24 hours.
         </div>
       )}
 
       <button
         type="submit"
-        className="w-full px-6 py-3.5 rounded-lg bg-gradient-to-r from-blue-500 to-blue-700 text-white font-semibold hover:-translate-y-0.5 hover:shadow-[0_6px_25px_rgba(59,130,246,0.25)] transition-all cursor-pointer border-none text-sm"
+        disabled={loading}
+        className="w-full px-6 py-3.5 rounded-lg bg-gradient-to-r from-blue-500 to-blue-700 text-white font-semibold hover:-translate-y-0.5 hover:shadow-[0_6px_25px_rgba(59,130,246,0.25)] focus:-translate-y-0.5 transition-all cursor-pointer border-none text-sm disabled:opacity-70 disabled:cursor-not-allowed"
       >
-        Submit Enquiry →
+        {loading ? "Sending Enquiry..." : "Submit Enquiry →"}
       </button>
 
       <p className="text-xs text-slate-600 text-center">

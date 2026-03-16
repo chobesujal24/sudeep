@@ -42,6 +42,11 @@ export const metadata = {
       "Leading engineering fabrication & LED lighting manufacturer in Aurangabad.",
     images: ["/og-image.jpg"],
   },
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
   robots: { index: true, follow: true },
   alternates: { canonical: "https://sudeepengineers.com" },
 };
@@ -64,6 +69,8 @@ export default function RootLayout({ children }) {
               description:
                 "Engineering fabrication, structural metal manufacturing and LED lighting company in Waluj MIDC, Aurangabad, Maharashtra.",
               url: "https://sudeepengineers.com",
+              logo: "https://sudeepengineers.com/logo.png",
+              image: "https://sudeepengineers.com/logo.png",
               telephone: "+91-9922996236",
               email: "info@sudeepengineers.com",
               address: {
