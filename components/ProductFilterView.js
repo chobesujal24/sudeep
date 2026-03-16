@@ -41,7 +41,7 @@ export default function ProductFilterView({ products, dbCatMap }) {
   }, [products, searchQuery, selectedCategories]);
 
   return (
-    <div className="flex flex-col lg:flex-row gap-8 relative">
+    <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 relative">
       
       {/* Mobile Filter Toggle */}
       <div className="lg:hidden flex items-center gap-4 mb-4">
@@ -66,12 +66,12 @@ export default function ProductFilterView({ products, dbCatMap }) {
 
       {/* Sidebar Filters (Desktop & Mobile Drawer) */}
       <aside className={`
-        fixed inset-0 z-50 bg-black/60 lg:bg-transparent lg:static lg:w-64 shrink-0 transition-opacity duration-300
+        fixed inset-0 z-50 bg-black/60 lg:bg-transparent lg:static lg:w-48 shrink-0 transition-opacity duration-300
         ${isMobileFiltersOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none lg:opacity-100 lg:pointer-events-auto'}
       `}>
         <div className={`
-          absolute right-0 top-0 bottom-0 w-[280px] bg-white lg:bg-transparent lg:w-full lg:static p-6 lg:p-0 h-full overflow-y-auto transition-transform duration-300
-          ${isMobileFiltersOpen ? 'translate-x-0' : 'translate-x-full lg:translate-x-0'}
+          absolute left-0 top-0 bottom-0 w-[250px] bg-white lg:bg-transparent lg:w-full lg:static p-6 lg:p-0 h-full overflow-y-auto transition-transform duration-300 shadow-2xl lg:shadow-none
+          ${isMobileFiltersOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
         `}>
           <div className="flex items-center justify-between lg:hidden mb-6">
             <h3 className="font-bold text-lg text-slate-900">Filters</h3>
@@ -129,11 +129,37 @@ export default function ProductFilterView({ products, dbCatMap }) {
 
       {/* Main Content Grid */}
       <div className="flex-1">
-        {/* Results count header */}
-        <div className="mb-6 pb-4 border-b border-slate-200 flex items-center justify-between">
-          <p className="text-slate-600 text-sm font-medium">
-            Showing <span className="font-bold text-slate-900">{filteredProducts.length}</span> products
-          </p>
+        {/* Results count header and Active Filters */}
+        <div className="mb-8">
+          <div className="pb-4 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <h2 className="text-2xl font-bold text-slate-900">All Products</h2>
+            <p className="text-slate-500 text-sm font-medium bg-slate-100 px-3 py-1 rounded-full w-fit">
+              Showing <span className="font-bold text-slate-900">{filteredProducts.length}</span> results
+            </p>
+          </div>
+
+          {/* Active Filter Pills */}
+          {selectedCategories.length > 0 && (
+            <div className="flex flex-wrap items-center gap-2 mt-4">
+              <span className="text-xs text-slate-500 font-medium mr-1">Active Filters:</span>
+              {selectedCategories.map(cat => (
+                <button 
+                  key={cat}
+                  onClick={() => toggleCategory(cat)}
+                  className="flex items-center gap-1.5 bg-blue-50 border border-blue-200 text-blue-700 px-3 py-1 rounded-full text-xs font-semibold hover:bg-blue-100 transition-colors"
+                >
+                  {cat}
+                  <X size={12} className="opacity-70" />
+                </button>
+              ))}
+              <button 
+                onClick={() => setSelectedCategories([])}
+                className="text-xs text-slate-500 hover:text-slate-900 underline underline-offset-2 ml-2 transition-colors"
+              >
+                Clear All
+              </button>
+            </div>
+          )}
         </div>
 
         {filteredProducts.length === 0 ? (
@@ -151,9 +177,9 @@ export default function ProductFilterView({ products, dbCatMap }) {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
             {filteredProducts.map((product, i) => (
-              <div key={i} className="bg-[#FFFFFF] border border-[#E2E8F0] shadow-sm rounded-xl overflow-hidden flex flex-col group hover:shadow-xl transition-all duration-300 hover:border-blue-200">
+              <div key={i} className="bg-white border border-slate-200 shadow-sm rounded-2xl overflow-hidden flex flex-col group hover:shadow-2xl transition-all duration-300 hover:border-blue-300 hover:-translate-y-1">
                 {/* Image placeholder */}
                 <div className="h-[240px] bg-[#F8FAFC] relative overflow-hidden flex items-center justify-center p-4">
                   {product.images?.[0] ? (
@@ -196,10 +222,10 @@ export default function ProductFilterView({ products, dbCatMap }) {
                     )}
                   </div>
 
-                  <div className="mt-auto pt-4 border-t border-slate-100 border-dashed">
+                  <div className="mt-auto pt-5 border-t border-slate-100">
                     <Link
                       href={`/products/${product.slug}`}
-                      className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-[#E2E8F0] group-hover:border-transparent bg-white group-hover:bg-blue-600 text-slate-700 group-hover:text-white font-semibold text-sm transition-all no-underline shadow-sm group-hover:shadow-md"
+                      className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-slate-200 group-hover:border-transparent bg-slate-50 group-hover:bg-blue-600 text-slate-700 group-hover:text-white font-bold text-sm transition-all no-underline shadow-sm group-hover:shadow-md"
                     >
                       View Details 
                       <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg>

@@ -58,7 +58,7 @@ export default async function Products() {
       <section className="pt-32 pb-16 relative overflow-hidden bg-[#FFFFFF]">
         <div className="absolute -top-[30%] -right-[20%] w-[500px] h-[500px] rounded-full pointer-events-none"
           style={{ background: "radial-gradient(circle, rgba(37,99,235,0.06) 0%, transparent 70%)" }} />
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="max-w-[1500px] mx-auto px-6 md:px-12 relative z-10">
           <nav className="text-xs text-[#475569] mb-6 flex gap-2">
             <Link href="/" className="hover:text-[#38BDF8] no-underline text-[#475569] transition-colors">Home</Link>
             <span>/</span><span className="text-[#1E293B]">Products</span>
@@ -76,7 +76,7 @@ export default async function Products() {
 
       {/* Interactive Products Grid */}
       <section className="py-12 md:py-20 bg-[#F8FAFC]">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-[1500px] mx-auto px-6 md:px-12">
            <ProductFilterView products={productsArray} dbCatMap={dbCatMap} />
         </div>
       </section>
