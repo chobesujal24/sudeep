@@ -11,7 +11,7 @@ export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const products = await getProductData();
   const productsArray = Array.isArray(products) ? products : [];
-  const product = productsArray.find((p) => p.slug === resolvedParams.slug);
+  const product = productsArray.find((p) => p.slug.toLowerCase() === resolvedParams.slug.toLowerCase());
 
   if (!product) return {};
 
@@ -37,7 +37,7 @@ export default async function ProductPage({ params }) {
   const products = await getProductData();
   const productsArray = Array.isArray(products) ? products : [];
   
-  const product = productsArray.find((p) => p.slug === resolvedParams.slug);
+  const product = productsArray.find((p) => p.slug.toLowerCase() === resolvedParams.slug.toLowerCase());
 
   if (!product) {
     notFound();
