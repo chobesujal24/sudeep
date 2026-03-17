@@ -9,6 +9,14 @@ const nextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: "/:path*",
+        destination: "/api/storage/:path*",
+      },
+    ];
+  },
 };
 
 export default nextConfig;
