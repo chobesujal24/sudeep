@@ -46,6 +46,3 @@ const nextConfig = {
 };
 
 export default nextConfig;
-=======
-export default nextConfig;
->>>>>>> 1024775 (Fix build errors, case-insensitive product routing, and custom image CDN)
