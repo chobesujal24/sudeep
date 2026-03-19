@@ -55,19 +55,19 @@ export default async function Products() {
       />
 
       {/* Page Hero */}
-      <section className="pt-32 pb-16 relative overflow-hidden bg-[#FFFFFF]">
+      <section className="pt-32 pb-16 relative overflow-hidden bg-[color:var(--color-background)]">
         <div className="absolute -top-[30%] -right-[20%] w-[500px] h-[500px] rounded-full pointer-events-none"
           style={{ background: "radial-gradient(circle, rgba(37,99,235,0.06) 0%, transparent 70%)" }} />
         <div className="max-w-[1500px] mx-auto px-6 md:px-12 relative z-10">
-          <nav className="text-xs text-[#475569] mb-6 flex gap-2">
-            <Link href="/" className="hover:text-[#38BDF8] no-underline text-[#475569] transition-colors">Home</Link>
-            <span>/</span><span className="text-[#1E293B]">Products</span>
+          <nav className="text-xs text-[color:var(--color-text-muted)] mb-6 flex gap-2">
+            <Link href="/" className="hover:text-[color:var(--color-accent)] no-underline text-[color:var(--color-text-muted)] transition-colors">Home</Link>
+            <span>/</span><span className="text-[color:var(--color-foreground)]">Products</span>
           </nav>
-          <h1 className="text-[clamp(2rem,4vw,3rem)] font-heading font-extrabold mb-4 text-[#1E293B]"
+          <h1 className="text-[clamp(2rem,4vw,3rem)] font-heading font-extrabold mb-4 text-[color:var(--color-foreground)]"
             style={{ animation: "fade-in-up 0.6s ease forwards" }}>
-            Our <span className="text-[#1E40AF]">Products</span>
+            Our <span className="text-[color:var(--color-primary)]">Products</span>
           </h1>
-          <p className="text-[#1E293B] opacity-80 text-lg max-w-[600px]"
+          <p className="text-[color:var(--color-text-secondary)] opacity-80 text-lg max-w-[600px]"
             style={{ animation: "fade-in-up 0.6s ease 0.1s forwards", opacity: 0 }}>
             Premium LED lighting, robust poles, and next-generation solar lighting solutions manufactured in Aurangabad.
           </p>
@@ -75,14 +75,14 @@ export default async function Products() {
       </section>
 
       {/* Interactive Products Grid */}
-      <section className="py-12 md:py-20 bg-[#F8FAFC]">
+      <section className="py-6 md:py-10 bg-[color:var(--color-section)]">
         <div className="max-w-[1500px] mx-auto px-6 md:px-12">
            <ProductFilterView products={productsArray} dbCatMap={dbCatMap} />
         </div>
       </section>
 
       {/* ====== CTA ====== */}
-      <section className="py-20 bg-[#F8FAFC] border-t border-[#E2E8F0]">
+      <section className="py-20 bg-[color:var(--color-section)] border-t border-[color:var(--color-border)]">
         <div className="max-w-5xl mx-auto px-6">
           <div className="bg-[#1E40AF] rounded-3xl p-12 md:p-16 text-center relative overflow-hidden animate-on-scroll">
             <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-heading font-bold text-[#FFFFFF] mb-4 relative z-10">

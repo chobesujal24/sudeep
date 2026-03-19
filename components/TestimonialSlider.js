@@ -1,6 +1,8 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 
+import { motion, AnimatePresence } from "framer-motion";
+
 const testimonials = [
   {
     text: "Sudeep Engineers delivered exceptional quality on our structural fabrication project. Their precision and attention to detail exceeded our expectations.",
@@ -51,28 +53,35 @@ export default function TestimonialSlider() {
         }, 5000);
       }}
     >
-      <div
-        className="testimonial-track"
-        style={{ transform: `translateX(-${current * 100}%)` }}
+      <motion.div
+        className="flex"
+        animate={{ x: `-${current * 100}%` }}
+        transition={{ 
+          type: "spring", 
+          stiffness: 80, 
+          damping: 20, 
+          mass: 1,
+          restDelta: 0.001
+        }}
       >
         {testimonials.map((t, i) => (
           <div key={i} className="min-w-full px-4">
-            <div className="glass-card-dark p-10 md:p-14 text-center relative">
-              <div className="absolute top-4 left-8 text-6xl text-white/10 font-serif leading-none select-none">
+            <div className="bg-[color:var(--color-bg-card)] border border-[color:var(--color-border)] p-10 md:p-14 text-center relative rounded-3xl shadow-xl transition-all duration-300">
+              <div className="absolute top-4 left-8 text-6xl text-[color:var(--color-primary)] opacity-10 font-serif leading-none select-none">
                 &ldquo;
               </div>
-              <div className="text-amber-400 mb-5 text-lg tracking-wider">
+              <div className="text-amber-500 dark:text-amber-400 mb-5 text-lg tracking-wider">
                 {"★".repeat(t.stars)}
               </div>
-              <p className="text-white/80 text-lg leading-relaxed mb-8 italic max-w-[600px] mx-auto">
+              <p className="text-[color:var(--color-text-secondary)] text-lg leading-relaxed mb-8 italic max-w-[600px] mx-auto">
                 {t.text}
               </p>
-              <p className="font-semibold text-white text-sm">{t.author}</p>
-              <p className="text-white/50 text-xs mt-1">{t.role}</p>
+              <p className="font-semibold text-[color:var(--color-foreground)] text-sm">{t.author}</p>
+              <p className="text-[color:var(--color-text-muted)] text-xs mt-1">{t.role}</p>
             </div>
           </div>
         ))}
-      </div>
+      </motion.div>
 
       {/* Dots */}
       <div className="flex justify-center gap-2.5 mt-8">
@@ -82,8 +91,8 @@ export default function TestimonialSlider() {
             onClick={() => goTo(i)}
             className={`h-2 rounded-full transition-all border-none cursor-pointer ${
               i === current
-                ? "bg-white w-8"
-                : "bg-white/30 w-2.5 hover:bg-white/50"
+                ? "bg-[color:var(--color-primary)] w-8"
+                : "bg-[color:var(--color-border-accent)] dark:bg-slate-700 w-2.5 hover:bg-[color:var(--color-primary)]/50"
             }`}
             aria-label={`Go to testimonial ${i + 1}`}
           />

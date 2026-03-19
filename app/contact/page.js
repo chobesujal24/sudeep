@@ -53,19 +53,19 @@ export default function ContactPage() {
       />
 
       {/* Page Hero */}
-      <section className="pt-32 pb-16 relative overflow-hidden bg-[#FFFFFF]">
+      <section className="pt-32 pb-16 relative overflow-hidden bg-[color:var(--color-background)]">
         <div className="absolute -top-[30%] -right-[20%] w-[500px] h-[500px] rounded-full pointer-events-none"
           style={{ background: "radial-gradient(circle, rgba(37,99,235,0.06) 0%, transparent 70%)" }} />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <nav className="text-xs text-[#475569] mb-6 flex gap-2">
-            <Link href="/" className="hover:text-[#38BDF8] no-underline text-[#475569]">Home</Link>
-            <span>/</span><span className="text-[#1E293B]">Contact</span>
+          <nav className="text-xs text-[color:var(--color-text-muted)] mb-6 flex gap-2">
+            <Link href="/" className="hover:text-[color:var(--color-accent)] no-underline text-[color:var(--color-text-muted)]">Home</Link>
+            <span>/</span><span className="text-[color:var(--color-foreground)]">Contact</span>
           </nav>
-          <h1 className="text-[clamp(2rem,4vw,3rem)] font-heading font-extrabold mb-4 text-[#1E293B]"
+          <h1 className="text-[clamp(2rem,4vw,3rem)] font-heading font-extrabold mb-4 text-[color:var(--color-foreground)]"
             style={{ animation: "fade-in-up 0.6s ease forwards" }}>
-            Get in <span className="text-[#1E40AF]">Touch</span>
+            Get in <span className="text-[color:var(--color-primary)]">Touch</span>
           </h1>
-          <p className="text-[#1E293B] opacity-80 text-lg max-w-[600px]"
+          <p className="text-[color:var(--color-text-secondary)] opacity-80 text-lg max-w-[600px]"
             style={{ animation: "fade-in-up 0.6s ease 0.1s forwards", opacity: 0 }}>
             Ready to discuss your project? Contact us for a free consultation and competitive quote.
           </p>
@@ -112,7 +112,7 @@ export default function ContactPage() {
               </p>
               <div className="rounded-2xl overflow-hidden border border-[color:var(--color-border)] h-[450px]">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3751.7!2d75.34!3d19.87!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDUyJzEyLjAiTiA3NcKwMjAnMzUuOSJF!5e0!3m2!1sen!2sin!4v1"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3751.7!2d75.34!3d19.87!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDUyJzEyLjAiTiA3NcKwMjAnMzUu9JF!5e0!3m2!1sen!2sin!4v1"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
@@ -128,7 +128,7 @@ export default function ContactPage() {
       </section>
 
       {/* Online Presence (Marketplaces) */}
-      <section className="py-12 bg-white border-t border-[color:var(--color-border)]">
+      <section className="py-12 bg-[color:var(--color-background)] border-t border-[color:var(--color-border)]">
         <div className="max-w-7xl mx-auto px-6 text-center animate-on-scroll">
           <h2 className="font-heading font-bold text-2xl mb-2">Find Us Online</h2>
           <p className="text-[color:var(--color-text-secondary)] text-sm mb-8">
@@ -140,7 +140,7 @@ export default function ContactPage() {
             <a 
               href="https://www.indiamart.com/eveready-solar-energy/" 
               target="_blank" rel="noopener noreferrer"
-              className="group flex flex-col items-center justify-center p-5 rounded-xl transition-all duration-300 hover:bg-white border border-gray-100 hover:border-[#00A699]/30 shadow-sm w-full md:w-auto hover:shadow-md"
+              className="group flex flex-col items-center justify-center p-5 rounded-xl transition-all duration-300 bg-white border border-[color:var(--color-border)] hover:border-[color:var(--color-primary)]/30 shadow-sm w-full md:w-auto hover:shadow-md"
             >
               <img src="/indiamart-clean.svg" alt="IndiaMart" className="w-[140px] h-auto object-contain mb-2" />
               <span className="text-gray-400 text-[10px] font-bold uppercase tracking-widest group-hover:text-[#00A699] transition-colors">Verified Supplier</span>
@@ -150,7 +150,7 @@ export default function ContactPage() {
             <a 
               href="https://www.justdial.com/Aurangabad-Maharashtra/SUDEEP-ENGINEERS-Waluj-Midc/9999PX240-X240-250509132009-B4K6_BZDET" 
               target="_blank" rel="noopener noreferrer"
-              className="group flex flex-col items-center justify-center p-5 rounded-xl transition-all duration-300 hover:bg-white border border-gray-100 hover:border-[#F96A00]/30 shadow-sm w-full md:w-auto hover:shadow-md"
+              className="group flex flex-col items-center justify-center p-5 rounded-xl transition-all duration-300 bg-white border border-[color:var(--color-border)] hover:border-[color:var(--color-primary)]/30 shadow-sm w-full md:w-auto hover:shadow-md"
             >
               <img src="/justdial-clean.svg" alt="JustDial" className="w-[140px] h-auto object-contain mb-2" />
               <span className="text-gray-400 text-[10px] font-bold uppercase tracking-widest group-hover:text-[#F96A00] transition-colors">Top Rated Profile</span>
@@ -160,7 +160,7 @@ export default function ContactPage() {
             <a 
               href="https://mkp.gem.gov.in/browse_nodes/browse_list#!/categories_for_brand?brand=SUDEEP" 
               target="_blank" rel="noopener noreferrer"
-              className="group flex flex-col items-center justify-center p-5 rounded-xl transition-all duration-300 hover:bg-white border border-gray-100 hover:border-[#212529]/30 shadow-sm w-full md:w-auto hover:shadow-md h-[104px]"
+              className="group flex flex-col items-center justify-center p-5 rounded-xl transition-all duration-300 bg-white border border-[color:var(--color-border)] hover:border-[color:var(--color-primary)]/30 shadow-sm w-full md:w-auto hover:shadow-md h-[104px]"
             >
               <img src="/gem-official.svg" alt="GeM Marketplace" className="w-[130px] h-[50px] object-contain mb-2" />
               <span className="text-gray-400 text-[10px] font-bold uppercase tracking-widest group-hover:text-[#212529] transition-colors">Registered OEM</span>

@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
 import ScrollAnimations from "@/components/ScrollAnimations";
 import Chatbot from "@/components/Chatbot";
+import ThemeProvider from "@/components/ThemeProvider";
 
 export const metadata = {
   metadataBase: new URL("https://sudeepengineers.com"),
@@ -53,7 +54,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="light">
+    <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -104,12 +105,14 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="antialiased">
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-        <FloatingButtons />
-        <ScrollAnimations />
-        <Chatbot />
+        <ThemeProvider>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+          <FloatingButtons />
+          <ScrollAnimations />
+          <Chatbot />
+        </ThemeProvider>
       </body>
     </html>
   );

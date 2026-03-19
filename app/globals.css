@@ -1,10 +1,8 @@
 @import "tailwindcss";
 
-/* ========================================
-   SUDEEP ENGINEERS — Tesla-Style Design System
-   ======================================== */
+@custom-variant dark (&:where(.dark, .dark *));
 
-@theme inline {
+:root {
   --color-background: #FFFFFF;
   --color-foreground: #0F172A;
   --color-section: #F8FAFC;
@@ -26,9 +24,68 @@
   --font-body: 'Inter', sans-serif;
 }
 
+.dark {
+  --color-background: #0A0E17;
+  --color-foreground: #F8FAFC;
+  --color-section: #111827;
+  --color-bg-secondary: #111827;
+  --color-bg-card: #1E293B;
+  --color-bg-card-hover: #334155;
+  --color-primary: #3B82F6;
+  --color-primary-hover: #60A5FA;
+  --color-border: #334155;
+  --color-text-secondary: #CBD5E1;
+  --color-text-muted: #94A3B8;
+}
+
+@theme {
+  --color-background: var(--color-background);
+  --color-foreground: var(--color-foreground);
+  --color-section: var(--color-section);
+  --color-bg-secondary: var(--color-bg-secondary);
+  --color-bg-card: var(--color-bg-card);
+  --color-bg-card-hover: var(--color-bg-card-hover);
+  --color-primary: var(--color-primary);
+  --color-primary-hover: var(--color-primary-hover);
+  --color-primary-light: var(--color-primary-light);
+  --color-accent: var(--color-accent);
+  --color-accent-dark: var(--color-accent-dark);
+  --color-accent-light: var(--color-accent-light);
+  --color-steel: var(--color-steel);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-muted: var(--color-text-muted);
+  --color-border: var(--color-border);
+  --color-border-accent: var(--color-border-accent);
+}
+
 /* --- Base Styles --- */
 html {
   scroll-behavior: smooth;
+}
+
+/* Transitions for smooth theme switching */
+body,
+section,
+div,
+nav,
+header,
+footer,
+aside,
+main,
+article,
+.bg-card,
+.bg-section,
+.bg-secondary,
+.nav-link,
+button,
+a,
+input,
+select,
+textarea {
+  transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
@@ -89,7 +146,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 8px 16px;
   font-size: 0.875rem;
   font-weight: 500;
-  color: #1E293B;
+  color: var(--color-foreground);
   text-decoration: none;
   transition: all 0.25s ease;
   border-radius: 9999px;
@@ -249,16 +306,22 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 auto;
 }
 
-/* animate-on-scroll utility */
+/* animate-on-scroll utility — only defines initial state */
 .animate-on-scroll {
   opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translateY(20px);
+  will-change: transform, opacity;
 }
-.animate-on-scroll.animated {
-  opacity: 1;
-  transform: translateY(0);
-}
+
+/* Initial state variations */
+.animate-on-scroll.slide-up { transform: translateY(20px); }
+.animate-on-scroll.slide-down { transform: translateY(-20px); }
+.animate-on-scroll.slide-left { transform: translateX(20px); }
+.animate-on-scroll.slide-right { transform: translateX(-20px); }
+.animate-on-scroll.zoom-in { transform: scale(0.95); }
+.animate-on-scroll.zoom-out { transform: scale(1.05); }
+
+/* Delay classes (kept for manual index/staggering) */
 .animate-on-scroll.delay-1 { transition-delay: 0.1s; }
 .animate-on-scroll.delay-2 { transition-delay: 0.2s; }
 .animate-on-scroll.delay-3 { transition-delay: 0.3s; }
@@ -397,7 +460,14 @@ h1, h2, h3, h4, h5, h6 {
    PRINT
    ======================================== */
 
-@media print {
-  .no-print { display: none !important; }
-  body { background: white; color: black; }
+/* Theme helpers */
+.logo-invert-on-dark {
+  transition: filter 0.4s ease, opacity 0.4s ease;
+}
+.dark .logo-invert-on-dark {
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+}
+.dark .logo-invert-on-dark:hover {
+  opacity: 1;
 }

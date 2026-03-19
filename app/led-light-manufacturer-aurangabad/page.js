@@ -19,7 +19,7 @@ export default function LEDManufacturerAurangabad() {
         description: "High-quality LED street lights, flood lights, and pixel LED lighting manufactured in Aurangabad.",
       })}} />
 
-      <section className="pt-32 pb-16 relative overflow-hidden" style={{ background: "linear-gradient(135deg, #0a0e17 0%, #111827 50%, #0f172a 100%)" }}>
+      <section className="pt-32 pb-16 relative overflow-hidden" style={{ background: "var(--color-background)" }}>
         <div className="absolute -top-[30%] -right-[20%] w-[500px] h-[500px] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%)" }} />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <nav className="text-xs text-[color:var(--color-text-muted)] mb-6 flex gap-2">

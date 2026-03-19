@@ -102,7 +102,7 @@ export default function IndustriesPage() {
       {industries.map((ind, idx) => (
         <section
           key={idx}
-          className={`py-20 ${idx % 2 === 0 ? "bg-[#F8FAFC]" : "bg-[#FFFFFF]"} ${idx > 0 ? "border-t border-[#E2E8F0]" : ""}`}
+          className={`py-20 ${idx % 2 === 0 ? "bg-[color:var(--color-section)]" : "bg-[color:var(--color-background)]"} ${idx > 0 ? "border-t border-[color:var(--color-border)]" : ""}`}
         >
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
@@ -125,7 +125,7 @@ export default function IndustriesPage() {
                 </Link>
               </div>
               <div className={`animate-on-scroll delay-2 ${idx % 2 !== 0 ? "lg:order-1" : ""}`}>
-                <div className="rounded-2xl overflow-hidden border border-[#E2E8F0] lg:h-[400px] h-[350px] relative group bg-[#FFFFFF]">
+                <div className="rounded-2xl overflow-hidden border border-[color:var(--color-border)] lg:h-[400px] h-[350px] relative group bg-[color:var(--color-background)]">
                   <Image 
                     src={ind.image} 
                     alt={ind.title} 
@@ -141,7 +141,7 @@ export default function IndustriesPage() {
       ))}
 
       {/* ====== CTA ====== */}
-      <section className="py-20 bg-[#F8FAFC] border-t border-[#E2E8F0]">
+      <section className="py-20 bg-[color:var(--color-section)] border-t border-[color:var(--color-border)]">
         <div className="max-w-5xl mx-auto px-6">
           <div className="bg-[#1E40AF] rounded-3xl p-12 md:p-16 text-center relative overflow-hidden animate-on-scroll">
             <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-heading font-bold text-[#FFFFFF] mb-4 relative z-10">

@@ -24,12 +24,12 @@ export default function FabricationAurangabad() {
         description: "Comprehensive engineering fabrication services in Aurangabad including metal fabrication, structural manufacturing, CNC machining, and industrial job work."
       })}} />
 
-      <section className="pt-32 pb-16 relative overflow-hidden" style={{ background: "linear-gradient(135deg, #0a0e17 0%, #111827 50%, #0f172a 100%)" }}>
+      <section className="pt-32 pb-16 relative overflow-hidden" style={{ background: "var(--color-background)" }}>
         <div className="absolute -top-[30%] -right-[20%] w-[500px] h-[500px] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%)" }} />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <nav className="text-xs text-[color:var(--color-text-muted)] mb-6 flex gap-2">
-            <Link href="/" className="hover:text-blue-400 no-underline text-[color:var(--color-text-muted)]">Home</Link>
-            <span>/</span><span className="text-[color:var(--color-text-secondary)]">Fabrication Aurangabad</span>
+            <Link href="/" className="hover:text-[color:var(--color-accent)] no-underline text-[color:var(--color-text-muted)]">Home</Link>
+            <span>/</span><span className="text-[color:var(--color-foreground)]">Fabrication Aurangabad</span>
           </nav>
           <h1 className="text-[clamp(2rem,4vw,3rem)] font-heading font-extrabold mb-4" style={{ animation: "fade-in-up 0.6s ease forwards" }}>
             Engineering Fabrication in <span className="gradient-text">Aurangabad</span>
@@ -83,7 +83,7 @@ export default function FabricationAurangabad() {
           </div>
 
           <div className="mt-12 animate-on-scroll">
-            <Link href="/contact" className="inline-flex px-8 py-3.5 rounded-md bg-gradient-to-r from-blue-500 to-blue-700 text-[color:var(--color-foreground)] font-semibold hover:-translate-y-0.5 transition-all no-underline">
+            <Link href="/contact" className="inline-flex px-8 py-3.5 rounded-md bg-gradient-to-r from-blue-500 to-blue-700 text-white font-semibold hover:-translate-y-0.5 transition-all no-underline">
               Get a Free Quote for Fabrication in Aurangabad →
             </Link>
           </div>

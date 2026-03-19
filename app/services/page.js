@@ -138,7 +138,7 @@ export default function ServicesPage() {
             sizes="100vw"
             quality={90}
           />
-          <div className="absolute inset-0 bg-white/80 backdrop-blur-[2px]"></div>
+          <div className="absolute inset-0 bg-[color:var(--color-background)]/60 backdrop-blur-[2px]"></div>
         </div>
 
         <div className="absolute -top-[30%] -right-[20%] w-[500px] h-[500px] rounded-full pointer-events-none"
@@ -148,11 +148,11 @@ export default function ServicesPage() {
             <Link href="/" className="hover:text-blue-400 no-underline text-[color:var(--color-text-muted)]">Home</Link>
             <span>/</span><span className="text-[color:var(--color-text-secondary)]">Services</span>
           </nav>
-          <h1 className="text-[clamp(2rem,4vw,3rem)] font-heading font-extrabold mb-4"
+          <h1 className="text-[clamp(2rem,4vw,3rem)] font-heading font-extrabold mb-4 text-[color:var(--color-foreground)]"
             style={{ animation: "fade-in-up 0.6s ease forwards" }}>
             Our <span className="gradient-text">Services</span>
           </h1>
-          <p className="text-[color:var(--color-text-secondary)] text-lg max-w-[600px]"
+          <p className="text-[color:var(--color-text-secondary)] text-lg max-w-[600px] opacity-90"
             style={{ animation: "fade-in-up 0.6s ease 0.1s forwards", opacity: 0 }}>
             Comprehensive engineering fabrication and LED lighting services from Waluj MIDC, Aurangabad.
           </p>
@@ -164,27 +164,27 @@ export default function ServicesPage() {
         <section
           key={service.id}
           id={service.id}
-          className={`py-20 ${idx % 2 === 0 ? "bg-[#F8FAFC]" : "bg-[#FFFFFF]"} ${
-            idx > 0 ? "border-t border-[#E2E8F0]" : ""
+          className={`py-20 ${idx % 2 === 0 ? "bg-[color:var(--color-bg-secondary)]" : "bg-[color:var(--color-bg-card)]"} ${
+            idx > 0 ? "border-t border-[color:var(--color-border)]" : ""
           }`}
         >
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
               <div className={`animate-on-scroll ${idx % 2 !== 0 ? "lg:order-2" : ""}`}>
-                <div className="w-14 h-14 rounded-lg bg-blue-500/10 border border-blue-500/15 flex items-center justify-center text-blue-400 mb-6 [&>svg]:w-6 [&>svg]:h-6">
+                <div className="w-14 h-14 rounded-lg bg-[color:var(--color-primary)]/10 border border-[color:var(--color-primary)]/15 flex items-center justify-center text-[color:var(--color-primary)] mb-6 [&>svg]:w-6 [&>svg]:h-6">
                   {service.icon}
                 </div>
-                <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-heading font-bold mb-2">
+                <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-heading font-bold mb-2 text-[color:var(--color-foreground)]">
                   {service.title}
                 </h2>
-                <p className="text-blue-400 text-sm font-medium mb-4">{service.subtitle}</p>
+                <p className="text-[color:var(--color-primary)] text-sm font-medium mb-4">{service.subtitle}</p>
                 <p className="text-[color:var(--color-text-secondary)] leading-relaxed mb-6">{service.description}</p>
 
-                <h3 className="font-heading font-semibold text-lg mb-3">Key Benefits</h3>
+                <h3 className="font-heading font-semibold text-lg mb-3 text-[color:var(--color-foreground)]">Key Benefits</h3>
                 <ul className="space-y-2 mb-6">
                   {service.benefits.map((b, i) => (
                     <li key={i} className="flex items-start gap-3 text-[color:var(--color-text-secondary)] text-sm">
-                      <span className="text-blue-400 font-bold mt-0.5 shrink-0">✓</span>
+                      <span className="text-[color:var(--color-primary)] font-bold mt-0.5 shrink-0">✓</span>
                       {b}
                     </li>
                   ))}
@@ -199,22 +199,22 @@ export default function ServicesPage() {
               </div>
 
               <div className={`animate-on-scroll delay-2 ${idx % 2 !== 0 ? "lg:order-1" : ""}`}>
-                <div className="rounded-2xl overflow-hidden border border-[#E2E8F0] lg:h-[400px] h-[320px] relative mb-6 group bg-[#FFFFFF]">
+                <div className="rounded-2xl overflow-hidden border border-[color:var(--color-border)] lg:h-[400px] h-[320px] relative mb-6 group bg-[color:var(--color-bg-card)]">
                   <Image 
                     src={service.image} 
                     alt={service.title} 
                     fill 
                     className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-90" 
                   />
-                  <div className="absolute inset-0 bg-blue-900/5 mix-blend-multiply"></div>
+                  <div className="absolute inset-0 bg-[color:var(--color-primary)]/5 mix-blend-multiply"></div>
                 </div>
                 <div className="glass-card p-6">
-                  <h4 className="font-heading font-semibold text-sm mb-3 text-blue-600">Industries Using This Service</h4>
+                  <h4 className="font-heading font-semibold text-sm mb-3 text-[color:var(--color-primary)]">Industries Using This Service</h4>
                   <div className="flex flex-wrap gap-2">
                     {service.industries.map((ind, i) => (
                       <span
                         key={i}
-                        className="bg-blue-50 border border-blue-200 rounded-full px-3 py-1 text-xs text-blue-700 font-medium"
+                        className="bg-[color:var(--color-primary)]/10 border border-[color:var(--color-primary)]/20 rounded-full px-3 py-1 text-xs text-[color:var(--color-primary)] font-medium"
                       >
                         {ind}
                       </span>

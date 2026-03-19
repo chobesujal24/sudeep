@@ -101,30 +101,30 @@ export default async function BlogPost({ params }) {
         }}
       />
 
-      <section className="pt-32 pb-16 relative overflow-hidden bg-[#FFFFFF]">
+      <section className="pt-32 pb-16 relative overflow-hidden bg-[color:var(--color-background)]">
         <div className="absolute -top-[30%] -right-[20%] w-[500px] h-[500px] rounded-full pointer-events-none"
           style={{ background: "radial-gradient(circle, rgba(37,99,235,0.06) 0%, transparent 70%)" }} />
         <div className="max-w-4xl mx-auto px-6 relative z-10">
-          <nav className="text-xs text-[#475569] mb-6 flex gap-2 overflow-x-auto whitespace-nowrap hide-scrollbar">
-            <Link href="/" className="hover:text-blue-400 no-underline text-[#475569] shrink-0">Home</Link>
+          <nav className="text-xs text-[color:var(--color-text-muted)] mb-6 flex gap-2 overflow-x-auto whitespace-nowrap hide-scrollbar">
+            <Link href="/" className="hover:text-[color:var(--color-accent)] no-underline text-[color:var(--color-text-muted)] shrink-0">Home</Link>
             <span className="shrink-0">/</span>
-            <Link href="/blog" className="hover:text-blue-400 no-underline text-[#475569] shrink-0">Blog</Link>
+            <Link href="/blog" className="hover:text-[color:var(--color-accent)] no-underline text-[color:var(--color-text-muted)] shrink-0">Blog</Link>
             <span className="shrink-0">/</span>
-            <span className="text-[#1E293B] truncate max-w-[200px] sm:max-w-none">{post.title}</span>
+            <span className="text-[color:var(--color-foreground)] truncate max-w-[200px] sm:max-w-none">{post.title}</span>
           </nav>
           
           {post.tag && (
-             <span className="inline-block bg-blue-500/10 border border-blue-500/15 rounded-full px-3 py-0.5 text-xs text-blue-400 font-semibold mb-4 uppercase tracking-wider">
+             <span className="inline-block bg-[color:var(--color-primary)]/10 border border-[color:var(--color-primary)]/15 rounded-full px-3 py-0.5 text-xs text-[color:var(--color-primary)] font-semibold mb-4 uppercase tracking-wider">
                {post.tag}
              </span>
           )}
           
-          <h1 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-heading font-extrabold mb-4 leading-tight text-[#1E293B]"
+          <h1 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-heading font-extrabold mb-4 leading-tight text-[color:var(--color-foreground)]"
             style={{ animation: "fade-in-up 0.6s ease forwards" }}>
             {post.title}
           </h1>
           
-          <div className="flex items-center gap-4 text-sm text-[#475569] font-medium">
+          <div className="flex items-center gap-4 text-sm text-[color:var(--color-text-secondary)] font-medium">
             {publishDate && <span>{publishDate}</span>}
           </div>
         </div>
@@ -132,9 +132,9 @@ export default async function BlogPost({ params }) {
 
       {/* Featured Image if available */}
       {post.featuredImage && (
-         <div className="bg-[#F8FAFC]">
+         <div className="bg-[color:var(--color-section)]">
            <div className="max-w-4xl mx-auto px-6 -mt-8 relative z-20">
-              <div className="w-full aspect-video md:aspect-[21/9] relative rounded-xl overflow-hidden shadow-lg border border-[#E2E8F0]">
+              <div className="w-full aspect-video md:aspect-[21/9] relative rounded-xl overflow-hidden shadow-lg border border-[color:var(--color-border)]">
                  <Image 
                    src={post.featuredImage} 
                    alt={post.title} 
@@ -147,18 +147,18 @@ export default async function BlogPost({ params }) {
          </div>
       )}
 
-      <section className={`py-16 bg-[#F8FAFC] ${!post.featuredImage ? "pt-16" : "pt-12"}`}>
+      <section className={`py-16 bg-[color:var(--color-section)] ${!post.featuredImage ? "pt-16" : "pt-12"}`}>
         <div className="max-w-4xl mx-auto px-6">
           <div
             className="blog-prose animate-on-scroll"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
-          <div className="mt-16 pt-8 border-t border-[#E2E8F0] flex flex-col sm:flex-row items-center justify-between gap-6 animate-on-scroll">
-            <Link href="/blog" className="text-[#1E40AF] text-sm font-bold no-underline hover:text-[#1D4ED8] flex items-center gap-2">
+          <div className="mt-16 pt-8 border-t border-[color:var(--color-border)] flex flex-col sm:flex-row items-center justify-between gap-6 animate-on-scroll">
+            <Link href="/blog" className="text-[color:var(--color-primary)] text-sm font-bold no-underline hover:text-[color:var(--color-primary-hover)] flex items-center gap-2">
               ← Back to all articles
             </Link>
             <Link href="/contact"
-              className="w-full sm:w-auto text-center px-8 py-3.5 rounded-md bg-[#38BDF8] text-[#0F172A] font-bold hover:opacity-90 transition-all no-underline shadow-sm">
+              className="w-full sm:w-auto text-center px-8 py-3.5 rounded-md bg-[color:var(--color-accent)] text-[#0F172A] font-bold hover:opacity-90 transition-all no-underline shadow-sm">
               Contact Us for Your Project →
             </Link>
           </div>

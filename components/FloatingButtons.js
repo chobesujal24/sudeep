@@ -51,7 +51,7 @@ export default function FloatingButtons() {
         {showTop && (
           <motion.button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="fixed bottom-24 right-6 z-30 w-[42px] h-[42px] rounded-full bg-white border border-[#E2E8F0] text-[#475569] flex items-center justify-center text-lg cursor-pointer shadow-sm hover:border-[#1E40AF] hover:text-[#1E40AF]"
+            className="fixed bottom-24 right-6 z-30 w-[42px] h-[42px] rounded-full bg-[color:var(--color-bg-card)] border border-[color:var(--color-border)] text-[color:var(--color-text-secondary)] flex items-center justify-center text-lg cursor-pointer shadow-sm hover:border-[color:var(--color-primary)] hover:text-[color:var(--color-primary)]"
             aria-label="Back to top"
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}

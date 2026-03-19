@@ -39,18 +39,18 @@ export default function FAQ() {
         <div key={i} className={`animate-on-scroll delay-${(i % 5) + 1}`}>
           <div className={`glass-card overflow-hidden ${openIndex === i ? "faq-open" : ""}`}>
             <button
-            onClick={() => toggle(i)}
-            className="w-full flex items-center justify-between px-6 py-5 bg-transparent border-none text-[color:var(--color-foreground)] text-[0.95rem] font-semibold cursor-pointer text-left font-[inherit] hover:text-[color:var(--color-accent)] transition-colors"
-          >
-            <span>{faq.q}</span>
-            <span className="text-[color:var(--color-accent)] text-xl ml-4 shrink-0 faq-icon-rotate">+</span>
-          </button>
-          <div className="faq-answer">
-            <div className="px-6 pb-5 text-[color:var(--color-text-secondary)] text-sm leading-relaxed">
-              {faq.a}
+              onClick={() => toggle(i)}
+              className="w-full flex items-center justify-between px-6 py-5 bg-transparent border-none text-[color:var(--color-foreground)] text-[0.95rem] font-semibold cursor-pointer text-left font-[inherit] hover:text-[color:var(--color-accent)] transition-colors"
+            >
+              <span>{faq.q}</span>
+              <span className="text-[color:var(--color-accent)] text-xl ml-4 shrink-0 faq-icon-rotate">+</span>
+            </button>
+            <div className="faq-answer">
+              <div className="px-6 pb-1 text-[color:var(--color-text-secondary)] text-sm leading-relaxed">
+                {faq.a}
+              </div>
             </div>
           </div>
-        </div>
         </div>
       ))}
 

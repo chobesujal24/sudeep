@@ -7,8 +7,8 @@ export default function ImageGallery({ images, productName }) {
 
   if (!images || images.length === 0) {
     return (
-      <div className="w-full h-full min-h-[400px] flex items-center justify-center bg-[#F8FAFC] rounded-2xl border border-[#E2E8F0]">
-        <span className="text-[#38BDF8] text-6xl">💡</span>
+      <div className="w-full h-full min-h-[400px] flex items-center justify-center bg-[color:var(--color-bg-secondary)] rounded-2xl border border-[color:var(--color-border)]">
+        <span className="text-[color:var(--color-accent)] text-6xl">💡</span>
       </div>
     );
   }
@@ -16,7 +16,7 @@ export default function ImageGallery({ images, productName }) {
   return (
     <div className="flex flex-col gap-4 sticky top-24">
       {/* Main Large Image */}
-      <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-[#FFFFFF] border border-[#E2E8F0] group">
+      <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-[color:var(--color-bg-card)] border border-[color:var(--color-border)] group">
         <Image
           src={mainImage}
           alt={productName}

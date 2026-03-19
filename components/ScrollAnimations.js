@@ -13,26 +13,50 @@ export default function ScrollAnimations() {
       observerRef.current.disconnect();
     }
 
+    const elements = document.querySelectorAll(".animate-on-scroll:not(.animated)");
+
     observerRef.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // Use framer-motion's animate for smooth spring animations
+            const el = entry.target;
+            const classes = el.classList;
+            
+            // Default animation values
+            let initialProps = { opacity: 1, x: 0, y: 0, scale: 1 };
+            
+            // Specific initial props based on classes if needed beyond CSS
+            // but we mostly want to animate back to "identity" values.
+            
+            // More fluid/organic spring config
+            const springConfig = { 
+              type: "spring", 
+              stiffness: 60, 
+              damping: 25, 
+              mass: 1.2,
+              duration: 1.0 
+            };
+            
+            // Extract delay from index if multiple elements intersecting at once
+            // or from explicit delay-X classes
+            const delayMatch = [...classes].find(c => c.startsWith("delay-"));
+            const delaySeconds = delayMatch ? parseInt(delayMatch.split("-")[1]) * 0.1 : 0;
+
             animate(
-              entry.target,
-              { opacity: 1, y: 0 },
-              { type: "spring", stiffness: 80, damping: 20, duration: 0.6 }
+              el,
+              { opacity: 1, x: 0, y: 0, scale: 1 },
+              { ...springConfig, delay: delaySeconds }
             );
-            entry.target.classList.add("animated");
-            observerRef.current.unobserve(entry.target);
+
+            el.classList.add("animated");
+            observerRef.current.unobserve(el);
           }
         });
       },
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+      { threshold: 0.15, rootMargin: "0px 0px -80px 0px" }
     );
 
-    // Initial observe
-    document.querySelectorAll(".animate-on-scroll:not(.animated)").forEach((el) => {
+    elements.forEach((el) => {
       observerRef.current.observe(el);
     });
 

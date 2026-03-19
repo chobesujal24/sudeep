@@ -53,19 +53,19 @@ export default async function BlogPage() {
       />
 
       {/* Page Hero */}
-      <section className="pt-32 pb-16 relative overflow-hidden bg-[#FFFFFF]">
+      <section className="pt-32 pb-16 relative overflow-hidden bg-[color:var(--color-background)]">
         <div className="absolute -top-[30%] -right-[20%] w-[500px] h-[500px] rounded-full pointer-events-none"
           style={{ background: "radial-gradient(circle, rgba(37,99,235,0.06) 0%, transparent 70%)" }} />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <nav className="text-xs text-[#475569] mb-6 flex gap-2">
-            <Link href="/" className="hover:text-[#38BDF8] no-underline text-[#475569]">Home</Link>
-            <span>/</span><span className="text-[#1E293B]">Blog</span>
+          <nav className="text-xs text-[color:var(--color-text-muted)] mb-6 flex gap-2">
+            <Link href="/" className="hover:text-[color:var(--color-accent)] no-underline text-[color:var(--color-text-muted)]">Home</Link>
+            <span>/</span><span className="text-[color:var(--color-foreground)]">Blog</span>
           </nav>
-          <h1 className="text-[clamp(2rem,4vw,3rem)] font-heading font-extrabold mb-4 text-[#1E293B]"
+          <h1 className="text-[clamp(2rem,4vw,3rem)] font-heading font-extrabold mb-4 text-[color:var(--color-foreground)]"
             style={{ animation: "fade-in-up 0.6s ease forwards" }}>
-            Engineering <span className="text-[#1E40AF]">Insights</span>
+            Engineering <span className="text-[color:var(--color-primary)]">Insights</span>
           </h1>
-          <p className="text-[#1E293B] opacity-80 text-lg max-w-[600px]"
+          <p className="text-[color:var(--color-text-secondary)] opacity-80 text-lg max-w-[600px]"
             style={{ animation: "fade-in-up 0.6s ease 0.1s forwards", opacity: 0 }}>
             Expert articles on fabrication, manufacturing, and LED lighting from our team.
           </p>
@@ -73,14 +73,14 @@ export default async function BlogPage() {
       </section>
 
       {/* Blog Cards */}
-      <section className="py-20 bg-[#F8FAFC]">
+      <section className="py-20 bg-[color:var(--color-section)]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {posts.map((post, i) => (
               <Link
                 href={`/blog/${post.slug}`}
                 key={post.id || i}
-                className={`bg-white border border-[#E2E8F0] rounded-xl overflow-hidden no-underline group shadow-sm hover:shadow-md transition-shadow animate-on-scroll delay-${(i % 5) + 1}`}
+                className={`bg-[color:var(--color-bg-card)] border border-[color:var(--color-border)] rounded-xl overflow-hidden no-underline group shadow-sm hover:shadow-md transition-shadow animate-on-scroll delay-${(i % 5) + 1}`}
               >
                 <div className="h-[200px] bg-gradient-to-br from-[#1E293B] to-[#0F172A] relative overflow-hidden flex items-center justify-center text-slate-700">
                   {post.featuredImage ? (
@@ -96,15 +96,15 @@ export default async function BlogPage() {
                 </div>
                 <div className="p-6">
                   {post.tag && (
-                    <span className="inline-block bg-blue-500/10 border border-blue-500/15 rounded-full px-3 py-0.5 text-[0.72rem] text-[#1E40AF] font-bold uppercase tracking-wider mb-3">
+                    <span className="inline-block bg-[color:var(--color-primary)]/10 border border-[color:var(--color-primary)]/15 rounded-full px-3 py-0.5 text-[0.72rem] text-[color:var(--color-primary)] font-bold uppercase tracking-wider mb-3">
                       {post.tag}
                     </span>
                   )}
-                  <h3 className="font-heading font-bold text-lg mb-2 text-[#0F172A] group-hover:text-[#1E40AF] transition-colors leading-snug line-clamp-2">
+                  <h3 className="font-heading font-bold text-lg mb-2 text-[color:var(--color-foreground)] group-hover:text-[color:var(--color-primary)] transition-colors leading-snug line-clamp-2">
                     {post.title}
                   </h3>
-                  <p className="text-[#475569] text-sm leading-relaxed mb-4 line-clamp-3">{post.excerpt}</p>
-                  <div className="flex items-center gap-2 text-xs text-[#94A3B8] font-medium border-t border-[#F1F5F9] pt-4 mt-auto">
+                  <p className="text-[color:var(--color-text-secondary)] text-sm leading-relaxed mb-4 line-clamp-3">{post.excerpt}</p>
+                  <div className="flex items-center gap-2 text-xs text-[color:var(--color-text-muted)] font-medium border-t border-[color:var(--color-border)] pt-4 mt-auto">
                     <span>{formatDate(post.created_at)}</span>
                   </div>
                 </div>
@@ -112,10 +112,10 @@ export default async function BlogPage() {
             ))}
             
             {posts.length === 0 && (
-              <div className="col-span-full py-20 text-center border-2 border-dashed border-[#CBD5E1] rounded-2xl bg-white">
-                 <svg className="w-12 h-12 mx-auto text-[#94A3B8] mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-                 <h3 className="text-xl font-bold text-[#1E293B]">Check back later</h3>
-                 <p className="text-[#64748B]">We are currently preparing new insights and articles. Stay tuned!</p>
+              <div className="col-span-full py-20 text-center border-2 border-dashed border-[color:var(--color-border)] rounded-2xl bg-[color:var(--color-bg-card)]">
+                 <svg className="w-12 h-12 mx-auto text-[color:var(--color-text-muted)] mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                 <h3 className="text-xl font-bold text-[color:var(--color-foreground)]">Check back later</h3>
+                 <p className="text-[color:var(--color-text-muted)]">We are currently preparing new insights and articles. Stay tuned!</p>
               </div>
             )}
           </div>

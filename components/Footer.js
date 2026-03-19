@@ -31,7 +31,7 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer style={{ background: "#0F172A" }}>
+    <footer style={{ background: "var(--color-background)", borderTop: "1px solid var(--color-border)" }} className="transition-colors duration-300">
       <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "80px 32px 0" }}>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
@@ -40,32 +40,32 @@ export default function Footer() {
               <img
                 src="/logo.png"
                 alt="Sudeep Engineers"
-                className="h-[80px] w-auto object-contain transition-transform group-hover:scale-105 brightness-0 invert opacity-90"
+                className="h-[80px] w-auto object-contain transition-transform group-hover:scale-105 logo-invert-on-dark"
               />
             </Link>
-            <p className="text-[#94A3B8] text-sm leading-relaxed max-w-[280px] mb-6">
+            <p className="text-[color:var(--color-text-secondary)] text-sm leading-relaxed max-w-[280px] mb-6">
               Premium LED lighting and solar solutions manufactured in Waluj MIDC,
               Aurangabad. Trusted MSME partner since 2019.
             </p>
             <div className="space-y-3 text-sm">
               <p className="flex items-center gap-3 group">
-                <span className="text-[#38BDF8]"><Icons.Location className="w-4 h-4" /></span>
-                <span className="text-[#94A3B8] group-hover:text-[#38BDF8] transition-colors">Waluj MIDC, Aurangabad, Maharashtra</span>
+                <span className="text-[color:var(--color-primary)]"><Icons.Location className="w-4 h-4" /></span>
+                <span className="text-[color:var(--color-text-secondary)] group-hover:text-[color:var(--color-primary)] transition-colors">Waluj MIDC, Aurangabad, Maharashtra</span>
               </p>
               <p className="flex items-center gap-3 group">
-                <span className="text-[#38BDF8]"><Icons.Phone className="w-4 h-4" /></span>
-                <a href="tel:+919922996236" className="text-[#94A3B8] no-underline group-hover:text-[#38BDF8] transition-colors">+91 9922996236</a>
+                <span className="text-[color:var(--color-primary)]"><Icons.Phone className="w-4 h-4" /></span>
+                <a href="tel:+919922996236" className="text-[color:var(--color-text-secondary)] no-underline group-hover:text-[color:var(--color-primary)] transition-colors">+91 9922996236</a>
               </p>
               <p className="flex items-center gap-3 group">
-                <span className="text-[#38BDF8]"><Icons.Envelope className="w-4 h-4" /></span>
-                <a href="mailto:info@sudeepengineers.com" className="text-[#94A3B8] no-underline group-hover:text-[#38BDF8] transition-colors">info@sudeepengineers.com</a>
+                <span className="text-[color:var(--color-primary)]"><Icons.Envelope className="w-4 h-4" /></span>
+                <a href="mailto:info@sudeepengineers.com" className="text-[color:var(--color-text-secondary)] no-underline group-hover:text-[color:var(--color-primary)] transition-colors">info@sudeepengineers.com</a>
               </p>
             </div>
           </div>
 
           {/* Products */}
           <div>
-            <h4 className="font-heading font-bold text-white text-sm mb-6 uppercase tracking-wider">Products</h4>
+            <h4 className="font-heading font-bold text-[color:var(--color-foreground)] text-sm mb-6 uppercase tracking-wider">Products</h4>
             <ul className="space-y-3">
               {footerLinks.services.map((link, i) => (
                 <li key={i}>
@@ -82,7 +82,7 @@ export default function Footer() {
 
           {/* Company */}
           <div>
-            <h4 className="font-heading font-bold text-white text-sm mb-6 uppercase tracking-wider">Company</h4>
+            <h4 className="font-heading font-bold text-[color:var(--color-foreground)] text-sm mb-6 uppercase tracking-wider">Company</h4>
             <ul className="space-y-3">
               {footerLinks.company.map((link, i) => (
                 <li key={i}>
@@ -99,13 +99,13 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-heading font-bold text-white text-sm mb-6 uppercase tracking-wider">Quick Links</h4>
+            <h4 className="font-heading font-bold text-[color:var(--color-foreground)] text-sm mb-6 uppercase tracking-wider">Quick Links</h4>
             <ul className="space-y-3">
               {footerLinks.seo.map((link, i) => (
                 <li key={i}>
                   <Link
                     href={link.href}
-                    className="text-[#94A3B8] hover:text-white text-sm transition-colors no-underline"
+                    className="text-[color:var(--color-text-muted)] hover:text-[color:var(--color-primary)] text-sm transition-colors no-underline"
                   >
                     {link.label}
                   </Link>
@@ -135,7 +135,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div
-          className="border-t border-white/10 py-8 flex flex-wrap items-center justify-between gap-4 text-xs text-[#64748B]"
+          className="border-t border-[color:var(--color-border)] py-8 flex flex-wrap items-center justify-between gap-4 text-xs text-[color:var(--color-text-muted)]"
         >
           <p>&copy; {new Date().getFullYear()} Sudeep Engineers. All rights reserved.</p>
           <p>

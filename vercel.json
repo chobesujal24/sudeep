@@ -1,8 +1,0 @@
-{
-  "routes": [
-    {
-      "src": "^/(.*)",
-      "dest": "https://ceawmxeopfmvjywmbsen.supabase.co/storage/v1/object/public/images/$1"
-    }
-  ]
-}
