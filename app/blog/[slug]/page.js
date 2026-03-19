@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { supabase } from "@/lib/supabase";
+import { transformUrls } from "@/lib/getProductData";
 
 export const revalidate = 60; // Revalidate every 60 seconds
 
@@ -39,7 +40,7 @@ async function getPostBySlug(slug) {
       return null;
     }
     
-    return data;
+    return transformUrls(data);
   } catch (error) {
     console.error("Error fetching post by slug:", error);
     return null;

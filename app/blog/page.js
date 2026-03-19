@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Icons } from "@/components/Icons";
 import { supabase } from "@/lib/supabase";
+import { transformUrls } from "@/lib/getProductData";
 
 export const metadata = {
   title: "Blog - Engineering & Manufacturing Insights",
@@ -24,7 +25,7 @@ export default async function BlogPage() {
       .order('created_at', { ascending: false });
 
     if (error) throw error;
-    if (data) posts = data;
+    if (data) posts = transformUrls(data);
   } catch (error) {
     console.error("Error fetching blogs from Supabase:", error);
   }
