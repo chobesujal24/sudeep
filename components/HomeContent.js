@@ -277,14 +277,14 @@ export default function HomeContent() {
         </div>
         <div className="relative z-10 w-full px-6 text-center" style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <motion.div className="mb-16" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-            <h2 className="font-heading font-bold text-[color:var(--color-foreground)] mb-4" style={{ fontSize: "clamp(2rem, 4vw, 2.75rem)" }}>Industries We Serve</h2>
-            <p className="text-[color:var(--color-text-secondary)] text-lg max-w-[500px] mx-auto">Trusted across diverse industrial sectors.</p>
+            <h2 className="font-heading font-bold text-white mb-4" style={{ fontSize: "clamp(2rem, 4vw, 2.75rem)" }}>Industries We Serve</h2>
+            <p className="text-white/80 text-lg max-w-[500px] mx-auto">Trusted across diverse industrial sectors.</p>
           </motion.div>
           <motion.div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6" variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
             {industries.map((ind, i) => (
-              <motion.div key={i} className="bg-[color:var(--color-bg-card)] border border-[color:var(--color-border)] p-8 text-center rounded-2xl transition-all duration-300 shadow-md hover:shadow-xl group" variants={fadeUp} custom={i}>
-                <div className="text-[color:var(--color-primary)] mb-4 flex justify-center group-hover:scale-110 transition-transform">{ind.icon}</div>
-                <h3 className="font-heading font-semibold text-sm text-[color:var(--color-foreground)]">{ind.name}</h3>
+              <motion.div key={i} className="bg-transparent border border-white/20 p-8 text-center rounded-2xl transition-all duration-300 hover:bg-white/5 group" variants={fadeUp} custom={i}>
+                <div className="text-[color:var(--color-accent)] mb-4 flex justify-center group-hover:scale-110 transition-transform">{ind.icon}</div>
+                <h3 className="font-heading font-semibold text-sm text-white">{ind.name}</h3>
               </motion.div>
             ))}
           </motion.div>
