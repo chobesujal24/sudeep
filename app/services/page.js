@@ -199,7 +199,7 @@ export default function ServicesPage() {
               </div>
 
               <div className={`animate-on-scroll delay-2 ${idx % 2 !== 0 ? "lg:order-1" : ""}`}>
-                <div className="rounded-2xl overflow-hidden border border-[color:var(--color-border)] lg:h-[400px] h-[320px] relative mb-6 group bg-[color:var(--color-bg-card)]">
+                <div className="rounded-2xl overflow-hidden border border-[color:var(--color-border)] lg:h-[400px] h-[320px] relative mb-6 group bg-white">
                   <Image 
                     src={service.image} 
                     alt={service.title} 

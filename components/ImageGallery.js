@@ -16,7 +16,7 @@ export default function ImageGallery({ images, productName }) {
   return (
     <div className="flex flex-col gap-4 sticky top-24">
       {/* Main Large Image */}
-      <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-[color:var(--color-bg-card)] border border-[color:var(--color-border)] group">
+      <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-white border border-[color:var(--color-border)] group">
         <Image
           src={mainImage}
           alt={productName}

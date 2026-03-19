@@ -84,11 +84,11 @@ export default async function BlogPage() {
               >
                 <div className="h-[200px] bg-gradient-to-br from-[#1E293B] to-[#0F172A] relative overflow-hidden flex items-center justify-center text-slate-700">
                   {post.featuredImage ? (
-                    <Image 
-                      src={post.featuredImage} 
-                      alt={post.title} 
+                    <Image
+                      src={post.featuredImage}
+                      alt={post.title}
                       fill
-                      className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" 
+                      className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
                     />
                   ) : (
                     <svg className="w-16 h-16 opacity-30 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
@@ -110,12 +110,12 @@ export default async function BlogPage() {
                 </div>
               </Link>
             ))}
-            
+
             {posts.length === 0 && (
               <div className="col-span-full py-20 text-center border-2 border-dashed border-[color:var(--color-border)] rounded-2xl bg-[color:var(--color-bg-card)]">
-                 <svg className="w-12 h-12 mx-auto text-[color:var(--color-text-muted)] mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-                 <h3 className="text-xl font-bold text-[color:var(--color-foreground)]">Check back later</h3>
-                 <p className="text-[color:var(--color-text-muted)]">We are currently preparing new insights and articles. Stay tuned!</p>
+                <svg className="w-12 h-12 mx-auto text-[color:var(--color-text-muted)] mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                <h3 className="text-xl font-bold text-[color:var(--color-foreground)]">Check back later</h3>
+                <p className="text-[color:var(--color-text-muted)]">We are currently preparing new insights and articles. Stay tuned!</p>
               </div>
             )}
           </div>

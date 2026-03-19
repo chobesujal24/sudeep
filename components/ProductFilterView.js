@@ -194,7 +194,7 @@ export default function ProductFilterView({ products, dbCatMap }) {
             {filteredProducts.map((product, i) => (
               <div key={i} className="bg-[color:var(--color-bg-card)] border border-[color:var(--color-border)] shadow-sm rounded-2xl overflow-hidden flex flex-col group hover:shadow-2xl transition-all duration-300 hover:border-[color:var(--color-accent)] hover:-translate-y-1">
                 {/* Image placeholder */}
-                <div className="h-[240px] bg-[color:var(--color-background)] relative overflow-hidden flex items-center justify-center p-4">
+                <div className="relative h-64 bg-white overflow-hidden flex items-center justify-center p-4">
                   {product.images?.[0] ? (
                     <Image 
                       src={product.images[0]} 
