@@ -1,8 +1,8 @@
 {
-  "rewrites": [
+  "routes": [
     {
-      "source": "/:path*",
-      "destination": "https://ceawmxeopfmvjywmbsen.supabase.co/storage/v1/object/public/images/:path*"
+      "src": "^/(.*)",
+      "dest": "https://ceawmxeopfmvjywmbsen.supabase.co/storage/v1/object/public/images/$1"
     }
   ]
 }

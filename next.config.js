@@ -3,45 +3,14 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: '**.supabase.co',
-        pathname: '/storage/v1/object/public/**',
+        protocol: "https",
+        hostname: "cdn.sudeepengineers.com",
       },
       {
-        protocol: 'https',
-        hostname: 'cdn.sudeepengineers.com',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'cdn.sudeepengineer.com',
-        pathname: '/**',
+        protocol: "https",
+        hostname: "**.supabase.co",
       },
     ],
-  },
-  async rewrites() {
-    return [
-      {
-        source: "/:path*",
-        has: [
-          {
-            type: 'host',
-            value: 'cdn.sudeepengineers.com',
-          },
-        ],
-        destination: "https://ceawmxeopfmvjywmbsen.supabase.co/storage/v1/object/public/images/:path*",
-      },
-      {
-        source: "/:path*",
-        has: [
-          {
-            type: 'host',
-            value: 'cdn.sudeepengineer.com',
-          },
-        ],
-        destination: "https://ceawmxeopfmvjywmbsen.supabase.co/storage/v1/object/public/images/:path*",
-      },
-    ];
   },
 };
 

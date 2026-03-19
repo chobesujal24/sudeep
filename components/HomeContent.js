@@ -93,7 +93,7 @@ export default function HomeContent() {
         <div className="section-overlay" />
         <div className="relative z-10 text-center px-6 max-w-[900px] mx-auto">
           <motion.h1 className="font-heading font-extrabold text-white leading-[1.05] mb-6" style={{ fontSize: "clamp(3.5rem, 7vw, 5rem)" }} initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}>
-            Precision Engineering<br /><span style={{ color: "rgba(255,255,255,0.75)" }}>Fabrication Solutions</span>
+            <br />Engineering <span className="text-emerald-500">Brighter</span> Lighting Systems<span style={{ color: "rgba(57, 190, 86, 0.75)" }}></span>
           </motion.h1>
           <motion.p className="text-white/80 text-lg md:text-xl max-w-[560px] mx-auto mb-10 leading-relaxed" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.5 }}>
             Trusted engineering partner in Waluj MIDC, Aurangabad.
