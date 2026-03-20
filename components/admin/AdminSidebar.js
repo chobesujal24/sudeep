@@ -29,7 +29,7 @@ export default function AdminSidebar({ activeTab, setActiveTab, onLogout }) {
               onClick={() => setActiveTab(tab.id)}
               className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all ${
                 isActive
-                  ? "bg-[#1E40AF] text-white shadow-md"
+                  ? "bg-[#166534] text-white shadow-md"
                   : "text-[#94A3B8] hover:text-white hover:bg-[#1E293B]"
               }`}
             >

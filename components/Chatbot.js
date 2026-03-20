@@ -1,19 +1,27 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import { X, Send, Loader2 } from 'lucide-react';
+import { X, Send, Loader2, MessageSquare, Sparkles, ArrowRight, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ChatMessage from './ChatMessage';
+
+const quickActions = [
+  { label: "📦 Product Catalog", query: "Tell me about your product categories" },
+  { label: "💰 Get a Quote", query: "I need a quote for LED lighting" },
+  { label: "⚙️ Custom Solutions", query: "Do you offer custom fabrication?" },
+];
 
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const [messages, setMessages] = useState([
-    { role: 'assistant', content: 'Hello! I am the Sudeep Engineers AI Assistant. How can I help you today with our lighting or fabrication solutions?' }
+    { role: 'assistant', content: 'Welcome to **Sudeep Engineers**! 👋\n\nI\'m your AI assistant — ready to help with product details, quotes, or custom engineering solutions.\n\nHow can I help you today?' }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
   const messagesEndRef = useRef(null);
+  const inputRef = useRef(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -24,32 +32,29 @@ export default function Chatbot() {
   }, [messages, isLoading]);
 
   useEffect(() => {
-    // Show tooltip shortly after mount
+    if (isOpen && inputRef.current) {
+      setTimeout(() => inputRef.current?.focus(), 400);
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
     const showTimer = setTimeout(() => {
-      if (!isOpen) {
-        setShowTooltip(true);
-      }
-    }, 1500);
+      if (!isOpen) setShowTooltip(true);
+    }, 2000);
+    const hideTimer = setTimeout(() => setShowTooltip(false), 6000);
+    return () => { clearTimeout(showTimer); clearTimeout(hideTimer); };
+  }, []);
 
-    // Hide tooltip after 3 seconds of showing
-    const hideTimer = setTimeout(() => {
-      setShowTooltip(false);
-    }, 4500); // 1.5s delay + 3s duration
-
-    return () => {
-      clearTimeout(showTimer);
-      clearTimeout(hideTimer);
-    };
-  }, []); // Only run once on mount
-
-  const handleSend = async () => {
-    if (!input.trim() || isLoading) return;
-    if (input.length > 500) {
+  const handleSend = async (text) => {
+    const messageText = text || input.trim();
+    if (!messageText || isLoading) return;
+    if (messageText.length > 500) {
       alert('Message must be under 500 characters.');
       return;
     }
 
-    const userMessage = { role: 'user', content: input.trim() };
+    setHasInteracted(true);
+    const userMessage = { role: 'user', content: messageText };
     setMessages(prev => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
@@ -57,11 +62,9 @@ export default function Chatbot() {
     try {
       const response = await fetch('/api/chat', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          messages: [...messages, userMessage].slice(-10) // Keep recent history 
+          messages: [...messages, userMessage].slice(-10)
         }),
       });
 
@@ -70,7 +73,7 @@ export default function Chatbot() {
       if (response.ok && data.reply) {
         setMessages(prev => [...prev, { role: 'assistant', content: data.reply }]);
       } else {
-        setMessages(prev => [...prev, { role: 'assistant', content: 'Sorry, I am having trouble connecting right now. Please try again later or contact us directly at info@sudeepengineers.com.' }]);
+        setMessages(prev => [...prev, { role: 'assistant', content: 'I\'m having trouble connecting right now. Please try again or reach us at **info@sudeepengineers.com**.' }]);
       }
     } catch (error) {
       setMessages(prev => [...prev, { role: 'assistant', content: 'An error occurred. Please try again later.' }]);
@@ -80,141 +83,257 @@ export default function Chatbot() {
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
       handleSend();
     }
   };
 
   return (
     <div className="fixed bottom-6 left-6 z-[9999] flex flex-col items-start">
-      {/* Chat Window */}
-      <div
-        className={`mb-4 bg-gray-50 dark:bg-slate-900 w-[350px] max-w-[calc(100vw-3rem)] sm:w-[380px] rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-gray-200 dark:border-slate-800 transition-all duration-300 ease-in-out origin-bottom-left ${isOpen ? 'scale-100 opacity-100 h-[500px] max-h-[75vh]' : 'scale-50 opacity-0 h-0 pointer-events-none'
-          }`}
-      >
-        <div className="bg-white dark:bg-slate-800 text-blue-900 dark:text-blue-100 px-4 py-3 flex items-center justify-between shadow-sm z-10 w-full border-b border-gray-100 dark:border-slate-700">
-          <div className="flex items-center gap-3">
-            <div className="relative w-10 h-10 flex-shrink-0 bg-blue-50 dark:bg-blue-900/30 rounded-full flex items-center justify-center border border-blue-100 dark:border-blue-800">
-              <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" xmlns="http://www.w3.org/2000/svg">
-                <path d="M11.5 2C11.5 7 15 10.5 20 10.5C15 10.5 11.5 14 11.5 19C11.5 14 8 10.5 3 10.5C8 10.5 11.5 7 11.5 2Z" fill="currentColor" className="text-blue-800 dark:text-blue-400" />
-                <path d="M19 13C19 15 20.5 16.5 22.5 16.5C20.5 16.5 19 18 19 20C19 18 17.5 16.5 15.5 16.5C17.5 16.5 19 15 19 13Z" fill="#3B82F6" />
-                <path d="M6.5 16C6.5 17.5 7.5 18.5 9 18.5C7.5 18.5 6.5 19.5 6.5 21C6.5 19.5 5.5 18.5 4 18.5C5.5 18.5 6.5 17.5 6.5 16Z" fill="#60A5FA" />
-              </svg>
-            </div>
-            <div>
-              <h3 className="font-bold text-sm leading-tight text-gray-900 dark:text-slate-100">AI Assistant</h3>
-              <p className="text-[11px] text-green-600 dark:text-green-400 mt-0.5 flex items-center gap-1 font-medium">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block animate-pulse"></span>
-                Online
-              </p>
-            </div>
-          </div>
-          <button
-            onClick={() => setIsOpen(false)}
-            className="text-gray-400 hover:text-gray-700 dark:hover:text-slate-200 transition-colors hover:bg-gray-100 dark:hover:bg-slate-700 p-1.5 rounded-full"
-            aria-label="Close chat"
+      {/* ── Chat Window ── */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.7, y: 40, rotateX: 15 }}
+            animate={{ opacity: 1, scale: 1, y: 0, rotateX: 0 }}
+            exit={{ opacity: 0, scale: 0.7, y: 40, rotateX: 15 }}
+            transition={{ type: "spring", stiffness: 300, damping: 28, mass: 0.8 }}
+            className="mb-2 w-[380px] max-w-[calc(100vw-3rem)] sm:w-[420px] overflow-hidden flex flex-col"
+            style={{
+              height: "650px",
+              maxHeight: "85vh",
+              borderRadius: "24px",
+              background: "var(--color-background)",
+              boxShadow: "0 25px 60px -12px rgba(0,0,0,0.25), 0 0 0 1px rgba(22,101,52,0.08)",
+            }}
           >
-            <X size={18} />
-          </button>
-        </div>
-
-        {/* Messages Area */}
-        <div className="flex-1 overflow-y-auto p-4 bg-gray-50/50 dark:bg-slate-900/50 scroll-smooth w-full">
-          <AnimatePresence initial={false}>
-            {messages.map((msg, index) => (
-              <ChatMessage key={index} role={msg.role} content={msg.content} />
-            ))}
-          </AnimatePresence>
-          
-          {isLoading && (
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9, y: 10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ type: "spring", stiffness: 300, damping: 25 }}
-              className="flex w-full justify-start mb-4"
-            >
-              <div className="bg-white dark:bg-slate-800 shadow-sm text-gray-800 dark:text-slate-200 rounded-2xl rounded-bl-sm border border-gray-100 dark:border-slate-700 px-4 py-3 flex items-center gap-2">
-                <Loader2 size={16} className="animate-spin text-blue-800 dark:text-blue-400" />
-                <span className="text-sm">Generating response</span>
-                <div className="flex gap-1 items-center pt-1.5 overflow-hidden">
-                  {[0, 1, 2].map(i => (
-                    <motion.span
-                      key={i}
-                      animate={{ y: [0, -3, 0] }}
-                      transition={{ 
-                        repeat: Infinity, 
-                        duration: 0.6, 
-                        delay: i * 0.15,
-                        ease: "easeInOut" 
-                      }}
-                      className="w-1 h-1 bg-blue-800 dark:bg-blue-400 rounded-full"
-                    />
-                  ))}
+            {/* ─ Header with gradient + glow ─ */}
+            <div className="relative overflow-hidden">
+              <div className="relative px-5 py-5 flex items-center justify-between z-10" style={{ background: "linear-gradient(135deg, #0F4C2E 0%, #166534 40%, #15803D 100%)" }}>
+                {/* Animated light streaks */}
+                <motion.div
+                  className="absolute inset-0 opacity-[0.08] pointer-events-none"
+                  animate={{ backgroundPosition: ["0% 0%", "200% 0%"] }}
+                  transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                  style={{ backgroundImage: "linear-gradient(90deg, transparent, white, transparent)", backgroundSize: "50% 100%" }}
+                />
+                <div className="flex items-center gap-3 relative z-10">
+                  <motion.div
+                    className="w-11 h-11 rounded-2xl flex items-center justify-center border border-white/20"
+                    style={{ background: "rgba(255,255,255,0.12)", backdropFilter: "blur(12px)" }}
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ type: "spring", stiffness: 400 }}
+                  >
+                    <Sparkles size={20} className="text-[#4ADE80]" />
+                  </motion.div>
+                  <div>
+                    <h3 className="font-bold text-[0.95rem] leading-tight text-white tracking-tight">Sudeep AI Assistant</h3>
+                    <p className="text-[11px] text-white/70 mt-1 flex items-center gap-1.5 font-medium">
+                      <motion.span
+                        className="w-2 h-2 rounded-full bg-[#4ADE80] inline-block"
+                        animate={{ scale: [1, 1.3, 1], opacity: [0.7, 1, 0.7] }}
+                        transition={{ repeat: Infinity, duration: 2 }}
+                      />
+                      Enterprise AI · Always Online
+                    </p>
+                  </div>
                 </div>
+                <motion.button
+                  whileHover={{ scale: 1.1, rotate: 90 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={() => setIsOpen(false)}
+                  className="text-white/60 hover:text-white transition-colors p-2 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 cursor-pointer"
+                  aria-label="Close chat"
+                >
+                  <X size={16} />
+                </motion.button>
               </div>
+              {/* Bottom glow line */}
+              <div className="h-[2px]" style={{ background: "linear-gradient(90deg, #22C55E, #4ADE80, #22C55E)" }} />
+            </div>
+
+            {/* ─ Messages Area ─ */}
+            <div className="flex-1 overflow-y-auto px-4 py-4 scroll-smooth w-full relative" style={{ background: "var(--color-background)" }}>
+              {/* Subtle background pattern */}
+              <div className="absolute inset-0 opacity-[0.015] pointer-events-none" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, currentColor 0.5px, transparent 0)", backgroundSize: "20px 20px" }} />
+
+              <div className="relative z-10">
+                <AnimatePresence initial={false}>
+                  {messages.map((msg, index) => (
+                    <ChatMessage key={index} role={msg.role} content={msg.content} index={index} />
+                  ))}
+                </AnimatePresence>
+
+                {/* Quick Actions */}
+                {!hasInteracted && messages.length <= 1 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5, duration: 0.4 }}
+                    className="flex flex-col gap-2 mt-1 mb-4 pl-9"
+                  >
+                    <span className="text-[10px] uppercase tracking-widest text-[color:var(--color-text-muted)] font-bold mb-1">Quick Actions</span>
+                    {quickActions.map((action, i) => (
+                      <motion.button
+                        key={i}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.6 + i * 0.1 }}
+                        whileHover={{ x: 4, scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={() => handleSend(action.query)}
+                        className="flex items-center justify-between gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold border border-[color:var(--color-border)] text-[color:var(--color-foreground)] hover:border-[#22C55E]/40 hover:bg-[#F0FDF4] dark:hover:bg-[#166534]/10 transition-all duration-200 cursor-pointer text-left bg-[color:var(--color-bg-card)]"
+                      >
+                        <span>{action.label}</span>
+                        <ArrowRight size={12} className="text-[color:var(--color-text-muted)] opacity-0 group-hover:opacity-100" />
+                      </motion.button>
+                    ))}
+                  </motion.div>
+                )}
+
+                {/* Typing Indicator */}
+                <AnimatePresence>
+                  {isLoading && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.8, y: 15 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.8, y: -5 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                      className="flex w-full justify-start mb-4 items-start gap-2"
+                    >
+                      <div className="flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center mt-0.5" style={{ background: "linear-gradient(135deg, #166534, #22C55E)" }}>
+                        <Sparkles size={13} className="text-white" />
+                      </div>
+                      <div className="bg-[color:var(--color-bg-card)] border border-[color:var(--color-border)] rounded-2xl rounded-bl-sm px-4 py-3.5 flex items-center gap-3 shadow-sm">
+                        <div className="flex gap-[4px] items-center">
+                          {[0, 1, 2].map(i => (
+                            <motion.span
+                              key={i}
+                              animate={{
+                                y: [0, -6, 0],
+                                opacity: [0.3, 1, 0.3],
+                                scale: [0.8, 1.2, 0.8]
+                              }}
+                              transition={{
+                                repeat: Infinity,
+                                duration: 1,
+                                delay: i * 0.2,
+                                ease: "easeInOut"
+                              }}
+                              className="w-[5px] h-[5px] rounded-full"
+                              style={{ background: "linear-gradient(135deg, #166534, #22C55E)" }}
+                            />
+                          ))}
+                        </div>
+                        <span className="text-[11px] text-[color:var(--color-text-muted)] font-medium italic">Generating response…</span>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+              <div ref={messagesEndRef} className="h-1" />
+            </div>
+
+            {/* ─ Input Area ─ */}
+            <div className="p-3.5 border-t border-[color:var(--color-border)] w-full" style={{ background: "var(--color-bg-card)" }}>
+              <div className="relative flex items-center gap-2">
+                <div className="flex-1 relative">
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    placeholder="Type your message…"
+                    maxLength={500}
+                    className="w-full pl-4 pr-4 py-3 bg-[color:var(--color-background)] border border-[color:var(--color-border)] rounded-xl text-sm focus:outline-none focus:border-[#22C55E] focus:ring-2 focus:ring-[#22C55E]/15 transition-all text-[color:var(--color-foreground)] placeholder-[color:var(--color-text-muted)]"
+                    disabled={isLoading}
+                  />
+                </div>
+                <motion.button
+                  whileHover={{ scale: 1.08 }}
+                  whileTap={{ scale: 0.92 }}
+                  onClick={() => handleSend()}
+                  disabled={!input.trim() || isLoading}
+                  className="flex-shrink-0 p-3 rounded-xl text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center cursor-pointer border-none shadow-lg disabled:shadow-none"
+                  style={{
+                    background: !input.trim() || isLoading
+                      ? "#94A3B8"
+                      : "linear-gradient(135deg, #166534, #15803D)"
+                  }}
+                  aria-label="Send message"
+                >
+                  <Send size={16} />
+                </motion.button>
+              </div>
+              <div className="flex items-center justify-center gap-1.5 mt-2.5">
+                <Sparkles size={9} className="text-[#22C55E] opacity-40" />
+                <p className="text-[9px] text-[color:var(--color-text-muted)] opacity-40 font-medium tracking-wider uppercase">
+                  Powered by AI · Sudeep Engineers
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ── Toggle Button ── */}
+      <div className="relative">
+        {/* Tooltip */}
+        <AnimatePresence>
+          {showTooltip && !isOpen && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.7, y: 12 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.7, y: 12 }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              className="absolute bottom-full left-0 mb-3 w-[210px] px-4 py-3.5 rounded-2xl shadow-2xl border border-[#BBF7D0] dark:border-[#166534]/50 z-10"
+              style={{ background: "var(--color-bg-card)" }}
+            >
+              <p className="text-[13px] font-semibold text-center text-[color:var(--color-foreground)]">
+                Need help? Chat with AI! <motion.span animate={{ rotate: [0, 14, -14, 0] }} transition={{ repeat: Infinity, duration: 1.5 }} className="inline-block">👋</motion.span>
+              </p>
+              <div className="absolute -bottom-[6px] left-6 w-3 h-3 border-b border-r border-[#BBF7D0] dark:border-[#166534]/50 transform rotate-45" style={{ background: "var(--color-bg-card)" }} />
             </motion.div>
           )}
-          <div ref={messagesEndRef} className="h-1" />
-        </div>
+        </AnimatePresence>
 
-        {/* Input Area */}
-        <div className="p-4 bg-white dark:bg-slate-800 border-t border-gray-100 dark:border-slate-700 w-full shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
-          <div className="relative flex items-center">
-            <input
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder="Ask about products or services..."
-              maxLength={500}
-              className="w-full pr-12 pl-4 py-3 bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-full text-sm focus:outline-none focus:border-blue-800 dark:focus:border-blue-500 focus:ring-1 focus:ring-blue-800 dark:focus:ring-blue-500 transition-all text-gray-800 dark:text-slate-100 placeholder-gray-400"
-              disabled={isLoading}
-            />
-            <button
-              onClick={handleSend}
-              disabled={!input.trim() || isLoading}
-              className="absolute right-2 p-2 bg-blue-800 dark:bg-blue-600 text-white rounded-full hover:bg-blue-700 dark:hover:bg-blue-500 transition-colors disabled:opacity-50 disabled:hover:bg-blue-800 flex items-center justify-center shadow-md"
-              aria-label="Send message"
-            >
-              <Send size={16} className="ml-0.5" />
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Toggle Button */}
-      <div className="relative">
-        <div
-          className={`absolute bottom-full left-0 mb-3 w-[180px] bg-white dark:bg-slate-800 text-blue-900 dark:text-blue-100 border border-blue-100 dark:border-slate-700 px-4 py-3 rounded-2xl shadow-xl transition-all duration-500 origin-bottom-left
-            ${showTooltip && !isOpen ? 'scale-100 opacity-100 translate-y-0' : 'scale-75 opacity-0 translate-y-2 pointer-events-none'}
-          `}
-        >
-          <p className="text-sm font-semibold text-center relative z-10">Need help? Chat with me! 👋</p>
-          <div className="absolute -bottom-2 left-5 w-4 h-4 bg-white dark:bg-slate-800 border-b border-r border-blue-100 dark:border-slate-700 transform rotate-45"></div>
-        </div>
-
-        <button
+        {/* FAB Button */}
+        <motion.button
           onClick={() => {
             setIsOpen(!isOpen);
             setShowTooltip(false);
           }}
-          className={`flex items-center justify-center w-14 h-14 bg-white dark:bg-slate-800 text-blue-800 dark:text-blue-400 rounded-full shadow-xl hover:shadow-2xl border border-blue-100 dark:border-slate-700 transition-all duration-300 ease-in-out hover:-translate-y-1 ${isOpen ? 'scale-0 opacity-0 absolute pointer-events-none' : 'scale-100 opacity-100'}`}
-          aria-label="Open chat window"
+          whileHover={{ scale: 1.1, y: -3 }}
+          whileTap={{ scale: 0.9 }}
+          className={`relative flex items-center justify-center w-[62px] h-[62px] rounded-2xl shadow-2xl border-none cursor-pointer transition-all duration-300 ${isOpen ? 'scale-0 opacity-0 absolute pointer-events-none' : 'scale-100 opacity-100'}`}
+          style={{
+            background: "linear-gradient(135deg, #0F4C2E, #166534, #15803D)",
+            boxShadow: "0 8px 30px rgba(22,101,52,0.4), 0 0 0 1px rgba(22,101,52,0.1)"
+          }}
+          aria-label="Open chat"
         >
-          <svg viewBox="0 0 24 24" fill="none" className="w-8 h-8" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="cool-ai-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#1E40AF" />
-                <stop offset="50%" stopColor="#3B82F6" />
-                <stop offset="100%" stopColor="#93C5FD" />
-              </linearGradient>
-            </defs>
-            <path d="M11.5 2C11.5 7 15 10.5 20 10.5C15 10.5 11.5 14 11.5 19C11.5 14 8 10.5 3 10.5C8 10.5 11.5 7 11.5 2Z" fill="url(#cool-ai-grad)" />
-            <path d="M19 13C19 15 20.5 16.5 22.5 16.5C20.5 16.5 19 18 19 20C19 18 17.5 16.5 15.5 16.5C17.5 16.5 19 15 19 13Z" fill="url(#cool-ai-grad)" />
-            <path d="M6.5 16C6.5 17.5 7.5 18.5 9 18.5C7.5 18.5 6.5 19.5 6.5 21C6.5 19.5 5.5 18.5 4 18.5C5.5 18.5 6.5 17.5 6.5 16Z" fill="url(#cool-ai-grad)" />
-          </svg>
-        </button>
+          <motion.div
+            animate={{ rotate: [0, -3, 3, 0] }}
+            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+          >
+            <MessageSquare size={24} className="text-white" />
+          </motion.div>
+          {/* Sparkle accent */}
+          <motion.div
+            className="absolute -top-0.5 -right-0.5"
+            animate={{ scale: [1, 1.3, 1], opacity: [0.7, 1, 0.7] }}
+            transition={{ repeat: Infinity, duration: 2 }}
+          >
+            <Sparkles size={12} className="text-[#4ADE80] drop-shadow-lg" />
+          </motion.div>
+          {/* Ping */}
+          <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5">
+            <span className="absolute inset-0 rounded-full bg-[#4ADE80] animate-ping opacity-60" />
+            <span className="relative block w-3.5 h-3.5 rounded-full bg-[#22C55E] border-2 border-[#0F4C2E]" />
+          </span>
+        </motion.button>
       </div>
     </div>
   );

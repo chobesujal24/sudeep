@@ -3,37 +3,40 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --color-background: #FFFFFF;
+  --color-background: #FAFAFA;
   --color-foreground: #0F172A;
-  --color-section: #F8FAFC;
-  --color-bg-secondary: #F8FAFC;
+  --color-section: #F1F5F9;
+  --color-bg-secondary: #F1F5F9;
   --color-bg-card: #FFFFFF;
-  --color-bg-card-hover: #F1F5F9;
-  --color-primary: #1E40AF;
-  --color-primary-hover: #1D4ED8;
-  --color-primary-light: #93C5FD;
-  --color-accent: #38BDF8;
-  --color-accent-dark: #1D4ED8;
-  --color-accent-light: #7DD3FC;
+  --color-bg-card-hover: #F8FAFC;
+  --color-primary: #166534;
+  --color-primary-hover: #15803D;
+  --color-primary-light: #86EFAC;
+  --color-accent: #22C55E;
+  --color-accent-dark: #166534;
+  --color-accent-light: #4ADE80;
   --color-steel: #64748b;
   --color-text-secondary: #334155;
   --color-text-muted: #64748B;
   --color-border: #E2E8F0;
-  --color-border-accent: #BAE6FD;
+  --color-border-accent: #BBF7D0;
   --font-heading: 'Outfit', sans-serif;
   --font-body: 'Inter', sans-serif;
 }
 
 .dark {
-  --color-background: #0A0E17;
-  --color-foreground: #F8FAFC;
-  --color-section: #111827;
-  --color-bg-secondary: #111827;
+  --color-background: #030712;
+  --color-foreground: #F1F5F9;
+  --color-section: #0F172A;
+  --color-bg-secondary: #0F172A;
   --color-bg-card: #1E293B;
   --color-bg-card-hover: #334155;
-  --color-primary: #3B82F6;
-  --color-primary-hover: #60A5FA;
-  --color-border: #334155;
+  --color-primary: #4ADE80;
+  --color-primary-hover: #86EFAC;
+  --color-primary-light: #166534;
+  --color-accent: #22C55E;
+  --color-border: #1E293B;
+  --color-border-accent: #166534;
   --color-text-secondary: #CBD5E1;
   --color-text-muted: #94A3B8;
 }
@@ -214,7 +217,7 @@ h1, h2, h3, h4, h5, h6 {
 .btn-primary:hover {
   transform: scale(1.05);
   background: var(--color-primary-hover);
-  box-shadow: 0 8px 30px rgba(30, 64, 175, 0.35);
+  box-shadow: 0 8px 30px rgba(22, 101, 52, 0.35);
 }
 
 .btn-secondary {
@@ -361,7 +364,7 @@ h1, h2, h3, h4, h5, h6 {
 .glass-card:hover {
   border-color: var(--color-border-accent);
   transform: translateY(-8px);
-  box-shadow: 0 20px 40px -10px rgba(30, 64, 175, 0.12), 0 10px 20px -8px rgba(30, 64, 175, 0.06);
+  box-shadow: 0 20px 40px -10px rgba(22, 101, 52, 0.12), 0 10px 20px -8px rgba(22, 101, 52, 0.06);
 }
 .glass-card:hover::before { opacity: 1; }
 
@@ -469,5 +472,21 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 0.9;
 }
 .dark .logo-invert-on-dark:hover {
+  opacity: 1;
+}
+
+/* Green logo tint — converts black logo to natural green */
+.logo-green {
+  filter: brightness(0) saturate(100%) invert(42%) sepia(93%) saturate(520%) hue-rotate(101deg) brightness(95%) contrast(92%);
+  transition: filter 0.4s ease, opacity 0.4s ease;
+}
+.logo-green:hover {
+  filter: brightness(0) saturate(100%) invert(42%) sepia(93%) saturate(700%) hue-rotate(101deg) brightness(100%) contrast(95%);
+}
+.dark .logo-green {
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+}
+.dark .logo-green:hover {
   opacity: 1;
 }

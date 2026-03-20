@@ -239,12 +239,12 @@ export default function AdminDashboard() {
               <div>
                 <label className="block text-xs font-bold text-[#475569] uppercase mb-1">Username</label>
                 <input type="text" value={username} onChange={(e) => setUsername(e.target.value)}
-                  className="w-full p-3 border border-[#CBD5E1] rounded-lg focus:ring-2 focus:ring-[#1E40AF]/30 outline-none text-[#0F172A]" placeholder="Enter username" />
+                  className="w-full p-3 border border-[#CBD5E1] rounded-lg focus:ring-2 focus:ring-[#166534]/30 outline-none text-[#0F172A]" placeholder="Enter username" />
               </div>
               <div>
                 <label className="block text-xs font-bold text-[#475569] uppercase mb-1">Password</label>
                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}
-                  className="w-full p-3 border border-[#CBD5E1] rounded-lg focus:ring-2 focus:ring-[#1E40AF]/30 outline-none text-[#0F172A]" placeholder="Enter password" />
+                  className="w-full p-3 border border-[#CBD5E1] rounded-lg focus:ring-2 focus:ring-[#166534]/30 outline-none text-[#0F172A]" placeholder="Enter password" />
               </div>
               
               {authError && (
@@ -273,16 +273,16 @@ export default function AdminDashboard() {
     <div className="flex flex-col lg:flex-row gap-8">
       {/* LEFT – Product List */}
       <div className="w-full lg:w-1/4 flex flex-col gap-4">
-        <button onClick={startAdd} className="w-full py-4 border-2 border-dashed border-[#CBD5E1] bg-white text-[#1E40AF] rounded-xl font-bold hover:bg-[#EFF6FF] hover:border-[#1E40AF] transition-all flex items-center justify-center gap-2 shadow-sm">
+        <button onClick={startAdd} className="w-full py-4 border-2 border-dashed border-[#CBD5E1] bg-white text-[#166534] rounded-xl font-bold hover:bg-[#F0FDF4] hover:border-[#166534] transition-all flex items-center justify-center gap-2 shadow-sm">
           Add New Product
         </button>
         <div className="bg-white border border-[#E2E8F0] rounded-xl shadow-sm overflow-hidden sticky top-[5rem]">
-          <div className="p-4 bg-[#F1F5F9] border-b border-[#E2E8F0]">
+          <div className="p-4 bg-[#F8FAFC] border-b border-[#E2E8F0]">
             <h2 className="text-sm font-bold text-[#475569] uppercase tracking-wider">Product Directory ({products.length})</h2>
           </div>
           <div className="max-h-[65vh] overflow-y-auto">
             {products.map((p, i) => (
-              <div key={i} className={`flex justify-between items-center p-4 border-b border-[#F1F5F9] cursor-pointer transition-colors ${editingIndex === i ? "bg-[#EFF6FF] border-l-4 border-l-[#1E40AF]" : "hover:bg-[#F8FAFC]"}`} onClick={() => startEdit(i)}>
+              <div key={i} className={`flex justify-between items-center p-4 border-b border-[#F8FAFC] cursor-pointer transition-colors ${editingIndex === i ? "bg-[#F0FDF4] border-l-4 border-l-[#166534]" : "hover:bg-[#F8FAFC]"}`} onClick={() => startEdit(i)}>
                 <div className="pr-2 max-w-[160px]">
                   <span className="font-semibold text-[0.9rem] truncate text-[#1E293B] block">{p.name}</span>
                   {p.status === "inactive" && <span className="text-[10px] text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded-full font-bold">Inactive</span>}
@@ -301,15 +301,15 @@ export default function AdminDashboard() {
             <div className="p-6 border-b border-[#E2E8F0] bg-[#F8FAFC] flex items-center justify-between flex-wrap gap-3">
               <h2 className="text-2xl font-bold text-[#0F172A]">{editingIndex !== null ? `Editing: ${formData.name}` : "Creating New Product"}</h2>
               <div className="flex items-center gap-3">
-                <button onClick={() => setPreviewOpen(true)} className="px-4 py-2 border border-[#1E40AF] text-[#1E40AF] rounded-lg text-sm font-bold hover:bg-[#EFF6FF] transition-colors">Preview</button>
+                <button onClick={() => setPreviewOpen(true)} className="px-4 py-2 border border-[#166534] text-[#166534] rounded-lg text-sm font-bold hover:bg-[#F0FDF4] transition-colors">Preview</button>
                 <select value={formData.status || "active"} onChange={(e) => setFormData({ ...formData, status: e.target.value })}
                   className="px-3 py-2 border border-[#CBD5E1] rounded-lg text-sm font-medium text-[#1E293B] bg-white">
                   <option value="active">Active</option>
                   <option value="inactive">Inactive</option>
                 </select>
                 <button onClick={() => { setEditingIndex(null); setFormData({}); }}
-                  className="px-4 py-2 border border-[#475569] text-[#475569] rounded-lg font-medium text-sm hover:bg-[#F1F5F9]">Discard</button>
-                <button onClick={handleSave} className="px-6 py-2 bg-[#1E40AF] hover:bg-[#1D4ED8] text-white rounded-lg font-bold text-sm shadow transition-all">Publish</button>
+                  className="px-4 py-2 border border-[#475569] text-[#475569] rounded-lg font-medium text-sm hover:bg-[#F8FAFC]">Discard</button>
+                <button onClick={handleSave} className="px-6 py-2 bg-[#166534] hover:bg-[#15803D] text-white rounded-lg font-bold text-sm shadow transition-all">Publish</button>
               </div>
             </div>
 
@@ -321,12 +321,12 @@ export default function AdminDashboard() {
                   <div>
                     <label className="block text-xs font-bold text-[#475569] uppercase mb-1">Product Title</label>
                     <input type="text" value={formData.name || ""} onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full p-2.5 border border-[#CBD5E1] rounded-lg focus:ring-2 focus:ring-[#1E40AF]/30 outline-none text-[#0F172A]" placeholder="e.g. LED Flood Light" />
+                      className="w-full p-2.5 border border-[#CBD5E1] rounded-lg focus:ring-2 focus:ring-[#166534]/30 outline-none text-[#0F172A]" placeholder="e.g. LED Flood Light" />
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-[#475569] uppercase mb-1">URL Slug</label>
                     <input type="text" value={formData.slug || ""} onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
-                      className="w-full p-2.5 bg-[#F1F5F9] border border-[#CBD5E1] rounded-lg outline-none text-[#0F172A]" />
+                      className="w-full p-2.5 bg-[#F8FAFC] border border-[#CBD5E1] rounded-lg outline-none text-[#0F172A]" />
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-[#475569] uppercase mb-1">Unique ID</label>
@@ -378,12 +378,12 @@ export default function AdminDashboard() {
                 <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-5">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="font-bold">Applications / Use Cases</h3>
-                    <button onClick={() => addArrayItem("applications", "New Application")} className="text-xs bg-white border border-[#CBD5E1] px-2 py-1 shadow-sm rounded hover:border-[#1E40AF]">Add +</button>
+                    <button onClick={() => addArrayItem("applications", "New Application")} className="text-xs bg-white border border-[#CBD5E1] px-2 py-1 shadow-sm rounded hover:border-[#166534]">Add +</button>
                   </div>
                   <div className="space-y-2 max-h-[250px] overflow-y-auto pr-2">
                     {(formData.applications || []).map((app, idx) => (
                       <div key={idx} className="flex gap-2">
-                        <input type="text" value={app} onChange={(e) => handleArrayChange("applications", idx, e.target.value)} className="flex-1 p-2 text-sm border border-[#CBD5E1] rounded-md outline-none focus:border-[#1E40AF]" />
+                        <input type="text" value={app} onChange={(e) => handleArrayChange("applications", idx, e.target.value)} className="flex-1 p-2 text-sm border border-[#CBD5E1] rounded-md outline-none focus:border-[#166534]" />
                         <button onClick={() => removeArrayItem("applications", idx)} className="px-3 bg-[#FEE2E2] text-[#EF4444] rounded-md hover:bg-[#FECACA]">✕</button>
                       </div>
                     ))}
@@ -394,7 +394,7 @@ export default function AdminDashboard() {
                 <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-5">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="font-bold">Image Gallery</h3>
-                    <label className="text-xs bg-white border border-[#CBD5E1] px-2 py-1 shadow-sm rounded hover:border-[#1E40AF] cursor-pointer">
+                    <label className="text-xs bg-white border border-[#CBD5E1] px-2 py-1 shadow-sm rounded hover:border-[#166534] cursor-pointer">
                       Browse Files
                       <input type="file" accept="image/*" multiple className="hidden" onChange={async (e) => {
                         for (const file of Array.from(e.target.files)) {
@@ -434,7 +434,7 @@ export default function AdminDashboard() {
                     ))}
                   </div>
                   <div className="mt-3 flex gap-2">
-                    <input type="text" id="manual-image-url" placeholder="Or paste image URL..." className="flex-1 p-2 text-xs border border-[#CBD5E1] rounded-md outline-none focus:border-[#1E40AF]" />
+                    <input type="text" id="manual-image-url" placeholder="Or paste image URL..." className="flex-1 p-2 text-xs border border-[#CBD5E1] rounded-md outline-none focus:border-[#166534]" />
                     <button onClick={() => { const input = document.getElementById("manual-image-url"); if (input.value) { setFormData((prev) => ({ ...prev, images: [...(prev.images || []), input.value] })); input.value = ""; } }}
                       className="text-xs bg-[#0F172A] text-white px-3 py-1.5 rounded-md">Add URL</button>
                   </div>
@@ -467,9 +467,9 @@ export default function AdminDashboard() {
                         <div className="w-1 h-1 bg-[#CBD5E1] rounded-full"></div>
                         <div className="w-1 h-1 bg-[#CBD5E1] rounded-full"></div>
                       </div>
-                      <input type="text" value={spec.label} onChange={(e) => handleObjectChange("specs", idx, "label", e.target.value)} className="w-[100px] text-xs font-bold uppercase p-1.5 border-b border-transparent hover:border-[#CBD5E1] focus:border-[#1E40AF] outline-none bg-transparent" placeholder="LABEL" />
+                      <input type="text" value={spec.label} onChange={(e) => handleObjectChange("specs", idx, "label", e.target.value)} className="w-[100px] text-xs font-bold uppercase p-1.5 border-b border-transparent hover:border-[#CBD5E1] focus:border-[#166534] outline-none bg-transparent" placeholder="LABEL" />
                       <span className="text-[#94A3B8]">:</span>
-                      <input type="text" value={spec.value} onChange={(e) => handleObjectChange("specs", idx, "value", e.target.value)} className="flex-1 text-sm p-1.5 border-b border-transparent hover:border-[#CBD5E1] focus:border-[#1E40AF] outline-none bg-transparent" />
+                      <input type="text" value={spec.value} onChange={(e) => handleObjectChange("specs", idx, "value", e.target.value)} className="flex-1 text-sm p-1.5 border-b border-transparent hover:border-[#CBD5E1] focus:border-[#166534] outline-none bg-transparent" />
                       <button onClick={() => removeArrayItem("specs", idx)} className="opacity-0 group-hover:opacity-100 absolute -right-2 -top-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs shadow-md">✕</button>
                     </div>
                   ))}
@@ -541,7 +541,7 @@ export default function AdminDashboard() {
             </div>
             <div className="p-8">
               {formData.images?.[0] && <img src={formData.images[0]} alt="" className="w-full h-[300px] object-cover rounded-xl mb-6" onError={(e) => { e.target.style.display = "none"; }} />}
-              <span className="inline-block bg-[#1E40AF]/10 text-[#1E40AF] text-xs font-bold px-3 py-1 rounded-full uppercase mb-3">{formData.category}</span>
+              <span className="inline-block bg-[#166534]/10 text-[#166534] text-xs font-bold px-3 py-1 rounded-full uppercase mb-3">{formData.category}</span>
               <h1 className="text-3xl font-bold text-[#0F172A] mb-3">{formData.name}</h1>
               <p className="text-[#334155] mb-6 leading-relaxed">{formData.description}</p>
               {(formData.specs || []).length > 0 && (
@@ -562,7 +562,7 @@ export default function AdminDashboard() {
                   <h3 className="font-bold text-[#0F172A] mb-3">Applications</h3>
                   <div className="flex flex-wrap gap-2">
                     {formData.applications.map((a, i) => (
-                      <span key={i} className="bg-[#1E40AF]/5 border border-[#1E40AF]/10 text-[#1E40AF] text-sm px-3 py-1 rounded-md">✔ {a}</span>
+                      <span key={i} className="bg-[#166534]/5 border border-[#166534]/10 text-[#166534] text-sm px-3 py-1 rounded-md">✔ {a}</span>
                     ))}
                   </div>
                 </div>
@@ -570,7 +570,7 @@ export default function AdminDashboard() {
               {formData.metaTitle && (
                 <div className="mt-6 pt-4 border-t border-[#E2E8F0]">
                   <p className="text-xs text-[#94A3B8] uppercase font-bold mb-1">SEO Preview</p>
-                  <p className="text-[#1E40AF] text-base font-medium">{formData.metaTitle}</p>
+                  <p className="text-[#166534] text-base font-medium">{formData.metaTitle}</p>
                   <p className="text-[#059669] text-xs mb-0.5">
                     sudeepengineers.com/product/{dbCategories.find(c => c.name === formData.category)?.slug || "category-slug"}/{formData.slug}
                   </p>

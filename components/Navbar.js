@@ -50,12 +50,12 @@ export default function Navbar() {
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{
           height: "76px",
-          background: isTransparent 
-            ? "transparent" 
+          background: isTransparent
+            ? "transparent"
             : "var(--color-background)",
           boxShadow: isTransparent ? "none" : "0 1px 20px rgba(0,0,0,0.06)",
-          borderBottom: isTransparent 
-            ? "1px solid transparent" 
+          borderBottom: isTransparent
+            ? "1px solid transparent"
             : "1px solid var(--color-border)",
           backdropFilter: isTransparent ? "none" : "blur(20px)",
           WebkitBackdropFilter: isTransparent ? "none" : "blur(20px)",
@@ -70,9 +70,8 @@ export default function Navbar() {
             <img
               src="/logo.png"
               alt="Sudeep Engineers"
-              className={`h-[90px] w-auto object-contain transition-all duration-300 group-hover:scale-105 ${
-                isTransparent || theme === 'dark' ? "brightness-0 invert" : ""
-              }`}
+              className={`h-[125px] w-auto object-contain transition-all duration-300 group-hover:scale-105 ${isTransparent ? "brightness-0 invert" : "logo-green"
+                }`}
             />
           </Link>
 
@@ -82,9 +81,8 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`nav-link ${isTransparent ? "nav-link-transparent" : "text-[color:var(--color-foreground)] hover:bg-[color:var(--color-bg-card-hover)]"} ${
-                  pathname === link.href ? "nav-link-active" : ""
-                }`}
+                className={`nav-link ${isTransparent ? "nav-link-transparent" : "text-[color:var(--color-foreground)] hover:bg-[color:var(--color-bg-card-hover)]"} ${pathname === link.href ? "nav-link-active" : ""
+                  }`}
               >
                 {link.label}
               </Link>
@@ -109,15 +107,14 @@ export default function Navbar() {
             {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}
-              className={`p-2 rounded-full transition-all duration-300 flex items-center justify-center ${
-                isTransparent 
-                  ? "bg-white/10 text-white hover:bg-white/20 border border-white/20" 
+              className={`p-2 rounded-full transition-all duration-300 flex items-center justify-center ${isTransparent
+                  ? "bg-white/10 text-white hover:bg-white/20 border border-white/20"
                   : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700"
-              }`}
+                }`}
               aria-label="Toggle theme"
             >
               {theme === 'light' ? (
-                <Icons.Moon className="w-5 h-5 text-indigo-600" />
+                <Icons.Moon className="w-5 h-5 text-emerald-600" />
               ) : (
                 <Icons.Sun className="w-5 h-5 text-yellow-400" />
               )}
@@ -165,9 +162,8 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed top-0 right-0 w-[300px] h-full bg-white dark:bg-slate-900 z-50 lg:hidden ${
-          mobileOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed top-0 right-0 w-[300px] h-full bg-white dark:bg-slate-900 z-50 lg:hidden ${mobileOpen ? "translate-x-0" : "translate-x-full"
+          }`}
         style={{
           boxShadow: "-5px 0 30px rgba(0,0,0,0.15)",
           transition: "transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
@@ -179,11 +175,10 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={closeMobile}
-              className={`block px-4 py-3.5 rounded-xl text-base font-medium transition-all no-underline mb-1 ${
-                pathname === link.href
-                  ? "text-[#1E40AF] dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20"
-                  : "text-[#1E293B] dark:text-slate-300 hover:text-[#1E40AF] dark:hover:text-blue-400 hover:bg-[#F8FAFC] dark:hover:bg-slate-800"
-              }`}
+              className={`block px-4 py-3.5 rounded-xl text-base font-medium transition-all no-underline mb-1 ${pathname === link.href
+                  ? "text-[#166534] dark:text-green-400 bg-green-50 dark:bg-green-900/20"
+                  : "text-[#1E293B] dark:text-slate-300 hover:text-[#166534] dark:hover:text-green-400 hover:bg-[#F8FAFC] dark:hover:bg-slate-800"
+                }`}
             >
               {link.label}
             </Link>
@@ -191,7 +186,7 @@ export default function Navbar() {
           <Link
             href="/contact"
             onClick={closeMobile}
-            className="mt-4 block w-full text-center px-5 py-3.5 rounded-full bg-[#1E40AF] dark:bg-blue-600 text-white font-semibold no-underline hover:bg-[#1D4ED8] dark:hover:bg-blue-500 transition-all"
+            className="mt-4 block w-full text-center px-5 py-3.5 rounded-full bg-[#166534] dark:bg-green-600 text-white font-semibold no-underline hover:bg-[#15803D] dark:hover:bg-green-500 transition-all"
           >
             Contact Us
           </Link>

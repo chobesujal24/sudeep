@@ -53,7 +53,7 @@ export default function MediaLibrary() {
     <div>
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-bold text-[#0F172A]">Media Library</h2>
-        <label className="flex items-center gap-2 px-4 py-2 bg-[#1E40AF] text-white rounded-lg text-sm font-semibold hover:bg-[#1D4ED8] cursor-pointer transition-colors">
+        <label className="flex items-center gap-2 px-4 py-2 bg-[#166534] text-white rounded-lg text-sm font-semibold hover:bg-[#15803D] cursor-pointer transition-colors">
           <Upload size={16} /> Upload Files
           <input type="file" accept="image/*" multiple className="hidden" onChange={(e) => handleUpload(e.target.files)} />
         </label>
@@ -61,17 +61,17 @@ export default function MediaLibrary() {
 
       {/* Drop Zone */}
       <div
-        className="border-2 border-dashed border-[#CBD5E1] rounded-xl p-10 text-center mb-6 transition-colors hover:border-[#1E40AF] hover:bg-[#F0F9FF] cursor-pointer"
-        onDragOver={(e) => { e.preventDefault(); e.currentTarget.classList.add("border-[#1E40AF]", "bg-[#F0F9FF]"); }}
-        onDragLeave={(e) => { e.currentTarget.classList.remove("border-[#1E40AF]", "bg-[#F0F9FF]"); }}
-        onDrop={(e) => { e.preventDefault(); e.currentTarget.classList.remove("border-[#1E40AF]", "bg-[#F0F9FF]"); handleUpload(e.dataTransfer.files); }}
+        className="border-2 border-dashed border-[#CBD5E1] rounded-xl p-10 text-center mb-6 transition-colors hover:border-[#166534] hover:bg-[#F0F9FF] cursor-pointer"
+        onDragOver={(e) => { e.preventDefault(); e.currentTarget.classList.add("border-[#166534]", "bg-[#F0F9FF]"); }}
+        onDragLeave={(e) => { e.currentTarget.classList.remove("border-[#166534]", "bg-[#F0F9FF]"); }}
+        onDrop={(e) => { e.preventDefault(); e.currentTarget.classList.remove("border-[#166534]", "bg-[#F0F9FF]"); handleUpload(e.dataTransfer.files); }}
       >
         <ImageIcon size={32} className="mx-auto text-[#94A3B8] mb-2" />
         <p className="text-sm text-[#64748B] font-medium">Drag & drop images here</p>
         <p className="text-xs text-[#94A3B8] mt-1">PNG, JPG, GIF up to 10MB</p>
       </div>
 
-      {uploading && <p className="text-sm text-[#1E40AF] mb-4 animate-pulse font-semibold">Uploading...</p>}
+      {uploading && <p className="text-sm text-[#166534] mb-4 animate-pulse font-semibold">Uploading...</p>}
 
       {loading ? (
         <p className="text-center text-[#64748B] py-10">Loading media...</p>

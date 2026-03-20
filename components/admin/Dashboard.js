@@ -25,7 +25,7 @@ export default function Dashboard({ products = [] }) {
   }, []);
 
   const cards = [
-    { label: "Products", value: products.length, icon: Package, color: "#1E40AF" },
+    { label: "Products", value: products.length, icon: Package, color: "#166534" },
     { label: "Categories", value: stats.categories, icon: FolderOpen, color: "#0284C7" },
     { label: "Leads", value: stats.leads, icon: MessageSquare, color: "#059669" },
     { label: "Active", value: products.filter(p => p.status !== "inactive").length, icon: TrendingUp, color: "#D97706" },

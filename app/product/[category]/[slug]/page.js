@@ -137,7 +137,7 @@ export default async function ProductPage({ params }) {
                   {product.specs.map((spec, idx) => (
                     <div
                       key={idx}
-                      className="bg-[color:var(--color-bg-card)] border border-[color:var(--color-border)] rounded-xl p-4 flex flex-col gap-1"
+                      className="bg-[color:var(--color-bg-card)] border border-[color:var(--color-border)] rounded-xl p-4 flex flex-col gap-1 border-l-[3px] border-l-[color:var(--color-primary)]"
                     >
                       <span className="text-[0.75rem] text-[color:var(--color-text-muted)] font-semibold uppercase tracking-wider">
                         {spec.label}
@@ -171,7 +171,7 @@ export default async function ProductPage({ params }) {
               <div className="mt-auto pt-8 border-t border-[color:var(--color-border)] flex flex-wrap gap-4">
                 <Link
                   href="/contact"
-                  className="flex-1 min-w-[200px] text-center px-8 py-3.5 rounded-md bg-[color:var(--color-primary)] text-[#FFFFFF] font-bold hover:opacity-90 transition-all no-underline shrink-0"
+                  className="flex-1 min-w-[200px] text-center px-8 py-3.5 rounded-full bg-[color:var(--color-primary)] text-[#FFFFFF] font-bold hover:opacity-90 hover:shadow-xl transition-all no-underline shrink-0"
                 >
                   Request Detailed Quote
                 </Link>

@@ -37,32 +37,47 @@ export default async function ProductCategories() {
         }}
       />
 
-      {/* Page Hero */}
-      <section className="pt-32 pb-16 relative overflow-hidden bg-[color:var(--color-background)]">
-        <div className="absolute -top-[30%] -right-[20%] w-[500px] h-[500px] rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(37,99,235,0.06) 0%, transparent 70%)" }} />
-        <div className="max-w-[1500px] mx-auto px-6 md:px-12 relative z-10">
-          <nav className="text-xs text-[color:var(--color-text-muted)] mb-6 flex gap-2">
+      {/* Page Hero Image */}
+      <section className="relative mt-20 overflow-hidden bg-black border-b border-[color:var(--color-border)]">
+        <div className="w-full relative">
+          <Image
+            src="/product-hero-section.png"
+            alt="Sudeep Lights Industrial Lighting"
+            width={1920}
+            height={480}
+            className="w-full h-auto brightness-[0.85]"
+            priority
+          />
+        </div>
+      </section>
+
+      {/* Breadcrumbs */}
+      <section className="pt-8 pb-2 bg-[color:var(--color-background)]">
+        <div className="max-w-[1500px] mx-auto px-6 md:px-12">
+          <nav className="text-xs font-medium text-[color:var(--color-text-muted)] flex gap-2 tracking-wide uppercase">
             <Link href="/" className="hover:text-[color:var(--color-accent)] no-underline text-[color:var(--color-text-muted)] transition-colors">Home</Link>
-            <span>/</span><span className="text-[color:var(--color-foreground)]">Product</span>
+            <span className="text-[color:var(--color-text-muted)]/40">/</span><span className="text-[color:var(--color-foreground)]">Product</span>
           </nav>
-          <h1 className="text-[clamp(2rem,4vw,3rem)] font-heading font-extrabold mb-4 text-[color:var(--color-foreground)]">
-            Our <span className="text-[color:var(--color-primary)]">Product Categories</span>
-          </h1>
-          <p className="text-[color:var(--color-text-secondary)] opacity-80 text-lg max-w-[600px]">
-            High-performance industrial lighting solutions tailored for infrastructure and industrial projects.
-          </p>
         </div>
       </section>
 
       {/* Categories Grid */}
-      <section className="py-16 bg-[color:var(--color-section)]">
+      <section className="py-20 bg-[color:var(--color-section)]">
         <div className="max-w-[1500px] mx-auto px-6 md:px-12">
+          {/* Section heading */}
+          <div className="text-center mb-14">
+            <span className="inline-block text-[color:var(--color-primary)] text-xs font-bold uppercase tracking-[0.3em] mb-3">Browse Collection</span>
+            <h2 className="font-heading font-bold text-[color:var(--color-foreground)] text-[clamp(1.8rem,3.5vw,2.5rem)] mb-4">Product Categories</h2>
+            <p className="text-[color:var(--color-text-secondary)] text-base max-w-[500px] mx-auto">High-performance industrial lighting solutions engineered for reliability.</p>
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {categories.map((cat) => (
               <Link key={cat.id} href={`/product/${cat.slug}`} className="group no-underline block">
-                <div className="bg-[color:var(--color-bg-card)] border border-[color:var(--color-border)] rounded-2xl overflow-hidden shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 h-full flex flex-col">
-                  <div className="relative h-[240px] overflow-hidden">
+                <div className="bg-[color:var(--color-bg-card)] border border-[color:var(--color-border)] rounded-2xl overflow-hidden shadow-sm transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 h-full flex flex-col relative">
+                  {/* Accent bar on hover */}
+                  <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[color:var(--color-primary)] to-[color:var(--color-accent)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+                  <div className="relative h-[280px] overflow-hidden">
                     <Image 
                       src={cat.image || "/placeholder-image.jpg"} 
                       alt={cat.name} 
@@ -70,17 +85,19 @@ export default async function ProductCategories() {
                       className="object-cover transition-transform duration-700 group-hover:scale-110" 
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
+                    <div className="absolute bottom-4 left-5 right-5">
+                      <h3 className="text-xl font-heading font-bold text-white mb-1 drop-shadow-lg">
+                        {cat.name}
+                      </h3>
+                    </div>
                   </div>
-                  <div className="p-8 flex-1 flex flex-col">
-                    <h3 className="text-xl font-heading font-bold text-[color:var(--color-foreground)] mb-3 group-hover:text-[color:var(--color-primary)] transition-colors">
-                      {cat.name}
-                    </h3>
+                  <div className="p-6 flex-1 flex flex-col">
                     <p className="text-[color:var(--color-text-secondary)] text-sm leading-relaxed line-clamp-3 mb-6">
                       {cat.description}
                     </p>
-                    <div className="mt-auto flex items-center gap-2 text-xs font-bold text-[color:var(--color-primary)] uppercase tracking-wider">
-                      Explore Products <span>→</span>
+                    <div className="mt-auto flex items-center gap-2 text-xs font-bold text-[color:var(--color-primary)] uppercase tracking-wider group-hover:gap-3 transition-all">
+                      Explore Products <span className="transition-transform group-hover:translate-x-1">→</span>
                     </div>
                   </div>
                 </div>
@@ -98,7 +115,9 @@ export default async function ProductCategories() {
       {/* ====== CTA ====== */}
       <section className="py-20 bg-[color:var(--color-background)] border-t border-[color:var(--color-border)]">
         <div className="max-w-5xl mx-auto px-6">
-          <div className="bg-[#1E40AF] rounded-3xl p-12 md:p-16 text-center relative overflow-hidden">
+          <div className="rounded-3xl p-12 md:p-16 text-center relative overflow-hidden" style={{ background: "linear-gradient(135deg, #166534, #15803D, #166534)" }}>
+            {/* Subtle pattern */}
+            <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)", backgroundSize: "24px 24px" }} />
             <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-heading font-bold text-[#FFFFFF] mb-4 relative z-10">
               Need Custom Lighting Solutions?
             </h2>
@@ -106,7 +125,7 @@ export default async function ProductCategories() {
               We manufacture custom LED lighting and solar solutions tailored to your exact specifications.
             </p>
             <Link href="/contact"
-              className="relative z-10 inline-flex px-8 py-3.5 rounded-md bg-[#FFFFFF] text-[#1E40AF] font-bold hover:opacity-90 transition-all no-underline">
+              className="relative z-10 inline-flex px-8 py-3.5 rounded-full bg-[#FFFFFF] text-[#166534] font-bold hover:opacity-90 hover:shadow-xl transition-all no-underline">
               Request Product Quote →
             </Link>
           </div>

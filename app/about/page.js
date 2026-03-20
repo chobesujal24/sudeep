@@ -246,7 +246,8 @@ export default function AboutPage() {
       {/* ====== CTA ====== */}
       <section className="py-20 bg-[color:var(--color-section)] border-t border-[color:var(--color-border)]">
         <div className="max-w-5xl mx-auto px-6">
-          <div className="bg-[#1E40AF] rounded-3xl p-12 md:p-16 text-center relative overflow-hidden animate-on-scroll">
+          <div className="rounded-3xl p-12 md:p-16 text-center relative overflow-hidden animate-on-scroll" style={{ background: "linear-gradient(135deg, #166534, #15803D, #166534)" }}>
+            <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)", backgroundSize: "24px 24px" }} />
             <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-heading font-bold text-[#FFFFFF] mb-4 relative z-10">
               Partner with Sudeep Engineers
             </h2>

@@ -82,7 +82,7 @@ export default function LeadsManager() {
                   }
                 </td>
                 <td className="p-4 text-right space-x-2">
-                  <button onClick={() => setViewing(lead)} className="text-[#1E40AF] hover:underline text-xs font-bold"><Eye size={14} className="inline -mt-0.5" /> View</button>
+                  <button onClick={() => setViewing(lead)} className="text-[#166534] hover:underline text-xs font-bold"><Eye size={14} className="inline -mt-0.5" /> View</button>
                   {!lead.replied && <button onClick={() => handleMarkReplied(lead.id)} className="text-green-600 hover:underline text-xs font-bold"><Mail size={14} className="inline -mt-0.5" /> Replied</button>}
                   <button onClick={() => handleDelete(lead.id)} className="text-[#EF4444] hover:underline text-xs font-bold"><Trash2 size={14} className="inline -mt-0.5" /> Delete</button>
                 </td>

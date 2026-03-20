@@ -338,11 +338,11 @@ export default function BlogManager() {
                 <div className="grid grid-cols-1 gap-4">
                   <div>
                     <label className="block text-xs font-bold text-[#475569] uppercase mb-1">Meta Title</label>
-                    <input type="text" value={metaTitle} onChange={e => setMetaTitle(e.target.value)} className="w-full p-2.5 border border-[#CBD5E1] rounded-md focus:ring-1 focus:ring-blue-500 outline-none text-[#0F172A]" placeholder="Title for Search Engines" />
+                    <input type="text" value={metaTitle} onChange={e => setMetaTitle(e.target.value)} className="w-full p-2.5 border border-[#CBD5E1] rounded-md focus:ring-1 focus:ring-emerald-600 outline-none text-[#0F172A]" placeholder="Title for Search Engines" />
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-[#475569] uppercase mb-1">Meta Description</label>
-                    <textarea value={metaDescription} onChange={e => setMetaDescription(e.target.value)} className="w-full p-2.5 border border-[#CBD5E1] rounded-md focus:ring-1 focus:ring-blue-500 outline-none text-[#0F172A] min-h-[80px]" placeholder="Description for Search Engines..."></textarea>
+                    <textarea value={metaDescription} onChange={e => setMetaDescription(e.target.value)} className="w-full p-2.5 border border-[#CBD5E1] rounded-md focus:ring-1 focus:ring-emerald-600 outline-none text-[#0F172A] min-h-[80px]" placeholder="Description for Search Engines..."></textarea>
                   </div>
                 </div>
               </section>

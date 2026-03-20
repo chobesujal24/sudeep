@@ -2,8 +2,8 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { Settings, Building2, Wrench, Lightbulb, Puzzle, PenTool, Landmark, Factory, Cog, Shield } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Settings, Building2, Wrench, Lightbulb, Puzzle, PenTool, Landmark, Factory, Cog, Shield, X } from "lucide-react";
 import TestimonialSlider from "@/components/TestimonialSlider";
 import FAQ from "@/components/FAQ";
 
@@ -28,22 +28,49 @@ const bgZoom = {
 
 /* ── Data ── */
 const services = [
-  { icon: <Settings size={28} />, title: "Engineering Fabrication", desc: "Custom engineering fabrication solutions for industrial projects." },
-  { icon: <Building2 size={28} />, title: "Structural Manufacturing", desc: "High-quality structural metal components for construction." },
-  { icon: <Wrench size={28} />, title: "Industrial Job Work", desc: "Precision job work services in Waluj MIDC." },
-  { icon: <Lightbulb size={28} />, title: "LED Lighting", desc: "Energy-efficient LED street lights and solar solutions." },
-  { icon: <Puzzle size={28} />, title: "Custom Solutions", desc: "Tailored engineering designs for specific requirements." },
-  { icon: <PenTool size={28} />, title: "Design & Prototyping", desc: "Rapid prototyping and engineering design support." },
+  { icon: <Lightbulb size={28} />, title: "LED Street Light Luminaries", desc: "High-efficiency street lighting solutions for urban & highway infrastructure." },
+  { icon: <Lightbulb size={28} />, title: "LED Flood Light Luminaries", desc: "Powerful flood lighting for stadiums, warehouses, and industrial areas." },
+  { icon: <Lightbulb size={28} />, title: "LED HighBay Lights", desc: "Premium high-bay lighting for factories, warehouses, and large indoor spaces." },
+  { icon: <PenTool size={28} />, title: "LED Linear Lights", desc: "Sleek linear lighting for commercial spaces, offices, and retail environments." },
+  { icon: <Settings size={28} />, title: "LED Solar Street Lights", desc: "Self-sustained solar-powered street lighting for eco-friendly installations." },
+  { icon: <Building2 size={28} />, title: "LED Highmast", desc: "Towering highmast lighting systems for highways, airports, and large areas." },
+  { icon: <Wrench size={28} />, title: "LED Solar Highmast", desc: "Solar-powered highmast lighting for remote and off-grid locations." },
+  { icon: <Shield size={28} />, title: "LED Stadium Mast", desc: "Professional-grade stadium mast lighting for sports arenas and grounds." },
+  { icon: <Puzzle size={28} />, title: "LED Bollard Light", desc: "Elegant bollard lights for pathways, gardens, and landscape lighting." },
 ];
 
 // Removed static products array
 
-const industries = [
-  { icon: <Building2 size={36} />, name: "Construction" },
-  { icon: <Landmark size={36} />, name: "Infrastructure" },
-  { icon: <Factory size={36} />, name: "Industrial Plants" },
-  { icon: <Cog size={36} />, name: "Manufacturing" },
-  { icon: <Shield size={36} />, name: "Government" },
+/* ── Client logos ── */
+const featuredClients = [
+  { logo: "/iNDUSTRIES LOGO/BHEL.webp", name: "BHEL" },
+  { logo: "/iNDUSTRIES LOGO/NTPC.webp", name: "NTPC" },
+  { logo: "/iNDUSTRIES LOGO/RAIL.webp", name: "Indian Railways" },
+  { logo: "/iNDUSTRIES LOGO/ongc.webp", name: "ONGC" },
+  { logo: "/iNDUSTRIES LOGO/gail.webp", name: "GAIL" },
+  { logo: "/iNDUSTRIES LOGO/image (5).webp", name: "SAIL" },
+  { logo: "/iNDUSTRIES LOGO/image (10).webp", name: "DRDO" },
+  { logo: "/iNDUSTRIES LOGO/image (8).webp", name: "Indian Oil" },
+  { logo: "/iNDUSTRIES LOGO/Oil india.webp", name: "Oil India" },
+];
+
+const allClients = [
+  ...featuredClients,
+  { logo: "/iNDUSTRIES LOGO/IRCTC.webp", name: "IRCTC" },
+  { logo: "/iNDUSTRIES LOGO/RVNL.webp", name: "RVNL" },
+  { logo: "/iNDUSTRIES LOGO/nalco.webp", name: "NALCO" },
+  { logo: "/iNDUSTRIES LOGO/IMG.webp", name: "HAL" },
+  { logo: "/iNDUSTRIES LOGO/image (1).webp", name: "NPCIL" },
+  { logo: "/iNDUSTRIES LOGO/image (2).webp", name: "Coal India" },
+  { logo: "/iNDUSTRIES LOGO/image (3).webp", name: "BEL" },
+  { logo: "/iNDUSTRIES LOGO/image (4).webp", name: "Munitions India" },
+  { logo: "/iNDUSTRIES LOGO/image (6).webp", name: "HMT" },
+  { logo: "/iNDUSTRIES LOGO/image (7).webp", name: "BPCL" },
+  { logo: "/iNDUSTRIES LOGO/image (9).webp", name: "NMDC" },
+  { logo: "/iNDUSTRIES LOGO/image (11).webp", name: "Ministry of Defence" },
+  { logo: "/iNDUSTRIES LOGO/image (13).webp", name: "Goa Shipyard" },
+  { logo: "/iNDUSTRIES LOGO/image (14).webp", name: "Cochin Shipyard" },
+  { logo: "/iNDUSTRIES LOGO/image (15).webp", name: "IIT ISM Dhanbad" },
 ];
 
 const whyUs = [
@@ -57,6 +84,7 @@ const whyUs = [
 
 export default function HomeContent() {
   const [categories, setCategories] = React.useState([]);
+  const [showAllClients, setShowAllClients] = React.useState(false);
 
   React.useEffect(() => {
     async function fetchCategories() {
@@ -83,7 +111,7 @@ export default function HomeContent() {
         </motion.div>
         <div className="section-overlay" />
         <div className="relative z-10 text-center px-6 max-w-[900px] mx-auto">
-          <motion.h1 className="font-heading font-extrabold text-white leading-[1.05] mb-6" style={{ fontSize: "clamp(3.5rem, 7vw, 5rem)" }} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.2, ease: [0.33, 1, 0.68, 1] }}>
+          <motion.h1 className="font-extrabold text-white leading-[1.05] mb-6" style={{ fontSize: "clamp(3.5rem, 7vw, 5rem)", fontFamily: "'Playfair Display', serif" }} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.2, ease: [0.33, 1, 0.68, 1] }}>
             <br />Engineering <span className="gradient-text">Brighter</span> Lighting Systems<span style={{ color: "rgba(57, 190, 86, 0.75)" }}></span>
           </motion.h1>
           <motion.p className="text-white/80 text-lg md:text-xl max-w-[560px] mx-auto mb-10 leading-relaxed" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.5 }}>
@@ -104,8 +132,8 @@ export default function HomeContent() {
 
       {/* ═══ FIND US ON (MARKETPLACES) ═══ */}
       <section className="relative" style={{ background: "var(--color-section)" }}>
-        <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(56,189,248,0.4), transparent)" }} />
-        <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(56,189,248,0.4), transparent)" }} />
+        <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg, transparent, var(--color-border), transparent)" }} />
+        <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg, transparent, var(--color-border), transparent)" }} />
         <div className="py-12 px-6" style={{ maxWidth: "1400px", margin: "0 auto" }}>
 
           <div className="text-center mb-8">
@@ -159,28 +187,42 @@ export default function HomeContent() {
         </div>
       </section>
 
-      {/* ═══ SERVICES ═══ */}
+      {/* ═══ PRODUCT RANGE ═══ */}
       <section className="section-cinematic" style={{ background: "var(--color-background)" }}>
         <div className="absolute inset-0 z-0">
-          <Image src="/services_hero_bg1.png" alt="Engineering Services" fill className="object-cover object-center" sizes="100vw" quality={85} />
+          <Image src="/services_hero_bg1.png" alt="LED Product Range" fill className="object-cover object-center" sizes="100vw" quality={85} />
           <div className="section-overlay" />
         </div>
         <div className="relative z-10 w-full px-6" style={{ maxWidth: "1400px", margin: "0 auto" }}>
           <motion.div className="text-center mb-16" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}>
-            <h2 className="font-heading font-bold text-[color:var(--color-foreground)] mb-4" style={{ fontSize: "clamp(2rem, 4vw, 2.75rem)" }}>Our Services</h2>
-            <p className="text-[color:var(--color-text-secondary)] text-lg max-w-[500px] mx-auto">Comprehensive engineering and lighting solutions.</p>
+            <span className="inline-block text-[#4ADE80] text-xs font-bold uppercase tracking-[0.3em] mb-3">What We Offer</span>
+            <h2 className="font-heading font-bold text-white mb-4" style={{ fontSize: "clamp(2rem, 4vw, 2.75rem)" }}>Our Product Range</h2>
+            <p className="text-white/80 text-lg max-w-[550px] mx-auto">Premium LED lighting solutions engineered for performance, durability, and energy efficiency.</p>
           </motion.div>
-          <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((s, i) => (
-              <motion.div key={i} className="bg-transparent border border-white/20 p-8 rounded-2xl transition-all duration-300 hover:bg-white/5 group" variants={fadeUp} custom={i}>
-                <div className="mb-5 text-[color:var(--color-accent)] transition-transform duration-300 group-hover:scale-105">{s.icon}</div>
-                <h3 className="font-heading font-bold text-lg mb-3 text-white">{s.title}</h3>
-                <p className="text-white/80 text-sm leading-relaxed">{s.desc}</p>
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ duration: 0.5, delay: i * 0.08, ease: [0.33, 1, 0.68, 1] }}
+                className="group"
+              >
+                <div className="bg-white/5 backdrop-blur-sm border border-white/15 p-8 rounded-2xl transition-all duration-500 hover:bg-white/10 hover:-translate-y-1.5 relative overflow-hidden h-full">
+                  {/* Accent bar */}
+                  <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#166534] to-[#4ADE80] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="mb-5 text-[#4ADE80] transition-transform duration-300 group-hover:scale-110 w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
+                    {s.icon}
+                  </div>
+                  <h3 className="font-heading font-bold text-lg mb-3 text-white">{s.title}</h3>
+                  <p className="text-white/70 text-sm leading-relaxed">{s.desc}</p>
+                </div>
               </motion.div>
             ))}
-          </motion.div>
-          <motion.div className="text-center mt-12" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-            <Link href="/services" className="btn-secondary">Explore All Services</Link>
+          </div>
+          <motion.div className="text-center mt-12" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.5 }}>
+            <Link href="/product" className="btn-secondary">View All Products</Link>
           </motion.div>
         </div>
       </section>
@@ -270,27 +312,107 @@ export default function HomeContent() {
         </div>
       </section>
 
-      {/* ═══ INDUSTRIES ═══ */}
-      <section className="section-cinematic">
-        <div className="absolute inset-0 z-0">
-          <Image src="/industries_hero_bg.png" alt="Industries We Serve" fill className="object-cover object-center" sizes="100vw" quality={85} />
-          <div className="section-overlay" />
-        </div>
-        <div className="relative z-10 w-full px-6 text-center" style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <motion.div className="mb-16" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-            <h2 className="font-heading font-bold text-white mb-4" style={{ fontSize: "clamp(2rem, 4vw, 2.75rem)" }}>Industries We Serve</h2>
-            <p className="text-white/80 text-lg max-w-[500px] mx-auto">Trusted across diverse industrial sectors.</p>
+      {/* ═══ TRUSTED BY — Company Logos ═══ */}
+      <section className="py-24 relative overflow-hidden" style={{ background: "var(--color-section)" }}>
+        {/* Subtle warm accent glow */}
+        <div className="absolute top-[-100px] right-[-100px] w-[500px] h-[500px] rounded-full opacity-[0.04]" style={{ background: "radial-gradient(circle, #F59E0B, transparent 70%)", filter: "blur(80px)" }} />
+        <div className="absolute bottom-[-100px] left-[-100px] w-[400px] h-[400px] rounded-full opacity-[0.03]" style={{ background: "radial-gradient(circle, #166534, transparent 70%)", filter: "blur(80px)" }} />
+        <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg, transparent, var(--color-border), transparent)" }} />
+        <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg, transparent, var(--color-border), transparent)" }} />
+        
+        <div className="relative z-10 w-full px-6" style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <motion.div className="text-center mb-16" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+            <span className="inline-block text-[color:var(--color-primary)] text-xs font-bold uppercase tracking-[0.3em] mb-4">Our Esteemed Clients</span>
+            <h2 className="font-heading font-bold text-[color:var(--color-foreground)] mb-5" style={{ fontSize: "clamp(2rem, 4vw, 2.75rem)" }}>
+              Trusted By India&apos;s <span className="gradient-text">Leading Organizations</span>
+            </h2>
+            <p className="text-[color:var(--color-text-secondary)] text-lg max-w-[550px] mx-auto leading-relaxed">
+              Proudly serving India&apos;s most prestigious government and private sector organizations with world-class engineering solutions.
+            </p>
           </motion.div>
-          <motion.div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6" variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
-            {industries.map((ind, i) => (
-              <motion.div key={i} className="bg-transparent border border-white/20 p-8 text-center rounded-2xl transition-all duration-300 hover:bg-white/5 group" variants={fadeUp} custom={i}>
-                <div className="text-[color:var(--color-accent)] mb-4 flex justify-center group-hover:scale-110 transition-transform">{ind.icon}</div>
-                <h3 className="font-heading font-semibold text-sm text-white">{ind.name}</h3>
+
+          <motion.div 
+            className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-4 md:gap-6 mx-auto" 
+            style={{ maxWidth: "900px" }}
+            variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }}
+          >
+            {featuredClients.map((client, i) => (
+              <motion.div
+                key={i}
+                variants={fadeUp}
+                custom={i}
+                className="group"
+              >
+                <div className="bg-[color:var(--color-bg-card)] rounded-2xl p-4 md:p-6 flex flex-col items-center justify-center gap-3 border border-[color:var(--color-border)] transition-all duration-500 hover:shadow-xl hover:scale-[1.03] hover:border-[color:var(--color-primary)]/30 h-[120px] md:h-[150px]">
+                  <div className="relative w-[60px] h-[60px] md:w-[80px] md:h-[80px] flex items-center justify-center">
+                    <img 
+                      src={client.logo} 
+                      alt={client.name} 
+                      className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-110"
+                    />
+                  </div>
+                  <span className="text-[color:var(--color-text-secondary)] text-[0.65rem] md:text-xs font-bold uppercase tracking-wider text-center leading-tight">{client.name}</span>
+                </div>
               </motion.div>
             ))}
           </motion.div>
+
+          <motion.div className="text-center mt-12" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+            <button 
+              onClick={() => setShowAllClients(true)}
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border-2 border-[color:var(--color-primary)]/30 text-[color:var(--color-primary)] font-bold text-sm hover:bg-[color:var(--color-primary)]/5 hover:border-[color:var(--color-primary)] transition-all duration-300 cursor-pointer bg-transparent"
+            >
+              View All {allClients.length}+ Clients
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </motion.div>
         </div>
       </section>
+
+      {/* ── All Clients Modal ── */}
+      <AnimatePresence>
+        {showAllClients && (
+          <motion.div 
+            className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+          >
+            <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={() => setShowAllClients(false)} />
+            <motion.div 
+              className="relative bg-white rounded-3xl w-full max-w-4xl max-h-[85vh] overflow-hidden shadow-2xl"
+              initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            >
+              <div className="flex items-center justify-between p-6 border-b border-[#E2E8F0]">
+                <div>
+                  <h3 className="text-xl font-heading font-bold text-[#0F172A]">Our Esteemed Clients</h3>
+                  <p className="text-sm text-[#64748B] mt-1">{allClients.length} organizations trust Sudeep Engineers</p>
+                </div>
+                <button 
+                  onClick={() => setShowAllClients(false)} 
+                  className="p-2 rounded-full hover:bg-[#F1F5F9] transition-colors bg-transparent border-none cursor-pointer"
+                >
+                  <X size={20} className="text-[#64748B]" />
+                </button>
+              </div>
+              <div className="p-6 overflow-y-auto" style={{ maxHeight: "calc(85vh - 80px)" }}>
+                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4">
+                  {allClients.map((client, i) => (
+                    <div 
+                      key={i} 
+                      className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-4 flex flex-col items-center justify-center gap-3 hover:shadow-lg hover:border-[#38BDF8]/30 hover:scale-[1.03] transition-all duration-300 h-[120px]"
+                    >
+                      <div className="relative w-[50px] h-[50px] flex items-center justify-center">
+                        <img src={client.logo} alt={client.name} className="max-w-full max-h-full object-contain" />
+                      </div>
+                      <span className="text-[#334155] text-[0.6rem] font-bold uppercase tracking-wider text-center leading-tight">{client.name}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* ═══ WHY CHOOSE US ═══ */}
       <section className="section-cinematic" style={{ background: "var(--color-section)" }}>
@@ -317,21 +439,6 @@ export default function HomeContent() {
             <h2 className="font-heading font-bold text-[color:var(--color-foreground)] mb-4" style={{ fontSize: "clamp(2rem, 4vw, 2.75rem)" }}>What Our Clients Say</h2>
           </motion.div>
           <TestimonialSlider />
-        </div>
-      </section>
-
-      {/* ═══ CTA ═══ */}
-      <section className="section-cinematic">
-        <div className="absolute inset-0 z-0">
-          <Image src="/service_structural.png" alt="Engineering Workshop" fill className="object-cover object-center" sizes="100vw" quality={85} />
-          <div className="section-overlay" />
-        </div>
-        <div className="relative z-10 text-center px-6 max-w-[700px] mx-auto">
-          <motion.h2 className="font-heading font-bold text- text-white mb-4 mb-5" style={{ fontSize: "clamp(2rem, 5vw, 3.25rem)" }} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>Ready to Start Your Project?</motion.h2>
-          <motion.p className="text-[color:var(--color-text-secondary)] text-white mb-4 max-w-[500px] mx-auto" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1}>Get a free consultation and competitive quote from our engineering team.</motion.p>
-          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={2}>
-            <Link href="/contact" className="btn-primary">Request a Quote</Link>
-          </motion.div>
         </div>
       </section>
 

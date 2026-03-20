@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import ProductFilterView from "@/components/ProductFilterView";
 import { getProductData } from "@/lib/getProductData";
@@ -19,7 +20,7 @@ export async function generateMetadata({ params }) {
 
   return {
     title: `${category.name} | Sudeep Lights`,
-    description: category.seo_description || `Explore our high-quality ${category.name} products. manufactured in Waluj MIDC, Aurangabad.`,
+    description: category.seo_description || `Explore our high-quality ${category.name} products manufactured in Waluj MIDC, Aurangabad.`,
   };
 }
 
@@ -63,27 +64,32 @@ export default async function CategoryPage({ params }) {
         }}
       />
 
-      {/* Page Hero */}
-      <section className="pt-32 pb-16 relative overflow-hidden bg-[color:var(--color-background)]">
-        <div className="absolute -top-[30%] -right-[20%] w-[500px] h-[500px] rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(37,99,235,0.06) 0%, transparent 70%)" }} />
-        <div className="max-w-[1500px] mx-auto px-6 md:px-12 relative z-10">
-          <nav className="text-xs text-[color:var(--color-text-muted)] mb-6 flex gap-2">
-            <Link href="/" className="hover:text-[color:var(--color-accent)] no-underline text-[color:var(--color-text-muted)] transition-colors">Home</Link>
-            <span>/</span>
-            <Link href="/product" className="hover:text-[color:var(--color-accent)] no-underline text-[color:var(--color-text-muted)] transition-colors">Product</Link>
-            <span>/</span>
-            <span className="text-[color:var(--color-foreground)]">{category.name}</span>
-          </nav>
-          <h1 className="text-[clamp(1.8rem,4vw,2.5rem)] font-heading font-extrabold mb-4 text-[color:var(--color-foreground)]">
-            {category.name} <span className="text-[color:var(--color-primary)]">Collection</span>
-          </h1>
-          <p className="text-[color:var(--color-text-secondary)] opacity-80 text-lg max-w-[750px]">
-            {category.description}
-          </p>
+      {/* Page Hero Image */}
+      <section className="relative mt-20 overflow-hidden bg-black border-b border-[color:var(--color-border)]">
+        <div className="w-full relative">
+          <Image
+            src="/product-hero-section.png"
+            alt={`${category.name} - Sudeep Lights`}
+            width={1920}
+            height={480}
+            className="w-full h-auto brightness-[0.85]"
+            priority
+          />
         </div>
       </section>
 
+      {/* Breadcrumbs */}
+      <section className="pt-8 pb-2 bg-[color:var(--color-background)]">
+        <div className="max-w-[1500px] mx-auto px-6 md:px-12">
+          <nav className="text-xs font-medium text-[color:var(--color-text-muted)] flex gap-2 tracking-wide uppercase">
+            <Link href="/" className="hover:text-[color:var(--color-accent)] no-underline text-[color:var(--color-text-muted)] transition-colors">Home</Link>
+            <span className="text-[color:var(--color-text-muted)]/40">/</span>
+            <Link href="/product" className="hover:text-[color:var(--color-accent)] no-underline text-[color:var(--color-text-muted)] transition-colors">Product</Link>
+            <span className="text-[color:var(--color-text-muted)]/40">/</span>
+            <span className="text-[color:var(--color-foreground)]">{category.name}</span>
+          </nav>
+        </div>
+      </section>
       {/* Products Grid */}
       <section className="py-6 md:py-10 bg-[color:var(--color-section)]">
         <div className="max-w-[1500px] mx-auto px-6 md:px-12">
@@ -98,7 +104,8 @@ export default async function CategoryPage({ params }) {
       {/* ====== CTA ====== */}
       <section className="py-20 bg-[color:var(--color-section)] border-t border-[color:var(--color-border)]">
         <div className="max-w-5xl mx-auto px-6">
-          <div className="bg-[#1E40AF] rounded-3xl p-12 md:p-16 text-center relative overflow-hidden animate-on-scroll">
+          <div className="rounded-3xl p-12 md:p-16 text-center relative overflow-hidden" style={{ background: "linear-gradient(135deg, #166534, #15803D, #166534)" }}>
+            <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)", backgroundSize: "24px 24px" }} />
             <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-heading font-bold text-[#FFFFFF] mb-4 relative z-10">
               Custom {category.name} Solutions
             </h2>
@@ -106,7 +113,7 @@ export default async function CategoryPage({ params }) {
               Looking for specific dimensions or power ratings? We manufacture custom solutions tailored to your project.
             </p>
             <Link href="/contact"
-              className="relative z-10 inline-flex px-8 py-3.5 rounded-md bg-[#FFFFFF] text-[#1E40AF] font-bold hover:opacity-90 transition-all no-underline">
+              className="relative z-10 inline-flex px-8 py-3.5 rounded-full bg-[#FFFFFF] text-[#166534] font-bold hover:opacity-90 hover:shadow-xl transition-all no-underline">
               Request a Custom Quote →
             </Link>
           </div>

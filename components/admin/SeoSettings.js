@@ -36,14 +36,14 @@ export default function SeoSettings() {
   return (
     <div>
       <div className="flex items-center gap-3 mb-6">
-        <Globe size={24} className="text-[#1E40AF]" />
+        <Globe size={24} className="text-[#166534]" />
         <h2 className="text-2xl font-bold text-[#0F172A]">SEO Settings</h2>
       </div>
       <div className="bg-white border border-[#E2E8F0] rounded-xl p-6 shadow-sm space-y-5">
         <div>
           <label className="block text-xs font-bold text-[#475569] uppercase mb-1">Homepage Meta Title</label>
           <input type="text" value={form.metaTitle} onChange={(e) => setForm({ ...form, metaTitle: e.target.value })}
-            className="w-full p-2.5 border border-[#CBD5E1] rounded-lg outline-none focus:ring-2 focus:ring-[#1E40AF]/30 text-[#0F172A]" placeholder="Sudeep Engineers — Industrial Fabrication & LED Lighting" />
+            className="w-full p-2.5 border border-[#CBD5E1] rounded-lg outline-none focus:ring-2 focus:ring-[#166534]/30 text-[#0F172A]" placeholder="Sudeep Engineers — Industrial Fabrication & LED Lighting" />
           <p className="text-[10px] text-[#94A3B8] mt-1">{form.metaTitle.length}/60 characters</p>
         </div>
         <div>
@@ -64,7 +64,7 @@ export default function SeoSettings() {
           {form.ogImage && <img src={form.ogImage} alt="OG Preview" className="mt-2 max-h-[120px] rounded-lg border border-[#E2E8F0]" />}
         </div>
         <button onClick={handleSave} disabled={saving}
-          className="flex items-center gap-2 px-6 py-2.5 bg-[#1E40AF] text-white rounded-lg text-sm font-bold hover:bg-[#1D4ED8] disabled:opacity-50">
+          className="flex items-center gap-2 px-6 py-2.5 bg-[#166534] text-white rounded-lg text-sm font-bold hover:bg-[#15803D] disabled:opacity-50">
           <Save size={16} /> {saving ? "Saving..." : "Save SEO Settings"}
         </button>
       </div>

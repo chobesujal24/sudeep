@@ -33,7 +33,7 @@ export default function FloatingButtons() {
         </motion.a>
         <motion.a
           href="tel:+919922996236"
-          className="w-[52px] h-[52px] rounded-full bg-blue-500 text-white flex items-center justify-center text-2xl shadow-[0_4px_15px_rgba(0,0,0,0.3)] no-underline"
+          className="w-[52px] h-[52px] rounded-full bg-emerald-600 text-white flex items-center justify-center text-2xl shadow-[0_4px_15px_rgba(0,0,0,0.3)] no-underline"
           aria-label="Call us"
           title="Call us"
           whileHover={{ scale: 1.15 }}

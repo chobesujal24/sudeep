@@ -40,7 +40,7 @@ export default function Footer() {
               <img
                 src="/logo.png"
                 alt="Sudeep Engineers"
-                className="h-[80px] w-auto object-contain transition-transform group-hover:scale-105 logo-invert-on-dark"
+                className="h-[100px] w-auto object-contain transition-transform group-hover:scale-105 logo-green"
               />
             </Link>
             <p className="text-[color:var(--color-text-secondary)] text-sm leading-relaxed max-w-[280px] mb-6">
