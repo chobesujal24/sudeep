@@ -154,7 +154,10 @@ export default function BlogManager() {
       fetchPosts();
     } catch (error) {
       console.error("Error saving post:", error);
-      alert("Failed to save post. Did you set up Supabase?");
+      const msg = error.message || "Unknown error";
+      const details = error.details || "";
+      const hint = error.hint || "";
+      alert(`Failed to save post: ${msg} ${details} ${hint}`);
     }
   };
 
@@ -170,7 +173,7 @@ export default function BlogManager() {
       fetchPosts();
     } catch (error) {
       console.error("Error deleting post:", error);
-      alert("Failed to delete post.");
+      alert(`Failed to delete post: ${error.message || ""}`);
     }
   };
 
