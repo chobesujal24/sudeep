@@ -31,7 +31,7 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer style={{ background: "var(--color-background)", borderTop: "1px solid var(--color-border)" }} className="transition-colors duration-300">
+    <footer style={{ background: "var(--color-bg-secondary)", borderTop: "1px solid var(--color-border)" }} className="transition-colors duration-300">
       <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "80px 32px 0" }}>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
@@ -71,7 +71,7 @@ export default function Footer() {
                 <li key={i}>
                   <Link
                     href={link.href}
-                    className="text-[#94A3B8] hover:text-white text-sm transition-colors no-underline"
+                    className="text-[color:var(--color-text-muted)] hover:text-[color:var(--color-primary)] text-sm transition-colors no-underline"
                   >
                     {link.label}
                   </Link>
@@ -88,7 +88,7 @@ export default function Footer() {
                 <li key={i}>
                   <Link
                     href={link.href}
-                    className="text-[#94A3B8] hover:text-white text-sm transition-colors no-underline"
+                    className="text-[color:var(--color-text-muted)] hover:text-[color:var(--color-primary)] text-sm transition-colors no-underline"
                   >
                     {link.label}
                   </Link>
@@ -116,19 +116,19 @@ export default function Footer() {
         </div>
 
         {/* Find Us On Marketplaces Row */}
-        <div className="border-t border-white/10 pt-8 pb-4 mb-8 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
-          <div className="text-white/60 text-sm font-medium uppercase tracking-wider flex-shrink-0 text-center md:text-left">
+        <div className="border-t border-[color:var(--color-border)] pt-8 pb-4 mb-8 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
+          <div className="text-[color:var(--color-text-muted)] text-sm font-medium uppercase tracking-wider flex-shrink-0 text-center md:text-left">
             Find Us On Top Marketplaces
           </div>
           <div className="flex flex-wrap justify-center md:justify-end items-center gap-8 md:gap-12">
             <a href="https://www.indiamart.com/eveready-solar-energy/" target="_blank" rel="noopener noreferrer" className="block transition-transform hover:scale-105 group">
-              <img src="/indiamart-clean.svg" alt="IndiaMart" className="h-8 md:h-10 w-auto:opacity-100 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300" />
+              <img src="/indiamart-clean.svg" alt="IndiaMart" className="h-8 md:h-10 w-auto opacity-100 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300" />
             </a>
             <a href="https://www.justdial.com/Aurangabad-Maharashtra/SUDEEP-ENGINEERS-Waluj-Midc/9999PX240-X240-250509132009-B4K6_BZDET" target="_blank" rel="noopener noreferrer" className="block transition-transform hover:scale-105 group">
-              <img src="/justdial-clean.svg" alt="JustDial" className="h-8 md:h-10 w-auto:opacity-100 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300" />
+              <img src="/justdial-clean.svg" alt="JustDial" className="h-8 md:h-10 w-auto opacity-100 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300" />
             </a>
             <a href="https://mkp.gem.gov.in/browse_nodes/browse_list#!/categories_for_brand?brand=SUDEEP" target="_blank" rel="noopener noreferrer" className="block transition-transform hover:scale-105 group flex items-center justify-center">
-              <img src="/gem-footer.svg" alt="GeM Marketplace Logo" className="h-8 md:h-10 lg:h-12 w-auto:opacity-100 transition-opacity duration-300" />
+              <img src="/gem-footer.svg" alt="GeM Marketplace Logo" className="h-8 md:h-10 lg:h-12 w-auto opacity-100 transition-opacity duration-300" />
             </a>
           </div>
         </div>
