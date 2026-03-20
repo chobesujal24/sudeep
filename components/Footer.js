@@ -3,11 +3,11 @@ import { Icons } from "./Icons";
 
 const footerLinks = {
   services: [
-    { href: "/products/led-street-light", label: "LED Street Lights" },
-    { href: "/products/led-flood-light", label: "LED Flood Lights" },
-    { href: "/products/solar-street-light", label: "Solar Street Lights" },
-    { href: "/products/high-mast-pole", label: "High Mast Poles" },
-    { href: "/products", label: "All Products" },
+    { href: "/product/led-street-light/led-street-light", label: "LED Street Lights" },
+    { href: "/product/led-street-light/led-flood-light", label: "LED Flood Lights" },
+    { href: "/product/led-street-light/solar-street-light", label: "Solar Street Lights" },
+    { href: "/product/highmast-light/high-mast-pole", label: "High Mast Poles" },
+    { href: "/product", label: "All Products" },
   ],
   company: [
     { href: "/about", label: "About Us" },
@@ -122,13 +122,13 @@ export default function Footer() {
           </div>
           <div className="flex flex-wrap justify-center md:justify-end items-center gap-8 md:gap-12">
             <a href="https://www.indiamart.com/eveready-solar-energy/" target="_blank" rel="noopener noreferrer" className="block transition-transform hover:scale-105 group">
-              <img src="/indiamart-clean.svg" alt="IndiaMart" className="h-8 md:h-10 w-auto object-contain brightness-0 invert opacity-60 group-hover:opacity-100 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300" />
+              <img src="/indiamart-clean.svg" alt="IndiaMart" className="h-8 md:h-10 w-auto:opacity-100 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300" />
             </a>
             <a href="https://www.justdial.com/Aurangabad-Maharashtra/SUDEEP-ENGINEERS-Waluj-Midc/9999PX240-X240-250509132009-B4K6_BZDET" target="_blank" rel="noopener noreferrer" className="block transition-transform hover:scale-105 group">
-              <img src="/justdial-clean.svg" alt="JustDial" className="h-8 md:h-10 w-auto object-contain brightness-0 invert opacity-60 group-hover:opacity-100 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300" />
+              <img src="/justdial-clean.svg" alt="JustDial" className="h-8 md:h-10 w-auto:opacity-100 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300" />
             </a>
             <a href="https://mkp.gem.gov.in/browse_nodes/browse_list#!/categories_for_brand?brand=SUDEEP" target="_blank" rel="noopener noreferrer" className="block transition-transform hover:scale-105 group flex items-center justify-center">
-              <img src="/gem-footer.svg" alt="GeM Marketplace Logo" className="h-8 md:h-10 lg:h-12 w-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
+              <img src="/gem-footer.svg" alt="GeM Marketplace Logo" className="h-8 md:h-10 lg:h-12 w-auto:opacity-100 transition-opacity duration-300" />
             </a>
           </div>
         </div>

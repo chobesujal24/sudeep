@@ -86,10 +86,37 @@ export default function CategoriesManager() {
               <textarea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })}
                 className="w-full p-2.5 border border-[#CBD5E1] rounded-lg outline-none min-h-[80px] text-[#0F172A]" />
             </div>
-            <div>
-              <label className="block text-xs font-bold text-[#475569] uppercase mb-1">Image URL</label>
-              <input type="text" value={form.image} onChange={(e) => setForm({ ...form, image: e.target.value })}
-                className="w-full p-2.5 border border-[#CBD5E1] rounded-lg outline-none text-[#0F172A]" />
+            <div className="md:col-span-1">
+              <div className="flex items-center justify-between mb-1">
+                <label className="block text-xs font-bold text-[#475569] uppercase">Category Image</label>
+                <label className="text-[10px] bg-white border border-[#CBD5E1] px-2 py-0.5 shadow-sm rounded hover:border-[#1E40AF] cursor-pointer font-bold uppercase transition-colors">
+                  Browse
+                  <input type="file" accept="image/*" className="hidden" onChange={async (e) => {
+                    const file = e.target.files[0];
+                    if (!file) return;
+                    try {
+                      const fileName = `categories/${form.slug || "new"}/${Date.now()}_${file.name}`;
+                      const { error } = await supabase.storage.from("images").upload(fileName, file);
+                      if (error) throw error;
+                      const { data: urlData } = supabase.storage.from("images").getPublicUrl(fileName);
+                      setForm(prev => ({ ...prev, image: urlData.publicUrl }));
+                    } catch (err) {
+                      alert("Upload failed: " + err.message);
+                    }
+                  }} />
+                </label>
+              </div>
+              <div className="flex gap-3">
+                <div className="w-16 h-16 rounded-lg border border-[#CBD5E1] bg-[#F8FAFC] overflow-hidden shrink-0 flex items-center justify-center">
+                  {form.image ? (
+                    <img src={form.image} alt="Preview" className="w-full h-full object-cover" />
+                  ) : (
+                    <span className="text-[10px] text-[#94A3B8] font-bold text-center px-1">No Image</span>
+                  )}
+                </div>
+                <input type="text" value={form.image} onChange={(e) => setForm({ ...form, image: e.target.value })}
+                  className="flex-1 p-2.5 border border-[#CBD5E1] rounded-lg outline-none focus:ring-2 focus:ring-[#1E40AF]/30 text-[#0F172A] text-sm h-16" placeholder="Paste URL or browse..." />
+              </div>
             </div>
             <div>
               <label className="block text-xs font-bold text-[#475569] uppercase mb-1">SEO Title</label>

@@ -27,6 +27,7 @@ export default function AdminDashboard() {
   const [editingIndex, setEditingIndex] = useState(null);
   const [formData, setFormData] = useState({});
   const [previewOpen, setPreviewOpen] = useState(false);
+  const [dbCategories, setDbCategories] = useState([]);
 
   const ALLOWED_EMAILS = ["chobesujal24@gmail.com", "sudeepengineers@gmail.com"];
 
@@ -125,17 +126,22 @@ export default function AdminDashboard() {
       if (dbData?.data?.products?.length > 0) {
         setProducts(dbData.data.products);
       } else {
-        const res = await fetch("/api/products");
+        const res = await fetch("/api/product");
         const data = await res.json();
         if (Array.isArray(data) && data.length > 0) {
           setProducts(data);
           await supabase.from("settings").upsert({ id: "productData", data: { products: data } });
         }
       }
+
+      // Also fetch categories for the dropdown
+      const { data: catData } = await supabase.from("categories").select("*").order("name");
+      if (catData) setDbCategories(catData);
+
     } catch (error) {
-      console.error("Failed to fetch products:", error);
+      console.error("Failed to fetch products/categories:", error);
       try {
-        const res = await fetch("/api/products");
+        const res = await fetch("/api/product");
         const data = await res.json();
         if (Array.isArray(data)) setProducts(data);
       } catch (e) { console.error("API fallback also failed:", e); }
@@ -329,8 +335,16 @@ export default function AdminDashboard() {
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-[#475569] uppercase mb-1">Category</label>
-                    <input type="text" value={formData.category || ""} onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                      className="w-full p-2.5 border border-[#CBD5E1] rounded-lg outline-none text-[#0F172A]" />
+                    <select
+                      value={formData.category || ""}
+                      onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                      className="w-full p-2.5 border border-[#CBD5E1] rounded-lg outline-none text-[#0F172A] bg-white"
+                    >
+                      <option value="">Select Category</option>
+                      {dbCategories.map(cat => (
+                        <option key={cat.id} value={cat.name}>{cat.name}</option>
+                      ))}
+                    </select>
                   </div>
                   <div className="md:col-span-2">
                     <label className="block text-xs font-bold text-[#475569] uppercase mb-1">Full Description</label>
@@ -557,7 +571,9 @@ export default function AdminDashboard() {
                 <div className="mt-6 pt-4 border-t border-[#E2E8F0]">
                   <p className="text-xs text-[#94A3B8] uppercase font-bold mb-1">SEO Preview</p>
                   <p className="text-[#1E40AF] text-base font-medium">{formData.metaTitle}</p>
-                  <p className="text-[#059669] text-xs mb-0.5">sudeepengineers.com/products/{formData.slug}</p>
+                  <p className="text-[#059669] text-xs mb-0.5">
+                    sudeepengineers.com/product/{dbCategories.find(c => c.name === formData.category)?.slug || "category-slug"}/{formData.slug}
+                  </p>
                   <p className="text-[#475569] text-sm">{formData.metaDescription}</p>
                 </div>
               )}

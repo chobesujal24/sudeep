@@ -7,7 +7,7 @@ export async function GET() {
     const products = await getProductData();
     return Response.json(products);
   } catch (error) {
-    console.error("GET /api/products error:", error);
+    console.error("GET /api/product error:", error);
     return Response.json({ error: "Failed to fetch products" }, { status: 500 });
   }
 }

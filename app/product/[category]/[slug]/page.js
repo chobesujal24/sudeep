@@ -2,46 +2,55 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ImageGallery from "@/components/ImageGallery";
 import { Icons } from "@/components/Icons";
+import { getProductData } from "@/lib/getProductData";
+import { supabase } from "@/lib/supabase";
 
 export const dynamic = 'force-dynamic';
 
-import { getProductData } from "@/lib/getProductData";
-
 export async function generateMetadata({ params }) {
-  const resolvedParams = await params;
+  const { category: categorySlug, slug } = await params;
   const products = await getProductData();
   const productsArray = Array.isArray(products) ? products : [];
-  const product = productsArray.find((p) => p.slug.toLowerCase() === resolvedParams.slug.toLowerCase());
+  const product = productsArray.find((p) => p.slug.toLowerCase() === slug.toLowerCase());
 
   if (!product) return {};
 
   return {
-    title: product.name,
+    title: `${product.name} | Sudeep Lights`,
     description: product.description,
     alternates: {
-      canonical: `https://sudeepengineers.com/products/${product.slug}`,
+      canonical: `https://sudeepengineers.com/product/${categorySlug}/${product.slug}`,
     },
     openGraph: {
       title: product.name,
       description: product.description,
-      url: `https://sudeepengineers.com/products/${product.slug}`,
+      url: `https://sudeepengineers.com/product/${categorySlug}/${product.slug}`,
       images: product.images?.length > 0 ? [{ url: product.images[0] }] : [],
     },
   };
 }
 
 export default async function ProductPage({ params }) {
-  const resolvedParams = await params;
+  const { category: categorySlug, slug } = await params;
   
   // Fetch from the API to get the latest CMS-controlled JSON data
   const products = await getProductData();
   const productsArray = Array.isArray(products) ? products : [];
   
-  const product = productsArray.find((p) => p.slug.toLowerCase() === resolvedParams.slug.toLowerCase());
+  const product = productsArray.find((p) => p.slug.toLowerCase() === slug.toLowerCase());
 
   if (!product) {
     notFound();
   }
+
+  // Fetch category info for breadcrumb name
+  const { data: categoryData } = await supabase
+    .from('categories')
+    .select('name')
+    .eq('slug', categorySlug)
+    .single();
+
+  const categoryName = categoryData?.name || product.category;
 
   return (
     <>
@@ -60,7 +69,7 @@ export default async function ProductPage({ params }) {
             },
             offers: {
               "@type": "Offer",
-              url: `https://sudeepengineers.com/products/${product.slug}`,
+              url: `https://sudeepengineers.com/product/${categorySlug}/${product.slug}`,
               priceCurrency: "INR",
               price: "0",
               availability: "https://schema.org/InStock",
@@ -88,8 +97,12 @@ export default async function ProductPage({ params }) {
               Home
             </Link>
             <span>/</span>
-            <Link href="/products" className="hover:text-[color:var(--color-accent)] no-underline text-[color:var(--color-text-muted)] transition-colors">
-              Products
+            <Link href="/product" className="hover:text-[color:var(--color-accent)] no-underline text-[color:var(--color-text-muted)] transition-colors">
+              Product
+            </Link>
+            <span>/</span>
+            <Link href={`/product/${categorySlug}`} className="hover:text-[color:var(--color-accent)] no-underline text-[color:var(--color-text-muted)] transition-colors capitalize">
+              {categoryName}
             </Link>
             <span>/</span>
             <span className="text-[color:var(--color-foreground)] font-medium">{product.name}</span>

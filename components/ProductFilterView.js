@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Search, Filter, X, Check } from 'lucide-react';
 
-export default function ProductFilterView({ products, dbCatMap }) {
+export default function ProductFilterView({ products, dbCatMap, basePath }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
@@ -39,6 +39,13 @@ export default function ProductFilterView({ products, dbCatMap }) {
       return matchesSearch && matchesCategory;
     });
   }, [products, searchQuery, selectedCategories]);
+
+  // Helper to get category slug
+  const getCategorySlug = (catName) => {
+    if (dbCatMap && dbCatMap[catName]) return dbCatMap[catName].slug;
+    // Fallback slugification
+    return catName.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  };
 
   return (
     <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 relative">
@@ -93,49 +100,52 @@ export default function ProductFilterView({ products, dbCatMap }) {
               />
             </div>
 
-            <div className="mb-8">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-[color:var(--color-foreground)]">Categories</h3>
-                {selectedCategories.length > 0 && (
-                  <button onClick={() => setSelectedCategories([])} className="text-xs text-[color:var(--color-primary)] hover:underline font-medium">Clear</button>
-                )}
-              </div>
-              <div className="space-y-3">
-                {allCategories.map(cat => {
-                  const isSelected = selectedCategories.includes(cat);
-                  return (
-                    <label key={cat} className="flex items-start gap-3 cursor-pointer group">
-                      <div className="relative flex items-center justify-center pt-0.5">
-                        <input 
-                          type="checkbox" 
-                          checked={isSelected}
-                          onChange={() => toggleCategory(cat)}
-                          className="peer sr-only"
-                        />
-                        <div className={`w-5 h-5 rounded border-2 transition-all flex items-center justify-center ${
-                          isSelected 
-                            ? "border-[color:var(--color-primary)] bg-[color:var(--color-primary)] shadow-sm" 
-                            : "border-[color:var(--color-border)] bg-[color:var(--color-bg-card)] group-hover:border-[color:var(--color-text-muted)]"
-                        }`}>
-                          <Check 
-                            size={14} 
-                            strokeWidth={3}
-                            className={`text-white transition-opacity duration-200 ${
-                              isSelected ? "opacity-100" : "opacity-0"
-                            }`} 
+            {/* Only show category filter if we have multiple categories to filter */}
+            {allCategories.length > 1 && (
+              <div className="mb-8">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-semibold text-[color:var(--color-foreground)]">Categories</h3>
+                  {selectedCategories.length > 0 && (
+                    <button onClick={() => setSelectedCategories([])} className="text-xs text-[color:var(--color-primary)] hover:underline font-medium">Clear</button>
+                  )}
+                </div>
+                <div className="space-y-3">
+                  {allCategories.map(cat => {
+                    const isSelected = selectedCategories.includes(cat);
+                    return (
+                      <label key={cat} className="flex items-start gap-3 cursor-pointer group">
+                        <div className="relative flex items-center justify-center pt-0.5">
+                          <input 
+                            type="checkbox" 
+                            checked={isSelected}
+                            onChange={() => toggleCategory(cat)}
+                            className="peer sr-only"
                           />
+                          <div className={`w-5 h-5 rounded border-2 transition-all flex items-center justify-center ${
+                            isSelected 
+                              ? "border-[color:var(--color-primary)] bg-[color:var(--color-primary)] shadow-sm" 
+                              : "border-[color:var(--color-border)] bg-[color:var(--color-bg-card)] group-hover:border-[color:var(--color-text-muted)]"
+                          }`}>
+                            <Check 
+                              size={14} 
+                              strokeWidth={3}
+                              className={`text-white transition-opacity duration-200 ${
+                                isSelected ? "opacity-100" : "opacity-0"
+                              }`} 
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <span className={`text-sm font-medium transition-colors ${
-                        isSelected ? "text-[color:var(--color-foreground)]" : "text-[color:var(--color-text-secondary)] group-hover:text-[color:var(--color-foreground)]"
-                      }`}>
-                        {cat}
-                      </span>
-                    </label>
-                  );
-                })}
+                        <span className={`text-sm font-medium transition-colors ${
+                          isSelected ? "text-[color:var(--color-foreground)]" : "text-[color:var(--color-text-secondary)] group-hover:text-[color:var(--color-foreground)]"
+                        }`}>
+                          {cat}
+                        </span>
+                      </label>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </aside>
@@ -237,7 +247,7 @@ export default function ProductFilterView({ products, dbCatMap }) {
 
                   <div className="mt-auto pt-5 border-t border-[color:var(--color-border)]">
                     <Link
-                      href={`/products/${product.slug}`}
+                      href={basePath ? `${basePath}/${product.slug}` : `/product/${getCategorySlug(product.category)}/${product.slug}`}
                       className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-[color:var(--color-border)] group-hover:border-transparent bg-[color:var(--color-section)] group-hover:bg-[color:var(--color-primary)] text-[color:var(--color-foreground)] group-hover:text-white font-bold text-sm transition-all no-underline shadow-sm group-hover:shadow-md"
                     >
                       View Details 

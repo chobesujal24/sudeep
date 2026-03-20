@@ -303,7 +303,7 @@ export default function BlogManager() {
                  <label className="block text-xs font-bold text-[#475569] uppercase mb-2 border-l-2 border-[#8B5CF6] pl-2">Post Content</label>
                  <div className="border border-[#CBD5E1] rounded-lg overflow-hidden">
                     <Editor
-                       apiKey="r349i3i2ixb9kquwcl1rnm0ol0ikry9o2mvyzsh1tzffwz0e" /* Use a free key or no-api-key prop if open source */
+                       apiKey="en2k5d5p82nmr3b6fxkkgvjsuvgke3gu3judu92npdt5asa6" /* Use a free key or no-api-key prop if open source */
                        onInit={(evt, editor) => editorRef.current = editor}
                        value={content}
                        onEditorChange={(newContent) => setContent(newContent)}

@@ -7,7 +7,7 @@ import { Icons } from "./Icons";
 
 const navLinks = [
   { href: "/services", label: "Services" },
-  { href: "/products", label: "Products" },
+  { href: "/product", label: "Products" },
   { href: "/industries", label: "Industries" },
   { href: "/about", label: "About" },
 ];

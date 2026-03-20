@@ -56,31 +56,22 @@ const whyUs = [
 ];
 
 export default function HomeContent() {
-  const [products, setProducts] = React.useState([]);
+  const [categories, setCategories] = React.useState([]);
 
   React.useEffect(() => {
-    async function fetchProducts() {
+    async function fetchCategories() {
       try {
-        const res = await fetch("/api/products");
+        const res = await fetch("/api/categories");
         if (res.ok) {
           const data = await res.json();
-          // The database products don't have is_active, take the first 6 for the marquee
-          const featuredProducts = data.slice(0, 6);
-
-          const mapped = featuredProducts.map(p => ({
-            title: p.name || p.title || "Product", // Fallback to title just in case
-            desc: p.description,
-            // the JSON uses an array of images
-            image: (p.images && p.images.length > 0) ? p.images[0] : "/placeholder-image.jpg",
-            href: `/products/${p.slug}`
-          }));
-          setProducts(mapped);
+          // Limit to first 6 categories as requested
+          setCategories(data.slice(0, 6));
         }
       } catch (err) {
-        console.error("Failed to fetch featured products:", err);
+        console.error("Failed to fetch featured categories:", err);
       }
     }
-    fetchProducts();
+    fetchCategories();
   }, []);
 
   return (
@@ -182,7 +173,7 @@ export default function HomeContent() {
           <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
             {services.map((s, i) => (
               <motion.div key={i} className="bg-transparent border border-white/20 p-8 rounded-2xl transition-all duration-300 hover:bg-white/5 group" variants={fadeUp} custom={i}>
-                <div className="mb-5 text-[color:var(--color-accent)] transition-transform duration-300 group-hover:scale-110">{s.icon}</div>
+                <div className="mb-5 text-[color:var(--color-accent)] transition-transform duration-300 group-hover:scale-105">{s.icon}</div>
                 <h3 className="font-heading font-bold text-lg mb-3 text-white">{s.title}</h3>
                 <p className="text-white/80 text-sm leading-relaxed">{s.desc}</p>
               </motion.div>
@@ -194,51 +185,61 @@ export default function HomeContent() {
         </div>
       </section>
 
-      {/* ═══ PRODUCTS ═══ */}
-      <section className="section-cinematic" style={{ background: "var(--color-section)" }}>
-        <div className="relative z-10 w-full px-6 py-20" style={{ maxWidth: "1400px", margin: "0 auto" }}>
+      {/* ═══ PRODUCTS (Now Categories) ═══ */}
+      <section className="py-24" style={{ background: "var(--color-section)" }}>
+        <div className="relative z-10 w-full px-6" style={{ maxWidth: "1400px", margin: "0 auto" }}>
           <motion.div className="text-center mb-16" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}>
-            <h2 className="font-heading font-bold text-[color:var(--color-foreground)] mb-4" style={{ fontSize: "clamp(2rem, 4vw, 2.75rem)" }}>Featured <span className="gradient-text">Products</span></h2>
-            <p className="text-[color:var(--color-text-secondary)] text-lg max-w-[500px] mx-auto">Premium lighting and fabrication products built to last.</p>
+            <h2 className="font-heading font-bold text-[color:var(--color-foreground)] mb-4" style={{ fontSize: "clamp(2rem, 4vw, 2.75rem)" }}>Product <span className="gradient-text">Categories</span></h2>
+            <p className="text-[color:var(--color-text-secondary)] text-lg max-w-[600px] mx-auto">High-performance industrial lighting solutions manufactured for infrastructure and safety.</p>
           </motion.div>
-
-          {/* Animated Marquee Container */}
-          {products.length > 0 ? (
-            <div className="relative w-full overflow-hidden mx-auto py-4" style={{ maxWidth: "1200px" }}>
-              <div className="absolute left-0 top-0 bottom-0 w-8 md:w-16 bg-gradient-to-r from-[color:var(--color-section)] to-transparent z-20 pointer-events-none" />
-              <div className="absolute right-0 top-0 bottom-0 w-8 md:w-16 bg-gradient-to-l from-[color:var(--color-section)] to-transparent z-20 pointer-events-none" />
-
-              <motion.div
-                className="flex gap-8 w-max"
-                animate={{ x: [0, -1000] }}
-                transition={{ repeat: Infinity, ease: "linear", duration: 25 }}
-              >
-                {[...products, ...products, ...products].map((p, i) => (
-                  <div key={i} className="w-[300px] sm:w-[350px] shrink-0">
-                    <Link href={p.href} className="block no-underline group">
-                      <div className="glass-card overflow-hidden">
-                        <div className="relative h-[250px] overflow-hidden">
-                          <Image src={p.image} alt={p.title} fill className="object-cover transition-transform duration-700 group-hover:scale-110" sizes="(max-width: 768px) 100vw, 33vw" />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                        </div>
-                        <div className="p-6">
-                          <h3 className="font-heading font-bold text-lg mb-2 text-[color:var(--color-foreground)] group-hover:text-[color:var(--color-primary)] transition-colors line-clamp-1">{p.title}</h3>
-                          <p className="text-[color:var(--color-text-secondary)] text-sm leading-relaxed line-clamp-2">{p.desc}</p>
+ 
+          {categories.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto" style={{ maxWidth: "1200px" }}>
+              {categories.map((cat, i) => (
+                <motion.div 
+                  key={cat.id} 
+                  variants={fadeUp} 
+                  initial="hidden" 
+                  whileInView="visible" 
+                  viewport={{ once: true }} 
+                  custom={i}
+                >
+                  <Link href={`/product/${cat.slug}`} className="block no-underline group h-full">
+                    <div className="glass-card overflow-hidden h-full flex flex-col border border-[color:var(--color-border)] hover:border-[color:var(--color-primary)] transition-all duration-500 hover:shadow-2xl">
+                      <div className="relative h-[250px] overflow-hidden">
+                        <Image 
+                          src={cat.image || "/placeholder-image.jpg"} 
+                          alt={cat.name} 
+                          fill 
+                          className="object-cover transition-transform duration-700 group-hover:scale-110" 
+                          sizes="(max-width: 768px) 100vw, 33vw" 
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
+                      </div>
+                      <div className="p-6 flex-1 flex flex-col">
+                        <h3 className="font-heading font-bold text-xl mb-3 text-[color:var(--color-foreground)] group-hover:text-[color:var(--color-primary)] transition-colors">
+                          {cat.name}
+                        </h3>
+                        <p className="text-[color:var(--color-text-secondary)] text-sm leading-relaxed line-clamp-2 mb-4">
+                          {cat.description}
+                        </p>
+                        <div className="mt-auto pt-4 border-t border-[color:var(--color-border)]/10 text-xs font-bold text-[color:var(--color-primary)] uppercase tracking-wider flex items-center gap-2">
+                          Explore Category <span>→</span>
                         </div>
                       </div>
-                    </Link>
-                  </div>
-                ))}
-              </motion.div>
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
             </div>
           ) : (
             <div className="h-[250px] flex items-center justify-center">
-              <div className="w-8 h-8 border-4 border-[#1E40AF] border-t-transparent rounded-full animate-spin"></div>
+              <div className="w-8 h-8 border-4 border-[color:var(--color-primary)] border-t-transparent rounded-full animate-spin"></div>
             </div>
           )}
-
-          <motion.div className="text-center mt-12" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-            <Link href="/products" className="btn-primary">View All Products</Link>
+ 
+          <motion.div className="text-center mt-16" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+            <Link href="/product" className="btn-primary">View All Categories</Link>
           </motion.div>
         </div>
       </section>
@@ -326,8 +327,8 @@ export default function HomeContent() {
           <div className="section-overlay" />
         </div>
         <div className="relative z-10 text-center px-6 max-w-[700px] mx-auto">
-          <motion.h2 className="font-heading font-bold text-[color:var(--color-foreground)] mb-5" style={{ fontSize: "clamp(2rem, 5vw, 3.25rem)" }} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>Ready to Start Your Project?</motion.h2>
-          <motion.p className="text-[color:var(--color-text-secondary)] text-lg mb-10 max-w-[500px] mx-auto" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1}>Get a free consultation and competitive quote from our engineering team.</motion.p>
+          <motion.h2 className="font-heading font-bold text- text-white mb-4 mb-5" style={{ fontSize: "clamp(2rem, 5vw, 3.25rem)" }} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>Ready to Start Your Project?</motion.h2>
+          <motion.p className="text-[color:var(--color-text-secondary)] text-white mb-4 max-w-[500px] mx-auto" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1}>Get a free consultation and competitive quote from our engineering team.</motion.p>
           <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={2}>
             <Link href="/contact" className="btn-primary">Request a Quote</Link>
           </motion.div>
