@@ -153,6 +153,14 @@ export default function AdminDashboard() {
       let updatedProducts = [...products];
       if (editingIndex !== null) updatedProducts[editingIndex] = formData;
       else updatedProducts.push(formData);
+
+      // Sort products by sequence before saving
+      updatedProducts.sort((a, b) => {
+        const seqA = parseInt(a.sequence) || 999;
+        const seqB = parseInt(b.sequence) || 999;
+        return seqA - seqB;
+      });
+
       const { error } = await supabase.from("settings").upsert({ id: "productData", data: { products: updatedProducts } });
       if (error) throw error;
       setProducts(updatedProducts);
@@ -187,7 +195,7 @@ export default function AdminDashboard() {
 
   const startAdd = () => {
     setEditingIndex(null);
-    setFormData({ id: "new-product", slug: "new-product-slug", name: "New Product", category: "Outdoor Lighting", description: "", specs: [], applications: [], images: [], catalogs: [], models: [], metaTitle: "", metaDescription: "", status: "active" });
+    setFormData({ id: "new-product", slug: "new-product-slug", name: "New Product", category: "Outdoor Lighting", description: "", specs: [], applications: [], images: [], catalogs: [], models: [], metaTitle: "", metaDescription: "", status: "active", sequence: 999 });
   };
 
   // Array handlers
@@ -204,6 +212,40 @@ export default function AdminDashboard() {
     const item = a.splice(dragIndex, 1)[0];
     a.splice(dropIndex, 0, item);
     setFormData({ ...formData, [field]: a });
+  };
+
+  const handleProductDragEnd = async (dragIndex, dropIndex, targetCategory = null) => {
+    // If dropping on the same item in the same category, do nothing
+    if (dragIndex === dropIndex && !targetCategory) return;
+    
+    const updatedProducts = [...products];
+    const item = updatedProducts.splice(dragIndex, 1)[0];
+    
+    // Update category if dropped on a category header or another category's product
+    if (targetCategory) {
+      item.category = targetCategory;
+    }
+    
+    // Determine the actual drop position
+    let finalDropIndex = dropIndex;
+    if (dropIndex === null) {
+      // If dropped on a header, find the first product of that category or push to end
+      const firstInCat = updatedProducts.findIndex(p => p.category === targetCategory);
+      finalDropIndex = firstInCat !== -1 ? firstInCat : updatedProducts.length;
+    }
+
+    updatedProducts.splice(finalDropIndex, 0, item);
+    
+    // Standardize sequences: (index + 1) * 10
+    const resequenced = updatedProducts.map((p, idx) => ({ ...p, sequence: (idx + 1) * 10 }));
+    
+    try {
+      const { error } = await supabase.from("settings").upsert({ id: "productData", data: { products: resequenced } });
+      if (error) throw error;
+      setProducts(resequenced);
+    } catch (error) {
+      alert("Error updating order: " + error.message);
+    }
   };
 
   if (loading) return <div className="min-h-screen flex text-white items-center justify-center bg-[#0F172A] p-10 font-bold">Initializing CMS...</div>;
@@ -277,19 +319,101 @@ export default function AdminDashboard() {
           Add New Product
         </button>
         <div className="bg-white border border-[#E2E8F0] rounded-xl shadow-sm overflow-hidden sticky top-[5rem]">
-          <div className="p-4 bg-[#F8FAFC] border-b border-[#E2E8F0]">
-            <h2 className="text-sm font-bold text-[#475569] uppercase tracking-wider">Product Directory ({products.length})</h2>
+          <div className="p-4 bg-[#F8FAFC] border-b border-[#E2E8F0] flex justify-between items-center">
+            <h2 className="text-sm font-bold text-[#475569] uppercase tracking-wider">Product Library</h2>
+            <span className="text-[10px] font-bold bg-[#E2E8F0] px-2 py-0.5 rounded-full text-[#475569]">{products.length} Items</span>
           </div>
-          <div className="max-h-[65vh] overflow-y-auto">
-            {products.map((p, i) => (
-              <div key={i} className={`flex justify-between items-center p-4 border-b border-[#F8FAFC] cursor-pointer transition-colors ${editingIndex === i ? "bg-[#F0FDF4] border-l-4 border-l-[#166534]" : "hover:bg-[#F8FAFC]"}`} onClick={() => startEdit(i)}>
-                <div className="pr-2 max-w-[160px]">
-                  <span className="font-semibold text-[0.9rem] truncate text-[#1E293B] block">{p.name}</span>
-                  {p.status === "inactive" && <span className="text-[10px] text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded-full font-bold">Inactive</span>}
+          <div className="max-h-[70vh] overflow-y-auto pr-1">
+            {dbCategories.map(cat => {
+              const catProducts = products.filter(p => p.category === cat.name);
+              return (
+                <div key={cat.id} className="mb-2">
+                  <div 
+                    className="p-2 bg-[#F8FAFC] border-y border-[#E2E8F0] text-[10px] font-bold text-[#64748B] uppercase tracking-widest flex justify-between items-center sticky top-0 z-10"
+                    onDragOver={(e) => e.preventDefault()}
+                    onDrop={(e) => {
+                      e.preventDefault();
+                      const dragIndex = parseInt(e.dataTransfer.getData("productIndex"), 10);
+                      handleProductDragEnd(dragIndex, null, cat.name);
+                    }}
+                  >
+                    {cat.name}
+                    <Icons.Engineering className="w-2.5 h-2.5 opacity-50" />
+                  </div>
+                  {catProducts.map((p) => {
+                    const globalIdx = products.indexOf(p);
+                    return (
+                      <div 
+                        key={globalIdx} 
+                        draggable
+                        onDragStart={(e) => e.dataTransfer.setData("productIndex", globalIdx)}
+                        onDragOver={(e) => e.preventDefault()}
+                        onDrop={(e) => {
+                          e.preventDefault();
+                          const dragIndex = parseInt(e.dataTransfer.getData("productIndex"), 10);
+                          handleProductDragEnd(dragIndex, globalIdx, cat.name);
+                        }}
+                        className={`flex justify-between items-center p-3 border-b border-[#F8FAFC] cursor-move transition-colors ${editingIndex === globalIdx ? "bg-[#F0FDF4] border-l-4 border-l-[#166534]" : "hover:bg-[#F8FAFC]"}`} 
+                        onClick={() => startEdit(globalIdx)}
+                        title="Drag to reorder within categories"
+                      >
+                        <div className="pr-2 max-w-[180px] flex items-center gap-3">
+                          <span className="text-[10px] font-bold text-slate-400 font-mono w-4 shrink-0 text-right">{p.sequence || globalIdx + 1}</span>
+                          <div className="truncate">
+                            <span className="font-semibold text-xs truncate text-[#1E293B] block">{p.name}</span>
+                            {p.status === "inactive" && <span className="text-[9px] text-amber-600 bg-amber-50 px-1 py-0.5 rounded-full font-bold">Hidden</span>}
+                          </div>
+                        </div>
+                        <button onClick={(e) => { e.stopPropagation(); handleDelete(globalIdx); }} className="text-[#EF4444] text-[10px] font-bold hover:underline shrink-0">✕</button>
+                      </div>
+                    );
+                  })}
                 </div>
-                <button onClick={(e) => { e.stopPropagation(); handleDelete(i); }} className="text-[#EF4444] text-xs font-bold hover:underline shrink-0">Delete</button>
+              );
+            })}
+            
+            {/* Uncategorized Group */}
+            {products.filter(p => !dbCategories.some(cat => cat.name === p.category)).length > 0 && (
+              <div className="mb-2">
+                <div 
+                  className="p-2 bg-[#FFF7ED] border-y border-[#FFEDD5] text-[10px] font-bold text-[#9A3412] uppercase tracking-widest sticky top-0 z-10"
+                  onDragOver={(e) => e.preventDefault()}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    const dragIndex = parseInt(e.dataTransfer.getData("productIndex"), 10);
+                    handleProductDragEnd(dragIndex, null, ""); // Set category to empty string
+                  }}
+                >
+                  Uncategorized
+                </div>
+                {products.filter(p => !dbCategories.some(cat => cat.name === p.category)).map((p) => {
+                  const globalIdx = products.indexOf(p);
+                  return (
+                    <div 
+                      key={globalIdx} 
+                      draggable
+                      onDragStart={(e) => e.dataTransfer.setData("productIndex", globalIdx)}
+                      onDragOver={(e) => e.preventDefault()}
+                      onDrop={(e) => {
+                        e.preventDefault();
+                        const dragIndex = parseInt(e.dataTransfer.getData("productIndex"), 10);
+                        handleProductDragEnd(dragIndex, globalIdx, null);
+                      }}
+                      className={`flex justify-between items-center p-3 border-b border-[#F8FAFC] cursor-move transition-colors ${editingIndex === globalIdx ? "bg-[#F0FDF4] border-l-4 border-l-[#166534]" : "hover:bg-[#F8FAFC]"}`} 
+                      onClick={() => startEdit(globalIdx)}
+                    >
+                      <div className="pr-2 max-w-[180px] flex items-center gap-3">
+                        <span className="text-[10px] font-bold text-slate-400 font-mono w-4 shrink-0 text-right">{p.sequence || globalIdx + 1}</span>
+                        <div className="truncate">
+                          <span className="font-semibold text-xs truncate text-[#1E293B] block">{p.name}</span>
+                        </div>
+                      </div>
+                      <button onClick={(e) => { e.stopPropagation(); handleDelete(globalIdx); }} className="text-[#EF4444] text-[10px] font-bold hover:underline shrink-0">✕</button>
+                    </div>
+                  );
+                })}
               </div>
-            ))}
+            )}
           </div>
         </div>
       </div>
@@ -345,6 +469,11 @@ export default function AdminDashboard() {
                         <option key={cat.id} value={cat.name}>{cat.name}</option>
                       ))}
                     </select>
+                  </div>
+                  <div className="md:col-span-1">
+                    <label className="block text-xs font-bold text-[#475569] uppercase mb-1">Display Sequence</label>
+                    <input type="number" value={formData.sequence || ""} onChange={(e) => setFormData({ ...formData, sequence: parseInt(e.target.value) || 0 })}
+                      className="w-full p-2.5 border border-[#CBD5E1] rounded-lg focus:ring-2 focus:ring-[#166534]/30 outline-none text-[#0F172A]" placeholder="Lower numbers show first" />
                   </div>
                   <div className="md:col-span-2">
                     <label className="block text-xs font-bold text-[#475569] uppercase mb-1">Full Description</label>

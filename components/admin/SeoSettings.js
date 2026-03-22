@@ -43,13 +43,13 @@ export default function SeoSettings() {
         <div>
           <label className="block text-xs font-bold text-[#475569] uppercase mb-1">Homepage Meta Title</label>
           <input type="text" value={form.metaTitle} onChange={(e) => setForm({ ...form, metaTitle: e.target.value })}
-            className="w-full p-2.5 border border-[#CBD5E1] rounded-lg outline-none focus:ring-2 focus:ring-[#166534]/30 text-[#0F172A]" placeholder="Sudeep Engineers — Industrial Fabrication & LED Lighting" />
+            className="w-full p-2.5 border border-[#CBD5E1] rounded-lg outline-none focus:ring-2 focus:ring-[#166534]/30 text-[#0F172A]" placeholder="Sudeep Engineers — Industrial LED & Solar Lighting" />
           <p className="text-[10px] text-[#94A3B8] mt-1">{form.metaTitle.length}/60 characters</p>
         </div>
         <div>
           <label className="block text-xs font-bold text-[#475569] uppercase mb-1">Homepage Meta Description</label>
           <textarea value={form.metaDescription} onChange={(e) => setForm({ ...form, metaDescription: e.target.value })}
-            className="w-full p-2.5 border border-[#CBD5E1] rounded-lg outline-none min-h-[80px] text-[#0F172A]" placeholder="Leading engineering fabrication company..." />
+            className="w-full p-2.5 border border-[#CBD5E1] rounded-lg outline-none min-h-[80px] text-[#0F172A]" placeholder="Leading industrial LED lighting & solar company..." />
           <p className="text-[10px] text-[#94A3B8] mt-1">{form.metaDescription.length}/160 characters</p>
         </div>
         <div>

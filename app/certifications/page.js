@@ -4,13 +4,13 @@ import { Landmark, ClipboardList, CheckCircle2, Lock } from "lucide-react";
 export const metadata = {
   title: "Certifications & Quality Standards",
   description:
-    "Sudeep Engineers is MSME Udyam registered, GST registered, and adheres to strict quality standards. Engineering fabrication company in Waluj MIDC, Aurangabad.",
+    "Sudeep Engineers is MSME Udyam registered, GST registered, and adheres to strict quality standards. LED lighting and Solar infrastructure company in Waluj MIDC, Aurangabad.",
   alternates: { canonical: "https://sudeepengineers.com/certifications" },
 };
 
 const certifications = [
   {
-    icon: <img src="/government_approved_badge_1772904413657.png" alt="MSME Logo" className="w-10 h-10 object-contain rounded-full" />,
+    icon: <Landmark color="#38BDF8" size={32} />,
     title: "MSME / Udyam Registration",
     status: "Registered",
     desc: "Sudeep Engineers is officially registered as a Micro Enterprise under the Government of India's Udyam Registration scheme (formerly MSME registration). This certification validates our standing as a recognized small industry and enables participation in government tenders and schemes.",
@@ -142,7 +142,7 @@ export default function CertificationsPage() {
               Work With a Certified Partner
             </h2>
             <p className="text-[#FFFFFF]/90 text-[1.05rem] mb-8 max-w-[500px] mx-auto relative z-10">
-              Partner with an MSME-registered, quality-focused engineering company.
+              Partner with an MSME-registered, quality-focused LED and Solar company.
             </p>
             <Link href="/contact"
               className="relative z-10 inline-flex px-8 py-3.5 rounded-md bg-[#38BDF8] text-[#0F172A] font-bold hover:opacity-90 transition-all no-underline">

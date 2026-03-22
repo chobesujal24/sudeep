@@ -78,9 +78,9 @@ export default function ContactForm() {
           className="w-full px-4 py-3 rounded-lg bg-[color:var(--color-bg-secondary)] border border-[color:var(--color-border)] text-[color:var(--color-foreground)] text-sm focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600/20 transition-colors"
         >
           <option value="">Select a service</option>
-          <option value="engineering-fabrication">Engineering Fabrication</option>
-          <option value="structural-metal">Structural Metal Manufacturing</option>
-          <option value="industrial-job-work">Industrial Job Work</option>
+          <option value="led-lighting">LED Lighting Manufacturing</option>
+          <option value="solar-infrastructure">Solar Power Infrastructure</option>
+          <option value="custom-engineering">Custom Engineering Solutions</option>
           <option value="custom-engineering">Custom Engineering Solutions</option>
           <option value="led-lighting">LED Lighting Manufacturing</option>
           <option value="other">Other</option>

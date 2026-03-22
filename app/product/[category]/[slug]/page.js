@@ -16,7 +16,7 @@ export async function generateMetadata({ params }) {
   if (!product) return {};
 
   return {
-    title: `${product.name} | Sudeep Lights`,
+    title: `${product.name} | Sudeep Engineers Specifications`,
     description: product.description,
     alternates: {
       canonical: `https://sudeepengineers.com/product/${categorySlug}/${product.slug}`,
@@ -33,7 +33,6 @@ export async function generateMetadata({ params }) {
 export default async function ProductPage({ params }) {
   const { category: categorySlug, slug } = await params;
   
-  // Fetch from the API to get the latest CMS-controlled JSON data
   const products = await getProductData();
   const productsArray = Array.isArray(products) ? products : [];
   
@@ -43,7 +42,6 @@ export default async function ProductPage({ params }) {
     notFound();
   }
 
-  // Fetch category info for breadcrumb name
   const { data: categoryData } = await supabase
     .from('categories')
     .select('name')
@@ -53,7 +51,7 @@ export default async function ProductPage({ params }) {
   const categoryName = categoryData?.name || product.category;
 
   return (
-    <>
+    <div className="bg-slate-50 min-h-screen">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -65,7 +63,7 @@ export default async function ProductPage({ params }) {
             description: product.description,
             brand: {
               "@type": "Brand",
-              name: "Sudeep Lights",
+              name: "Sudeep Engineers",
             },
             offers: {
               "@type": "Offer",
@@ -73,125 +71,109 @@ export default async function ProductPage({ params }) {
               priceCurrency: "INR",
               price: "0",
               availability: "https://schema.org/InStock",
-              priceSpecification: {
-                "@type": "PriceSpecification",
-                priceCurrency: "INR",
-                price: "0",
-                valueAddedTaxIncluded: false
-              }
-            },
-            aggregateRating: {
-              "@type": "AggregateRating",
-              ratingValue: "4.8",
-              reviewCount: "24"
             }
           }),
         }}
       />
 
-      <section className="pt-32 pb-20 bg-[color:var(--color-section)] min-h-screen">
-        <div className="max-w-7xl mx-auto px-6">
-          {/* Breadcrumbs */}
-          <nav className="text-xs text-[color:var(--color-text-muted)] mb-8 flex gap-2 items-center">
-            <Link href="/" className="hover:text-[color:var(--color-accent)] no-underline text-[color:var(--color-text-muted)] transition-colors">
-              Home
-            </Link>
+      {/* Corporate Breadcrumbs Header */}
+      <section className="bg-slate-900 border-b-4 border-emerald-600 pt-28 pb-8 px-6">
+        <div className="max-w-[1400px] mx-auto">
+          <nav className="text-xs font-bold text-slate-400 flex flex-wrap gap-2 tracking-widest uppercase items-center">
+            <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <span>/</span>
-            <Link href="/product" className="hover:text-[color:var(--color-accent)] no-underline text-[color:var(--color-text-muted)] transition-colors">
-              Product
-            </Link>
+            <Link href="/product" className="hover:text-white transition-colors">Products</Link>
             <span>/</span>
-            <Link href={`/product/${categorySlug}`} className="hover:text-[color:var(--color-accent)] no-underline text-[color:var(--color-text-muted)] transition-colors capitalize">
+            <Link href={`/product/${categorySlug}`} className="hover:text-white transition-colors">
               {categoryName}
             </Link>
             <span>/</span>
-            <span className="text-[color:var(--color-foreground)] font-medium">{product.name}</span>
+            <span className="text-white">{product.name}</span>
           </nav>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-            {/* Left: Image Gallery */}
-            <div className="w-full">
-              <ImageGallery images={product.images || []} productName={product.name} />
+      <section className="py-16">
+        <div className="max-w-[1400px] mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+            
+            {/* Left Col: Imagery */}
+            <div className="lg:col-span-5 w-full">
+              <div className="bg-white border border-slate-200 p-2 shadow-sm sticky top-28">
+                <ImageGallery images={product.images || []} productName={product.name} />
+              </div>
             </div>
 
-            {/* Right: Product Information */}
-            <div className="flex flex-col">
-              <div className="inline-flex items-center gap-2 bg-[color:var(--color-primary)]/10 border border-[color:var(--color-primary)]/25 rounded-full px-3 py-1 text-[0.7rem] font-bold text-[color:var(--color-primary)] uppercase tracking-widest mb-4 w-fit">
-                {product.category}
+            {/* Right Col: Specifications */}
+            <div className="lg:col-span-7 flex flex-col">
+              <div className="mb-8 border-b-2 border-slate-200 pb-6">
+                <div className="inline-block bg-slate-200 text-slate-700 text-[0.65rem] font-bold px-3 py-1 mb-4 uppercase tracking-widest rounded-sm">
+                  {product.category}
+                </div>
+                <h1 className="text-3xl lg:text-4xl font-extrabold text-slate-900 mb-4 uppercase tracking-tight">
+                  {product.name}
+                </h1>
+                <p className="text-slate-600 text-lg leading-relaxed font-medium">
+                  {product.description}
+                </p>
               </div>
 
-              <h1 className="text-[clamp(1.8rem,3vw,2.5rem)] font-heading font-extrabold text-[color:var(--color-foreground)] mb-4 leading-tight">
-                {product.name}
-              </h1>
-
-              <p className="text-[color:var(--color-text-secondary)] opacity-80 text-base leading-relaxed mb-8">
-                {product.description}
-              </p>
-
-              {/* Technical Specifications */}
-              <div className="mb-10">
-                <h3 className="text-lg font-heading font-bold text-[color:var(--color-foreground)] mb-4 flex items-center gap-2">
-                  <Icons.Specs className="w-5 h-5 text-[color:var(--color-primary)]" /> Technical Specifications
+              {/* Technical Specifications Datasheet */}
+              <div className="mb-12">
+                <h3 className="text-xl font-extrabold text-slate-900 mb-6 uppercase tracking-tight flex items-center gap-3">
+                  <span className="w-8 h-8 bg-emerald-100 flex items-center justify-center rounded text-emerald-700">
+                    <Icons.Specs className="w-4 h-4" />
+                  </span>
+                  Technical Specifications
                 </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {product.specs.map((spec, idx) => (
-                    <div
-                      key={idx}
-                      className="bg-[color:var(--color-bg-card)] border border-[color:var(--color-border)] rounded-xl p-4 flex flex-col gap-1 border-l-[3px] border-l-[color:var(--color-primary)]"
-                    >
-                      <span className="text-[0.75rem] text-[color:var(--color-text-muted)] font-semibold uppercase tracking-wider">
-                        {spec.label}
-                      </span>
-                      <span className="text-[color:var(--color-foreground)] opacity-90 text-sm font-medium">
-                        {spec.value}
-                      </span>
-                    </div>
-                  ))}
+                
+                <div className="bg-white border text-sm sm:text-base border-slate-200">
+                  <div className="grid grid-cols-1 divide-y divide-slate-200">
+                    {product.specs.map((spec, idx) => (
+                      <div key={idx} className={`grid grid-cols-3 ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50'}`}>
+                        <div className="col-span-1 border-r border-slate-200 p-4 font-bold text-slate-700 uppercase tracking-wide text-xs flex items-center">
+                          {spec.label}
+                        </div>
+                        <div className="col-span-2 p-4 text-slate-800 font-medium font-mono text-sm">
+                          {spec.value}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              {/* Applications */}
-              <div className="mb-10">
-                <h3 className="text-lg font-heading font-bold text-[color:var(--color-foreground)] mb-4 flex items-center gap-2">
-                  <Icons.Factory className="w-5 h-5 text-[color:var(--color-primary)]" /> Ideal Applications
+              {/* Applications & Certifications */}
+              <div className="mb-12">
+                <h3 className="text-xl font-extrabold text-slate-900 mb-6 uppercase tracking-tight flex items-center gap-3">
+                  <span className="w-8 h-8 bg-blue-100 flex items-center justify-center rounded text-blue-700">
+                    <Icons.Factory className="w-4 h-4" />
+                  </span>
+                  Ideal Applications
                 </h3>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-3">
                   {product.applications.map((app, idx) => (
                     <span
                       key={idx}
-                      className="bg-[color:var(--color-primary)]/5 border border-[color:var(--color-primary)]/10 text-[color:var(--color-foreground)] text-sm px-3 py-1.5 rounded-md"
+                      className="bg-white border border-slate-300 text-slate-700 text-sm font-bold uppercase tracking-wider px-4 py-2"
                     >
-                      ✔ {app}
+                      {app}
                     </span>
                   ))}
                 </div>
               </div>
 
-              {/* Call to Actions */}
-              <div className="mt-auto pt-8 border-t border-[color:var(--color-border)] flex flex-wrap gap-4">
-                <Link
-                  href="/contact"
-                  className="flex-1 min-w-[200px] text-center px-8 py-3.5 rounded-full bg-[color:var(--color-primary)] text-[#FFFFFF] font-bold hover:opacity-90 hover:shadow-xl transition-all no-underline shrink-0"
-                >
-                  Request Detailed Quote
-                </Link>
-                <a
-                  href={`https://wa.me/919922996236?text=Hello%2C%20I%20am%20interested%20in%20the%20${encodeURIComponent(product.name)}.`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 min-w-[200px] flex items-center justify-center gap-2 text-center px-8 py-3.5 rounded-md border border-[#25d366] bg-[#25d366]/10 text-[color:var(--color-foreground)] font-bold hover:-translate-y-0.5 hover:bg-[#25d366]/20 transition-all no-underline shrink-0"
-                >
-                  <Icons.WhatsApp className="w-5 h-5 text-[#25d366]" /> Chat on WhatsApp
-                </a>
-              </div>
-
-              {/* Specific Models / Technical Documentation */}
+              {/* Documentation Downloads */}
               {(product.models?.length > 0 || (product.catalogs && product.catalogs.length > 0)) && (
-                <div className="mt-8 pt-8 border-t border-[color:var(--color-border)]">
-                  <h3 className="text-lg font-heading font-bold text-[color:var(--color-foreground)] mb-4 flex items-center gap-2">
-                    <Icons.Doc className="w-5 h-5 text-[color:var(--color-primary)]" /> Available Models & Documentation
+                <div className="mb-12 flex flex-col gap-4">
+                  <h3 className="text-xl font-extrabold text-slate-900 mb-2 uppercase tracking-tight flex items-center gap-3">
+                    <span className="w-8 h-8 bg-rose-100 flex items-center justify-center rounded text-rose-700">
+                      <Icons.Doc className="w-4 h-4" />
+                    </span>
+                    Datasheets & Compliance
                   </h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {product.models && product.models.length > 0 ? (
                       product.models.map((model, idx) => (
                         <a
@@ -199,19 +181,19 @@ export default async function ProductPage({ params }) {
                           href={model.tds}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center justify-between px-4 py-3 rounded-xl bg-[color:var(--color-bg-card)] border border-[color:var(--color-border)] shadow-sm hover:border-[color:var(--color-accent)] hover:shadow-md transition-all text-[color:var(--color-foreground)] no-underline group"
+                          className="flex items-center justify-between p-4 bg-white border border-slate-300 hover:border-emerald-600 transition-colors group"
                         >
-                          <div className="flex items-center gap-3">
-                            <span className="p-2.5 bg-[color:var(--color-section)] border border-[color:var(--color-border)] text-[color:var(--color-foreground)] font-bold rounded-lg text-sm shrink-0">
+                          <div className="flex items-center gap-4">
+                            <span className="w-12 h-12 bg-slate-100 flex items-center justify-center border border-slate-200 font-mono font-bold text-slate-800 text-sm">
                               {model.wattage}
                             </span>
                             <div className="flex flex-col">
-                              <span className="text-sm font-semibold text-[color:var(--color-foreground)]">TDS Sheet</span>
-                              <span className="text-xs text-[color:var(--color-text-muted)]">PDF Document</span>
+                              <span className="text-sm font-bold text-slate-900 uppercase">TDS Sheet</span>
+                              <span className="text-[0.65rem] text-slate-500 uppercase tracking-widest font-bold">PDF Format</span>
                             </div>
                           </div>
-                          <span className="text-[color:var(--color-accent)] bg-[color:var(--color-accent)]/10 p-2 rounded-full group-hover:bg-[color:var(--color-accent)] group-hover:text-white transition-colors shrink-0">
-                            <Icons.Envelope className="w-4 h-4" />
+                          <span className="text-slate-400 group-hover:text-emerald-600 transition-colors">
+                            <Icons.Envelope className="w-5 h-5" />
                           </span>
                         </a>
                       ))
@@ -222,15 +204,19 @@ export default async function ProductPage({ params }) {
                           href={catalog}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center justify-between px-4 py-3 rounded-lg bg-[color:var(--color-bg-card)] border border-[color:var(--color-border)] hover:border-[color:var(--color-accent)] hover:shadow-sm transition-all text-[color:var(--color-foreground)] text-sm font-medium no-underline group col-span-1 sm:col-span-2"
+                          className="flex items-center justify-between p-4 bg-white border border-slate-300 hover:border-emerald-600 transition-colors group col-span-1 sm:col-span-2"
                         >
-                          <div className="flex items-center gap-3">
-                            <span className="p-2 bg-[color:var(--color-primary)]/10 text-[color:var(--color-primary)] rounded-md">
+                          <div className="flex items-center gap-4">
+                            <span className="w-10 h-10 bg-rose-50 flex items-center justify-center border border-rose-100 text-rose-600">
                               <Icons.Envelope className="w-4 h-4" /> 
                             </span>
-                            <span className="truncate max-w-[250px] sm:max-w-xs">{catalog.split('/').pop().replace(/%20/g, ' ')}</span>
+                            <span className="text-sm font-bold text-slate-700 uppercase truncate">
+                              Download Complete Technical Brochure
+                            </span>
                           </div>
-                          <span className="text-[color:var(--color-accent)] group-hover:translate-x-1 transition-transform">→ Download</span>
+                          <span className="text-xs font-bold text-emerald-700 uppercase tracking-widest group-hover:translate-x-1 transition-transform">
+                            Download ➔
+                          </span>
                         </a>
                       ))
                     )}
@@ -238,26 +224,34 @@ export default async function ProductPage({ params }) {
                 </div>
               )}
 
-              {/* Location Map */}
-              <div className="mt-12 animate-on-scroll">
-                <h3 className="text-lg font-heading font-bold text-[color:var(--color-foreground)] mb-4">Manufacturing Facility</h3>
-                <div className="rounded-2xl overflow-hidden border border-[color:var(--color-border)] h-[300px]">
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3751.7!2d75.34!3d19.87!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDUyJzEyLjAiTiA3NcKwMjAnMzUuOSJF!5e0!3m2!1sen!2sin!4v1"
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    allowFullScreen=""
-                    loading="lazy"
-                    title="Sudeep Engineers - Waluj MIDC, Aurangabad"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  />
+              {/* Action Ribbon */}
+              <div className="mt-8 bg-slate-900 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 border-l-4 border-emerald-500">
+                <div className="text-center sm:text-left">
+                  <h4 className="text-white font-extrabold uppercase tracking-tight mb-2">Request OEM Pricing</h4>
+                  <p className="text-slate-400 text-xs font-bold tracking-widest uppercase">Minimum Order Quantity Applies</p>
+                </div>
+                <div className="flex gap-4 w-full sm:w-auto">
+                  <a
+                    href={`https://wa.me/919922996236?text=Hello%2C%20I%20need%20a%20quotation%20for%20${encodeURIComponent(product.name)}.`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3 bg-[#25D366] text-white font-bold text-sm uppercase tracking-wider hover:bg-[#20BE5A] transition-colors"
+                  >
+                    <Icons.WhatsApp className="w-4 h-4" /> WhatsApp
+                  </a>
+                  <Link
+                    href="/contact"
+                    className="flex-1 sm:flex-none text-center px-6 py-3 bg-emerald-600 text-white font-bold text-sm uppercase tracking-wider hover:bg-emerald-700 transition-colors"
+                  >
+                    Get Quote
+                  </Link>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

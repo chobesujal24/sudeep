@@ -5,7 +5,7 @@ import { MapPin, Phone, Mail, MessageCircle } from "lucide-react";
 export const metadata = {
   title: "Contact Us - Get a Free Quote for Engineering Services",
   description:
-    "Contact Sudeep Engineers for engineering fabrication, metal manufacturing & LED lighting quotes. Visit us at Waluj MIDC, Aurangabad or call for inquiries.",
+    "Contact Sudeep Engineers for LED lighting and solar infrastructure quotes. Visit us at Waluj MIDC, Aurangabad or call for inquiries.",
   alternates: { canonical: "https://sudeepengineers.com/contact" },
 };
 
@@ -108,7 +108,7 @@ export default function ContactPage() {
             <div className="animate-on-scroll delay-2">
               <h2 className="font-heading font-bold text-2xl mb-2">Our Location</h2>
               <p className="text-[color:var(--color-text-secondary)] text-sm mb-6">
-                Visit our manufacturing facility in Waluj MIDC, Aurangabad.
+                Visit our manufacturing facility in Waluj MIDC, Aurangabad. We are specialists in LED and Solar projects.
               </p>
               <div className="rounded-2xl overflow-hidden border border-[color:var(--color-border)] h-[450px]">
                 <iframe

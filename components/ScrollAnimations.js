@@ -23,7 +23,7 @@ export default function ScrollAnimations() {
             const classes = el.classList;
             
             // Default animation values
-            let initialProps = { opacity: 1, x: 0, y: 0, scale: 1 };
+            let initialProps = { opacity: 1, x: 0, y: 0 };
             
             // Specific initial props based on classes if needed beyond CSS
             // but we mostly want to animate back to "identity" values.
@@ -44,7 +44,7 @@ export default function ScrollAnimations() {
 
             animate(
               el,
-              { opacity: 1, x: 0, y: 0, scale: 1 },
+              { opacity: 1, x: 0, y: 0 },
               { ...springConfig, delay: delaySeconds }
             );
 

@@ -3,14 +3,14 @@ import Image from "next/image";
 import { Settings, Wrench, Lightbulb, PenTool, TestTube, Factory, Target, Telescope } from "lucide-react";
 
 export const metadata = {
-  title: "About Us - Engineering Fabrication Company in Aurangabad",
+  title: "About Us - LED Lighting & Solar Infrastructure",
   description:
-    "Learn about Sudeep Engineers — a trusted MSME engineering fabrication and LED lighting manufacturer in Waluj MIDC, Aurangabad, Maharashtra. Established 2019.",
+    "Learn about Sudeep Engineers — a trusted MSME LED lighting and Solar Infrastructure manufacturer in Waluj MIDC, Aurangabad, Maharashtra. Established 2019.",
   alternates: { canonical: "https://sudeepengineers.com/about" },
   openGraph: {
-    title: "About Sudeep Engineers | Engineering Fabrication Aurangabad",
+    title: "About Sudeep Engineers | India's Leading Lighting Manufacturer",
     description:
-      "Trusted engineering fabrication & LED lighting manufacturer in Waluj MIDC, Aurangabad since 2019.",
+      "Trusted LED lighting & Solar Infrastructure manufacturer in Waluj MIDC, Aurangabad since 2019.",
   },
 };
 
@@ -43,7 +43,7 @@ export default function AboutPage() {
           </nav>
           <h1 className="text-[clamp(2rem,4vw,3rem)] font-heading font-extrabold mb-4 text-[color:var(--color-foreground)]"
             style={{ animation: "fade-in-up 0.6s ease forwards" }}>
-            About <span className="text-[color:var(--color-primary)]">Sudeep Engineers</span>
+            About <span className="text-[color:var(--color-primary)]">SUDEEP ENGINEERS</span>
           </h1>
           <p className="text-[color:var(--color-text-secondary)] opacity-80 text-lg max-w-[600px]"
             style={{ animation: "fade-in-up 0.6s ease 0.1s forwards", opacity: 0 }}>
@@ -65,15 +65,15 @@ export default function AboutPage() {
               </h2>
               <p className="text-[color:var(--color-text-secondary)] opacity-80 leading-relaxed mb-4">
                 Founded in 2019, Sudeep Engineers was established with a vision to provide
-                world-class engineering fabrication services from the industrial heartland of
+                world-class LED lighting and solar infrastructure services from the industrial heartland of
                 Aurangabad. Starting as a small workshop in Waluj MIDC, we have grown into a
-                trusted name in engineering fabrication and LED lighting manufacturing.
+                trusted name in advanced commercial energy and illumination.
               </p>
               <p className="text-[color:var(--color-text-secondary)] opacity-80 leading-relaxed mb-4">
                 Our journey began with a commitment to quality and customer satisfaction. Today, we
-                serve clients across construction, infrastructure, industrial plants, manufacturing
-                companies, and government projects — delivering precision-engineered solutions that
-                meet the highest standards.
+                serve clients across construction, infrastructure, industrial plants, sporting arenas,
+                and government projects — delivering precision-engineered solutions that
+                meet the highest global standards.
               </p>
               <p className="text-[color:var(--color-text-secondary)] opacity-80 leading-relaxed">
                 As a registered MSME Micro Enterprise under the Udyam scheme, we combine the agility
@@ -82,7 +82,7 @@ export default function AboutPage() {
             </div>
             <div className="animate-on-scroll delay-2">
               <div className="rounded-2xl overflow-hidden border border-[#E2E8F0] h-[400px] relative">
-                <Image src="/sudeep_factory_exterior.png" alt="Sudeep Engineers Factory" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+                <Image src="/main/rajasthan-solar.jpg" alt="Sudeep Engineers Solar Infrastructure" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
               </div>
             </div>
           </div>
@@ -106,11 +106,11 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { icon: <Settings className="w-6 h-6" />, title: "Mechanical Engineering", desc: "Precision machining, CNC operations, and mechanical assembly with tight tolerances." },
-              { icon: <Wrench className="w-6 h-6" />, title: "Structural Engineering", desc: "Heavy-duty structural fabrication for buildings, bridges, and industrial frameworks." },
+              { icon: <Settings className="w-6 h-6" />, title: "Infrastructure Engineering", desc: "Precision assembly of highmasts, lighting poles, and solar grid arrays." },
+              { icon: <Wrench className="w-6 h-6" />, title: "Solar Systems", desc: "Heavy-duty structural solar mounting for commercial buildings and industrial grids." },
               { icon: <Lightbulb className="w-6 h-6" />, title: "Electrical Engineering", desc: "LED lighting design, PCB assembly, and electrical component manufacturing." },
-              { icon: <PenTool className="w-6 h-6" />, title: "Design Engineering", desc: "CAD-based design, prototyping, and engineering documentation for custom solutions." },
-              { icon: <TestTube className="w-6 h-6" />, title: "Quality Engineering", desc: "Comprehensive quality control, material testing, and compliance verification." },
+              { icon: <PenTool className="w-6 h-6" />, title: "Design Engineering", desc: "CAD-based photometric design, prototyping, and layout planning." },
+              { icon: <TestTube className="w-6 h-6" />, title: "Quality Engineering", desc: "Comprehensive quality control, luminance testing, and BIS compliance verification." },
               { icon: <Factory className="w-6 h-6" />, title: "Manufacturing Engineering", desc: "Process optimization, production planning, and lean manufacturing practices." },
             ].map((item, i) => (
               <div key={i} className={`bg-[color:var(--color-section)] border border-[color:var(--color-border)] rounded-xl p-8 animate-on-scroll delay-${(i % 5) + 1}`}>
@@ -131,7 +131,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="animate-on-scroll delay-2">
               <div className="rounded-2xl overflow-hidden border border-[color:var(--color-border)] h-[400px] relative">
-                <Image src="/precision_manufacturing_capabilities_v2.png" alt="Manufacturing Capabilities" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+                <Image src="/main/solarpanels.webp" alt="LED Lighting Capabilities" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
               </div>
             </div>
             <div className="animate-on-scroll">
@@ -143,13 +143,13 @@ export default function AboutPage() {
               </h2>
               <ul className="space-y-4">
                 {[
-                  "CNC machining & precision cutting",
-                  "MIG/TIG welding & fabrication",
-                  "Sheet metal forming, bending & punching",
+                  "Industrial LED Assembly",
+                  "Optical Testing & Photometric Analysis",
+                  "Smart Lighting Control Systems",
                   "Surface treatment & powder coating",
                   "LED PCB assembly & testing",
                   "Quality inspection laboratory",
-                  "Prototype development & testing",
+                  "Solar EPC implementation",
                   "Custom tooling & fixtures",
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3 text-[color:var(--color-text-secondary)] opacity-80 text-sm">
@@ -181,7 +181,7 @@ export default function AboutPage() {
               </p>
               <p className="text-[color:var(--color-text-secondary)] opacity-80 leading-relaxed mb-4">
                 Waluj MIDC hosts over 2,000 industrial units including major automobile and
-                engineering companies, making it ideal for our engineering fabrication operations. Our
+                engineering companies, making it ideal for our operations. Our
                 proximity to key suppliers and logistics networks ensures efficient project delivery.
               </p>
               <div className="mt-6 grid grid-cols-2 gap-4">
@@ -221,10 +221,10 @@ export default function AboutPage() {
                 <Target className="w-7 h-7" />
               </div>
               <h2 className="font-heading font-bold text-2xl mb-4 text-[color:var(--color-foreground)]">Our Mission</h2>
-              <p className="text-[#1E293B] opacity-80 leading-relaxed">
-                To deliver world-class engineering fabrication and LED lighting solutions that exceed
+              <p className="text-[color:var(--color-text-secondary)] opacity-80 leading-relaxed">
+                To deliver world-class LED lighting solutions and solar infrastructure that exceed
                 customer expectations in quality, reliability, and value. We are committed to
-                contributing to India&apos;s industrial growth through precision manufacturing from
+                contributing to India&apos;s sustainable growth through precision manufacturing from
                 our base in Waluj MIDC, Aurangabad.
               </p>
             </div>
@@ -234,9 +234,9 @@ export default function AboutPage() {
               </div>
               <h2 className="font-heading font-bold text-2xl mb-4 text-[color:var(--color-foreground)]">Short description</h2>
               <p className="text-[color:var(--color-text-secondary)] opacity-80 leading-relaxed">
-                Sudeep Engineers is a 6 years 9 months old Proprietorship Firm incorporated on 04-Jun-2019, having its registered office located at Aurangabad, Maharashtra.
-                The major activity of Sudeep Engineers is Manufacturing, Sub-classified into Manufacture of fabricated metal products except machinery and equipment and is primarily engaged in the Manufacture of metal frameworks or skeletons for construction and parts thereof towers masts trusses bridges etc .
-                Sudeep Engineers is classified as Micro enterprise in the financial year 2024-25. It has its unit situated at Aurangabad, Maharashtra.
+                Sudeep Engineers is a Proprietorship Firm incorporated on 04-Jun-2019, having its registered office located at Aurangabad, Maharashtra.
+                The major activity of Sudeep Engineers is Manufacturing, Sub-classified into Manufacture of LED infrastructure and solar power assemblies.
+                Sudeep Engineers is classified as a Micro enterprise in the financial year 2024-25. It has its unit situated at Aurangabad, Maharashtra.
               </p>
             </div>
           </div>
@@ -252,7 +252,7 @@ export default function AboutPage() {
               Partner with Sudeep Engineers
             </h2>
             <p className="text-[#FFFFFF]/90 text-[1.05rem] mb-8 max-w-[500px] mx-auto relative z-10">
-              Let&apos;s discuss your engineering fabrication or LED lighting project requirements.
+              Let&apos;s discuss your LED lighting or Solar infrastructure project requirements.
             </p>
             <Link href="/contact"
               className="relative z-10 inline-flex px-8 py-3.5 rounded-md bg-[#38BDF8] text-[#0F172A] font-bold hover:opacity-90 transition-all no-underline">

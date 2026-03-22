@@ -4,25 +4,25 @@ import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
 import ScrollAnimations from "@/components/ScrollAnimations";
 import Chatbot from "@/components/Chatbot";
-import ThemeProvider from "@/components/ThemeProvider";
+import SmoothScroll from "@/components/SmoothScroll";
 
 export const metadata = {
   metadataBase: new URL("https://sudeepengineers.com"),
   title: {
-    default: "Sudeep Engineers | LED Lighting & Fabrication Aurangabad",
+    default: "Sudeep Engineers | LED Lighting & Solar Solutions Aurangabad",
     template: "%s | Sudeep Engineers",
   },
   description:
-    "Leading LED manufacturer & engineering fabrication in Waluj MIDC, Aurangabad. MSME registered company delivering custom industrial solutions since 2019.",
+    "Leading LED manufacturer & Solar Infrastructure provider in Waluj MIDC, Aurangabad. MSME registered company delivering custom industrial energy solutions since 2019.",
   keywords: [
-    "engineering fabrication aurangabad",
-    "metal fabrication waluj midc",
-    "industrial fabrication aurangabad",
     "led light manufacturer aurangabad",
-    "engineering job work waluj midc",
-    "industrial metal fabrication india",
-    "msme engineering company aurangabad",
-    "custom metal fabrication maharashtra",
+    "solar street lights maharashtra",
+    "industrial led lighting india",
+    "commercial solar solutions",
+    "waluj midc led manufacturing",
+    "solar infrastructure aurangabad",
+    "msme lighting company maharashtra",
+    "custom energy solutions india",
   ],
   authors: [{ name: "Sudeep Engineers" }],
   creator: "Sudeep Engineers",
@@ -31,16 +31,16 @@ export const metadata = {
     locale: "en_IN",
     url: "https://sudeepengineers.com",
     siteName: "Sudeep Lights",
-    title: "Sudeep Lights | Premium LED Lighting & Fabrication",
+    title: "Sudeep Lights | Premium LED Lighting & Solar Infrastructure",
     description:
-      "Leading LED manufacturer & engineering fabrication in Waluj MIDC, Aurangabad, Maharashtra.",
+      "Leading LED manufacturer & solar energy provider in Waluj MIDC, Aurangabad, Maharashtra.",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Sudeep Lights" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sudeep Engineers | Fabrication & LED Manufacturing",
+    title: "Sudeep Engineers | Solar & LED Manufacturing",
     description:
-      "Leading engineering fabrication & LED lighting manufacturer in Aurangabad.",
+      "Leading solar infrastructure & LED lighting manufacturer in Aurangabad.",
     images: ["/og-image.jpg"],
   },
   icons: {
@@ -58,7 +58,7 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -68,7 +68,7 @@ export default function RootLayout({ children }) {
               "@id": "https://sudeepengineers.com",
               name: "Sudeep Engineers",
               description:
-                "Engineering fabrication, structural metal manufacturing and LED lighting company in Waluj MIDC, Aurangabad, Maharashtra.",
+                "Premium LED lighting and solar power infrastructure company in Waluj MIDC, Aurangabad, Maharashtra.",
               url: "https://sudeepengineers.com",
               logo: "https://sudeepengineers.com/logo.png",
               image: "https://sudeepengineers.com/logo.png",
@@ -105,14 +105,13 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="antialiased">
-        <ThemeProvider>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-          <FloatingButtons />
-          <ScrollAnimations />
-          <Chatbot />
-        </ThemeProvider>
+        <SmoothScroll />
+        <Navbar />
+        <main>{children}</main>
+        <Footer />
+        <FloatingButtons />
+        <ScrollAnimations />
+        <Chatbot />
       </body>
     </html>
   );

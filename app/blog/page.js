@@ -7,7 +7,7 @@ import { transformUrls } from "@/lib/getProductData";
 export const metadata = {
   title: "Blog - Engineering & Manufacturing Insights",
   description:
-    "Expert articles on engineering fabrication, metal manufacturing, LED lighting, and industrial manufacturing in Aurangabad. Stay informed with Sudeep Engineers blog.",
+    "Expert articles on industrial energy, LED lighting, and solar manufacturing in Aurangabad. Stay informed with Sudeep Engineers blog.",
   alternates: { canonical: "https://sudeepengineers.com/blog" },
   revalidate: 60 // Revalidate cache every minute or as needed
 };
@@ -68,7 +68,7 @@ export default async function BlogPage() {
           </h1>
           <p className="text-[color:var(--color-text-secondary)] opacity-80 text-lg max-w-[600px]"
             style={{ animation: "fade-in-up 0.6s ease 0.1s forwards", opacity: 0 }}>
-            Expert articles on fabrication, manufacturing, and LED lighting from our team.
+            Expert articles on solar energy, sustainable manufacturing, and LED lighting from our team.
           </p>
         </div>
       </section>
@@ -89,7 +89,7 @@ export default async function BlogPage() {
                       src={post.featuredImage}
                       alt={post.title}
                       fill
-                      className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+                      className="object-cover opacity-80 group-hover:opacity-100 transition-all duration-500"
                     />
                   ) : (
                     <svg className="w-16 h-16 opacity-30 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>

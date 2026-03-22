@@ -5,9 +5,9 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const testimonials = [
   {
-    text: "Sudeep Engineers delivered exceptional quality on our structural fabrication project. Their precision and attention to detail exceeded our expectations.",
+    text: "Sudeep Engineers delivered exceptional quality on our highway LED street light deployment. Their precision and lighting efficiency exceeded our expectations.",
     author: "Rajesh Patil",
-    role: "Project Manager, Construction Company",
+    role: "Project Manager, Infrastructure Company",
     stars: 5,
   },
   {
@@ -17,15 +17,15 @@ const testimonials = [
     stars: 5,
   },
   {
-    text: "Outstanding engineering job work quality. Sudeep Engineers consistently delivers on time and their custom fabrication solutions have helped us streamline our manufacturing.",
+    text: "Outstanding smart lighting quality. Sudeep Engineers consistently delivers on time and their highmast solutions have completely illuminated our facility safely.",
     author: "Amit Deshmukh",
     role: "Plant Manager, Industrial Company",
     stars: 5,
   },
   {
-    text: "The best engineering fabrication partner in Aurangabad. Their modern facility in Waluj MIDC and skilled team make them our go-to choice for all metal fabrication needs.",
+    text: "The best LED lighting partner in Aurangabad. Their modern facility in Waluj MIDC and skilled team make them our go-to choice for all infrastructure lighting needs.",
     author: "Sunil Joshi",
-    role: "Director, Manufacturing Enterprise",
+    role: "Director, Municipal Operations",
     stars: 5,
   },
 ];

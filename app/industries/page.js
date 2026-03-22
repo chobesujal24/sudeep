@@ -3,47 +3,47 @@ import Image from "next/image";
 import { Building2, Globe, Factory, Settings, Landmark } from "lucide-react";
 
 export const metadata = {
-  title: "Industries Served - Engineering Solutions Across Sectors",
+  title: "Industries Served - LED & Solar Solutions Across Sectors",
   description:
-    "Sudeep Engineers serves construction, infrastructure, industrial plants, manufacturing companies & government projects with engineering fabrication & LED lighting in Aurangabad.",
+    "Sudeep Engineers serves construction, infrastructure, industrial plants, sporting arenas & government projects with high-end LED lighting and Solar Infrastructure in Aurangabad.",
   alternates: { canonical: "https://sudeepengineers.com/industries" },
 };
 
 const industries = [
   {
     icon: <Building2 color="currentColor" size={48} />,
-    title: "Construction",
-    desc: "Structural steel fabrication, metal frameworks, roofing systems, and building components for residential, commercial, and industrial construction projects across Aurangabad and Maharashtra.",
-    services: ["Structural steel beams & columns", "Metal roofing systems", "Staircase fabrication", "Railing & handrails", "Cladding support structures"],
-    image: "/industry_construction_1772907669191.png"
+    title: "Construction & Real Estate",
+    desc: "Complete lighting and solar infrastructure solutions for residential, commercial, and industrial construction projects across India.",
+    services: ["Commercial LED Lighting", "Solar Power Infrastructure", "Highmast Area Lighting", "Security Parameter Lighting"],
+    image: "/main/user-req-1.jpg"
   },
   {
     icon: <Globe color="currentColor" size={48} />,
-    title: "Infrastructure",
-    desc: "Heavy-duty fabricated components for infrastructure development including bridges, flyovers, water treatment plants, and public utility projects. Trusted by government agencies and contractors.",
-    services: ["Bridge components", "Flyover structural elements", "Water tank structures", "Pipeline supports", "LED street lighting systems"],
-    image: "/general_industry_fabrication_1772904248397.png"
+    title: "Highways & Infrastructure",
+    desc: "Heavy-duty engineered lighting for infrastructure development including highways, flyovers, and public utility projects. Trusted by agencies and contractors.",
+    services: ["LED Street Lighting systems", "Octagonal Poles", "Solar Street Lights", "Smart City Lighting"],
+    image: "/main/wiki-LED_street_light.jpg"
   },
   {
     icon: <Factory color="currentColor" size={48} />,
     title: "Industrial Plants",
-    desc: "Custom fabrication and job work for industrial facilities. We supply machine components, industrial fixtures, conveyor systems, and maintenance parts to keep plants running efficiently.",
-    services: ["Machine guards & enclosures", "Conveyor system components", "Industrial platforms & walkways", "Duct fabrication", "LED industrial lighting"],
-    image: "/industry_plant_1772907685804.png"
+    desc: "Custom LED lighting and solar solutions for industrial facilities. We supply robust, IP66 rated fixtures to keep production lines bright and energy efficient.",
+    services: ["LED High Bay Lights", "Industrial Flood Lights", "Solar Roof Installations", "Warehouse Lighting"],
+    image: "/main/ef51007f-a9cb-4195-96cc-ea488edfe5b9-0000.webp"
   },
   {
     icon: <Settings color="currentColor" size={48} />,
-    title: "Manufacturing Companies",
-    desc: "Precision parts and assemblies for manufacturing companies. From CNC-machined components to complete sub-assemblies, we serve as an extension of your production capability.",
-    services: ["CNC machined components", "Jigs & fixtures", "Assembly sub-contracts", "Tool & die components", "Prototype development"],
-    image: "/industry_manufacturing_1772907702259.png"
+    title: "Sports & Stadiums",
+    desc: "Precision illumination for professional sporting arenas and community grounds. Engineered to deliver uniform lux levels without glare.",
+    services: ["Stadium Flood Lights", "Highmast Lifting Carriages", "Sports Complex Lighting", "Auditorium Lighting"],
+    image: "/main/highmast.webp"
   },
   {
     icon: <Landmark color="currentColor" size={48} />,
-    title: "Government Projects",
-    desc: "As an MSME registered company, we are qualified for government tenders and projects. We have experience delivering fabrication and LED lighting solutions for municipal and state government initiatives.",
-    services: ["Smart city LED lighting", "Government building fabrication", "Public infrastructure works", "Solar structure fabrication", "Street light installation"],
-    image: "/industry_government_1772907719581.png"
+    title: "Government & Municipal",
+    desc: "As an MSME registered company, we deliver large-scale lighting and solar infrastructure for municipal and state government smart-city initiatives.",
+    services: ["Smart City LED Networks", "Public Parks & Post Tops", "Government Building Solar", "Street Light Installation"],
+    image: "/main/rajasthan-solar.jpg"
   },
 ];
 
@@ -69,7 +69,7 @@ export default function IndustriesPage() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/industries_hero_bg.png"
+            src="/main/posttoplight.webp"
             alt="Engineering Infrastructure Projects"
             fill
             priority
@@ -93,7 +93,7 @@ export default function IndustriesPage() {
           </h1>
           <p className="text-[color:var(--color-text-secondary)] text-lg max-w-[600px]"
             style={{ animation: "fade-in-up 0.6s ease 0.1s forwards", opacity: 0 }}>
-            Delivering engineering fabrication and LED lighting solutions across diverse industrial sectors.
+            Delivering elite LED lighting and Solar solutions across diverse industrial sectors.
           </p>
         </div>
       </section>
@@ -130,7 +130,7 @@ export default function IndustriesPage() {
                     src={ind.image} 
                     alt={ind.title} 
                     fill 
-                    className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-90" 
+                    className="object-cover opacity-90" 
                   />
                   <div className="absolute inset-0 bg-blue-900/5 mix-blend-multiply"></div>
                 </div>
@@ -149,7 +149,7 @@ export default function IndustriesPage() {
               Your Industry, Our Expertise
             </h2>
             <p className="text-[#FFFFFF]/90 text-[1.05rem] mb-8 max-w-[500px] mx-auto relative z-10">
-              Whatever your industry, we have the engineering fabrication capabilities to deliver.
+              Whatever your industry, we have the manufacturing capabilities to light it up.
             </p>
             <Link href="/contact"
               className="relative z-10 inline-flex px-8 py-3.5 rounded-md bg-[#38BDF8] text-[#0F172A] font-bold hover:opacity-90 transition-all no-underline">

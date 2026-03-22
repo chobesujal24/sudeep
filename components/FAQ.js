@@ -3,10 +3,6 @@ import { useState } from "react";
 
 const faqs = [
   {
-    q: "What engineering fabrication services does Sudeep Engineers offer?",
-    a: "We offer comprehensive engineering fabrication services including structural metal manufacturing, custom fabrication, sheet metal work, welding (MIG/TIG), CNC machining, and industrial job work. Our Waluj MIDC facility in Aurangabad is equipped with modern machinery for precision fabrication.",
-  },
-  {
     q: "Where is Sudeep Engineers located?",
     a: "We are located in Waluj MIDC, Aurangabad, Maharashtra, India. Our strategic location in the heart of Aurangabad's industrial hub allows us to serve clients across Maharashtra and India efficiently.",
   },
@@ -20,7 +16,7 @@ const faqs = [
   },
   {
     q: "What industries do you serve?",
-    a: "We serve a wide range of industries including construction, infrastructure, industrial plants, manufacturing companies, and government projects. Our engineering fabrication and LED lighting solutions are tailored to meet the specific needs of each sector.",
+    a: "We serve a wide range of industries including infrastructure, commercial zones, industrial plants, and government municipal projects. Our LED lighting infrastructure and solar solutions are tailored to meet the exacting needs of each sector.",
   },
   {
     q: "How can I request a quote?",

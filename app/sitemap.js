@@ -13,18 +13,12 @@ export default function sitemap() {
   ];
 
   const seoPages = [
-    { url: `${baseUrl}/fabrication-aurangabad`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
-    { url: `${baseUrl}/metal-fabrication-waluj-midc`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
-    { url: `${baseUrl}/industrial-fabrication-services`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/led-light-manufacturer-aurangabad`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
   ];
 
   const blogPosts = [
-    "engineering-fabrication-services-aurangabad",
-    "metal-fabrication-industrial-projects",
     "best-led-lighting-industrial-use",
     "benefits-local-manufacturing-waluj-midc",
-    "structural-fabrication-infrastructure",
   ].map((slug) => ({
     url: `${baseUrl}/blog/${slug}`,
     lastModified: new Date(),

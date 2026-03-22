@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import { Plus, Trash2, Save, X } from "lucide-react";
 
-const empty = { name: "", slug: "", description: "", image: "", seo_title: "", seo_description: "" };
+const empty = { name: "", slug: "", description: "", image: "", seo_title: "", seo_description: "", sequence: 999 };
 
 export default function CategoriesManager() {
   const [categories, setCategories] = useState([]);
@@ -15,7 +15,7 @@ export default function CategoriesManager() {
 
   const fetchCategories = async () => {
     try {
-      const { data, error } = await supabase.from("categories").select("*").order("created_at", { ascending: true });
+      const { data, error } = await supabase.from("categories").select("*").order("sequence", { ascending: true }).order("created_at", { ascending: true });
       if (data) setCategories(data);
       // Silently handle missing table — user needs to create it in Supabase
     } catch (e) { /* table may not exist yet */ }
@@ -128,6 +128,12 @@ export default function CategoriesManager() {
               <input type="text" value={form.seo_description} onChange={(e) => setForm({ ...form, seo_description: e.target.value })}
                 className="w-full p-2.5 border border-[#CBD5E1] rounded-lg outline-none text-[#0F172A]" />
             </div>
+            <div>
+              <label className="block text-xs font-bold text-[#475569] uppercase mb-1">Display Sequence</label>
+              <input type="number" min="0" value={form.sequence} onChange={(e) => setForm({ ...form, sequence: parseInt(e.target.value) || 0 })}
+                className="w-full p-2.5 border border-[#CBD5E1] rounded-lg outline-none focus:ring-2 focus:ring-[#166534]/30 text-[#0F172A]" 
+                placeholder="Lower numbers appear first" />
+            </div>
           </div>
           <button onClick={handleSave} className="mt-4 flex items-center gap-2 px-6 py-2.5 bg-[#166534] text-white rounded-lg text-sm font-bold hover:bg-[#15803D]">
             <Save size={16} /> Save Category
@@ -138,6 +144,7 @@ export default function CategoriesManager() {
       <div className="bg-white border border-[#E2E8F0] rounded-xl shadow-sm overflow-hidden">
         <table className="w-full text-sm">
           <thead><tr className="bg-[#F8FAFC] border-b border-[#E2E8F0]">
+            <th className="text-left p-4 text-xs font-bold text-[#475569] uppercase">Seq.</th>
             <th className="text-left p-4 text-xs font-bold text-[#475569] uppercase">Name</th>
             <th className="text-left p-4 text-xs font-bold text-[#475569] uppercase">Slug</th>
             <th className="text-left p-4 text-xs font-bold text-[#475569] uppercase">SEO Title</th>
@@ -146,6 +153,7 @@ export default function CategoriesManager() {
           <tbody>
             {categories.map((cat, i) => (
               <tr key={cat.id} className="border-b border-[#F1F5F9] hover:bg-[#F8FAFC]">
+                <td className="p-4 text-[#64748B] font-mono font-bold">{cat.sequence ?? 999}</td>
                 <td className="p-4 font-semibold text-[#1E293B]">{cat.name}</td>
                 <td className="p-4 text-[#64748B]">{cat.slug}</td>
                 <td className="p-4 text-[#64748B] truncate max-w-[200px]">{cat.seo_title || "—"}</td>

@@ -64,28 +64,52 @@ export default async function CategoryPage({ params }) {
         }}
       />
 
-      {/* Page Hero Image */}
-      <section className="relative mt-20 overflow-hidden bg-black border-b border-[color:var(--color-border)]">
-        <div className="w-full relative">
+      {/* ═══════════════════════════════════════
+          Category Page Hero — Premium Image
+          ═══════════════════════════════════════ */}
+      <section className="relative h-[45vh] min-h-[350px] flex items-center justify-center overflow-hidden" style={{ background: "#000000" }}>
+        {/* Stunning High-Res Hero Image (Alternative Industrial Shot) */}
+        <div className="absolute inset-0 z-0">
           <Image
             src="/product-hero-section.png"
-            alt={`${category.name} - Sudeep Lights`}
-            width={1920}
-            height={480}
-            className="w-full h-auto brightness-[0.85]"
-            priority
+            alt={`${category.name} - Sudeep Engineers`}
+            fill
+            className="object-cover"
+            priority /* Crucial for LCP */
+            unoptimized
           />
+        </div>
+
+        {/* Cinematic Dark Overlay */}
+        <div
+          className="absolute inset-0 z-1"
+          style={{
+            background: "linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, #000000 100%)",
+          }}
+        />
+
+        {/* Hero Content */}
+        <div className="relative z-10 text-center px-6 mt-16 max-w-4xl mx-auto">
+          <span className="inline-block text-[#4ADE80] text-xs font-bold uppercase tracking-[0.3em] mb-4">
+            Category
+          </span>
+          <h1 className="font-heading font-bold text-white mb-6 tracking-tight" style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", lineHeight: 1.1 }}>
+            {category.name}
+          </h1>
+          <p className="text-white/70 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+            {category.seo_description || `Engineered for scale. Explore our line of high-performance ${category.name} solutions.`}
+          </p>
         </div>
       </section>
 
       {/* Breadcrumbs */}
-      <section className="pt-8 pb-2 bg-[color:var(--color-background)]">
-        <div className="max-w-[1500px] mx-auto px-6 md:px-12">
-          <nav className="text-xs font-medium text-[color:var(--color-text-muted)] flex gap-2 tracking-wide uppercase">
-            <Link href="/" className="hover:text-[color:var(--color-accent)] no-underline text-[color:var(--color-text-muted)] transition-colors">Home</Link>
-            <span className="text-[color:var(--color-text-muted)]/40">/</span>
-            <Link href="/product" className="hover:text-[color:var(--color-accent)] no-underline text-[color:var(--color-text-muted)] transition-colors">Product</Link>
-            <span className="text-[color:var(--color-text-muted)]/40">/</span>
+      <section className="py-4 border-b border-[color:var(--color-border)]" style={{ background: "var(--color-background)" }}>
+        <div className="max-w-[1400px] mx-auto px-6">
+          <nav className="text-xs font-medium text-[color:var(--color-text-muted)] flex gap-2 tracking-[0.1em] uppercase items-center flex-wrap">
+            <Link href="/" className="hover:text-[color:var(--color-primary)] transition-colors">Home</Link>
+            <span className="opacity-50">/</span>
+            <Link href="/product" className="hover:text-[color:var(--color-primary)] transition-colors">Products</Link>
+            <span className="opacity-50">/</span>
             <span className="text-[color:var(--color-foreground)]">{category.name}</span>
           </nav>
         </div>

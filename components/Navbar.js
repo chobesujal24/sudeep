@@ -2,28 +2,30 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useTheme } from "./ThemeProvider";
-import { Icons } from "./Icons";
+import { supabase } from "@/lib/supabase";
+import { Building2, BookOpen, Newspaper } from "lucide-react";
 
 const navLinks = [
-  { href: "/services", label: "Services" },
-  { href: "/product", label: "Products" },
   { href: "/industries", label: "Industries" },
-  { href: "/about", label: "About" },
+  { href: "/services", label: "Services" },
+  { href: "/contact", label: "Contact Us" },
 ];
 
+// Dynamic categories will be fetched inside the component
+
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [dbCategories, setDbCategories] = useState([]);
   const pathname = usePathname();
-  const { theme, toggleTheme } = useTheme();
-  const isHome = pathname === "/";
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
-    window.addEventListener("scroll", onScroll);
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
+    async function fetchCategories() {
+      const { data, error } = await supabase.from('categories').select('*').order('sequence', { ascending: true }).limit(9);
+      if (data) {
+        setDbCategories(data);
+      }
+    }
+    fetchCategories();
   }, []);
 
   useEffect(() => {
@@ -41,24 +43,13 @@ export default function Navbar() {
     document.body.style.overflow = "";
   };
 
-  // Transparent on hero (home + not scrolled), adaptive otherwise
-  const isTransparent = isHome && !scrolled;
-
   return (
     <>
       <nav
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+        className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-slate-200"
         style={{
-          height: "76px",
-          background: isTransparent
-            ? "transparent"
-            : "var(--color-background)",
-          boxShadow: isTransparent ? "none" : "0 1px 20px rgba(0,0,0,0.06)",
-          borderBottom: isTransparent
-            ? "1px solid transparent"
-            : "1px solid var(--color-border)",
-          backdropFilter: isTransparent ? "none" : "blur(20px)",
-          WebkitBackdropFilter: isTransparent ? "none" : "blur(20px)",
+          height: "80px",
+          boxShadow: "0 2px 10px rgba(0,0,0,0.02)",
         }}
       >
         <div
@@ -66,59 +57,120 @@ export default function Navbar() {
           className="flex items-center justify-between h-full"
         >
           {/* Logo — Left */}
-          <Link href="/" className="flex items-center no-underline group shrink-0">
+          <Link href="/" className="flex items-center no-underline shrink-0">
             <img
               src="/logo.png"
               alt="Sudeep Engineers"
-              className={`h-[125px] w-auto object-contain transition-all duration-300 group-hover:scale-105 ${isTransparent ? "brightness-0 invert" : "logo-green"
-                }`}
+              className="h-[115px] w-auto object-contain logo-green"
             />
           </Link>
 
           {/* Center Nav Links — Desktop */}
-          <div className="hidden lg:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-8 h-full">
+            <Link
+              href="/"
+              className={`text-[15px] font-semibold tracking-wide transition-colors h-full flex items-center border-b-2 ${pathname === "/" ? "text-emerald-700 border-emerald-600" : "text-slate-700 hover:text-emerald-700 border-transparent hover:border-emerald-600"}`}
+            >
+              Home
+            </Link>
+
+            {/* About Dropdown */}
+            <div className="relative group h-full flex items-center">
+              <Link
+                href="/about"
+                className={`text-[15px] font-semibold tracking-wide transition-colors h-full flex items-center gap-1 border-b-2 ${pathname.startsWith("/about") || pathname.startsWith("/blog") || pathname.startsWith("/news") ? "text-emerald-700 border-emerald-600" : "text-slate-700 hover:text-emerald-700 border-transparent hover:border-emerald-600"}`}
+              >
+                About Us <svg className="w-4 h-4 rotate-180 group-hover:rotate-0 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+              </Link>
+              
+              {/* Dropdown Mega-Menu */}
+              <div className="absolute top-[80px] left-0 w-[320px] bg-white border border-slate-200 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top -translate-y-2 group-hover:translate-y-0 p-3 flex flex-col gap-1">
+                <Link href="/about" className="group/item flex items-center gap-4 p-3 hover:bg-slate-50 transition-colors rounded-md border border-transparent hover:border-slate-100">
+                  <div className="w-10 h-10 rounded-full bg-emerald-50 text-emerald-600 flex shrink-0 items-center justify-center">
+                    <Building2 size={20} strokeWidth={1.5} />
+                  </div>
+                  <div>
+                    <h4 className="text-[0.85rem] font-bold text-slate-900 uppercase tracking-tight group-hover/item:text-emerald-700 transition-colors">Company Profile</h4>
+                    <p className="text-xs text-slate-500 mt-0.5">Heritage, vision, and team.</p>
+                  </div>
+                </Link>
+                <Link href="/blog" className="group/item flex items-center gap-4 p-3 hover:bg-slate-50 transition-colors rounded-md border border-transparent hover:border-slate-100">
+                  <div className="w-10 h-10 rounded-full bg-emerald-50 text-emerald-600 flex shrink-0 items-center justify-center">
+                    <BookOpen size={20} strokeWidth={1.5} />
+                  </div>
+                  <div>
+                    <h4 className="text-[0.85rem] font-bold text-slate-900 uppercase tracking-tight group-hover/item:text-emerald-700 transition-colors">Blog</h4>
+                    <p className="text-xs text-slate-500 mt-0.5">Insights and technical articles.</p>
+                  </div>
+                </Link>
+                <Link href="/news" className="group/item flex items-center gap-4 p-3 hover:bg-slate-50 transition-colors rounded-md border border-transparent hover:border-slate-100">
+                  <div className="w-10 h-10 rounded-full bg-emerald-50 text-emerald-600 flex shrink-0 items-center justify-center">
+                    <Newspaper size={20} strokeWidth={1.5} />
+                  </div>
+                  <div>
+                    <h4 className="text-[0.85rem] font-bold text-slate-900 uppercase tracking-tight group-hover/item:text-emerald-700 transition-colors">Projects</h4>
+                    <p className="text-xs text-slate-500 mt-0.5">Discover ongoing and completed projects.</p>
+                  </div>
+                </Link>
+              </div>
+            </div>
+
+            {/* Products Dropdown */}
+            <div className="relative group h-full flex items-center">
+              <Link
+                href="/product"
+                className={`text-[15px] font-semibold tracking-wide transition-colors h-full flex items-center gap-1 border-b-2 ${pathname.startsWith("/product") ? "text-emerald-700 border-emerald-600" : "text-slate-700 hover:text-emerald-700 border-transparent hover:border-emerald-600"}`}
+              >
+                Products <svg className="w-4 h-4 rotate-180 group-hover:rotate-0 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+              </Link>
+              
+              {/* Dropdown Mega-Menu */}
+              <div className="absolute top-full left-1/2 -translate-x-1/2 w-[850px] bg-white border border-slate-200 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top translate-y-2 group-hover:translate-y-0 p-6">
+                <div className="flex justify-between items-end mb-6 pb-4 border-b border-slate-100">
+                  <div>
+                    <h3 className="text-lg font-bold text-slate-900 uppercase tracking-tight">Industrial Products</h3>
+                    <p className="text-sm text-slate-500 mt-1">Explore our complete range of certified manufacturing solutions.</p>
+                  </div>
+                  <Link href="/product" className="text-sm font-bold text-emerald-700 hover:text-emerald-800 uppercase tracking-wider flex items-center gap-1">
+                    View Complete Catalog ➔
+                  </Link>
+                </div>
+                <div className={`grid gap-6 ${dbCategories.length > 4 ? "grid-cols-3 lg:grid-cols-4" : "grid-cols-2 md:grid-cols-4"}`}>
+                  {dbCategories.map((cat, idx) => (
+                    <Link key={cat.id || idx} href={`/product/${cat.slug}`} className="group/item flex flex-col gap-3">
+                      <div className="relative w-full aspect-square bg-white border border-slate-100 overflow-hidden flex items-center justify-center p-4 group-hover/item:border-emerald-200 group-hover/item:shadow-sm transition-all rounded-md">
+                        <img src={cat.image || "/placeholder-image.jpg"} alt={cat.name} className="max-w-full max-h-full object-contain mix-blend-multiply" />
+                      </div>
+                      <div>
+                        <h4 className="text-[0.8rem] font-bold text-slate-900 group-hover/item:text-emerald-700 transition-colors uppercase tracking-tight leading-tight">{cat.name}</h4>
+                        <p className="text-xs text-slate-500 mt-1 leading-relaxed line-clamp-2">{cat.description || "View details and specifications"}</p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`nav-link ${isTransparent ? "nav-link-transparent" : "text-[color:var(--color-foreground)] hover:bg-[color:var(--color-bg-card-hover)]"} ${pathname === link.href ? "nav-link-active" : ""
-                  }`}
+                className={`text-[15px] font-semibold tracking-wide transition-colors h-full flex items-center border-b-2 ${pathname === link.href ? "text-emerald-700 border-emerald-600" : "text-slate-700 hover:text-emerald-700 border-transparent hover:border-emerald-600"}`}
               >
                 {link.label}
               </Link>
             ))}
           </div>
 
-          {/* Right — Contact + Theme Toggle + Mobile Toggle */}
-          <div className="flex items-center gap-3 md:gap-4">
-            <Link
-              href="/contact"
-              className="hidden lg:inline-flex items-center justify-center px-6 py-2.5 rounded-full text-sm font-semibold transition-all no-underline"
-              style={{
-                background: isTransparent ? "rgba(255,255,255,0.12)" : "var(--color-primary)",
-                color: "#FFFFFF",
-                border: isTransparent ? "1px solid rgba(255,255,255,0.3)" : "1px solid var(--color-primary)",
-                backdropFilter: isTransparent ? "blur(8px)" : "none",
-              }}
-            >
-              Contact
-            </Link>
-
-            {/* Theme Toggle Button */}
-            <button
-              onClick={toggleTheme}
-              className={`p-2 rounded-full transition-all duration-300 flex items-center justify-center ${isTransparent
-                  ? "bg-white/10 text-white hover:bg-white/20 border border-white/20"
-                  : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700"
-                }`}
-              aria-label="Toggle theme"
-            >
-              {theme === 'light' ? (
-                <Icons.Moon className="w-5 h-5 text-emerald-600" />
-              ) : (
-                <Icons.Sun className="w-5 h-5 text-yellow-400" />
-              )}
-            </button>
+          {/* Right — Contact & Mobile Toggle */}
+          <div className="flex items-center gap-4">
+            <div className="hidden lg:flex items-center gap-3 text-slate-600">
+              <svg className="w-5 h-5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              <div className="flex flex-col">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Call Us</span>
+                <a href="tel:+919922996236" className="text-sm font-bold text-slate-800 hover:text-emerald-600 transition-colors">+91 9922996236</a>
+              </div>
+            </div>
 
             {/* Mobile Toggle */}
             <button
@@ -127,23 +179,20 @@ export default function Navbar() {
               aria-label="Toggle menu"
             >
               <span
-                className="block w-6 h-0.5 rounded transition-all"
+                className="block w-6 h-0.5 rounded transition-all bg-slate-800"
                 style={{
-                  background: isTransparent || theme === 'dark' ? "#FFFFFF" : "#1E293B",
                   transform: mobileOpen ? "rotate(45deg) translateY(7px)" : "none",
                 }}
               />
               <span
-                className="block w-6 h-0.5 rounded transition-all"
+                className="block w-6 h-0.5 rounded transition-all bg-slate-800"
                 style={{
-                  background: isTransparent || theme === 'dark' ? "#FFFFFF" : "#1E293B",
                   opacity: mobileOpen ? 0 : 1,
                 }}
               />
               <span
-                className="block w-6 h-0.5 rounded transition-all"
+                className="block w-6 h-0.5 rounded transition-all bg-slate-800"
                 style={{
-                  background: isTransparent || theme === 'dark' ? "#FFFFFF" : "#1E293B",
                   transform: mobileOpen ? "rotate(-45deg) translateY(-7px)" : "none",
                 }}
               />
@@ -162,34 +211,71 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed top-0 right-0 w-[300px] h-full bg-white dark:bg-slate-900 z-50 lg:hidden ${mobileOpen ? "translate-x-0" : "translate-x-full"
-          }`}
-        style={{
-          boxShadow: "-5px 0 30px rgba(0,0,0,0.15)",
-          transition: "transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-        }}
+        className={`fixed top-0 right-0 w-[300px] h-full bg-white z-50 lg:hidden shadow-2xl transition-transform duration-300 ${mobileOpen ? "translate-x-0" : "translate-x-full"}`}
       >
-        <div className="pt-24 px-6">
-          {[{ href: "/", label: "Home" }, ...navLinks].map((link) => (
+        <div className="pt-24 px-6 overflow-y-auto h-full pb-20">
+          {[{ href: "/", label: "Home" }].map((link) => (
             <Link
               key={link.href}
               href={link.href}
               onClick={closeMobile}
-              className={`block px-4 py-3.5 rounded-xl text-base font-medium transition-all no-underline mb-1 ${pathname === link.href
-                  ? "text-[#166534] dark:text-green-400 bg-green-50 dark:bg-green-900/20"
-                  : "text-[#1E293B] dark:text-slate-300 hover:text-[#166534] dark:hover:text-green-400 hover:bg-[#F8FAFC] dark:hover:bg-slate-800"
-                }`}
+              className={`block px-4 py-3.5 border-b border-slate-100 text-base font-semibold transition-all ${pathname === link.href ? "text-emerald-700 bg-emerald-50/50" : "text-slate-700"}`}
             >
               {link.label}
             </Link>
           ))}
+
+          <div className="mt-6 mb-2 px-4 text-xs font-bold uppercase tracking-wider text-slate-400">About Us</div>
+          {[ { href: "/about", label: "Company Profile" }, { href: "/blog", label: "Blog" }, { href: "/news", label: "News" } ].map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={closeMobile}
+              className="block px-4 py-3 text-sm font-medium text-slate-600 hover:text-emerald-700 bg-white"
+            >
+              {link.label}
+            </Link>
+          ))}
+
+          <div className="mt-6 mb-2 border-t border-slate-100 pt-6 px-4 text-xs font-bold uppercase tracking-wider text-slate-400">Quick Links</div>
+          {navLinks.map((link) => (
+             <Link
+              key={link.href}
+              href={link.href}
+              onClick={closeMobile}
+              className={`block px-4 py-3.5 border-b border-slate-100 text-base font-semibold transition-all ${pathname === link.href ? "text-emerald-700 bg-emerald-50/50" : "text-slate-700"}`}
+            >
+              {link.label}
+            </Link>
+          ))}
+          
+          <div className="mt-8 mb-4 px-4 text-xs font-bold uppercase tracking-wider text-slate-400">Products Range</div>
+          
+          {dbCategories.map((cat, idx) => (
+            <Link
+              key={cat.id || idx}
+              href={`/product/${cat.slug}`}
+              onClick={closeMobile}
+              className="block px-4 py-3 text-sm font-medium text-slate-600 hover:text-emerald-700 bg-slate-50 mb-1 rounded-md"
+            >
+              {cat.name}
+            </Link>
+          ))}
+          
           <Link
-            href="/contact"
+            href="/product"
             onClick={closeMobile}
-            className="mt-4 block w-full text-center px-5 py-3.5 rounded-full bg-[#166534] dark:bg-green-600 text-white font-semibold no-underline hover:bg-[#15803D] dark:hover:bg-green-500 transition-all"
+            className="block px-4 py-3 text-sm font-bold text-emerald-700 hover:bg-emerald-50 mb-1 rounded-md"
           >
-            Contact Us
+            View All Products ➔
           </Link>
+
+          <a
+            href="tel:+919922996236"
+            className="mt-8 flex items-center justify-center gap-2 w-full px-5 py-3.5 rounded-none bg-emerald-700 text-white font-semibold hover:bg-emerald-800 transition-colors"
+          >
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> Call Now
+          </a>
         </div>
       </div>
     </>

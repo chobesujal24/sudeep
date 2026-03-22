@@ -12,7 +12,8 @@ import {
   ClipboardList,
   FileText,
   Sun,
-  Moon
+  Moon,
+  ChevronUp
 } from "lucide-react";
 
 export const Icons = {
@@ -39,4 +40,5 @@ export const Icons = {
   Doc: (props) => <FileText strokeWidth={1.5} {...props} />,
   Sun: (props) => <Sun strokeWidth={1.5} {...props} />,
   Moon: (props) => <Moon strokeWidth={1.5} {...props} />,
+  ChevronUp: (props) => <ChevronUp strokeWidth={1.5} {...props} />,
 };

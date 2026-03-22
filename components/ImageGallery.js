@@ -22,7 +22,7 @@ export default function ImageGallery({ images, productName }) {
           alt={productName}
           fill
           unoptimized
-          className="object-contain p-4 group-hover:scale-110 transition-transform duration-500 ease-in-out"
+          className="object-contain p-4 transition-all duration-500 ease-in-out"
           priority
         />
       </div>
