@@ -58,15 +58,12 @@ export async function POST(req) {
     const lang = detectLanguage(cleanText);
     const voice = VOICE_MAP[lang] || VOICE_MAP['en'];
 
-    const { UniversalEdgeTTS } = await import('edge-tts-universal');
-    const tts = new UniversalEdgeTTS();
-    await tts.setMetadata(voice, 'audio-24khz-48kbitrate-mono-mp3');
+    const { Communicate } = await import('edge-tts-universal');
+    const tts = new Communicate(cleanText, { voice: voice });
     
-    const readable = tts.toReadable(cleanText);
     const chunks = [];
-    
-    for await (const chunk of readable) {
-      if (chunk.type === 'audio') {
+    for await (const chunk of tts.stream()) {
+      if (chunk.type === 'audio' && chunk.data) {
         chunks.push(Buffer.from(chunk.data));
       }
     }
