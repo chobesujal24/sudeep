@@ -28,27 +28,35 @@ export default function ChatMessage({ role, content }) {
       return;
     }
 
-    // Stop anything playing right now
     window.speechSynthesis.cancel(); 
     
-    // Chrome has a bug where calling speak() immediately after cancel() fails silently.
-    // Wrap in a short timeout to let the cancel process natively.
     setTimeout(() => {
       const cleanText = content.replace(/[*#_`]/g, '').replace(/\[(.*?)\]\(.*?\)/g, '$1');
       if (!cleanText.trim()) return;
 
       const utterance = new SpeechSynthesisUtterance(cleanText);
       
+      // Auto-detect language from text content
+      const detectedLang = detectLanguage(cleanText);
+      utterance.lang = detectedLang;
+      
       const voices = window.speechSynthesis.getVoices();
       if (voices && voices.length > 0) {
-        const naturalVoice = voices.find(v => v.name.toLowerCase().includes('natural') || v.name.toLowerCase().includes('online')) 
-          || voices.find(v => v.name.includes('Google US English') || v.name.includes('Google UK English')) 
-          || voices.find(v => v.name.includes('Aria') || v.name.includes('Zira') || v.name.includes('Natasha'))
-          || voices.find(v => v.lang.startsWith('en'))
-          || voices[0];
+        // Find a voice matching the detected language
+        const langPrefix = detectedLang.split('-')[0]; // e.g. 'hi' from 'hi-IN'
+        
+        // Priority: natural/online > Google > Microsoft > any matching lang > fallback
+        const matchingVoice = 
+          voices.find(v => v.lang.startsWith(langPrefix) && (v.name.toLowerCase().includes('natural') || v.name.toLowerCase().includes('online'))) ||
+          voices.find(v => v.lang.startsWith(langPrefix) && v.name.toLowerCase().includes('google')) ||
+          voices.find(v => v.lang.startsWith(langPrefix) && !v.localService) ||
+          voices.find(v => v.lang.startsWith(langPrefix)) ||
+          voices.find(v => v.name.toLowerCase().includes('natural') || v.name.toLowerCase().includes('online')) ||
+          voices.find(v => v.name.includes('Google US English')) ||
+          voices[0];
           
-        if (naturalVoice) {
-          utterance.voice = naturalVoice;
+        if (matchingVoice) {
+          utterance.voice = matchingVoice;
         }
       }
       
@@ -57,14 +65,17 @@ export default function ChatMessage({ role, content }) {
 
       utterance.onend = () => setIsPlaying(false);
       utterance.onerror = (e) => {
-        console.error("SpeechSynthesis error:", e);
+        // 'interrupted' is expected when cancel() is called — not a real error
+        if (e?.error !== 'interrupted') {
+          console.warn('TTS:', e?.error || 'unknown');
+        }
         setIsPlaying(false);
       };
 
       setIsPlaying(true);
       window.speechSynthesis.speak(utterance);
 
-      // Chrome timeout bug workaround (speech stops >15s if not paused/resumed)
+      // Chrome >15s timeout workaround
       const chromeBugFix = setInterval(() => {
         if (!window.speechSynthesis.speaking) {
           clearInterval(chromeBugFix);
@@ -76,6 +87,35 @@ export default function ChatMessage({ role, content }) {
 
     }, 100);
   };
+
+  // Detect language from Unicode character ranges
+  function detectLanguage(text) {
+    const sample = text.substring(0, 200);
+    if (/[\u0900-\u097F]/.test(sample)) return 'hi-IN'; // Hindi (Devanagari)
+    if (/[\u0980-\u09FF]/.test(sample)) return 'bn-IN'; // Bengali
+    if (/[\u0A80-\u0AFF]/.test(sample)) return 'gu-IN'; // Gujarati
+    if (/[\u0B00-\u0B7F]/.test(sample)) return 'or-IN'; // Odia
+    if (/[\u0A00-\u0A7F]/.test(sample)) return 'pa-IN'; // Punjabi
+    if (/[\u0B80-\u0BFF]/.test(sample)) return 'ta-IN'; // Tamil
+    if (/[\u0C00-\u0C7F]/.test(sample)) return 'te-IN'; // Telugu
+    if (/[\u0C80-\u0CFF]/.test(sample)) return 'kn-IN'; // Kannada
+    if (/[\u0D00-\u0D7F]/.test(sample)) return 'ml-IN'; // Malayalam
+    if (/[\u0600-\u06FF]/.test(sample)) return 'ar-SA'; // Arabic
+    if (/[\u0590-\u05FF]/.test(sample)) return 'he-IL'; // Hebrew
+    if (/[\u4E00-\u9FFF]/.test(sample)) return 'zh-CN'; // Chinese
+    if (/[\u3040-\u309F\u30A0-\u30FF]/.test(sample)) return 'ja-JP'; // Japanese
+    if (/[\uAC00-\uD7AF]/.test(sample)) return 'ko-KR'; // Korean
+    if (/[\u0E00-\u0E7F]/.test(sample)) return 'th-TH'; // Thai
+    if (/[\u0400-\u04FF]/.test(sample)) return 'ru-RU'; // Russian
+    if (/[àáâãäéèêëíìîïóòôõöúùûüñçß]/.test(sample)) {
+      if (/[ñ¿¡]/.test(sample)) return 'es-ES'; // Spanish
+      if (/[àâéèêëîïôùûüç]/.test(sample)) return 'fr-FR'; // French
+      if (/[äöüß]/.test(sample)) return 'de-DE'; // German
+      if (/[àèéìíîòóùú]/.test(sample)) return 'it-IT'; // Italian
+      if (/[àáâãéêíóôõúç]/.test(sample)) return 'pt-BR'; // Portuguese
+    }
+    return 'en-US'; // Default English
+  }
 
   return (
     <motion.div

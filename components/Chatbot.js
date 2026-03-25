@@ -26,6 +26,7 @@ export default function Chatbot() {
   const [attachedFile, setAttachedFile] = useState(null);
   
   const messagesEndRef = useRef(null);
+  const messagesContainerRef = useRef(null);
   const inputRef = useRef(null);
   const fileInputRef = useRef(null);
   const recognitionRef = useRef(null);
@@ -52,16 +53,26 @@ export default function Chatbot() {
     return () => { clearTimeout(showTimer); clearTimeout(hideTimer); };
   }, [isOpen]);
 
-  // Lock background scroll when chat is open
+  // Trap wheel events inside the chat messages area so the main page never scrolls
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
+    const container = messagesContainerRef.current;
+    if (!container) return;
+
+    const handleWheel = (e) => {
+      const { scrollTop, scrollHeight, clientHeight } = container;
+      const atTop = scrollTop <= 0;
+      const atBottom = scrollTop + clientHeight >= scrollHeight - 1;
+
+      // If scrolling up at the top, or scrolling down at the bottom, block the event
+      if ((e.deltaY < 0 && atTop) || (e.deltaY > 0 && atBottom)) {
+        e.preventDefault();
+      }
+      // Always stop propagation so the outer page never gets the wheel event
+      e.stopPropagation();
     };
+
+    container.addEventListener('wheel', handleWheel, { passive: false });
+    return () => container.removeEventListener('wheel', handleWheel);
   }, [isOpen]);
 
   // Handle Speech Recognition setup
@@ -241,7 +252,7 @@ export default function Chatbot() {
             </div>
 
             {/* ─ Messages Area ─ */}
-            <div className="flex-1 overflow-y-auto overflow-x-hidden px-4 py-4 w-full relative custom-scrollbar overscroll-contain" style={{ background: "var(--color-background)", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" }}>
+            <div ref={messagesContainerRef} className="flex-1 overflow-y-auto overflow-x-hidden px-4 py-4 w-full relative custom-scrollbar" style={{ background: "var(--color-background)", overscrollBehavior: "contain" }}>
               <div className="relative z-10">
                 <AnimatePresence initial={false}>
                   {messages.map((msg, index) => (
