@@ -23,7 +23,6 @@ export default function Chatbot() {
   
   // New features state
   const [isListening, setIsListening] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
   const [attachedFile, setAttachedFile] = useState(null);
   
   const messagesEndRef = useRef(null);
@@ -90,17 +89,7 @@ export default function Chatbot() {
     }
   };
 
-  const speak = (text) => {
-    if (!('speechSynthesis' in window)) return;
-    window.speechSynthesis.cancel(); // Stop current speech
-    if (isMuted) return;
-    
-    const cleanText = text.replace(/[*#_`]/g, '').replace(/\[(.*?)\]\(.*?\)/g, '$1');
-    const utterance = new SpeechSynthesisUtterance(cleanText);
-    window.speechSynthesis.speak(utterance);
-  };
-
-  // Turn off speech when closing chat
+  // Stop speech synthesis if closing chat completely
   useEffect(() => {
     if (!isOpen && typeof window !== 'undefined' && window.speechSynthesis) {
       window.speechSynthesis.cancel();
@@ -165,7 +154,6 @@ export default function Chatbot() {
 
       if (response.ok && data.reply) {
         setMessages(prev => [...prev, { role: 'assistant', content: data.reply }]);
-        speak(data.reply);
       } else {
         setMessages(prev => [...prev, { role: 'assistant', content: data.error || 'Connection error. Try again later.' }]);
       }
@@ -228,15 +216,6 @@ export default function Chatbot() {
                 
                 <div className="flex items-center gap-1">
                   <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={() => setIsMuted(!isMuted)}
-                    className="text-white/80 hover:text-white transition-colors p-2 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10"
-                    title={isMuted ? "Enable Voice (TTS)" : "Disable Voice"}
-                  >
-                    {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} className="text-[#4ADE80]" />}
-                  </motion.button>
-                  <motion.button
                     whileHover={{ scale: 1.1, rotate: 90 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={() => setIsOpen(false)}
@@ -250,7 +229,7 @@ export default function Chatbot() {
             </div>
 
             {/* ─ Messages Area ─ */}
-            <div className="flex-1 overflow-y-auto overflow-x-hidden px-4 py-4 w-full relative custom-scrollbar" style={{ background: "var(--color-background)", WebkitOverflowScrolling: "touch" }}>
+            <div className="flex-1 overflow-y-auto overflow-x-hidden px-4 py-4 w-full relative custom-scrollbar overscroll-contain" style={{ background: "var(--color-background)", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" }}>
               <div className="relative z-10">
                 <AnimatePresence initial={false}>
                   {messages.map((msg, index) => (

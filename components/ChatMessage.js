@@ -1,11 +1,56 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { motion } from 'framer-motion';
-import { Sparkles, User } from 'lucide-react';
+import { Sparkles, User, Volume2, Square } from 'lucide-react';
 
 export default function ChatMessage({ role, content }) {
   const isUser = role === 'user';
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    return () => {
+      if (isPlaying && window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+      }
+    };
+  }, [isPlaying]);
+
+  const handleSpeak = () => {
+    if (!('speechSynthesis' in window)) return;
+    
+    if (isPlaying) {
+      window.speechSynthesis.cancel();
+      setIsPlaying(false);
+      return;
+    }
+
+    window.speechSynthesis.cancel(); // Stop anything else currently playing
+    
+    const cleanText = content.replace(/[*#_`]/g, '').replace(/\[(.*?)\]\(.*?\)/g, '$1');
+    const utterance = new SpeechSynthesisUtterance(cleanText);
+    
+    // Attempt to find a natural-sounding voice
+    const voices = window.speechSynthesis.getVoices();
+    const naturalVoice = voices.find(v => v.name.toLowerCase().includes('natural') || v.name.toLowerCase().includes('online')) 
+      || voices.find(v => v.name.includes('Google US English') || v.name.includes('Google UK English')) 
+      || voices.find(v => v.name.includes('Aria') || v.name.includes('Zira') || v.name.includes('Natasha'))
+      || voices[0];
+      
+    if (naturalVoice) {
+      utterance.voice = naturalVoice;
+    }
+    
+    // Tweak parameters for a slightly more pleasant, natural human cadence
+    utterance.rate = 1.05;
+    utterance.pitch = 1.05;
+
+    utterance.onend = () => setIsPlaying(false);
+    utterance.onerror = () => setIsPlaying(false);
+
+    setIsPlaying(true);
+    window.speechSynthesis.speak(utterance);
+  };
 
   return (
     <motion.div
@@ -41,6 +86,18 @@ export default function ChatMessage({ role, content }) {
             <ReactMarkdown remarkPlugins={[remarkGfm]}>
               {content}
             </ReactMarkdown>
+            
+            {/* AI Action Bar - Text Bottom */}
+            <div className="flex items-center gap-2 mt-3 pt-2 border-t border-[color:var(--color-border)] opacity-80 hover:opacity-100 transition-opacity">
+              <button 
+                onClick={handleSpeak}
+                className={`flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider px-2 py-1.5 rounded-md hover:bg-black/5 dark:hover:bg-white/10 transition-colors ${isPlaying ? 'text-[#166534] dark:text-[#4ADE80]' : 'text-[color:var(--color-text-muted)]'}`}
+                title={isPlaying ? "Stop Reading" : "Read Aloud"}
+              >
+                {isPlaying ? <Square size={13} fill="currentColor" /> : <Volume2 size={13} />}
+                {isPlaying ? "Stop" : "Read Aloud"}
+              </button>
+            </div>
           </div>
         )}
       </div>
