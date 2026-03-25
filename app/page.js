@@ -33,7 +33,7 @@ export default function HomePage() {
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
             <span className="text-xs font-bold text-emerald-300 uppercase tracking-widest leading-none">
-              India's Premier Lighting OEM
+              India's Premier Lighting OEM Solutions
             </span>
           </div>
 

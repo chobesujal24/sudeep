@@ -1,9 +1,13 @@
 // Force re-build of Chat API
 import { NextResponse } from 'next/server';
+import { getProductData } from '@/lib/getProductData';
 
-const SYSTEM_PROMPT = `You are an AI assistant for Sudeep Engineers (LED lighting and solar infrastructure) in Waluj MIDC, Aurangabad.
+const BASE_SYSTEM_PROMPT = `You are an AI assistant for Sudeep Engineers (LED lighting and solar infrastructure) in Waluj MIDC, Aurangabad.
 Support: Professional, concise answers about products, quotes, and technical specs. 
 Identify as Sudeep Engineers AI Assistant.
+
+CRITICALLY IMPORTANT INSTRUCTION:
+YOU MUST STRICTLY ONLY ANSWER QUESTIONS RELATED TO SUDEEP ENGINEERS, OUR PRODUCTS, SERVICES, INDUSTRIES, AND COMPANY. IF A USER ASKS ABOUT ANYTHING ELSE (general knowledge, coding, writing unrelated essays, politics, etc.), POLITELY DECLINE AND REDIRECT THEM TO OUR OFFERINGS. Do not provide code, general knowledge, or casual conversations unrelated to the business.
 
 VISUAL CAPABILITIES:
 You can see and analyze images provided by the user (site photos, drawings, lamp designs). Provide expert feedback based on visual evidence.
@@ -81,6 +85,20 @@ export async function POST(req) {
     }
 
     if (!messages.length) return NextResponse.json({ error: 'Invalid message' }, { status: 400 });
+
+    // Fetch products
+    let productsText = "";
+    try {
+      const allProducts = await getProductData();
+      if (allProducts && allProducts.length > 0) {
+        productsText = "\n\nOUR COMPLETE PRODUCT CATALOG (Use this data to answer product questions accurately):\n" + 
+          allProducts.map(p => `- ${p.name || p.title || 'Product'} (Category: ${p.category || 'N/A'}): ${p.shortDescription || p.description || ''} ${p.wattage ? 'Wattage: ' + p.wattage : ''}`).join('\n');
+      }
+    } catch (e) {
+      console.error("Failed to fetch products for AI context", e);
+    }
+
+    const SYSTEM_PROMPT = BASE_SYSTEM_PROMPT + productsText;
 
     // Format for NVIDIA Llama 3.2 Vision Model
     const formattedMessages = [
