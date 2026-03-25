@@ -8,114 +8,66 @@ export default function ChatMessage({ role, content }) {
   const isUser = role === 'user';
   const [isPlaying, setIsPlaying] = useState(false);
 
-  useEffect(() => {
-    // Warm up voices array on mount (so they're available when clicked)
-    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-      window.speechSynthesis.getVoices();
-      
-      return () => {
-        if (isPlaying) window.speechSynthesis.cancel();
-      };
-    }
-  }, [isPlaying]);
+  const audioRef = React.useRef(null);
 
-  const handleSpeak = () => {
-    if (!('speechSynthesis' in window)) return;
-    
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.src = "";
+      }
+    };
+  }, []);
+
+  const handleSpeak = async () => {
     if (isPlaying) {
-      window.speechSynthesis.cancel();
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
       setIsPlaying(false);
       return;
     }
 
-    window.speechSynthesis.cancel(); 
-    
-    setTimeout(() => {
+    setIsPlaying(true);
+
+    try {
       const cleanText = content.replace(/[*#_`]/g, '').replace(/\[(.*?)\]\(.*?\)/g, '$1');
-      if (!cleanText.trim()) return;
-
-      const utterance = new SpeechSynthesisUtterance(cleanText);
-      
-      // Auto-detect language from text content
-      const detectedLang = detectLanguage(cleanText);
-      utterance.lang = detectedLang;
-      
-      const voices = window.speechSynthesis.getVoices();
-      if (voices && voices.length > 0) {
-        // Find a voice matching the detected language
-        const langPrefix = detectedLang.split('-')[0]; // e.g. 'hi' from 'hi-IN'
-        
-        // Priority: natural/online > Google > Microsoft > any matching lang > fallback
-        const matchingVoice = 
-          voices.find(v => v.lang.startsWith(langPrefix) && (v.name.toLowerCase().includes('natural') || v.name.toLowerCase().includes('online'))) ||
-          voices.find(v => v.lang.startsWith(langPrefix) && v.name.toLowerCase().includes('google')) ||
-          voices.find(v => v.lang.startsWith(langPrefix) && !v.localService) ||
-          voices.find(v => v.lang.startsWith(langPrefix)) ||
-          voices.find(v => v.name.toLowerCase().includes('natural') || v.name.toLowerCase().includes('online')) ||
-          voices.find(v => v.name.includes('Google US English')) ||
-          voices[0];
-          
-        if (matchingVoice) {
-          utterance.voice = matchingVoice;
-        }
-      }
-      
-      utterance.rate = 1.0;
-      utterance.pitch = 1.0;
-
-      utterance.onend = () => setIsPlaying(false);
-      utterance.onerror = (e) => {
-        // 'interrupted' is expected when cancel() is called — not a real error
-        if (e?.error !== 'interrupted') {
-          console.warn('TTS:', e?.error || 'unknown');
-        }
+      if (!cleanText.trim()) {
         setIsPlaying(false);
+        return;
+      }
+
+      const response = await fetch('/api/tts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: cleanText })
+      });
+
+      if (!response.ok) throw new Error('TTS request failed');
+
+      const blob = await response.blob();
+      const audioUrl = URL.createObjectURL(blob);
+      
+      const audio = new Audio(audioUrl);
+      audioRef.current = audio;
+
+      audio.onended = () => {
+        setIsPlaying(false);
+        URL.revokeObjectURL(audioUrl);
+      };
+      audio.onerror = () => {
+        setIsPlaying(false);
+        URL.revokeObjectURL(audioUrl);
       };
 
-      setIsPlaying(true);
-      window.speechSynthesis.speak(utterance);
+      await audio.play();
 
-      // Chrome >15s timeout workaround
-      const chromeBugFix = setInterval(() => {
-        if (!window.speechSynthesis.speaking) {
-          clearInterval(chromeBugFix);
-        } else {
-          window.speechSynthesis.pause();
-          window.speechSynthesis.resume();
-        }
-      }, 14000);
-
-    }, 100);
-  };
-
-  // Detect language from Unicode character ranges
-  function detectLanguage(text) {
-    const sample = text.substring(0, 200);
-    if (/[\u0900-\u097F]/.test(sample)) return 'hi-IN'; // Hindi (Devanagari)
-    if (/[\u0980-\u09FF]/.test(sample)) return 'bn-IN'; // Bengali
-    if (/[\u0A80-\u0AFF]/.test(sample)) return 'gu-IN'; // Gujarati
-    if (/[\u0B00-\u0B7F]/.test(sample)) return 'or-IN'; // Odia
-    if (/[\u0A00-\u0A7F]/.test(sample)) return 'pa-IN'; // Punjabi
-    if (/[\u0B80-\u0BFF]/.test(sample)) return 'ta-IN'; // Tamil
-    if (/[\u0C00-\u0C7F]/.test(sample)) return 'te-IN'; // Telugu
-    if (/[\u0C80-\u0CFF]/.test(sample)) return 'kn-IN'; // Kannada
-    if (/[\u0D00-\u0D7F]/.test(sample)) return 'ml-IN'; // Malayalam
-    if (/[\u0600-\u06FF]/.test(sample)) return 'ar-SA'; // Arabic
-    if (/[\u0590-\u05FF]/.test(sample)) return 'he-IL'; // Hebrew
-    if (/[\u4E00-\u9FFF]/.test(sample)) return 'zh-CN'; // Chinese
-    if (/[\u3040-\u309F\u30A0-\u30FF]/.test(sample)) return 'ja-JP'; // Japanese
-    if (/[\uAC00-\uD7AF]/.test(sample)) return 'ko-KR'; // Korean
-    if (/[\u0E00-\u0E7F]/.test(sample)) return 'th-TH'; // Thai
-    if (/[\u0400-\u04FF]/.test(sample)) return 'ru-RU'; // Russian
-    if (/[àáâãäéèêëíìîïóòôõöúùûüñçß]/.test(sample)) {
-      if (/[ñ¿¡]/.test(sample)) return 'es-ES'; // Spanish
-      if (/[àâéèêëîïôùûüç]/.test(sample)) return 'fr-FR'; // French
-      if (/[äöüß]/.test(sample)) return 'de-DE'; // German
-      if (/[àèéìíîòóùú]/.test(sample)) return 'it-IT'; // Italian
-      if (/[àáâãéêíóôõúç]/.test(sample)) return 'pt-BR'; // Portuguese
+    } catch (error) {
+      console.error('Failed to play TTS:', error);
+      setIsPlaying(false);
     }
-    return 'en-US'; // Default English
-  }
+  };
 
   return (
     <motion.div
