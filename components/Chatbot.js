@@ -52,6 +52,18 @@ export default function Chatbot() {
     return () => { clearTimeout(showTimer); clearTimeout(hideTimer); };
   }, [isOpen]);
 
+  // Lock background scroll when chat is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   // Handle Speech Recognition setup
   useEffect(() => {
     if (typeof window !== 'undefined') {

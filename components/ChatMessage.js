@@ -9,11 +9,14 @@ export default function ChatMessage({ role, content }) {
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
-    return () => {
-      if (isPlaying && window.speechSynthesis) {
-        window.speechSynthesis.cancel();
-      }
-    };
+    // Warm up voices array on mount (so they're available when clicked)
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      window.speechSynthesis.getVoices();
+      
+      return () => {
+        if (isPlaying) window.speechSynthesis.cancel();
+      };
+    }
   }, [isPlaying]);
 
   const handleSpeak = () => {
@@ -25,31 +28,53 @@ export default function ChatMessage({ role, content }) {
       return;
     }
 
-    window.speechSynthesis.cancel(); // Stop anything else currently playing
+    // Stop anything playing right now
+    window.speechSynthesis.cancel(); 
     
-    const cleanText = content.replace(/[*#_`]/g, '').replace(/\[(.*?)\]\(.*?\)/g, '$1');
-    const utterance = new SpeechSynthesisUtterance(cleanText);
-    
-    // Attempt to find a natural-sounding voice
-    const voices = window.speechSynthesis.getVoices();
-    const naturalVoice = voices.find(v => v.name.toLowerCase().includes('natural') || v.name.toLowerCase().includes('online')) 
-      || voices.find(v => v.name.includes('Google US English') || v.name.includes('Google UK English')) 
-      || voices.find(v => v.name.includes('Aria') || v.name.includes('Zira') || v.name.includes('Natasha'))
-      || voices[0];
+    // Chrome has a bug where calling speak() immediately after cancel() fails silently.
+    // Wrap in a short timeout to let the cancel process natively.
+    setTimeout(() => {
+      const cleanText = content.replace(/[*#_`]/g, '').replace(/\[(.*?)\]\(.*?\)/g, '$1');
+      if (!cleanText.trim()) return;
+
+      const utterance = new SpeechSynthesisUtterance(cleanText);
       
-    if (naturalVoice) {
-      utterance.voice = naturalVoice;
-    }
-    
-    // Tweak parameters for a slightly more pleasant, natural human cadence
-    utterance.rate = 1.05;
-    utterance.pitch = 1.05;
+      const voices = window.speechSynthesis.getVoices();
+      if (voices && voices.length > 0) {
+        const naturalVoice = voices.find(v => v.name.toLowerCase().includes('natural') || v.name.toLowerCase().includes('online')) 
+          || voices.find(v => v.name.includes('Google US English') || v.name.includes('Google UK English')) 
+          || voices.find(v => v.name.includes('Aria') || v.name.includes('Zira') || v.name.includes('Natasha'))
+          || voices.find(v => v.lang.startsWith('en'))
+          || voices[0];
+          
+        if (naturalVoice) {
+          utterance.voice = naturalVoice;
+        }
+      }
+      
+      utterance.rate = 1.0;
+      utterance.pitch = 1.0;
 
-    utterance.onend = () => setIsPlaying(false);
-    utterance.onerror = () => setIsPlaying(false);
+      utterance.onend = () => setIsPlaying(false);
+      utterance.onerror = (e) => {
+        console.error("SpeechSynthesis error:", e);
+        setIsPlaying(false);
+      };
 
-    setIsPlaying(true);
-    window.speechSynthesis.speak(utterance);
+      setIsPlaying(true);
+      window.speechSynthesis.speak(utterance);
+
+      // Chrome timeout bug workaround (speech stops >15s if not paused/resumed)
+      const chromeBugFix = setInterval(() => {
+        if (!window.speechSynthesis.speaking) {
+          clearInterval(chromeBugFix);
+        } else {
+          window.speechSynthesis.pause();
+          window.speechSynthesis.resume();
+        }
+      }, 14000);
+
+    }, 100);
   };
 
   return (
