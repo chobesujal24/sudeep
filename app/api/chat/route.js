@@ -92,7 +92,12 @@ export async function POST(req) {
       const allProducts = await getProductData();
       if (allProducts && allProducts.length > 0) {
         productsText = "\n\nOUR COMPLETE PRODUCT CATALOG (Use this data to answer product questions accurately):\n" + 
-          allProducts.map(p => `- ${p.name || p.title || 'Product'} (Category: ${p.category || 'N/A'}): ${p.shortDescription || p.description || ''} ${p.wattage ? 'Wattage: ' + p.wattage : ''}`).join('\n');
+          allProducts.map(p => {
+            const apps = Array.isArray(p.applications) && p.applications.length > 0 ? `| Applications: ${p.applications.join(', ')} ` : '';
+            const specs = Array.isArray(p.specs) && p.specs.length > 0 ? `| Specs: ${p.specs.map(s => `${s.label}: ${s.value}`).join(', ')} ` : '';
+            const models = Array.isArray(p.models) && p.models.length > 0 ? `| Models: ${p.models.map(m => m.wattage).join(', ')}` : '';
+            return `- ${p.name || p.title || 'Product'} (Category: ${p.category || 'N/A'}): ${p.description || ''} ${apps}${specs}${models}`;
+          }).join('\n');
       }
     } catch (e) {
       console.error("Failed to fetch products for AI context", e);

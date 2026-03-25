@@ -19,13 +19,13 @@ export default function HomePage() {
         <div className="absolute inset-0 z-0">
           <HeroSlider />
         </div>
-        
+
         {/* Clean gradient overlay */}
         <div className="absolute inset-0 z-[1] bg-gradient-to-b from-slate-950/70 via-slate-950/50 to-slate-950/80" />
-        
+
         {/* Central content */}
         <div className="relative z-10 w-full px-6 text-center max-w-5xl mx-auto flex flex-col items-center">
-          
+
           {/* Glowing B2B Trust Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 backdrop-blur-md mb-8 shadow-[0_0_20px_rgba(16,185,129,0.15)]">
             <span className="flex h-2 w-2 relative">
@@ -74,7 +74,7 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
-        
+
         {/* Bottom trust bar — minimal, clean */}
         <div className="absolute bottom-0 left-0 right-0 z-20 border-t border-white/5 bg-slate-950/40 backdrop-blur-md">
           <div className="max-w-5xl mx-auto px-6 py-4 flex justify-center items-center gap-8 md:gap-12 text-[10px] md:text-[11px] font-medium text-white/40 uppercase tracking-[0.2em]">
