@@ -47,9 +47,23 @@ function detectLanguage(text) {
   return 'en';
 }
 
+export async function GET(req) {
+  const { searchParams } = new URL(req.url);
+  const text = searchParams.get('text');
+  return handleTTS(text);
+}
+
 export async function POST(req) {
   try {
     const { text } = await req.json();
+    return handleTTS(text);
+  } catch (error) {
+    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
+  }
+}
+
+async function handleTTS(text) {
+  try {
     if (!text || text.length > 5000) {
       return NextResponse.json({ error: 'Invalid text' }, { status: 400 });
     }
@@ -61,20 +75,27 @@ export async function POST(req) {
     const { Communicate } = await import('edge-tts-universal');
     const tts = new Communicate(cleanText, { voice: voice });
     
-    const chunks = [];
-    for await (const chunk of tts.stream()) {
-      if (chunk.type === 'audio' && chunk.data) {
-        chunks.push(Buffer.from(chunk.data));
+    const stream = new ReadableStream({
+      async start(controller) {
+        try {
+          for await (const chunk of tts.stream()) {
+            if (chunk.type === 'audio' && chunk.data) {
+              controller.enqueue(new Uint8Array(chunk.data));
+            }
+          }
+          controller.close();
+        } catch (error) {
+          console.error('Streaming error:', error);
+          controller.error(error);
+        }
       }
-    }
+    });
 
-    const audioBuffer = Buffer.concat(chunks);
-
-    return new Response(audioBuffer, {
+    return new Response(stream, {
       headers: {
         'Content-Type': 'audio/mpeg',
-        'Content-Length': audioBuffer.length.toString(),
-        'Cache-Control': 'public, max-age=3600',
+        'Transfer-Encoding': 'chunked',
+        'Cache-Control': 'no-cache',
       },
     });
 
@@ -83,3 +104,5 @@ export async function POST(req) {
     return NextResponse.json({ error: 'TTS generation failed' }, { status: 500 });
   }
 }
+
+

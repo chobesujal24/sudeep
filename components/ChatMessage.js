@@ -38,27 +38,16 @@ export default function ChatMessage({ role, content }) {
         return;
       }
 
-      const response = await fetch('/api/tts', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: cleanText })
-      });
-
-      if (!response.ok) throw new Error('TTS request failed');
-
-      const blob = await response.blob();
-      const audioUrl = URL.createObjectURL(blob);
+      // Use native browser streaming via GET request
+      const ttsUrl = `/api/tts?text=${encodeURIComponent(cleanText)}`;
       
-      const audio = new Audio(audioUrl);
+      const audio = new Audio(ttsUrl);
       audioRef.current = audio;
 
-      audio.onended = () => {
+      audio.onended = () => setIsPlaying(false);
+      audio.onerror = (e) => {
+        console.error('Failed to play TTS stream:', e);
         setIsPlaying(false);
-        URL.revokeObjectURL(audioUrl);
-      };
-      audio.onerror = () => {
-        setIsPlaying(false);
-        URL.revokeObjectURL(audioUrl);
       };
 
       await audio.play();
