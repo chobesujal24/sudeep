@@ -3,23 +3,22 @@ import { Icons } from "./Icons";
 
 const footerLinks = {
   products: [
-    { href: "/product/led-street-light/led-street-light", label: "LED Street Lights" },
-    { href: "/product/led-street-light/led-flood-light", label: "LED Flood Lights" },
-    { href: "/product/led-street-light/solar-street-light", label: "Solar Street Lights" },
-    { href: "/product/highmast-light/high-mast-pole", label: "High Mast Poles" },
+    { href: "/product/led-street-light", label: "LED Street Lights" },
+    { href: "/product/led-flood-light", label: "LED Flood Lights" },
+    { href: "/product/solar-street-light", label: "Solar Street Lights" },
+    { href: "/product/high-mast-pole", label: "High Mast Poles" },
     { href: "/product", label: "Browse All Products" },
   ],
   company: [
     { href: "/about", label: "About Sudeep Engineers" },
     { href: "/industries", label: "Core Industries" },
-    { href: "/certifications", label: "ISO & MSME Certifications" },
-    { href: "/blog", label: "Technical Blog" },
+    { href: "/certifications", label: "Certifications" },
+    { href: "/blog", label: "Blog" },
     { href: "/contact", label: "Contact Us" },
   ],
   support: [
     { href: "/contact", label: "Request a Quote" },
     { href: "/services", label: "OEM/ODM Manufacturing" },
-    { href: "/product/led-street-light/solar-street-light", label: "Solar Installation Guide" },
     { href: "/contact", label: "Customer Support" },
   ],
 };
@@ -27,46 +26,45 @@ const footerLinks = {
 export default function Footer() {
   return (
     <footer className="bg-slate-50 border-t border-slate-200 text-slate-600">
-      <div className="max-w-[1400px] mx-auto px-6 py-16 lg:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-16">
-          
-          {/* Brand Column (Span 2) */}
-          <div className="lg:col-span-2">
+      <div className="max-w-6xl mx-auto px-6 py-16 lg:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-10 mb-16">
+
+          {/* Brand Column */}
+          <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-6">
               <img
                 src="/logo.png"
                 alt="Sudeep Engineers"
-                className="h-[80px] w-auto object-contain logo-green"
+                className="h-16 w-auto object-contain logo-green"
               />
             </Link>
-            <p className="text-slate-600 text-sm leading-relaxed max-w-sm mb-8 font-medium">
-              Premium LED lighting and solar solutions manufactured entirely in Waluj MIDC,
-              Aurangabad. Trusted MSME and GeM registered partner for India's largest infrastructure projects.
+            <p className="text-slate-500 text-sm leading-relaxed max-w-xs mb-6">
+              Premium LED lighting and solar solutions. MSME and GeM registered partner for India's infrastructure projects.
             </p>
-            <div className="space-y-4 text-sm font-semibold">
+            <div className="space-y-3 text-sm">
               <div className="flex items-start gap-3">
-                <Icons.Location className="w-5 h-5 text-emerald-700 shrink-0 mt-0.5" />
-                <span>Waluj MIDC, Aurangabad,<br/>Maharashtra 431136, India</span>
+                <Icons.Location className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                <span className="text-slate-500">Waluj MIDC, Aurangabad,<br />Maharashtra 431136</span>
               </div>
               <div className="flex items-center gap-3">
-                <Icons.Phone className="w-5 h-5 text-emerald-700 shrink-0" />
-                <a href="tel:+919922996236" className="hover:text-emerald-700 transition-colors">+91 9922996236</a>
+                <Icons.Phone className="w-4 h-4 text-emerald-600 shrink-0" />
+                <a href="tel:+919922996236" className="text-slate-500 hover:text-emerald-600 transition-colors">+91 9922996236</a>
               </div>
               <div className="flex items-center gap-3">
-                <Icons.Envelope className="w-5 h-5 text-emerald-700 shrink-0" />
-                <a href="mailto:info@sudeepengineers.com" className="hover:text-emerald-700 transition-colors">info@sudeepengineers.com</a>
+                <Icons.Envelope className="w-4 h-4 text-emerald-600 shrink-0" />
+                <a href="mailto:info@sudeepengineers.com" className="text-slate-500 hover:text-emerald-600 transition-colors">info@sudeepengineers.com</a>
               </div>
             </div>
           </div>
 
           {/* Products Column */}
           <div>
-            <h4 className="font-bold text-slate-900 text-sm mb-6 uppercase tracking-widest">Products</h4>
-            <ul className="space-y-3">
+            <h4 className="font-semibold text-slate-900 text-sm mb-5 uppercase tracking-wider">Products</h4>
+            <ul className="space-y-2.5">
               {footerLinks.products.map((link, i) => (
                 <li key={i}>
-                  <Link href={link.href} className="text-sm font-medium hover:text-emerald-700 transition-colors flex items-center gap-2">
-                    <span className="text-emerald-500 text-xs">▸</span> {link.label}
+                  <Link href={link.href} className="text-sm text-slate-500 hover:text-emerald-600 transition-colors">
+                    {link.label}
                   </Link>
                 </li>
               ))}
@@ -75,12 +73,12 @@ export default function Footer() {
 
           {/* Company Column */}
           <div>
-            <h4 className="font-bold text-slate-900 text-sm mb-6 uppercase tracking-widest">Company</h4>
-            <ul className="space-y-3">
+            <h4 className="font-semibold text-slate-900 text-sm mb-5 uppercase tracking-wider">Company</h4>
+            <ul className="space-y-2.5">
               {footerLinks.company.map((link, i) => (
                 <li key={i}>
-                  <Link href={link.href} className="text-sm font-medium hover:text-emerald-700 transition-colors flex items-center gap-2">
-                    <span className="text-emerald-500 text-xs">▸</span> {link.label}
+                  <Link href={link.href} className="text-sm text-slate-500 hover:text-emerald-600 transition-colors">
+                    {link.label}
                   </Link>
                 </li>
               ))}
@@ -89,12 +87,12 @@ export default function Footer() {
 
           {/* Support Column */}
           <div>
-            <h4 className="font-bold text-slate-900 text-sm mb-6 uppercase tracking-widest">Support</h4>
-            <ul className="space-y-3">
+            <h4 className="font-semibold text-slate-900 text-sm mb-5 uppercase tracking-wider">Support</h4>
+            <ul className="space-y-2.5">
               {footerLinks.support.map((link, i) => (
                 <li key={i}>
-                  <Link href={link.href} className="text-sm font-medium hover:text-emerald-700 transition-colors flex items-center gap-2">
-                    <span className="text-emerald-500 text-xs">▸</span> {link.label}
+                  <Link href={link.href} className="text-sm text-slate-500 hover:text-emerald-600 transition-colors">
+                    {link.label}
                   </Link>
                 </li>
               ))}
@@ -102,23 +100,10 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Corporate Certification Bar */}
-        <div className="border-t border-slate-200 pt-8 pb-8 flex flex-wrap items-center justify-between gap-6">
-          <div className="flex items-center gap-6 opacity-70 grayscale hover:grayscale-0 transition-all duration-300">
-             <img src="/indiamart-clean.svg" alt="IndiaMart Supplier" className="h-8 md:h-10 w-auto" />
-             <img src="/justdial-clean.svg" alt="JustDial Verified" className="h-8 md:h-10 w-auto" />
-             <img src="/gem-official.svg" alt="GeM Registered" className="h-8 md:h-10 w-auto" />
-          </div>
-          <div className="text-right">
-            <h5 className="text-sm font-bold text-slate-800 uppercase tracking-widest mb-1">Stay Connected</h5>
-            <p className="text-xs text-slate-500 font-medium">Follow our latest manufacturing updates</p>
-          </div>
-        </div>
-
-        {/* Copyright */}
-        <div className="border-t border-slate-200 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">
+        {/* Bottom bar */}
+        <div className="border-t border-slate-200 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <p>&copy; {new Date().getFullYear()} Sudeep Engineers. All rights reserved.</p>
-          <p>ISO 9001:2015 B2B Manufacturing Facility</p>
+          <p className="font-medium">ISO 9001:2015 Certified · MSME Registered · GeM Approved</p>
         </div>
       </div>
     </footer>

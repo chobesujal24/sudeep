@@ -7,26 +7,23 @@ import BigImageGallery from "@/components/BigImageGallery";
 
 /*
  * HomePage — Server Component.
- *
- * The Hero section features an automated, premium crossfade HeroSlider background.
- * Below the hero: StatsBar, BentoGrid Services, existing sections, WhyUs, CTA.
+ * Premium $100M minimalist homepage with clean typography and generous whitespace.
  */
 export default function HomePage() {
   return (
     <>
       {/* ═══════════════════════════════════════
-          B2B/B2C PREMIUM HERO SECTION
+          HERO — Full-screen cinematic
           ═══════════════════════════════════════ */}
-      <div className="relative w-full h-[90vh] min-h-[650px] pt-[80px] flex items-center justify-center overflow-hidden bg-slate-900">
+      <div className="relative w-full h-screen min-h-[600px] max-h-[1000px] flex items-center justify-center overflow-hidden bg-slate-950">
         <div className="absolute inset-0 z-0">
           <HeroSlider />
         </div>
         
-        {/* Advanced Ambient Backdrop overlays */}
-        <div className="absolute inset-0 z-[1] bg-gradient-to-b from-slate-950/80 via-slate-950/40 to-slate-950/90" />
-        <div className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-900/40 via-transparent to-transparent backdrop-blur-[1px]" />
+        {/* Clean gradient overlay */}
+        <div className="absolute inset-0 z-[1] bg-gradient-to-b from-slate-950/70 via-slate-950/50 to-slate-950/80" />
         
-        {/* Central UI */}
+        {/* Central content */}
         <div className="relative z-10 w-full px-6 text-center max-w-5xl mx-auto flex flex-col items-center">
           
           {/* Glowing B2B Trust Badge */}
@@ -45,10 +42,10 @@ export default function HomePage() {
           </p>
 
           {/* Epic Typography Engine */}
-          <h1 className="font-extrabold text-white leading-[1.1] mb-6 font-heading tracking-tight flex flex-col items-center">
+          <h1 className="font-extrabold text-white leading-[1.1] mb-6 tracking-tight flex flex-col items-center">
             <div className="flex items-center gap-3 md:gap-4 mb-2">
-              <span className="bg-gradient-to-r from-zinc-100 via-white to-zinc-400 bg-clip-text text-transparent drop-shadow-lg font-serif" style={{ fontSize: "clamp(3rem, 7vw, 5.5rem)" }}>SUDEEP</span>
-              <span className="bg-gradient-to-r from-emerald-400 via-emerald-300 to-emerald-500 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(16,185,129,0.4)] font-serif" style={{ fontSize: "clamp(3rem, 7vw, 5.5rem)" }}>ENGINEERS</span>
+              <span className="bg-gradient-to-r from-zinc-100 via-white to-zinc-400 bg-clip-text text-transparent drop-shadow-lg" style={{ fontSize: "clamp(3rem, 7vw, 5.5rem)" }}>SUDEEP</span>
+              <span className="bg-gradient-to-r from-emerald-400 via-emerald-300 to-emerald-500 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(16,185,129,0.4)]" style={{ fontSize: "clamp(3rem, 7vw, 5.5rem)" }}>ENGINEERS</span>
             </div>
             <div className="text-lg md:text-2xl font-light tracking-[0.3em] text-zinc-300 uppercase flex items-center gap-3 md:gap-5 mt-2">
               <span className="drop-shadow-sm">Save Energy</span>
@@ -61,50 +58,49 @@ export default function HomePage() {
             The uncompromising OEM manufacturer of high-performance <strong className="font-semibold text-white">LED Street lights, Flood lights, Highbay systems, and Industrial Solar Infrastructure</strong>. Engineered for B2B excellence.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-5 items-center justify-center">
-            <Link href="/contact" className="group relative px-8 py-4 bg-emerald-600 text-white text-sm font-bold uppercase tracking-wider overflow-hidden rounded-sm transition-all hover:bg-emerald-500 hover:shadow-[0_0_30px_rgba(16,185,129,0.4)] border border-emerald-500">
-              <span className="relative z-10 flex items-center gap-2">Request OEM Quote <span className="text-lg group-hover:translate-x-1 transition-transform">➔</span></span>
+          {/* Clean CTAs */}
+          <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
+            <Link
+              href="/contact"
+              className="px-8 py-4 bg-emerald-500 text-white text-sm font-semibold uppercase tracking-widest rounded-full hover:bg-emerald-400 transition-all duration-300 hover:shadow-[0_0_30px_rgba(16,185,129,0.3)] min-w-[200px]"
+            >
+              Request OEM Quote
             </Link>
-            <Link href="/product" className="group px-8 py-4 bg-white/5 border border-white/20 backdrop-blur-md text-white text-sm font-bold uppercase tracking-wider hover:bg-white/10 hover:border-white/40 transition-all rounded-sm shadow-xl">
-              <span className="flex items-center gap-2">Explore Catalog <span className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">➔</span></span>
+            <Link
+              href="/product"
+              className="px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-semibold uppercase tracking-widest rounded-full hover:bg-white/20 transition-all duration-300 min-w-[200px]"
+            >
+              Explore Catalog
             </Link>
           </div>
         </div>
         
-        {/* Floating Trust Bar (Glassmorphism) docked to bottom */}
-        <div className="absolute bottom-0 left-0 right-0 z-20 border-t border-white/10 bg-slate-950/60 backdrop-blur-xl">
-          <div className="max-w-[1400px] mx-auto px-6 py-4 flex flex-wrap justify-between items-center gap-4 text-[10px] md:text-xs font-semibold text-zinc-300 uppercase tracking-widest">
-            <div className="flex items-center gap-2">
-              <span className="text-emerald-400">✓</span> ISO 9001:2015
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-emerald-400">✓</span> MSME Registered
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-emerald-400">✓</span> Govt. GeM Approved
-            </div>
-            <div className="hidden md:flex items-center gap-2">
-              <span className="text-emerald-400">✓</span> 500+ Projects
-            </div>
-            <div className="hidden lg:flex items-center gap-2">
-              <span className="text-emerald-400">✓</span> PAN India Delivery
-            </div>
+        {/* Bottom trust bar — minimal, clean */}
+        <div className="absolute bottom-0 left-0 right-0 z-20 border-t border-white/5 bg-slate-950/40 backdrop-blur-md">
+          <div className="max-w-5xl mx-auto px-6 py-4 flex justify-center items-center gap-8 md:gap-12 text-[10px] md:text-[11px] font-medium text-white/40 uppercase tracking-[0.2em]">
+            <span>MSME Registered</span>
+            <span className="hidden sm:inline text-white/10">|</span>
+            <span className="hidden sm:inline">500+ Projects</span>
+            <span className="hidden md:inline text-white/10">|</span>
+            <span className="hidden md:inline">PAN India Delivery</span>
+            <span className="hidden lg:inline text-white/10">|</span>
+            <span className="hidden lg:inline">7+ Years</span>
           </div>
         </div>
       </div>
 
       {/* ═══════════════════════════════════════
-          STATS BAR — Animated Counters
+          STATS BAR
           ═══════════════════════════════════════ */}
       <StatsBar />
 
       {/* ═══════════════════════════════════════
-          NEW BIG IMAGE SHOWCASE
+          PRODUCT GALLERY
           ═══════════════════════════════════════ */}
       <BigImageGallery />
 
       {/* ═══════════════════════════════════════
-          EXISTING SECTIONS — Clients, Products, FAQ, Testimonials
+          MAIN CONTENT — Products, Clients, Certifications, FAQ
           ═══════════════════════════════════════ */}
       <HomeContent />
 

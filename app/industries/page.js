@@ -15,35 +15,35 @@ const industries = [
     title: "Construction & Real Estate",
     desc: "Complete lighting and solar infrastructure solutions for residential, commercial, and industrial construction projects across India.",
     services: ["Commercial LED Lighting", "Solar Power Infrastructure", "Highmast Area Lighting", "Security Parameter Lighting"],
-    image: "/main/user-req-1.jpg"
+    image: "/main/industry-construction.png"
   },
   {
     icon: <Globe color="currentColor" size={48} />,
     title: "Highways & Infrastructure",
     desc: "Heavy-duty engineered lighting for infrastructure development including highways, flyovers, and public utility projects. Trusted by agencies and contractors.",
     services: ["LED Street Lighting systems", "Octagonal Poles", "Solar Street Lights", "Smart City Lighting"],
-    image: "/main/wiki-LED_street_light.jpg"
+    image: "/main/industry-highways.png"
   },
   {
     icon: <Factory color="currentColor" size={48} />,
     title: "Industrial Plants",
     desc: "Custom LED lighting and solar solutions for industrial facilities. We supply robust, IP66 rated fixtures to keep production lines bright and energy efficient.",
     services: ["LED High Bay Lights", "Industrial Flood Lights", "Solar Roof Installations", "Warehouse Lighting"],
-    image: "/main/ef51007f-a9cb-4195-96cc-ea488edfe5b9-0000.webp"
+    image: "/main/industry-plants.png"
   },
   {
     icon: <Settings color="currentColor" size={48} />,
     title: "Sports & Stadiums",
     desc: "Precision illumination for professional sporting arenas and community grounds. Engineered to deliver uniform lux levels without glare.",
     services: ["Stadium Flood Lights", "Highmast Lifting Carriages", "Sports Complex Lighting", "Auditorium Lighting"],
-    image: "/main/highmast.webp"
+    image: "/main/industry-stadium.png"
   },
   {
     icon: <Landmark color="currentColor" size={48} />,
     title: "Government & Municipal",
     desc: "As an MSME registered company, we deliver large-scale lighting and solar infrastructure for municipal and state government smart-city initiatives.",
     services: ["Smart City LED Networks", "Public Parks & Post Tops", "Government Building Solar", "Street Light Installation"],
-    image: "/main/rajasthan-solar.jpg"
+    image: "/main/industry-government.png"
   },
 ];
 
@@ -102,10 +102,10 @@ export default function IndustriesPage() {
       {industries.map((ind, idx) => (
         <section
           key={idx}
-          className={`py-20 ${idx % 2 === 0 ? "bg-[color:var(--color-section)]" : "bg-[color:var(--color-background)]"} ${idx > 0 ? "border-t border-[color:var(--color-border)]" : ""}`}
+          className={`py-12 md:py-20 ${idx % 2 === 0 ? "bg-[color:var(--color-section)]" : "bg-[color:var(--color-background)]"} ${idx > 0 ? "border-t border-[color:var(--color-border)]" : ""}`}
         >
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          <div className="max-w-7xl mx-auto px-4 md:px-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-start">
               <div className={`animate-on-scroll ${idx % 2 !== 0 ? "lg:order-2" : ""}`}>
                 <div className="text-blue-400 mb-6 [&>svg]:w-12 [&>svg]:h-12">{ind.icon}</div>
                 <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-heading font-bold mb-4">{ind.title}</h2>
@@ -125,7 +125,7 @@ export default function IndustriesPage() {
                 </Link>
               </div>
               <div className={`animate-on-scroll delay-2 ${idx % 2 !== 0 ? "lg:order-1" : ""}`}>
-                <div className="rounded-2xl overflow-hidden border border-[color:var(--color-border)] lg:h-[400px] h-[350px] relative group bg-[color:var(--color-background)]">
+                <div className="rounded-2xl overflow-hidden border border-[color:var(--color-border)] lg:h-[400px] h-[250px] sm:h-[350px] relative group bg-[color:var(--color-background)]">
                   <Image 
                     src={ind.image} 
                     alt={ind.title} 
@@ -141,9 +141,9 @@ export default function IndustriesPage() {
       ))}
 
       {/* ====== CTA ====== */}
-      <section className="py-20 bg-[color:var(--color-section)] border-t border-[color:var(--color-border)]">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="rounded-3xl p-12 md:p-16 text-center relative overflow-hidden animate-on-scroll" style={{ background: "linear-gradient(135deg, #166534, #15803D, #166534)" }}>
+      <section className="py-12 md:py-20 bg-[color:var(--color-section)] border-t border-[color:var(--color-border)]">
+        <div className="max-w-5xl mx-auto px-4 md:px-6">
+          <div className="rounded-3xl p-8 sm:p-10 md:p-16 text-center relative overflow-hidden animate-on-scroll" style={{ background: "linear-gradient(135deg, #166534, #15803D, #166534)" }}>
             <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)", backgroundSize: "24px 24px" }} />
             <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-heading font-bold text-[#FFFFFF] mb-4 relative z-10">
               Your Industry, Our Expertise

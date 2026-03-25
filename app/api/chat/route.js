@@ -1,80 +1,105 @@
+// Force re-build of Chat API
 import { NextResponse } from 'next/server';
 
-const SYSTEM_PROMPT = `You are an AI assistant for Sudeep Engineers, an industrial LED lighting and solar infrastructure company located in Waluj MIDC, Aurangabad, Maharashtra, India.
-You should answer professionally, concisely, and help users understand products, services, or request quotations. 
-Never say you are an AI from NVIDIA or Meta unless strictly necessary; identify yourself as the Sudeep Engineers AI Assistant.
+const SYSTEM_PROMPT = `You are an AI assistant for Sudeep Engineers (LED lighting and solar infrastructure) in Waluj MIDC, Aurangabad.
+Support: Professional, concise answers about products, quotes, and technical specs. 
+Identify as Sudeep Engineers AI Assistant.
 
-Key Company Details:
-- Location: Waluj MIDC, Aurangabad, Maharashtra (Prime industrial hub)
-- Established: June 4, 2019
-- Status: MSME Udyam registered Micro enterprise
-- Timings: Open 09:15 to 19:00
+VISUAL CAPABILITIES:
+You can see and analyze images provided by the user (site photos, drawings, lamp designs). Provide expert feedback based on visual evidence.
 
-Marketplace Presence & Credentials:
-- IndiaMart: Verified Supplier (Top Rated for products/services)
-- JustDial: Top Rated Dealer in LED Lighting and Solar Infrastructure
-- GeM (Government e Marketplace): Registered OEM Supplier
+CRITICAL LINKS:
+[Contact Us](/contact), [Product Catalog](/product), [About Us](/about), [Industries](/industries), [Certifications](/certifications).
 
-Main Products:
-- LED Street Lights & LED Flood Lights (10W to 1000W+)
-- Solar Street Lights & Solar Blinkers
-- High Mast Lighting Systems & GI/Octagonal Poles
-- Recessed Light Panels & Indoor LED Lighting
-- Industrial & Infrastructure Lighting Solutions
-
-Core Services:
-- LED Lighting Manufacturing
-- Solar Power Infrastructure Projects
-- Smart City Street Lighting
-- Photometric Design & Energy Efficiency Consultations
-
-Contact Information:
-Phone: +91 9922996236
-Email: info@sudeepengineers.com
+Key Details:
+- Location: Waluj MIDC, Aurangabad, Maharashtra
+- MSME registered, GeM OEM Supplier
+- Products: LED Street/Flood/Highbay, Solar Street Lights, High Mast Poles.
 `;
 
-// Rate limiting basic implementation (in-memory)
 const rateLimitMap = new Map();
-const RATE_LIMIT_MAX = 15; // 15 requests per minute per IP to be safe (NVIDIA limit is 40 overall)
+const RATE_LIMIT_MAX = 20;
 const RATE_LIMIT_WINDOW_MS = 60000;
 
 export async function POST(req) {
   try {
-    // 1. Basic Rate Limiting based on IP
     const ip = req.headers.get('x-forwarded-for') || 'anonymous';
-    
     const currentTime = Date.now();
     const ipData = rateLimitMap.get(ip) || { count: 0, resetTime: currentTime + RATE_LIMIT_WINDOW_MS };
-    
-    if (currentTime > ipData.resetTime) {
-      ipData.count = 0;
-      ipData.resetTime = currentTime + RATE_LIMIT_WINDOW_MS;
-    }
-    
+    if (currentTime > ipData.resetTime) { ipData.count = 0; ipData.resetTime = currentTime + RATE_LIMIT_WINDOW_MS; }
     ipData.count += 1;
     rateLimitMap.set(ip, ipData);
+    if (ipData.count > RATE_LIMIT_MAX) return NextResponse.json({ error: 'Too many requests.' }, { status: 429 });
 
-    if (ipData.count > RATE_LIMIT_MAX) {
-      return NextResponse.json({ error: 'Too many requests. Please wait a minute.' }, { status: 429 });
+    let messages = [];
+    let fileBase64 = null;
+    let fileName = "";
+    let fileType = "";
+
+    const contentType = req.headers.get("content-type") || "";
+
+    if (contentType.includes("multipart/form-data")) {
+      const formData = await req.formData();
+      messages = JSON.parse(formData.get("messages") || "[]");
+      const file = formData.get("file");
+      
+      if (file && file instanceof File) {
+        if (file.size > 15 * 1024 * 1024) return NextResponse.json({ error: "15MB limit exceeded." }, { status: 400 });
+        
+        fileName = file.name;
+        fileType = file.type;
+        const arrayBuffer = await file.arrayBuffer();
+        const buffer = Buffer.from(arrayBuffer);
+
+        if (fileType.includes("pdf")) {
+          try {
+            // Lazy load pdf-parse only at runtime to avoid build-time static analysis issues
+            const { createRequire } = await import('module');
+            const require = createRequire(import.meta.url);
+            const pdf = require('pdf-parse');
+            
+            const data = await pdf(buffer);
+            const text = (data.text || "").substring(0, 50000);
+            if (messages.length > 0) {
+              messages[messages.length - 1].content += `\n\n[USER UPLOADED PDF ("${fileName}") TEXT:]\n${text}`;
+            }
+          } catch (e) {
+            console.error("PDF Runtime Parse error:", e);
+          }
+        } else if (fileType.includes("image")) {
+          fileBase64 = buffer.toString('base64');
+        } else {
+          const text = buffer.toString('utf-8').substring(0, 50000);
+          if (messages.length > 0) {
+            messages[messages.length - 1].content += `\n\n[USER UPLOADED FILE ("${fileName}") TEXT:]\n${text}`;
+          }
+        }
+      }
+    } else {
+      const body = await req.json();
+      messages = body.messages;
     }
 
-    // 2. Parse input and structure messages
-    const { messages } = await req.json();
+    if (!messages.length) return NextResponse.json({ error: 'Invalid message' }, { status: 400 });
 
-    if (!messages || !Array.isArray(messages)) {
-      return NextResponse.json({ error: 'Invalid messages format' }, { status: 400 });
-    }
-
+    // Format for NVIDIA Llama 3.2 Vision Model
     const formattedMessages = [
       { role: 'system', content: SYSTEM_PROMPT },
-      ...messages.map((m) => ({
-        role: m.role,
-        content: String(m.content).substring(0, 1000) // Sanitize and limit length
-      }))
+      ...messages.map((m, idx) => {
+        const isLatest = idx === messages.length - 1;
+        if (isLatest && fileBase64 && fileType.includes("image")) {
+          return {
+            role: m.role,
+            content: [
+              { type: "text", text: String(m.content) },
+              { type: "image_url", image_url: { url: `data:${fileType};base64,${fileBase64}` } }
+            ]
+          };
+        }
+        return { role: m.role, content: String(m.content) };
+      })
     ];
 
-    // 3. Setup NVIDIA API connection
-    // Fallback to exactly what the user provided if environment variable is not matched, though securely it should only be in .env.local
     const apiKey = process.env.NVIDIA_API_KEY || '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';
 
     const response = await fetch('https://integrate.api.nvidia.com/v1/chat/completions', {
@@ -84,25 +109,25 @@ export async function POST(req) {
         'Authorization': `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        model: 'meta/llama3-8b-instruct',
+        model: fileBase64 ? 'meta/llama-3.2-90b-vision-instruct' : 'meta/llama-3.1-70b-instruct',
         messages: formattedMessages,
-        temperature: 0.2, // Low temperature for more professional, reliable answers
+        temperature: 0.2,
         top_p: 0.7,
-        max_tokens: 512,
+        max_tokens: 1024,
       })
     });
 
     if (!response.ok) {
       const errorData = await response.text();
-      console.error('NVIDIA API Error:', errorData);
-      return NextResponse.json({ error: 'Failed to generate AI response' }, { status: response.status });
+      console.error('NVIDIA Vision AI Error:', errorData);
+      return NextResponse.json({ error: 'AI Error' }, { status: response.status });
     }
 
     const data = await response.json();
     return NextResponse.json({ reply: data.choices[0].message.content });
 
   } catch (error) {
-    console.error('Chat API Error:', error);
-    return NextResponse.json({ error: 'Internal server error processing chat request.' }, { status: 500 });
+    console.error('Chat API Fatal Error:', error);
+    return NextResponse.json({ error: 'Internal server error.' }, { status: 500 });
   }
 }

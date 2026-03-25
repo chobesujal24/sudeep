@@ -20,7 +20,7 @@ export default function Navbar() {
 
   useEffect(() => {
     async function fetchCategories() {
-      const { data, error } = await supabase.from('categories').select('*').order('sequence', { ascending: true }).limit(9);
+      const { data, error } = await supabase.from('categories').select('*').order('sequence', { ascending: true });
       if (data) {
         setDbCategories(data);
       }
@@ -125,8 +125,8 @@ export default function Navbar() {
               </Link>
               
               {/* Dropdown Mega-Menu */}
-              <div className="absolute top-full left-1/2 -translate-x-1/2 w-[850px] bg-white border border-slate-200 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top translate-y-2 group-hover:translate-y-0 p-6">
-                <div className="flex justify-between items-end mb-6 pb-4 border-b border-slate-100">
+              <div className="absolute top-full left-1/2 -translate-x-1/2 w-[1000px] bg-white border border-slate-200 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top translate-y-2 group-hover:translate-y-0 p-6">
+                <div className="flex justify-between items-end mb-4 pb-4 border-b border-slate-100">
                   <div>
                     <h3 className="text-lg font-bold text-slate-900 uppercase tracking-tight">Industrial Products</h3>
                     <p className="text-sm text-slate-500 mt-1">Explore our complete range of certified manufacturing solutions.</p>
@@ -135,18 +135,20 @@ export default function Navbar() {
                     View Complete Catalog ➔
                   </Link>
                 </div>
-                <div className={`grid gap-6 ${dbCategories.length > 4 ? "grid-cols-3 lg:grid-cols-4" : "grid-cols-2 md:grid-cols-4"}`}>
-                  {dbCategories.map((cat, idx) => (
-                    <Link key={cat.id || idx} href={`/product/${cat.slug}`} className="group/item flex flex-col gap-3">
-                      <div className="relative w-full aspect-square bg-white border border-slate-100 overflow-hidden flex items-center justify-center p-4 group-hover/item:border-emerald-200 group-hover/item:shadow-sm transition-all rounded-md">
-                        <img src={cat.image || "/placeholder-image.jpg"} alt={cat.name} className="max-w-full max-h-full object-contain mix-blend-multiply" />
-                      </div>
-                      <div>
-                        <h4 className="text-[0.8rem] font-bold text-slate-900 group-hover/item:text-emerald-700 transition-colors uppercase tracking-tight leading-tight">{cat.name}</h4>
-                        <p className="text-xs text-slate-500 mt-1 leading-relaxed line-clamp-2">{cat.description || "View details and specifications"}</p>
-                      </div>
-                    </Link>
-                  ))}
+                <div className="max-h-[450px] overflow-y-auto pr-2 custom-scrollbar">
+                  <div className="grid gap-4 grid-cols-4 lg:grid-cols-5">
+                    {dbCategories.map((cat, idx) => (
+                      <Link key={cat.id || idx} href={`/product/${cat.slug}`} className="group/item flex flex-col gap-2">
+                        <div className="relative w-full aspect-[4/3] bg-white border border-slate-100 overflow-hidden flex items-center justify-center p-3 group-hover/item:border-emerald-200 group-hover/item:shadow-sm transition-all rounded-md">
+                          <img src={cat.image || "/placeholder-image.jpg"} alt={cat.name} className="max-w-full max-h-full object-contain mix-blend-multiply" />
+                        </div>
+                        <div>
+                          <h4 className="text-[0.75rem] font-bold text-slate-900 group-hover/item:text-emerald-700 transition-colors uppercase tracking-tight leading-tight">{cat.name}</h4>
+                          <p className="text-[10px] text-slate-500 mt-0.5 leading-relaxed line-clamp-1">{cat.description || "View details and specifications"}</p>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>

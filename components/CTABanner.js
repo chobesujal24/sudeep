@@ -2,33 +2,34 @@
 import Link from "next/link";
 
 /*
- * CTABanner — Corporate B2B Call-to-Action strip.
- * Clean, high-contrast, designed to drive quote requests.
+ * CTABanner — Clean, minimalist CTA section.
  */
 
 export default function CTABanner() {
   return (
-    <section className="py-20 bg-emerald-800 border-t border-emerald-900">
-      <div className="max-w-[1000px] mx-auto px-6 text-center">
-        <span className="inline-block text-emerald-300 text-sm font-bold uppercase tracking-[0.2em] mb-4">
-          Ready to Start Your Project?
+    <section className="py-20 md:py-28 bg-slate-900">
+      <div className="max-w-3xl mx-auto px-6 text-center">
+        <span className="text-[11px] font-semibold uppercase tracking-[0.3em] text-emerald-400 mb-6 block">
+          Ready to Start?
         </span>
         <h2
-          className="font-extrabold text-white mb-6 uppercase tracking-tight"
-          style={{ fontSize: "clamp(2rem, 4vw, 2.5rem)", lineHeight: 1.15 }}
+          className="font-bold text-white mb-6 tracking-tight"
+          style={{ fontSize: "clamp(1.75rem, 4vw, 2.75rem)", lineHeight: 1.15 }}
         >
-          Let's Engineer Your Next Infrastructure Solution
+          Let's engineer your next
+          <br />
+          infrastructure solution.
         </h2>
-        <p className="text-emerald-100 text-lg max-w-[700px] mx-auto mb-10 leading-relaxed font-medium">
-          Get a detailed, customized technical proposal for your LED lighting
-          or solar infrastructure requirements within 48 hours. Built for scale, delivered on time.
+        <p className="text-slate-400 text-base md:text-lg max-w-lg mx-auto mb-10 leading-relaxed">
+          Get a customized technical proposal for your LED lighting
+          or solar infrastructure requirements within 48 hours.
         </p>
-        <div className="flex flex-wrap gap-4 justify-center">
-          <Link href="/contact" className="inline-flex items-center justify-center px-10 py-4 bg-white text-emerald-800 font-bold uppercase tracking-wider hover:bg-emerald-50 transition-colors border-2 border-transparent">
-            Request a Consultation
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link href="/contact" className="px-8 py-4 bg-emerald-500 text-white text-sm font-semibold uppercase tracking-widest rounded-full hover:bg-emerald-400 transition-all duration-300 hover:shadow-[0_0_30px_rgba(16,185,129,0.3)] min-w-[200px]">
+            Request a Quote
           </Link>
-          <Link href="/services" className="inline-flex items-center justify-center px-10 py-4 bg-transparent text-white font-bold uppercase tracking-wider border-2 border-white hover:bg-white/10 transition-colors">
-            Explore Capabilities
+          <Link href="/services" className="px-8 py-4 bg-white/10 border border-white/20 text-white text-sm font-semibold uppercase tracking-widest rounded-full hover:bg-white/20 transition-all duration-300 min-w-[200px]">
+            Our Capabilities
           </Link>
         </div>
       </div>
