@@ -81,7 +81,7 @@ export default async function BlogPost({ params }) {
     return date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
   };
 
-  const publishDate = formatDate(post.createdAt);
+  const publishDate = formatDate(post.created_at);
 
   return (
     <>
@@ -93,8 +93,8 @@ export default async function BlogPost({ params }) {
             "@type": "Article",
             headline: post.title,
             description: post.metaDescription || post.excerpt,
-            datePublished: post.createdAt ? new Date(post.createdAt.seconds * 1000).toISOString() : "",
-            dateModified: post.updatedAt ? new Date(post.updatedAt.seconds * 1000).toISOString() : "",
+            datePublished: post.created_at ? new Date(post.created_at).toISOString() : "",
+            dateModified: post.updated_at ? new Date(post.updated_at).toISOString() : "",
             image: post.featuredImage ? [post.featuredImage] : [],
             author: { "@type": "Organization", name: "Sudeep Engineers" },
             publisher: { "@type": "Organization", name: "Sudeep Engineers" },

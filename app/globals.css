@@ -37,6 +37,11 @@
 }
 
 /* --- Base Styles --- */
+::selection {
+  background-color: #d1fae5; /* emerald-100 */
+  color: #064e3b; /* emerald-900 */
+}
+
 html {
   scroll-behavior: smooth;
 }

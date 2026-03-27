@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Landmark, ClipboardList, CheckCircle2, Lock } from "lucide-react";
+import { Landmark, ClipboardList, CheckCircle2, Lock, FileCheck } from "lucide-react";
 
 export const metadata = {
   title: "Certifications & Quality Standards",
@@ -61,6 +61,16 @@ const certifications = [
       "Fire safety and emergency protocols",
     ],
   },
+];
+
+const OFFICIAL_DOCUMENTS = [
+  { file: "BIS CERTIFICATE SUDEEP Flood Light.pdf", title: "BIS Certificate — Flood Lights" },
+  { file: "BIS CERTIFICATE SUDEEP HIBAY LIGHTS.pdf", title: "BIS Certificate — Highbay" },
+  { file: "BIS CERTIFICATE SUDEEP LED DRIVER .pdf", title: "BIS Certificate — LED Driver" },
+  { file: "BIS CERTIFICATE SUDEEP STREET LIGHT.pdf", title: "BIS Certificate — Street Light" },
+  { file: "ISO CERTIFICATE.pdf", title: "ISO 9001:2015 Certificate" },
+  { file: "SUDEEP BIFMA.pdf", title: "BIFMA Standards Compliance" },
+  { file: "TRADEMARK CERTIFICATE.pdf", title: "Trademark Registration" },
 ];
 
 export default function CertificationsPage() {
@@ -130,6 +140,47 @@ export default function CertificationsPage() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Accreditation & Certifications Grid */}
+      <section className="py-20 bg-[color:var(--color-background)] border-t border-[color:var(--color-border)]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16 animate-on-scroll">
+            <span className="inline-flex items-center gap-2 bg-[color:var(--color-primary)]/10 border border-[color:var(--color-primary)]/20 rounded-full px-4 py-1 text-[0.8rem] font-semibold text-[color:var(--color-primary)] uppercase tracking-wider mb-4">
+              Compliance
+            </span>
+            <h2 className="text-[clamp(1.8rem,4vw,2.5rem)] font-heading font-bold mb-4 text-[color:var(--color-foreground)]">
+              Accreditation & <span className="text-[color:var(--color-primary)]">Certifications</span>
+            </h2>
+            <p className="text-[color:var(--color-text-secondary)] opacity-80 text-lg max-w-lg mx-auto">
+              Industrial-grade certifications for mission-critical infrastructure.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {OFFICIAL_DOCUMENTS.map((doc, i) => (
+              <a 
+                key={i} 
+                href={`/certifications/${doc.file}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-5 p-6 bg-[color:var(--color-section)] border border-[color:var(--color-border)] rounded-xl hover:border-[color:var(--color-primary)]/30 hover:shadow-lg transition-all duration-300 animate-on-scroll delay-${(i % 5) + 1} no-underline"
+              >
+                <div className="w-12 h-12 rounded-lg bg-[color:var(--color-primary)]/10 flex items-center justify-center text-[color:var(--color-primary)] shrink-0 group-hover:bg-[color:var(--color-primary)] group-hover:text-white transition-all duration-300 shadow-sm">
+                  <FileCheck size={24} strokeWidth={1.5} />
+                </div>
+                <div className="min-w-0">
+                  <h4 className="text-base font-bold text-[color:var(--color-foreground)] group-hover:text-[color:var(--color-primary)] transition-colors truncate mb-1">
+                    {doc.title}
+                  </h4>
+                  <p className="text-[11px] text-[color:var(--color-text-muted)] font-bold uppercase tracking-widest flex items-center gap-1.5 opacity-70 group-hover:opacity-100">
+                    View Document <span className="group-hover:translate-x-1 transition-transform">→</span>
+                  </p>
+                </div>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 

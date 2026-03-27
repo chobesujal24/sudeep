@@ -1,7 +1,6 @@
 import Link from "next/link";
 import HeroSlider from "@/components/HeroSlider";
 import StatsBar from "@/components/StatsBar";
-import CTABanner from "@/components/CTABanner";
 import HomeContent from "@/components/HomeContent";
 import BigImageGallery from "@/components/BigImageGallery";
 
@@ -43,18 +42,18 @@ export default function HomePage() {
 
           {/* Epic Typography Engine */}
           <h1 className="font-extrabold text-white leading-[1.1] mb-6 tracking-tight flex flex-col items-center">
-            <div className="flex items-center gap-3 md:gap-4 mb-2">
-              <span className="bg-gradient-to-r from-zinc-100 via-white to-zinc-400 bg-clip-text text-transparent drop-shadow-lg" style={{ fontSize: "clamp(3rem, 7vw, 5.5rem)" }}>SUDEEP</span>
-              <span className="bg-gradient-to-r from-emerald-400 via-emerald-300 to-emerald-500 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(16,185,129,0.4)]" style={{ fontSize: "clamp(3rem, 7vw, 5.5rem)" }}>ENGINEERS</span>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mb-4 md:mb-2">
+              <span className="bg-gradient-to-r from-zinc-100 via-white to-zinc-400 bg-clip-text text-transparent drop-shadow-lg" style={{ fontSize: "clamp(2.2rem, 12vw, 5.5rem)" }}>SUDEEP</span>
+              <span className="bg-gradient-to-r from-emerald-400 via-emerald-300 to-emerald-500 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(16,185,129,0.4)]" style={{ fontSize: "clamp(2.2rem, 12vw, 5.5rem)" }}>ENGINEERS</span>
             </div>
-            <div className="text-lg md:text-2xl font-light tracking-[0.3em] text-zinc-300 uppercase flex items-center gap-3 md:gap-5 mt-2">
+            <div className="text-sm md:text-2xl font-light tracking-[0.2em] md:tracking-[0.3em] text-zinc-300 uppercase flex items-center justify-center gap-3 md:gap-5 mt-2 text-center">
               <span className="drop-shadow-sm">Save Energy</span>
-              <span className="text-emerald-400/80 text-sm">✦</span>
+              <span className="text-emerald-400/80 text-xs hidden sm:inline">✦</span>
               <span className="drop-shadow-sm">Save the World</span>
             </div>
           </h1>
 
-          <p className="text-zinc-300 text-lg md:text-xl md:leading-relaxed font-light max-w-3xl mb-12 drop-shadow-md">
+          <p className="text-zinc-300 text-base md:text-xl md:leading-relaxed font-light max-w-3xl mb-12 drop-shadow-md text-center px-4">
             The uncompromising OEM manufacturer of high-performance <strong className="font-semibold text-white">LED Street lights, Flood lights, Highbay systems, and Industrial Solar Infrastructure</strong>. Engineered for B2B excellence.
           </p>
 
@@ -103,11 +102,6 @@ export default function HomePage() {
           MAIN CONTENT — Products, Clients, Certifications, FAQ
           ═══════════════════════════════════════ */}
       <HomeContent />
-
-      {/* ═══════════════════════════════════════
-          CTA BANNER — Pre-Footer
-          ═══════════════════════════════════════ */}
-      <CTABanner />
     </>
   );
 }

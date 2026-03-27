@@ -4,12 +4,13 @@ import { Icons } from "@/components/Icons";
 import { supabase } from "@/lib/supabase";
 import { transformUrls } from "@/lib/getProductData";
 
+export const revalidate = 60; // Revalidate cache every minute
+
 export const metadata = {
   title: "Blog - Engineering & Manufacturing Insights",
   description:
     "Expert articles on industrial energy, LED lighting, and solar manufacturing in Aurangabad. Stay informed with Sudeep Engineers blog.",
   alternates: { canonical: "https://sudeepengineers.com/blog" },
-  revalidate: 60 // Revalidate cache every minute or as needed
 };
 
 // Next.js page component
