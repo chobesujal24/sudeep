@@ -3,10 +3,14 @@ import Image from "next/image";
 import { Building2, Globe, Factory, Settings, Landmark } from "lucide-react";
 
 export const metadata = {
-  title: "Industries Served - LED & Solar Solutions Across Sectors",
+  title: "Industries We Serve — Highway, Municipal, Industrial & Stadium LED Lighting",
   description:
-    "Sudeep Engineers serves construction, infrastructure, industrial plants, sporting arenas & government projects with high-end LED lighting and Solar Infrastructure in Aurangabad.",
+    "Sudeep Engineers supplies LED street lights, flood lights, solar lights, octagonal poles & highmast poles to highway authorities, municipal corporations, industrial plants, stadiums & government projects across India.",
   alternates: { canonical: "https://sudeepengineers.com/industries" },
+  openGraph: {
+    title: "LED Lighting & Solar Infrastructure for All Industries | Sudeep Engineers",
+    description: "Highway LED street lights, stadium flood lights, industrial highbay, solar street lights & poles for every sector.",
+  },
 };
 
 const industries = [
@@ -81,10 +85,10 @@ export default function IndustriesPage() {
         </div>
 
         <div className="absolute -top-[30%] -right-[20%] w-[500px] h-[500px] rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%)" }} />
+          style={{ background: "radial-gradient(circle, rgba(21,128,61,0.06) 0%, transparent 70%)" }} />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <nav className="text-xs text-[color:var(--color-text-muted)] mb-6 flex gap-2">
-            <Link href="/" className="hover:text-blue-400 no-underline text-[color:var(--color-text-muted)]">Home</Link>
+            <Link href="/" className="hover:text-green-500 no-underline text-[color:var(--color-text-muted)]">Home</Link>
             <span>/</span><span className="text-[color:var(--color-text-secondary)]">Industries</span>
           </nav>
           <h1 className="text-[clamp(2rem,4vw,3rem)] font-heading font-extrabold mb-4"
@@ -107,20 +111,20 @@ export default function IndustriesPage() {
           <div className="max-w-7xl mx-auto px-4 md:px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-start">
               <div className={`animate-on-scroll ${idx % 2 !== 0 ? "lg:order-2" : ""}`}>
-                <div className="text-blue-400 mb-6 [&>svg]:w-12 [&>svg]:h-12">{ind.icon}</div>
+                <div className="text-green-500 mb-6 [&>svg]:w-12 [&>svg]:h-12">{ind.icon}</div>
                 <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-heading font-bold mb-4">{ind.title}</h2>
                 <p className="text-[color:var(--color-text-secondary)] leading-relaxed mb-6">{ind.desc}</p>
                 <h3 className="font-heading font-semibold text-base mb-3">Our Solutions</h3>
                 <ul className="space-y-2 mb-6">
                   {ind.services.map((s, i) => (
                     <li key={i} className="flex items-start gap-3 text-[color:var(--color-text-secondary)] text-sm">
-                      <span className="text-blue-400 font-bold mt-0.5 shrink-0">✓</span>
+                      <span className="text-green-500 font-bold mt-0.5 shrink-0">✓</span>
                       {s}
                     </li>
                   ))}
                 </ul>
                 <Link href="/contact"
-                  className="inline-flex px-6 py-3 rounded-md bg-gradient-to-r from-blue-500 to-blue-700 text-[color:var(--color-foreground)] font-semibold hover:-translate-y-0.5 transition-all no-underline text-sm">
+                  className="inline-flex px-6 py-3 rounded-md bg-gradient-to-r from-green-600 to-green-700 text-[color:var(--color-foreground)] font-semibold hover:-translate-y-0.5 transition-all no-underline text-sm">
                   Enquire for {ind.title} →
                 </Link>
               </div>
@@ -132,7 +136,7 @@ export default function IndustriesPage() {
                     fill 
                     className="object-cover opacity-90" 
                   />
-                  <div className="absolute inset-0 bg-blue-900/5 mix-blend-multiply"></div>
+                  <div className="absolute inset-0 bg-green-900/5 mix-blend-multiply"></div>
                 </div>
               </div>
             </div>
@@ -152,7 +156,7 @@ export default function IndustriesPage() {
               Whatever your industry, we have the manufacturing capabilities to light it up.
             </p>
             <Link href="/contact"
-              className="relative z-10 inline-flex px-8 py-3.5 rounded-md bg-[#38BDF8] text-[#0F172A] font-bold hover:opacity-90 transition-all no-underline">
+              className="relative z-10 inline-flex px-8 py-3.5 rounded-md bg-[#15803d] text-[#0F172A] font-bold hover:opacity-90 transition-all no-underline">
               Discuss Your Project →
             </Link>
           </div>

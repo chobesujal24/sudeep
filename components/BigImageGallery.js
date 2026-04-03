@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
 const bigImages = [
@@ -14,11 +14,19 @@ const bigImages = [
 export default function BigImageGallery() {
   const [activeIndex, setActiveIndex] = useState(0);
 
+  /* Auto-play */
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % bigImages.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [activeIndex]);
+
   return (
-    <section className="py-12 md:py-20 lg:py-28 bg-slate-50">
+    <section className="py-12 md:py-20 lg:py-28 bg-slate-50" aria-label="Product showcase gallery">
       <div className="max-w-6xl mx-auto px-4 md:px-6">
         <div className="text-center mb-8 md:mb-12">
-          <span className="text-[11px] font-semibold uppercase tracking-[0.3em] text-emerald-600 mb-4 block">Manufacturing</span>
+          <span className="text-[11px] font-semibold uppercase tracking-[0.3em] text-green-600 mb-4 block">Manufacturing</span>
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4">
            LED Solar Street Light
           </h2>
@@ -62,8 +70,8 @@ export default function BigImageGallery() {
                 onClick={() => setActiveIndex(idx)}
                 className={`relative flex-none w-24 sm:w-32 lg:w-full aspect-square snap-center overflow-hidden rounded-xl border-2 transition-all bg-white p-1.5 sm:p-2 ${
                   activeIndex === idx 
-                    ? "border-emerald-500 shadow-md scale-100" 
-                    : "border-slate-100 hover:border-emerald-200 opacity-60 hover:opacity-100 scale-95 hover:scale-100"
+                    ? "border-green-500 shadow-md scale-100" 
+                    : "border-slate-100 hover:border-green-200 opacity-60 hover:opacity-100 scale-95 hover:scale-100"
                 }`}
                 aria-label={`View ${img.title}`}
               >

@@ -5,8 +5,13 @@ import { supabase } from "@/lib/supabase";
 export const dynamic = 'force-dynamic';
 
 export const metadata = {
-  title: "Product Categories | Sudeep Engineers",
-  description: "Explore our technical catalog of industrial LED lighting, including Street Lights, Flood Lights, High Masts, and Solar Solutions.",
+  title: "LED & Solar Products — Street Lights, Flood Lights, Highmast, Poles | Sudeep Engineers",
+  description: "Browse our complete product catalog: LED street lights, LED flood lights, LED highbay lights, solar street lights, octagonal poles, highmast poles, and solar infrastructure. BIS certified, ISO 9001:2015 manufacturer in Aurangabad.",
+  alternates: { canonical: "https://sudeepengineers.com/product" },
+  openGraph: {
+    title: "LED & Solar Product Catalog | Sudeep Engineers India",
+    description: "Complete range of LED street lights, flood lights, solar lights, octagonal poles & highmast poles from India's trusted manufacturer.",
+  },
 };
 
 export default async function ProductCategories() {
@@ -41,13 +46,13 @@ export default async function ProductCategories() {
       {/* ═══════════════════════════════════════
           B2B Catalog Header
           ═══════════════════════════════════════ */}
-      <section className="relative bg-slate-900 border-b-4 border-emerald-600 pt-32 pb-24 px-6 overflow-hidden">
+      <section className="relative bg-slate-900 border-b-4 border-green-600 pt-32 pb-24 px-6 overflow-hidden">
         {/* Abstract Technical Background lines */}
         <div className="absolute inset-0 z-0 opacity-10" style={{ background: "linear-gradient(90deg, transparent 99px, #ffffff 1px) 0 0 / 100px 100px" }} />
         
         <div className="relative z-10 max-w-[1400px] mx-auto text-center md:text-left flex flex-col md:flex-row items-center justify-between gap-12">
           <div className="max-w-2xl">
-            <span className="inline-block px-3 py-1 bg-emerald-900 border border-emerald-700 text-emerald-300 text-xs font-bold uppercase tracking-[0.2em] mb-6">
+            <span className="inline-block px-3 py-1 bg-green-900 border border-green-700 text-green-300 text-xs font-bold uppercase tracking-[0.2em] mb-6">
               Official Catalog
             </span>
             <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-6 uppercase tracking-tight">
@@ -75,9 +80,9 @@ export default async function ProductCategories() {
       <section className="bg-white border-b border-slate-200 py-4 px-6 sticky top-[80px] z-40 shadow-sm">
         <div className="max-w-[1400px] mx-auto">
           <nav className="text-xs font-bold text-slate-500 flex gap-2 tracking-widest uppercase items-center">
-            <Link href="/" className="hover:text-emerald-700 transition-colors">Home</Link>
+            <Link href="/" className="hover:text-green-700 transition-colors">Home</Link>
             <span className="text-slate-300">/</span>
-            <span className="text-emerald-700">Products Range</span>
+            <span className="text-green-700">Products Range</span>
           </nav>
         </div>
       </section>
@@ -88,7 +93,7 @@ export default async function ProductCategories() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {categories.map((cat) => (
-              <Link key={cat.id} href={`/product/${cat.slug}`} className="group block h-full bg-white border border-slate-200 hover:border-emerald-600 transition-colors shadow-sm hover:shadow-xl">
+              <Link key={cat.id} href={`/product/${cat.slug}`} className="group block h-full bg-white border border-slate-200 hover:border-green-600 transition-colors shadow-sm hover:shadow-xl">
                 <div className="flex flex-col h-full">
                   {/* Image Container */}
                   <div className="relative h-[280px] w-full border-b border-slate-100 p-6 flex items-center justify-center bg-white overflow-hidden">
@@ -103,10 +108,10 @@ export default async function ProductCategories() {
                   
                   {/* Category Details */}
                   <div className="flex-1 flex flex-col p-8">
-                    <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-emerald-700 transition-colors uppercase tracking-wide">
+                    <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-green-700 transition-colors uppercase tracking-wide">
                       {cat.name}
                     </h3>
-                    <p className="text-slate-600 text-sm leading-relaxed line-clamp-3 mb-8 border-l-2 border-emerald-100 pl-4">
+                    <p className="text-slate-600 text-sm leading-relaxed line-clamp-3 mb-8 border-l-2 border-green-100 pl-4">
                       {cat.description}
                     </p>
                     
@@ -114,7 +119,7 @@ export default async function ProductCategories() {
                       <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">
                         View Models
                       </span>
-                      <span className="w-8 h-8 rounded bg-emerald-50 text-emerald-700 flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                      <span className="w-8 h-8 rounded bg-green-50 text-green-700 flex items-center justify-center group-hover:bg-green-600 group-hover:text-white transition-colors">
                         <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
                       </span>
                     </div>
@@ -133,17 +138,17 @@ export default async function ProductCategories() {
       </section>
 
       {/* ====== CTA Ribbon ====== */}
-      <section className="bg-emerald-800 py-16">
+      <section className="bg-green-800 py-16">
         <div className="max-w-[1400px] mx-auto px-6 flex flex-col lg:flex-row items-center justify-between gap-8 text-center lg:text-left">
           <div>
             <h2 className="text-2xl lg:text-3xl font-extrabold text-white uppercase tracking-tight mb-2">
               Looking for Custom Manufacturing?
             </h2>
-            <p className="text-emerald-100 text-lg max-w-2xl font-medium">
+            <p className="text-green-100 text-lg max-w-2xl font-medium">
               Our Walk-in facility provides tailored specifications, custom wattage, and precision photometric calibration.
             </p>
           </div>
-          <Link href="/contact" className="inline-flex items-center justify-center px-8 py-4 bg-white text-emerald-800 font-bold uppercase tracking-widest hover:bg-slate-100 transition-colors border max-w-max shrink-0">
+          <Link href="/contact" className="inline-flex items-center justify-center px-8 py-4 bg-white text-green-800 font-bold uppercase tracking-widest hover:bg-slate-100 transition-colors border max-w-max shrink-0">
             Request Engineering Specs ➔
           </Link>
         </div>

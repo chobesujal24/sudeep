@@ -102,30 +102,32 @@ export default async function BlogPost({ params }) {
         }}
       />
 
-      <section className="pt-32 pb-16 relative overflow-hidden bg-[color:var(--color-background)]">
-        <div className="absolute -top-[30%] -right-[20%] w-[500px] h-[500px] rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(37,99,235,0.06) 0%, transparent 70%)" }} />
-        <div className="max-w-4xl mx-auto px-6 relative z-10">
-          <nav className="text-xs text-[color:var(--color-text-muted)] mb-6 flex gap-2 overflow-x-auto whitespace-nowrap hide-scrollbar">
-            <Link href="/" className="hover:text-[color:var(--color-accent)] no-underline text-[color:var(--color-text-muted)] shrink-0">Home</Link>
-            <span className="shrink-0">/</span>
-            <Link href="/blog" className="hover:text-[color:var(--color-accent)] no-underline text-[color:var(--color-text-muted)] shrink-0">Blog</Link>
-            <span className="shrink-0">/</span>
-            <span className="text-[color:var(--color-foreground)] truncate max-w-[200px] sm:max-w-none">{post.title}</span>
+      <section className="pt-32 pb-16 relative overflow-hidden bg-slate-50 border-b border-slate-200">
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-30 pointer-events-none">
+           <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute w-full h-full text-green-100 fill-current">
+              <polygon points="0,100 100,0 100,100" />
+           </svg>
+        </div>
+        <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
+          <nav className="text-xs text-slate-500 mb-8 flex justify-center gap-2 overflow-x-auto whitespace-nowrap hide-scrollbar">
+            <Link href="/" className="hover:text-green-700 font-medium transition-colors shrink-0">Home</Link>
+            <span className="shrink-0 text-slate-300">/</span>
+            <Link href="/blog" className="hover:text-green-700 font-medium transition-colors shrink-0">Blog</Link>
+            <span className="shrink-0 text-slate-300">/</span>
+            <span className="text-slate-800 font-bold truncate max-w-[200px] sm:max-w-none">{post.title}</span>
           </nav>
           
           {post.tag && (
-             <span className="inline-block bg-[color:var(--color-primary)]/10 border border-[color:var(--color-primary)]/15 rounded-full px-3 py-0.5 text-xs text-[color:var(--color-primary)] font-semibold mb-4 uppercase tracking-wider">
+             <span className="inline-block bg-green-50 border border-green-200 rounded-full px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest text-green-700 shadow-sm mb-6">
                {post.tag}
              </span>
           )}
           
-          <h1 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-heading font-extrabold mb-4 leading-tight text-[color:var(--color-foreground)]"
-            style={{ animation: "fade-in-up 0.6s ease forwards" }}>
+          <h1 className="text-3xl md:text-5xl font-extrabold mb-6 text-slate-900 tracking-tight leading-[1.15]">
             {post.title}
           </h1>
           
-          <div className="flex items-center gap-4 text-sm text-[color:var(--color-text-secondary)] font-medium">
+          <div className="flex items-center justify-center gap-4 text-sm text-slate-500 font-bold uppercase tracking-wider">
             {publishDate && <span>{publishDate}</span>}
           </div>
         </div>
@@ -133,9 +135,9 @@ export default async function BlogPost({ params }) {
 
       {/* Featured Image if available */}
       {post.featuredImage && (
-         <div className="bg-[color:var(--color-section)]">
-           <div className="max-w-4xl mx-auto px-6 -mt-8 relative z-20">
-              <div className="w-full aspect-video md:aspect-[21/9] relative rounded-xl overflow-hidden shadow-lg border border-[color:var(--color-border)]">
+         <div className="bg-white">
+           <div className="max-w-4xl mx-auto px-6 -mt-10 relative z-20">
+              <div className="w-full aspect-video md:aspect-[21/9] relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-slate-100">
                  <Image 
                    src={post.featuredImage} 
                    alt={post.title} 
@@ -148,18 +150,18 @@ export default async function BlogPost({ params }) {
          </div>
       )}
 
-      <section className={`py-16 bg-[color:var(--color-section)] ${!post.featuredImage ? "pt-16" : "pt-12"}`}>
-        <div className="max-w-4xl mx-auto px-6">
+      <section className={`py-16 md:py-24 bg-white ${!post.featuredImage ? "pt-16" : "pt-16"}`}>
+        <div className="max-w-3xl mx-auto px-6">
           <div
-            className="blog-prose animate-on-scroll"
+            className="prose prose-slate prose-lg max-w-none prose-headings:font-bold prose-headings:text-slate-900 prose-a:text-green-700 hover:prose-a:text-green-600 prose-img:rounded-xl"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
-          <div className="mt-16 pt-8 border-t border-[color:var(--color-border)] flex flex-col sm:flex-row items-center justify-between gap-6 animate-on-scroll">
-            <Link href="/blog" className="text-[color:var(--color-primary)] text-sm font-bold no-underline hover:text-[color:var(--color-primary-hover)] flex items-center gap-2">
-              ← Back to all articles
+          <div className="mt-20 pt-10 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <Link href="/blog" className="text-slate-500 text-sm font-bold no-underline hover:text-green-700 flex items-center gap-2 group transition-colors">
+              <span className="group-hover:-translate-x-1 transition-transform">←</span> Back to all articles
             </Link>
             <Link href="/contact"
-              className="w-full sm:w-auto text-center px-8 py-3.5 rounded-md bg-[color:var(--color-accent)] text-[#0F172A] font-bold hover:opacity-90 transition-all no-underline shadow-sm">
+              className="w-full sm:w-auto text-center px-8 py-3.5 rounded-lg bg-green-700 text-white font-bold hover:bg-green-600 transition-colors shadow-sm">
               Contact Us for Your Project →
             </Link>
           </div>

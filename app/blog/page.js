@@ -7,10 +7,15 @@ import { transformUrls } from "@/lib/getProductData";
 export const revalidate = 60; // Revalidate cache every minute
 
 export const metadata = {
-  title: "Blog - Engineering & Manufacturing Insights",
+  title: "Industrial LED Lighting & Solar Blog | Sudeep Engineers",
   description:
-    "Expert articles on industrial energy, LED lighting, and solar manufacturing in Aurangabad. Stay informed with Sudeep Engineers blog.",
+    "Insights, case studies, and industry updates on LED lighting manufacturing, solar street lights, and highmast pole infrastructure in India.",
+  keywords: "led lighting blog, solar street light blog, highmast pole lighting, street light manufacturer india, led manufacturing updates",
   alternates: { canonical: "https://sudeepengineers.com/blog" },
+  openGraph: {
+    title: "Engineering Insights & News | Sudeep Engineers Blog",
+    description: "Expert articles on solar energy, sustainable manufacturing, and industrial LED lighting solutions.",
+  },
 };
 
 // Next.js page component
@@ -34,7 +39,7 @@ export default async function BlogPage() {
   // Format date helper
   const formatDate = (timestamp) => {
     if (!timestamp) return "Recent Update";
-    const date = new Date(timestamp); // Supabase 'created_at' is typically an ISO string
+    const date = new Date(timestamp);
     return date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
   };
 
@@ -45,79 +50,89 @@ export default async function BlogPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://sudeepengineers.com" },
-              { "@type": "ListItem", position: 2, name: "Blog", item: "https://sudeepengineers.com/blog" },
-            ],
+            "@type": "Blog",
+            "name": "Sudeep Engineers Engineering Insights",
+            "url": "https://sudeepengineers.com/blog",
+            "description": "Insights, case studies, and industry updates on LED lighting manufacturing and solar infrastructure.",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Sudeep Engineers"
+            }
           }),
         }}
       />
 
       {/* Page Hero */}
-      <section className="pt-32 pb-16 relative overflow-hidden bg-[color:var(--color-background)]">
-        <div className="absolute -top-[30%] -right-[20%] w-[500px] h-[500px] rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(37,99,235,0.06) 0%, transparent 70%)" }} />
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <nav className="text-xs text-[color:var(--color-text-muted)] mb-6 flex gap-2">
-            <Link href="/" className="hover:text-[color:var(--color-accent)] no-underline text-[color:var(--color-text-muted)]">Home</Link>
-            <span>/</span><span className="text-[color:var(--color-foreground)]">Blog</span>
+      <section className="pt-32 pb-16 relative overflow-hidden bg-slate-50 border-b border-slate-200">
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-30 pointer-events-none">
+           <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute w-full h-full text-green-100 fill-current">
+              <polygon points="0,100 100,0 100,100" />
+           </svg>
+        </div>
+        <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
+          <nav className="text-xs text-slate-500 mb-6 flex justify-center gap-2">
+            <Link href="/" className="hover:text-green-700 font-medium transition-colors">Home</Link>
+            <span className="text-slate-300">/</span><span className="text-slate-800 font-bold">Blog</span>
           </nav>
-          <h1 className="text-[clamp(2rem,4vw,3rem)] font-heading font-extrabold mb-4 text-[color:var(--color-foreground)]"
-            style={{ animation: "fade-in-up 0.6s ease forwards" }}>
-            Engineering <span className="text-[color:var(--color-primary)]">Insights</span>
+          <span className="inline-block text-xs font-bold uppercase tracking-[0.3em] text-green-700 bg-green-50 border border-green-200 px-4 py-1.5 rounded-full mb-6 shadow-sm">Industry Updates</span>
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-6 text-slate-900 tracking-tight">
+            Engineering <span className="text-green-700">Insights</span>
           </h1>
-          <p className="text-[color:var(--color-text-secondary)] opacity-80 text-lg max-w-[600px]"
-            style={{ animation: "fade-in-up 0.6s ease 0.1s forwards", opacity: 0 }}>
-            Expert articles on solar energy, sustainable manufacturing, and LED lighting from our team.
+          <p className="text-slate-600 text-lg max-w-2xl mx-auto leading-relaxed">
+            Expert articles, project case studies, and latest trends in solar energy, sustainable manufacturing, and industrial LED lighting infrastructure.
           </p>
         </div>
       </section>
 
       {/* Blog Cards */}
-      <section className="py-20 bg-[color:var(--color-section)]">
+      <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {posts.map((post, i) => (
               <Link
                 href={`/blog/${post.slug}`}
                 key={post.id || i}
-                className={`bg-[color:var(--color-bg-card)] border border-[color:var(--color-border)] rounded-xl overflow-hidden no-underline group shadow-sm hover:shadow-md transition-shadow animate-on-scroll delay-${(i % 5) + 1}`}
+                className="group flex flex-col bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-green-300 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
               >
-                <div className="h-[200px] bg-gradient-to-br from-[#1E293B] to-[#0F172A] relative overflow-hidden flex items-center justify-center text-slate-700">
+                <div className="h-[240px] bg-slate-100 relative overflow-hidden flex items-center justify-center">
                   {post.featuredImage ? (
                     <Image
                       src={post.featuredImage}
                       alt={post.title}
                       fill
-                      className="object-cover opacity-80 group-hover:opacity-100 transition-all duration-500"
+                      className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                     />
                   ) : (
-                    <svg className="w-16 h-16 opacity-30 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                    <div className="w-full h-full bg-slate-900 flex items-center justify-center">
+                        <svg className="w-16 h-16 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" /></svg>
+                    </div>
+                  )}
+                  {post.tag && (
+                    <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm border border-slate-200 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-green-700 shadow-sm">
+                      {post.tag}
+                    </div>
                   )}
                 </div>
-                <div className="p-6">
-                  {post.tag && (
-                    <span className="inline-block bg-[color:var(--color-primary)]/10 border border-[color:var(--color-primary)]/15 rounded-full px-3 py-0.5 text-[0.72rem] text-[color:var(--color-primary)] font-bold uppercase tracking-wider mb-3">
-                      {post.tag}
-                    </span>
-                  )}
-                  <h3 className="font-heading font-bold text-lg mb-2 text-[color:var(--color-foreground)] group-hover:text-[color:var(--color-primary)] transition-colors leading-snug line-clamp-2">
+                <div className="p-8 flex flex-col flex-1">
+                  <h3 className="font-bold text-xl mb-3 text-slate-900 group-hover:text-green-700 transition-colors leading-snug line-clamp-2">
                     {post.title}
                   </h3>
-                  <p className="text-[color:var(--color-text-secondary)] text-sm leading-relaxed mb-4 line-clamp-3">{post.excerpt}</p>
-                  <div className="flex items-center gap-2 text-xs text-[color:var(--color-text-muted)] font-medium border-t border-[color:var(--color-border)] pt-4 mt-auto">
+                  <p className="text-slate-500 text-sm leading-relaxed mb-6 line-clamp-3">
+                    {post.excerpt}
+                  </p>
+                  <div className="flex items-center justify-between text-xs text-slate-400 font-bold border-t border-slate-100 pt-5 mt-auto uppercase tracking-wider">
                     <span>{formatDate(post.created_at)}</span>
+                    <span className="text-green-700 flex items-center gap-1 group-hover:translate-x-1 transition-transform">Read Article <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
                   </div>
                 </div>
               </Link>
             ))}
 
             {posts.length === 0 && (
-              <div className="col-span-full py-20 text-center border-2 border-dashed border-[color:var(--color-border)] rounded-2xl bg-[color:var(--color-bg-card)]">
-                <svg className="w-12 h-12 mx-auto text-[color:var(--color-text-muted)] mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-                <h3 className="text-xl font-bold text-[color:var(--color-foreground)]">Check back later</h3>
-                <p className="text-[color:var(--color-text-muted)]">We are currently preparing new insights and articles. Stay tuned!</p>
+              <div className="col-span-full py-24 text-center border-2 border-dashed border-slate-200 rounded-3xl bg-slate-50">
+                <svg className="w-16 h-16 mx-auto text-slate-300 mb-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" /></svg>
+                <h3 className="text-2xl font-bold text-slate-900 mb-2">Check back later</h3>
+                <p className="text-slate-500 max-w-sm mx-auto">We are currently preparing new engineering insights and articles. Stay tuned!</p>
               </div>
             )}
           </div>

@@ -3,14 +3,14 @@ import Image from "next/image";
 import { Settings, Building2, Wrench, Hammer, Lightbulb } from "lucide-react";
 
 export const metadata = {
-  title: "Services - LED Lighting & Solar Infrastructure",
+  title: "LED Lighting Manufacturing & Solar EPC Services — OEM LED Manufacturer India",
   description:
-    "Comprehensive engineering solutions in Waluj MIDC, Aurangabad — high-performance LED lighting manufacturing and complete Solar Power infrastructure.",
+    "Sudeep Engineers offers LED lighting manufacturing services including LED street lights, flood lights, highbay lights, and complete solar power EPC infrastructure. ISO 9001:2015 certified facility in Waluj MIDC, Aurangabad.",
   alternates: { canonical: "https://sudeepengineers.com/services" },
   openGraph: {
-    title: "LED & Solar Services | Sudeep Engineers Aurangabad",
+    title: "LED Manufacturing & Solar Infrastructure Services | Sudeep Engineers",
     description:
-      "Full-range LED lighting manufacturing & Solar power infrastructure in Waluj MIDC.",
+      "Full-range LED street light, flood light, highbay manufacturing & solar power EPC services from ISO certified facility in Aurangabad.",
   },
 };
 
@@ -88,10 +88,10 @@ export default function ServicesPage() {
         </div>
 
         <div className="absolute -top-[30%] -right-[20%] w-[500px] h-[500px] rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%)" }} />
+          style={{ background: "radial-gradient(circle, rgba(21,128,61,0.06) 0%, transparent 70%)" }} />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <nav className="text-xs text-[color:var(--color-text-muted)] mb-6 flex gap-2">
-            <Link href="/" className="hover:text-blue-400 no-underline text-[color:var(--color-text-muted)]">Home</Link>
+            <Link href="/" className="hover:text-green-500 no-underline text-[color:var(--color-text-muted)]">Home</Link>
             <span>/</span><span className="text-[color:var(--color-text-secondary)]">Services</span>
           </nav>
           <h1 className="text-[clamp(2rem,4vw,3rem)] font-heading font-extrabold mb-4 text-[color:var(--color-foreground)]"
@@ -138,7 +138,7 @@ export default function ServicesPage() {
 
                 <Link
                   href="/contact"
-                  className="inline-flex px-6 py-3 rounded-md bg-gradient-to-r from-blue-500 to-blue-700 text-white font-semibold hover:-translate-y-0.5 transition-all no-underline text-sm"
+                  className="inline-flex px-6 py-3 rounded-md bg-gradient-to-r from-green-600 to-green-700 text-white font-semibold hover:-translate-y-0.5 transition-all no-underline text-sm"
                 >
                   Get Quote for {service.title} →
                 </Link>
@@ -176,7 +176,7 @@ export default function ServicesPage() {
       {/* CTA */}
       <section className="py-20 bg-[color:var(--color-bg-secondary)] border-t border-[color:var(--color-border)]">
         <div className="max-w-5xl mx-auto px-6">
-          <div className="bg-gradient-to-r from-blue-700 to-blue-500 rounded-3xl p-12 md:p-16 text-center relative overflow-hidden animate-on-scroll">
+          <div className="bg-gradient-to-r from-green-700 to-green-600 rounded-3xl p-12 md:p-16 text-center relative overflow-hidden animate-on-scroll">
             <div className="absolute -top-1/2 -right-[30%] w-[400px] h-[400px] rounded-full pointer-events-none"
               style={{ background: "radial-gradient(circle, rgba(255,255,255,0.1), transparent 70%)" }} />
             <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-heading font-bold text-white mb-4 relative z-10">
@@ -186,7 +186,7 @@ export default function ServicesPage() {
               Contact us today for a free consultation and competitive quote. We deliver quality from Waluj MIDC, Aurangabad.
             </p>
             <Link href="/contact"
-              className="relative z-10 inline-flex px-8 py-3.5 rounded-md bg-white text-blue-700 font-semibold hover:-translate-y-0.5 hover:bg-gray-100 transition-all no-underline">
+              className="relative z-10 inline-flex px-8 py-3.5 rounded-md bg-white text-green-700 font-semibold hover:-translate-y-0.5 hover:bg-gray-100 transition-all no-underline">
               Request Free Quote →
             </Link>
           </div>

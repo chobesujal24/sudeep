@@ -35,7 +35,7 @@ export default function AboutPage() {
       {/* Page Hero */}
       <section className="pt-32 pb-16 relative overflow-hidden bg-[color:var(--color-background)]">
         <div className="absolute -top-[30%] -right-[20%] w-[500px] h-[500px] rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(37,99,235,0.06) 0%, transparent 70%)" }} />
+          style={{ background: "radial-gradient(circle, rgba(21,128,61,0.06) 0%, transparent 70%)" }} />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <nav className="text-xs text-[color:var(--color-text-muted)] mb-6 flex gap-2">
             <Link href="/" className="hover:text-[color:var(--color-accent)] no-underline text-[color:var(--color-text-muted)]">Home</Link>
@@ -246,7 +246,7 @@ export default function AboutPage() {
       {/* ====== CTA ====== */}
       <section className="py-20 bg-[color:var(--color-section)] border-t border-[color:var(--color-border)]">
         <div className="max-w-5xl mx-auto px-6">
-          <div className="rounded-3xl p-12 md:p-16 text-center relative overflow-hidden animate-on-scroll" style={{ background: "linear-gradient(135deg, #166534, #15803D, #166534)" }}>
+          <div className="rounded-3xl p-12 md:p-16 text-center relative overflow-hidden animate-on-scroll" style={{ background: "linear-gradient(135deg, #047857, #059669, #047857)" }}>
             <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)", backgroundSize: "24px 24px" }} />
             <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-heading font-bold text-[#FFFFFF] mb-4 relative z-10">
               Partner with Sudeep Engineers
@@ -255,7 +255,7 @@ export default function AboutPage() {
               Let&apos;s discuss your LED lighting or Solar infrastructure project requirements.
             </p>
             <Link href="/contact"
-              className="relative z-10 inline-flex px-8 py-3.5 rounded-md bg-[#38BDF8] text-[#0F172A] font-bold hover:opacity-90 transition-all no-underline">
+              className="relative z-10 inline-flex px-8 py-3.5 rounded-full bg-white text-green-800 font-bold hover:bg-slate-100 hover:shadow-lg transition-all no-underline">
               Contact Us Today →
             </Link>
           </div>

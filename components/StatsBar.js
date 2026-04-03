@@ -3,7 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 
 /*
- * StatsBar — Clean animated counter section with minimalist design.
+ * StatsBar — Enhanced animated counter section.
+ * Clean white design with upgraded animations and better typography.
  */
 
 const stats = [
@@ -34,7 +35,7 @@ function AnimatedCounter({ target, suffix, duration = 2000 }) {
   }, [isInView, target, duration]);
 
   return (
-    <span ref={ref} className="tabular-nums text-emerald-600">
+    <span ref={ref} className="tabular-nums text-green-700">
       {count}
       {suffix}
     </span>
@@ -43,7 +44,7 @@ function AnimatedCounter({ target, suffix, duration = 2000 }) {
 
 export default function StatsBar() {
   return (
-    <section className="py-16 md:py-20 bg-white border-y border-slate-100">
+    <section className="py-16 md:py-20 bg-white border-y border-slate-100" aria-label="Company statistics">
       <div className="max-w-5xl mx-auto px-6">
         <motion.div
           className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4"
@@ -53,7 +54,14 @@ export default function StatsBar() {
           transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
         >
           {stats.map((stat, i) => (
-            <div key={i} className="text-center relative">
+            <motion.div
+              key={i}
+              className="text-center relative"
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+            >
               {i > 0 && (
                 <div className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 w-px h-12 bg-slate-100" />
               )}
@@ -63,7 +71,7 @@ export default function StatsBar() {
               <div className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
                 {stat.label}
               </div>
-            </div>
+            </motion.div>
           ))}
         </motion.div>
       </div>

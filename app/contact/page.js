@@ -55,7 +55,7 @@ export default function ContactPage() {
       {/* Page Hero */}
       <section className="pt-32 pb-16 relative overflow-hidden bg-[color:var(--color-background)]">
         <div className="absolute -top-[30%] -right-[20%] w-[500px] h-[500px] rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(37,99,235,0.06) 0%, transparent 70%)" }} />
+          style={{ background: "radial-gradient(circle, rgba(21,128,61,0.06) 0%, transparent 70%)" }} />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <nav className="text-xs text-[color:var(--color-text-muted)] mb-6 flex gap-2">
             <Link href="/" className="hover:text-[color:var(--color-accent)] no-underline text-[color:var(--color-text-muted)]">Home</Link>
@@ -78,12 +78,12 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             {contactInfo.map((info, i) => (
               <div key={i} className={`glass-card p-6 animate-on-scroll delay-${i + 1}`}>
-                <div className="w-12 h-12 rounded-lg bg-blue-500/10 border border-blue-500/15 flex items-center justify-center text-blue-400 mb-4 [&>svg]:w-6 [&>svg]:h-6">
+                <div className="w-12 h-12 rounded-lg bg-green-600/10 border border-green-600/15 flex items-center justify-center text-green-500 mb-4 [&>svg]:w-6 [&>svg]:h-6">
                   {info.icon}
                 </div>
                 <h3 className="font-heading font-semibold text-sm mb-2">{info.title}</h3>
                 {info.link ? (
-                  <a href={info.link} className="text-[color:var(--color-text-secondary)] text-sm no-underline hover:text-blue-400 transition-colors" target={info.link.startsWith("http") ? "_blank" : undefined} rel={info.link.startsWith("http") ? "noopener noreferrer" : undefined}>
+                  <a href={info.link} className="text-[color:var(--color-text-secondary)] text-sm no-underline hover:text-green-500 transition-colors" target={info.link.startsWith("http") ? "_blank" : undefined} rel={info.link.startsWith("http") ? "noopener noreferrer" : undefined}>
                     {info.content}
                   </a>
                 ) : (
@@ -157,11 +157,11 @@ export default function ContactPage() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl mx-auto">
               <div className="glass-card p-6 text-center">
                 <h4 className="font-semibold text-sm mb-2">Monday - Friday</h4>
-                <p className="text-blue-400 font-bold">9:00 AM - 6:00 PM</p>
+                <p className="text-green-500 font-bold">9:00 AM - 6:00 PM</p>
               </div>
               <div className="glass-card p-6 text-center">
                 <h4 className="font-semibold text-sm mb-2">Saturday</h4>
-                <p className="text-blue-400 font-bold">9:00 AM - 2:00 PM</p>
+                <p className="text-green-500 font-bold">9:00 AM - 2:00 PM</p>
               </div>
               <div className="glass-card p-6 text-center">
                 <h4 className="font-semibold text-sm mb-2">Sunday</h4>

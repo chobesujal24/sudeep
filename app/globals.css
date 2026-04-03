@@ -9,15 +9,18 @@
   --color-bg-secondary: #F1F5F9;
   --color-bg-card: #FFFFFF;
   --color-bg-card-hover: #F8FAFC;
-  --color-primary: #166534;
-  --color-primary-hover: #15803D;
-  --color-accent: #2563EB;
+  --color-primary: #15803d;
+  --color-primary-hover: #16a34a;
+  --color-primary-light: #DCFCE7;
+  --color-accent: #15803d;
+  --color-accent-glow: rgba(21, 128, 61, 0.4);
   --color-text-secondary: #475569;
   --color-text-muted: #64748B;
   --color-border: #E2E8F0;
   --color-border-accent: #CBD5E1;
   --font-heading: 'Montserrat', sans-serif;
   --font-body: 'Inter', sans-serif;
+  --font-display: 'Outfit', sans-serif;
 }
 
 @theme {
@@ -38,8 +41,8 @@
 
 /* --- Base Styles --- */
 ::selection {
-  background-color: #d1fae5; /* emerald-100 */
-  color: #064e3b; /* emerald-900 */
+  background-color: #d1fae5;
+  color: #064e3b;
 }
 
 html {
@@ -80,51 +83,78 @@ body {
   overflow-x: hidden;
 }
 
-/* Solid background, no tech grid */
-
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading), var(--font-body), sans-serif;
 }
 
 /* ========================================
-   CINEMATIC SECTIONS
+   ANNOUNCEMENT MARQUEE BAR
    ======================================== */
 
-.section-cinematic {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.announcement-bar {
+  background: linear-gradient(90deg, #064E3B, #065F46, #064E3B);
   overflow: hidden;
-}
-
-.section-cinematic-hero {
   position: relative;
-  height: 100vh;
+}
+
+.announcement-bar::before,
+.announcement-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.announcement-bar::before {
+  left: 0;
+  background: linear-gradient(90deg, #064E3B, transparent);
+}
+
+.announcement-bar::after {
+  right: 0;
+  background: linear-gradient(-90deg, #064E3B, transparent);
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+  animation: marquee 40s linear infinite;
+  width: max-content;
 }
 
-.section-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.38);
-  z-index: 1;
-}
-
-.section-overlay-light {
-  position: absolute;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.85); /* Stronger white overlay for B2B readability */
-  z-index: 1;
+.marquee-track:hover {
+  animation-play-state: paused;
 }
 
 /* ========================================
-   NAVBAR — Tesla-style underline hover
+   NAVBAR — Glassmorphism + Scroll
    ======================================== */
+
+.navbar-glass {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar-glass.scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.navbar-transparent {
+  background: transparent;
+  backdrop-filter: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
 
 .nav-link {
   position: relative;
@@ -176,7 +206,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ========================================
-   BUTTONS — Premium
+   BUTTONS — Premium with glow
    ======================================== */
 
 .btn-primary {
@@ -185,19 +215,22 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: center;
   padding: 14px 34px;
   border-radius: 9999px;
-  background: var(--color-primary);
+  background: linear-gradient(135deg, #059669, #10B981);
   color: #FFFFFF;
   font-weight: 600;
   font-size: 0.9rem;
   letter-spacing: 0.02em;
   text-decoration: none;
-  border: 1px solid var(--color-primary);
+  border: none;
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
 }
 
 .btn-primary:hover {
-  background: var(--color-primary-hover);
+  background: linear-gradient(135deg, #047857, #059669);
+  box-shadow: 0 6px 25px rgba(5, 150, 105, 0.45);
+  transform: translateY(-1px);
 }
 
 .btn-secondary {
@@ -212,17 +245,18 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.9rem;
   letter-spacing: 0.02em;
   text-decoration: none;
-  border: 1px solid var(--color-primary);
+  border: 2px solid var(--color-primary);
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .btn-secondary:hover {
-  background: rgba(22, 101, 52, 0.05);
+  background: rgba(5, 150, 105, 0.08);
+  transform: translateY(-1px);
 }
 
 /* ========================================
-   ANIMATIONS
+   ANIMATIONS — Full Premium Suite
    ======================================== */
 
 @keyframes fade-in-up {
@@ -245,13 +279,50 @@ h1, h2, h3, h4, h5, h6 {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
 }
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px -5px rgba(30, 64, 175, 0.3); }
-  50% { box-shadow: 0 0 40px -5px rgba(30, 64, 175, 0.5); }
-}
+
+/* Shimmer — number glow effect */
 @keyframes shimmer {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
+}
+
+/* Pulse glow — green accent */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px -5px rgba(16, 185, 129, 0.3); }
+  50% { box-shadow: 0 0 40px -5px rgba(16, 185, 129, 0.55); }
+}
+
+/* Ken Burns — hero slider zoom */
+@keyframes ken-burns {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.12); }
+}
+
+/* Text reveal */
+@keyframes text-reveal {
+  0% { opacity: 0; transform: translateY(20px) rotateX(-10deg); filter: blur(4px); }
+  100% { opacity: 1; transform: translateY(0) rotateX(0deg); filter: blur(0); }
+}
+
+/* Gradient shift — CTA background */
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Border glow */
+@keyframes border-glow {
+  0%, 100% { border-color: rgba(16, 185, 129, 0.2); }
+  50% { border-color: rgba(16, 185, 129, 0.6); }
+}
+
+/* Floating particles */
+@keyframes particle-float {
+  0% { transform: translateY(100vh) scale(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-10vh) scale(1); opacity: 0; }
 }
 
 /* Scroll indicator bounce */
@@ -259,6 +330,18 @@ h1, h2, h3, h4, h5, h6 {
   0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
   40% { transform: translateY(-12px) translateX(-50%); }
   60% { transform: translateY(-6px) translateX(-50%); }
+}
+
+/* Infinite logo scroll */
+@keyframes logo-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Number counting shimmer */
+@keyframes number-shimmer {
+  0% { background-position: -100% 0; }
+  100% { background-position: 200% 0; }
 }
 
 .scroll-indicator {
@@ -277,14 +360,13 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 auto;
 }
 
-/* animate-on-scroll utility — only defines initial state */
+/* animate-on-scroll utility */
 .animate-on-scroll {
   opacity: 0;
   transform: translateY(20px);
   will-change: transform, opacity;
 }
 
-/* Initial state variations */
 .animate-on-scroll.slide-up { transform: translateY(20px); }
 .animate-on-scroll.slide-down { transform: translateY(-20px); }
 .animate-on-scroll.slide-left { transform: translateX(20px); }
@@ -292,44 +374,163 @@ h1, h2, h3, h4, h5, h6 {
 .animate-on-scroll.zoom-in { transform: none; }
 .animate-on-scroll.zoom-out { transform: none; }
 
-/* Delay classes (kept for manual index/staggering) */
 .animate-on-scroll.delay-1 { transition-delay: 0.1s; }
 .animate-on-scroll.delay-2 { transition-delay: 0.2s; }
 .animate-on-scroll.delay-3 { transition-delay: 0.3s; }
 .animate-on-scroll.delay-4 { transition-delay: 0.4s; }
 .animate-on-scroll.delay-5 { transition-delay: 0.5s; }
 
-/* Gradient text */
+/* ========================================
+   PREMIUM GRADIENT TEXT
+   ======================================== */
+
 .gradient-text {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  background: linear-gradient(135deg, #059669, #10B981, #34D399);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-hero {
+  background: linear-gradient(135deg, #ECFDF5, #6EE7B7, #A7F3D0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-golden {
+  background: linear-gradient(135deg, #F59E0B, #FBBF24, #FCD34D);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 /* ========================================
-   BENTO GRID — Solid B2B Cards
+   CINEMATIC SECTIONS
+   ======================================== */
+
+.section-cinematic {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.section-cinematic-hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.section-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.38);
+  z-index: 1;
+}
+
+.section-overlay-light {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.85);
+  z-index: 1;
+}
+
+/* ========================================
+   3D CARD TILT HOVER
+   ======================================== */
+
+.card-3d {
+  perspective: 1000px;
+}
+
+.card-3d-inner {
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s ease;
+  transform-style: preserve-3d;
+}
+
+.card-3d:hover .card-3d-inner {
+  transform: rotateY(-2deg) rotateX(2deg) translateY(-4px);
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(16, 185, 129, 0.15);
+}
+
+/* Gradient border card */
+.card-gradient-border {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.card-gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, transparent 40%, rgba(16, 185, 129, 0.4), transparent 60%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.card-gradient-border:hover::before {
+  opacity: 1;
+}
+
+/* ========================================
+   BENTO GRID
    ======================================== */
 
 .bento-card {
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: 1rem;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.4s ease;
   position: relative;
   overflow: hidden;
 }
 
 .bento-card:hover {
   border-color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.08);
 }
 
 /* ========================================
-   STATS — Solid Color
+   STATS — Dark Gradient Section
    ======================================== */
 
+.stats-section {
+  background: linear-gradient(135deg, #0F172A 0%, #064E3B 50%, #0F172A 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.stats-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at 20% 50%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 50%, rgba(16, 185, 129, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
 .stats-number {
-  color: var(--color-primary);
+  font-family: var(--font-display), sans-serif;
+  background: linear-gradient(90deg, #6EE7B7, #34D399, #10B981, #6EE7B7);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: number-shimmer 4s ease-in-out infinite;
 }
 
 /* ========================================
@@ -343,8 +544,26 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
 }
 
+/* Hero particle overlay */
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hero-particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: rgba(16, 185, 129, 0.5);
+  border-radius: 50%;
+  animation: particle-float linear infinite;
+}
+
 /* ========================================
-   CARDS — Solid Corporate Lines
+   CARDS — Premium Hover Effects
    ======================================== */
 
 .glass-card {
@@ -361,13 +580,15 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 3px;
-  background: var(--color-primary);
+  background: linear-gradient(90deg, #059669, #10B981, #34D399);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
 .glass-card:hover {
   border-color: var(--color-border-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px -8px rgba(0, 0, 0, 0.08);
 }
 
 .glass-card:hover::before { opacity: 1; }
@@ -378,6 +599,50 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 1rem;
   position: relative;
   overflow: hidden;
+}
+
+/* Product badge */
+.product-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  z-index: 5;
+}
+
+.product-badge-new {
+  background: linear-gradient(135deg, #059669, #10B981);
+  color: white;
+}
+
+.product-badge-best {
+  background: linear-gradient(135deg, #F59E0B, #FBBF24);
+  color: #78350F;
+}
+
+/* ========================================
+   INFINITE LOGO SCROLL
+   ======================================== */
+
+.logo-scroll-container {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, white 10%, white 90%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, white 10%, white 90%, transparent);
+}
+
+.logo-scroll-track {
+  display: flex;
+  animation: logo-scroll 30s linear infinite;
+  width: max-content;
+}
+
+.logo-scroll-track:hover {
+  animation-play-state: paused;
 }
 
 /* ========================================
@@ -454,10 +719,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ========================================
-   PRINT
+   THEME HELPERS
    ======================================== */
 
-/* Theme helpers */
 .logo-invert-on-dark {
   transition: filter 0.4s ease, opacity 0.4s ease;
 }
@@ -469,7 +733,6 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 1;
 }
 
-/* Green logo tint — converts black logo to natural green */
 .logo-green {
   filter: brightness(0) saturate(100%) invert(42%) sepia(93%) saturate(520%) hue-rotate(101deg) brightness(95%) contrast(92%);
   transition: filter 0.4s ease, opacity 0.4s ease;
@@ -486,8 +749,28 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ========================================
+   CTA GRADIENT ANIMATED BG
+   ======================================== */
+
+.cta-gradient-bg {
+  background: linear-gradient(-45deg, #0F172A, #064E3B, #0D3B2F, #1E293B);
+  background-size: 400% 400%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* ========================================
+   SECTION DIVIDER
+   ======================================== */
+
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.3), transparent);
+}
+
+/* ========================================
    CUSTOM SCROLLBAR
    ======================================== */
+
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
   height: 6px;

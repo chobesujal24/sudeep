@@ -316,11 +316,11 @@ export default function Chatbot() {
                     className="flex items-center justify-between mx-2 mb-2 p-2 bg-[#F0FDF4] dark:bg-[#166534]/20 border border-[#BBF7D0] dark:border-[#166534] rounded-lg"
                   >
                     <div className="flex items-center gap-2 overflow-hidden">
-                      <FileText size={14} className="text-emerald-600 flex-shrink-0" />
-                      <span className="text-xs text-emerald-800 dark:text-emerald-200 truncate">{attachedFile.name} ({Math.round(attachedFile.size / 1024)}KB)</span>
+                      <FileText size={14} className="text-green-600 flex-shrink-0" />
+                      <span className="text-xs text-green-800 dark:text-green-200 truncate">{attachedFile.name} ({Math.round(attachedFile.size / 1024)}KB)</span>
                     </div>
                     {attachedFile.type.startsWith('image/') && (
-                      <div className="w-10 h-10 rounded border border-emerald-200 overflow-hidden ml-2 flex-shrink-0">
+                      <div className="w-10 h-10 rounded border border-green-200 overflow-hidden ml-2 flex-shrink-0">
                         <img 
                           src={URL.createObjectURL(attachedFile)} 
                           alt="preview" 
@@ -328,7 +328,7 @@ export default function Chatbot() {
                         />
                       </div>
                     )}
-                    <button onClick={() => setAttachedFile(null)} className="text-emerald-600 hover:text-emerald-800 p-1 bg-emerald-100 rounded-full dark:bg-emerald-900/50 ml-auto">
+                    <button onClick={() => setAttachedFile(null)} className="text-green-600 hover:text-green-800 p-1 bg-green-100 rounded-full dark:bg-green-900/50 ml-auto">
                       <X size={12} />
                     </button>
                   </motion.div>
@@ -346,7 +346,7 @@ export default function Chatbot() {
                 
                 <button 
                   onClick={() => fileInputRef.current?.click()}
-                  className="p-2 text-[color:var(--color-text-muted)] hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 rounded-lg transition-colors"
+                  className="p-2 text-[color:var(--color-text-muted)] hover:text-green-600 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-lg transition-colors"
                   title="Attach File or Image (Max 15MB)"
                 >
                   <Paperclip size={18} />
@@ -369,7 +369,7 @@ export default function Chatbot() {
                     <button
                       onClick={toggleListening}
                       className={`absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded-lg transition-colors ${
-                        isListening ? "text-red-500 bg-red-50 dark:bg-red-900/20 animate-pulse" : "text-[color:var(--color-text-muted)] hover:text-emerald-600"
+                        isListening ? "text-red-500 bg-red-50 dark:bg-red-900/20 animate-pulse" : "text-[color:var(--color-text-muted)] hover:text-green-600"
                       }`}
                     >
                       {isListening ? <Mic size={16} /> : <MicOff size={16} />}

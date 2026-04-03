@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { Icons } from "./Icons";
 
@@ -25,7 +26,7 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-emerald-100/30 text-slate-900 overflow-hidden" 
+    <footer className="relative border-t border-green-100/30 text-slate-900 overflow-hidden" 
       style={{ background: "url('/main/footer_bg.png') center/cover no-repeat" }}>
       <div className="max-w-6xl mx-auto px-6 py-16 lg:py-20 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-10 mb-16">
@@ -40,31 +41,32 @@ export default function Footer() {
               />
             </Link>
             <p className="text-slate-600 text-sm leading-relaxed max-w-xs mb-6 font-medium">
-              Premium LED lighting and solar solutions. MSME and GeM registered partner for India's infrastructure projects.
+              Premium LED lighting and solar solutions. ISO 9001:2015 certified, BIS approved. MSME and GeM registered partner for India&apos;s infrastructure projects.
             </p>
             <div className="space-y-3 text-sm">
               <div className="flex items-start gap-3">
-                <Icons.Location className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
+                <Icons.Location className="w-4 h-4 text-green-700 shrink-0 mt-0.5" />
                 <span className="text-slate-600 font-medium">Waluj MIDC, Aurangabad,<br />Maharashtra 431136</span>
               </div>
               <div className="flex items-center gap-3">
-                <Icons.Phone className="w-4 h-4 text-emerald-700 shrink-0" />
-                <a href="tel:+919922996236" className="text-slate-600 hover:text-emerald-800 transition-colors font-semibold tracking-wide">+91 9922996236</a>
+                <Icons.Phone className="w-4 h-4 text-green-700 shrink-0" />
+                <a href="tel:+919922996236" className="text-slate-600 hover:text-green-800 transition-colors font-semibold tracking-wide">+91 9922996236</a>
               </div>
               <div className="flex items-center gap-3">
-                <Icons.Envelope className="w-4 h-4 text-emerald-700 shrink-0" />
-                <a href="mailto:info@sudeepengineers.com" className="text-slate-600 hover:text-emerald-800 transition-colors font-medium">info@sudeepengineers.com</a>
+                <Icons.Envelope className="w-4 h-4 text-green-700 shrink-0" />
+                <a href="mailto:info@sudeepengineers.com" className="text-slate-600 hover:text-green-800 transition-colors font-medium">info@sudeepengineers.com</a>
               </div>
             </div>
           </div>
 
           {/* Products Column */}
           <div>
-            <h4 className="font-bold text-emerald-900 text-sm mb-6 uppercase tracking-[0.2em]">Products</h4>
+            <h4 className="font-bold text-green-900 text-sm mb-6 uppercase tracking-[0.2em]">Products</h4>
             <ul className="space-y-3">
               {footerLinks.products.map((link, i) => (
                 <li key={i}>
-                  <Link href={link.href} className="text-sm text-slate-600 hover:text-emerald-700 font-medium transition-colors">
+                  <Link href={link.href} className="text-sm text-slate-600 hover:text-green-700 font-medium transition-colors inline-flex items-center gap-1 group">
+                    <span className="w-0 group-hover:w-2 h-px bg-green-600 transition-all duration-300" />
                     {link.label}
                   </Link>
                 </li>
@@ -74,11 +76,12 @@ export default function Footer() {
 
           {/* Company Column */}
           <div>
-            <h4 className="font-bold text-emerald-900 text-sm mb-6 uppercase tracking-[0.2em]">Company</h4>
+            <h4 className="font-bold text-green-900 text-sm mb-6 uppercase tracking-[0.2em]">Company</h4>
             <ul className="space-y-3">
               {footerLinks.company.map((link, i) => (
                 <li key={i}>
-                  <Link href={link.href} className="text-sm text-slate-600 hover:text-emerald-700 font-medium transition-colors">
+                  <Link href={link.href} className="text-sm text-slate-600 hover:text-green-700 font-medium transition-colors inline-flex items-center gap-1 group">
+                    <span className="w-0 group-hover:w-2 h-px bg-green-600 transition-all duration-300" />
                     {link.label}
                   </Link>
                 </li>
@@ -88,27 +91,39 @@ export default function Footer() {
 
           {/* Support Column */}
           <div>
-            <h4 className="font-bold text-emerald-900 text-sm mb-6 uppercase tracking-[0.2em]">Support</h4>
+            <h4 className="font-bold text-green-900 text-sm mb-6 uppercase tracking-[0.2em]">Support</h4>
             <ul className="space-y-3">
               {footerLinks.support.map((link, i) => (
                 <li key={i}>
-                  <Link href={link.href} className="text-sm text-slate-600 hover:text-emerald-700 font-medium transition-colors">
+                  <Link href={link.href} className="text-sm text-slate-600 hover:text-green-700 font-medium transition-colors inline-flex items-center gap-1 group">
+                    <span className="w-0 group-hover:w-2 h-px bg-green-600 transition-all duration-300" />
                     {link.label}
                   </Link>
                 </li>
               ))}
             </ul>
+
+            {/* Quick CTA card */}
+            <div className="mt-8 p-4 rounded-xl bg-white/60 backdrop-blur-sm border border-green-100">
+              <h5 className="text-sm font-bold text-green-900 mb-2">Get a Quote</h5>
+              <p className="text-xs text-slate-500 mb-3">Contact us for custom pricing on your infrastructure project.</p>
+              <Link href="/contact" className="inline-flex items-center gap-1.5 text-xs font-bold text-green-700 hover:text-green-800 transition-colors">
+                Contact Us →
+              </Link>
+            </div>
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-emerald-900/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-emerald-950/60 uppercase tracking-widest font-bold">
+        <div className="border-t border-green-900/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-green-950/60 uppercase tracking-widest font-bold">
           <p>&copy; {new Date().getFullYear()} Sudeep Engineers. All rights reserved.</p>
           <div className="flex gap-4">
             <span>ISO 9001:2015</span>
-            <span className="text-emerald-900/20">|</span>
+            <span className="text-green-900/20">|</span>
+            <span>BIS Certified</span>
+            <span className="text-green-900/20">|</span>
             <span>MSME Registered</span>
-            <span className="text-emerald-900/20">|</span>
+            <span className="text-green-900/20">|</span>
             <span>GeM Approved</span>
           </div>
         </div>

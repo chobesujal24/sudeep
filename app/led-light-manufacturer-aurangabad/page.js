@@ -20,10 +20,10 @@ export default function LEDManufacturerAurangabad() {
       })}} />
 
       <section className="pt-32 pb-16 relative overflow-hidden" style={{ background: "var(--color-background)" }}>
-        <div className="absolute -top-[30%] -right-[20%] w-[500px] h-[500px] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%)" }} />
+        <div className="absolute -top-[30%] -right-[20%] w-[500px] h-[500px] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(21,128,61,0.06) 0%, transparent 70%)" }} />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <nav className="text-xs text-[color:var(--color-text-muted)] mb-6 flex gap-2">
-            <Link href="/" className="hover:text-blue-400 no-underline text-[color:var(--color-text-muted)]">Home</Link>
+            <Link href="/" className="hover:text-green-500 no-underline text-[color:var(--color-text-muted)]">Home</Link>
             <span>/</span><span className="text-[color:var(--color-text-secondary)]">LED Light Manufacturer Aurangabad</span>
           </nav>
           <h1 className="text-[clamp(2rem,4vw,3rem)] font-heading font-extrabold mb-4" style={{ animation: "fade-in-up 0.6s ease forwards" }}>
@@ -80,7 +80,7 @@ export default function LEDManufacturerAurangabad() {
           </div>
 
           <div className="mt-12 animate-on-scroll">
-            <Link href="/contact" className="inline-flex px-8 py-3.5 rounded-md bg-gradient-to-r from-blue-500 to-blue-700 text-[color:var(--color-foreground)] font-semibold hover:-translate-y-0.5 transition-all no-underline">
+            <Link href="/contact" className="inline-flex px-8 py-3.5 rounded-md bg-gradient-to-r from-green-600 to-green-700 text-[color:var(--color-foreground)] font-semibold hover:-translate-y-0.5 transition-all no-underline">
               Get LED Lighting Quote →
             </Link>
           </div>
@@ -98,13 +98,13 @@ export default function LEDManufacturerAurangabad() {
               { icon: <Sparkles color="currentColor" size={48} />, name: "Pixel LED Lights", range: "RGB/RGBW", feature: "DMX512 Control" },
             ].map((p, i) => (
               <div key={i} className={`glass-card p-8 text-center animate-on-scroll delay-${i + 1}`}>
-                <div className="text-blue-400 mb-4 flex justify-center [&>svg]:w-12 [&>svg]:h-12">{p.icon}</div>
+                <div className="text-green-500 mb-4 flex justify-center [&>svg]:w-12 [&>svg]:h-12">{p.icon}</div>
                 <h3 className="font-heading font-bold text-lg mb-2">{p.name}</h3>
                 <div className="flex justify-center gap-2 mb-3">
-                  <span className="bg-blue-500/8 border border-blue-500/12 rounded-full px-3 py-0.5 text-xs text-blue-400">{p.range}</span>
-                  <span className="bg-blue-500/8 border border-blue-500/12 rounded-full px-3 py-0.5 text-xs text-blue-400">{p.feature}</span>
+                  <span className="bg-green-600/8 border border-green-600/12 rounded-full px-3 py-0.5 text-xs text-green-500">{p.range}</span>
+                  <span className="bg-green-600/8 border border-green-600/12 rounded-full px-3 py-0.5 text-xs text-green-500">{p.feature}</span>
                 </div>
-                <Link href="/contact" className="text-blue-400 text-sm font-semibold no-underline hover:text-blue-300">
+                <Link href="/contact" className="text-green-500 text-sm font-semibold no-underline hover:text-green-400">
                   Get Quote →
                 </Link>
               </div>

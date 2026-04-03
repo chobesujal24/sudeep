@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FileCheck, X } from "lucide-react";
+import { motion } from "framer-motion";
 import TestimonialSlider from "@/components/TestimonialSlider";
 import FAQ from "@/components/FAQ";
 import { supabase } from "@/lib/supabase";
@@ -87,34 +88,50 @@ export default function HomeContent() {
     fetchCategories();
   }, []);
 
+  // Duplicate for infinite scroll
+  const marqueeClients = [...allClients, ...allClients];
+
   return (
     <>
       {/* ═══ PRODUCT RANGE ═══ */}
-      <section className="py-20 md:py-28 bg-white">
+      <section className="py-20 md:py-28 bg-white" id="products" aria-label="Product range">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <span className="text-[11px] font-semibold uppercase tracking-[0.3em] text-emerald-600 mb-4 block">What We Build</span>
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <span className="text-[11px] font-semibold uppercase tracking-[0.3em] text-green-600 mb-4 block">What We Build</span>
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4">Our Product Range</h2>
             <p className="text-slate-500 text-base md:text-lg max-w-xl mx-auto leading-relaxed">
               Engineered for high-performance infrastructure across India.
             </p>
-          </div>
+          </motion.div>
 
-          {/* Clean product grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {services.map((s, i) => (
-              <div key={i} className="group bg-white rounded-2xl border border-slate-100 hover:border-emerald-200 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 overflow-hidden">
-                <div className="aspect-[4/3] bg-slate-50 flex items-center justify-center p-6 overflow-hidden">
-                  <img src={s.image} alt={s.title} className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500" />
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+              >
+                <div className="group bg-white rounded-2xl border border-slate-100 hover:border-green-200 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 overflow-hidden">
+                  <div className="aspect-[4/3] bg-slate-50 flex items-center justify-center p-6 overflow-hidden">
+                    <img src={s.image} alt={s.title} className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="font-semibold text-lg text-slate-900 mb-2">{s.title}</h3>
+                    <p className="text-slate-500 text-sm leading-relaxed mb-4">{s.desc}</p>
+                    <Link href="/product" className="text-sm font-semibold text-green-600 hover:text-green-700 transition-colors inline-flex items-center gap-1.5 group/link">
+                      View Details <span className="group-hover/link:translate-x-0.5 transition-transform">→</span>
+                    </Link>
+                  </div>
                 </div>
-                <div className="p-6">
-                  <h3 className="font-semibold text-lg text-slate-900 mb-2">{s.title}</h3>
-                  <p className="text-slate-500 text-sm leading-relaxed mb-4">{s.desc}</p>
-                  <Link href="/product" className="text-sm font-semibold text-emerald-600 hover:text-emerald-700 transition-colors inline-flex items-center gap-1.5 group/link">
-                    View Details <span className="group-hover/link:translate-x-0.5 transition-transform">→</span>
-                  </Link>
-                </div>
-              </div>
+              </motion.div>
             ))}
           </div>
 
@@ -127,41 +144,56 @@ export default function HomeContent() {
       </section>
 
       {/* ═══ CATEGORIES ═══ */}
-      <section className="py-20 md:py-28 bg-slate-50">
+      <section className="py-20 md:py-28 bg-slate-50" id="categories" aria-label="Product categories">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <span className="text-[11px] font-semibold uppercase tracking-[0.3em] text-emerald-600 mb-4 block">Product Lines</span>
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <span className="text-[11px] font-semibold uppercase tracking-[0.3em] text-green-600 mb-4 block">Product Lines</span>
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4">Categories</h2>
             <p className="text-slate-500 text-base md:text-lg max-w-xl mx-auto leading-relaxed">
               Explore our dynamic product categories.
             </p>
-          </div>
+          </motion.div>
  
           {categories.length > 0 ? (
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-5">
-              {categories.map((cat) => (
-                <Link key={cat.id} href={`/product/${cat.slug}`} className="group block bg-white rounded-xl border border-slate-100 hover:border-emerald-200 hover:shadow-lg transition-all duration-300 overflow-hidden hover:-translate-y-1 flex flex-col">
-                  <div className="aspect-[4/3] bg-slate-50 p-4 flex items-center justify-center relative">
-                    <img 
-                      src={cat.image || "https://placehold.co/600x400/f8fafc/94a3b8?text=Category"} 
-                      alt={cat.name} 
-                      className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500 mix-blend-multiply" 
-                    />
-                  </div>
-                  <div className="p-4 bg-white flex-1 flex flex-col justify-between">
-                    <div>
-                      <h3 className="font-semibold text-sm md:text-base text-slate-900 mb-1 group-hover:text-emerald-700 transition-colors line-clamp-1">
-                        {cat.name}
-                      </h3>
-                      <p className="text-slate-500 text-xs leading-relaxed line-clamp-2 mb-3">
-                        {cat.description || "View details and specifications"}
-                      </p>
+              {categories.map((cat, idx) => (
+                <motion.div
+                  key={cat.id}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: idx * 0.04 }}
+                >
+                  <Link href={`/product/${cat.slug}`} className="group block bg-white rounded-xl border border-slate-100 hover:border-green-200 hover:shadow-lg transition-all duration-300 overflow-hidden hover:-translate-y-1 flex flex-col">
+                    <div className="aspect-[4/3] bg-slate-50 p-4 flex items-center justify-center relative">
+                      <img 
+                        src={cat.image || "https://placehold.co/600x400/f8fafc/94a3b8?text=Category"} 
+                        alt={cat.name} 
+                        className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500 mix-blend-multiply" 
+                        loading="lazy"
+                      />
                     </div>
-                    <span className="text-xs font-semibold text-emerald-600 inline-flex items-center gap-1">
-                      View <span className="hidden sm:inline">Specifications</span> <span className="group-hover:translate-x-0.5 transition-transform">→</span>
-                    </span>
-                  </div>
-                </Link>
+                    <div className="p-4 bg-white flex-1 flex flex-col justify-between">
+                      <div>
+                        <h3 className="font-semibold text-sm md:text-base text-slate-900 mb-1 group-hover:text-green-700 transition-colors line-clamp-1">
+                          {cat.name}
+                        </h3>
+                        <p className="text-slate-500 text-xs leading-relaxed line-clamp-2 mb-3">
+                          {cat.description || "View details and specifications"}
+                        </p>
+                      </div>
+                      <span className="text-xs font-semibold text-green-600 inline-flex items-center gap-1">
+                        View <span className="hidden sm:inline">Specifications</span> <span className="group-hover:translate-x-0.5 transition-transform">→</span>
+                      </span>
+                    </div>
+                  </Link>
+                </motion.div>
               ))}
             </div>
           ) : (
@@ -172,39 +204,54 @@ export default function HomeContent() {
         </div>
       </section>
 
-      {/* ═══ TRUSTED CLIENTS ═══ */}
-      <section className="py-20 md:py-28 bg-white">
+      {/* ═══ TRUSTED CLIENTS — Infinite Marquee ═══ */}
+      <section className="py-20 md:py-28 bg-white" id="clients" aria-label="Trusted clients">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <span className="text-[11px] font-semibold uppercase tracking-[0.3em] text-emerald-600 mb-4 block">Our Clients</span>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4">Trusted by India's Leading Institutions</h2>
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <span className="text-[11px] font-semibold uppercase tracking-[0.3em] text-green-600 mb-4 block">Our Clients</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4">Trusted by India&apos;s Leading Institutions</h2>
             <p className="text-slate-500 text-base md:text-lg max-w-xl mx-auto leading-relaxed">
               Powering infrastructure for government and private sector organizations nationwide.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-3 md:grid-cols-6 gap-4 md:gap-6 mb-10">
-            {featuredClients.map((client, i) => (
-              <div key={i} className="bg-slate-50 rounded-xl p-4 md:p-6 flex flex-col items-center justify-center gap-3 hover:bg-white hover:shadow-md transition-all duration-300 aspect-square">
-                <img src={client.logo} alt={client.name} className="w-12 md:w-16 h-12 md:h-16 object-contain grayscale hover:grayscale-0 transition-all duration-300" />
-                <span className="text-slate-500 text-[9px] md:text-[10px] font-semibold uppercase tracking-wider text-center">{client.name}</span>
-              </div>
-            ))}
+          {/* Infinite scrolling logo marquee */}
+          <div className="logo-scroll-container mb-10">
+            <div className="logo-scroll-track">
+              {marqueeClients.map((client, i) => (
+                <div key={i} className="flex-none w-28 md:w-36 mx-3 md:mx-4 bg-slate-50 rounded-xl p-4 md:p-5 flex flex-col items-center justify-center gap-3 hover:bg-white hover:shadow-md transition-all duration-300 aspect-square">
+                  <img src={client.logo} alt={client.name} className="w-12 md:w-16 h-12 md:h-16 object-contain grayscale hover:grayscale-0 transition-all duration-300" loading="lazy" />
+                  <span className="text-slate-500 text-[9px] md:text-[10px] font-semibold uppercase tracking-wider text-center">{client.name}</span>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="text-center">
-            <button onClick={() => setShowAllClients(true)} className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-emerald-600 border border-emerald-200 rounded-full hover:bg-emerald-50 transition-all">
+            <button onClick={() => setShowAllClients(true)} className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-green-600 border border-green-200 rounded-full hover:bg-green-50 transition-all">
               View All {allClients.length} Clients →
             </button>
           </div>
 
           {/* ═══ CERTIFICATIONS ═══ */}
           <div className="mt-24">
-            <div className="text-center mb-12">
-              <span className="text-[11px] font-semibold uppercase tracking-[0.3em] text-emerald-600 mb-4 block">Compliance</span>
-              <h3 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight mb-3">Accreditation & Certifications</h3>
+            <motion.div 
+              className="text-center mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <span className="text-[11px] font-semibold uppercase tracking-[0.3em] text-green-600 mb-4 block">Compliance</span>
+              <h3 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight mb-3">Accreditation &amp; Certifications</h3>
               <p className="text-slate-500 text-sm md:text-base max-w-lg mx-auto">Industrial-grade certifications for mission-critical infrastructure.</p>
-            </div>
+            </motion.div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {OFFICIAL_DOCUMENTS.map((doc, i) => (
                 <a 
@@ -212,13 +259,13 @@ export default function HomeContent() {
                   href={`/certifications/${doc.file}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-4 p-5 bg-slate-50 rounded-xl hover:bg-white hover:shadow-md border border-transparent hover:border-emerald-100 transition-all duration-300"
+                  className="group flex items-center gap-4 p-5 bg-slate-50 rounded-xl hover:bg-white hover:shadow-md border border-transparent hover:border-green-100 transition-all duration-300"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-600 shrink-0 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
+                  <div className="w-10 h-10 rounded-lg bg-green-50 flex items-center justify-center text-green-600 shrink-0 group-hover:bg-green-600 group-hover:text-white transition-all duration-300">
                     <FileCheck size={20} strokeWidth={1.5} />
                   </div>
                   <div className="min-w-0">
-                    <h4 className="text-sm font-semibold text-slate-900 group-hover:text-emerald-700 transition-colors truncate">{doc.title}</h4>
+                    <h4 className="text-sm font-semibold text-slate-900 group-hover:text-green-700 transition-colors truncate">{doc.title}</h4>
                     <p className="text-[11px] text-slate-400 font-medium uppercase tracking-wider mt-0.5">View PDF →</p>
                   </div>
                 </a>
@@ -263,11 +310,11 @@ export default function HomeContent() {
       )}
 
       {/* ═══ TESTIMONIALS & FAQ ═══ */}
-      <section className="py-20 md:py-28 bg-slate-50">
+      <section className="py-20 md:py-28 bg-slate-50" aria-label="Testimonials and FAQ">
         <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16">
           <div>
             <div className="mb-8">
-              <span className="text-[11px] font-semibold uppercase tracking-[0.3em] text-emerald-600 mb-3 block">Reviews</span>
+              <span className="text-[11px] font-semibold uppercase tracking-[0.3em] text-green-600 mb-3 block">Reviews</span>
               <h2 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">What Our Clients Say</h2>
             </div>
             <div className="bg-white rounded-2xl border border-slate-100 p-6 md:p-8">

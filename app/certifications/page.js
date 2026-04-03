@@ -10,7 +10,7 @@ export const metadata = {
 
 const certifications = [
   {
-    icon: <Landmark color="#38BDF8" size={32} />,
+    icon: <Landmark color="#15803d" size={32} />,
     title: "MSME / Udyam Registration",
     status: "Registered",
     desc: "Sudeep Engineers is officially registered as a Micro Enterprise under the Government of India's Udyam Registration scheme (formerly MSME registration). This certification validates our standing as a recognized small industry and enables participation in government tenders and schemes.",
@@ -23,7 +23,7 @@ const certifications = [
     ],
   },
   {
-    icon: <ClipboardList color="#38BDF8" size={32} />,
+    icon: <ClipboardList color="#15803d" size={32} />,
     title: "GST Registration",
     status: "Active",
     desc: "We are a fully GST-compliant business with valid GSTIN registration. All our transactions, invoicing, and billing are conducted in full compliance with the Goods and Services Tax framework, ensuring transparency and seamless business dealings.",
@@ -36,7 +36,7 @@ const certifications = [
     ],
   },
   {
-    icon: <CheckCircle2 color="#38BDF8" size={32} />,
+    icon: <CheckCircle2 color="#15803d" size={32} />,
     title: "Quality Management Standards",
     status: "Implemented",
     desc: "We follow rigorous quality management practices inspired by international standards. Our quality control processes cover incoming material inspection, in-process quality checks, and final product testing to ensure every deliverable meets the highest standards.",
@@ -49,7 +49,7 @@ const certifications = [
     ],
   },
   {
-    icon: <Lock color="#38BDF8" size={32} />,
+    icon: <Lock color="#15803d" size={32} />,
     title: "Safety Standards Compliance",
     status: "Compliant",
     desc: "Our manufacturing facility in Waluj MIDC adheres to all applicable safety standards and regulations. We maintain safe working conditions, proper material handling procedures, and conduct regular safety training for our workforce.",
@@ -93,7 +93,7 @@ export default function CertificationsPage() {
       {/* Page Hero */}
       <section className="pt-32 pb-16 relative overflow-hidden bg-[color:var(--color-background)]">
         <div className="absolute -top-[30%] -right-[20%] w-[500px] h-[500px] rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(37,99,235,0.06) 0%, transparent 70%)" }} />
+          style={{ background: "radial-gradient(circle, rgba(21,128,61,0.06) 0%, transparent 70%)" }} />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <nav className="text-xs text-[color:var(--color-text-muted)] mb-6 flex gap-2">
             <Link href="/" className="hover:text-[color:var(--color-accent)] no-underline text-[color:var(--color-text-muted)]">Home</Link>
@@ -196,7 +196,7 @@ export default function CertificationsPage() {
               Partner with an MSME-registered, quality-focused LED and Solar company.
             </p>
             <Link href="/contact"
-              className="relative z-10 inline-flex px-8 py-3.5 rounded-md bg-[#38BDF8] text-[#0F172A] font-bold hover:opacity-90 transition-all no-underline">
+              className="relative z-10 inline-flex px-8 py-3.5 rounded-md bg-[#15803d] text-[#0F172A] font-bold hover:opacity-90 transition-all no-underline">
               Get in Touch →
             </Link>
           </div>

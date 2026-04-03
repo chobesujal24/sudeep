@@ -1,11 +1,15 @@
-export default function sitemap() {
+import { supabase } from "@/lib/supabase";
+import { getProductData } from "@/lib/getProductData";
+
+export default async function sitemap() {
   const baseUrl = "https://sudeepengineers.com";
 
+  // Static pages
   const mainPages = [
     { url: baseUrl, lastModified: new Date(), changeFrequency: "weekly", priority: 1.0 },
     { url: `${baseUrl}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/services`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
-    { url: `${baseUrl}/product`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
+    { url: `${baseUrl}/product`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
     { url: `${baseUrl}/industries`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/certifications`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
     { url: `${baseUrl}/blog`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
@@ -14,6 +18,8 @@ export default function sitemap() {
 
   const seoPages = [
     { url: `${baseUrl}/led-light-manufacturer-aurangabad`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/solar-street-light-manufacturer`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/street-light-pole-manufacturer`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
   ];
 
   const blogPosts = [
@@ -26,5 +32,57 @@ export default function sitemap() {
     priority: 0.6,
   }));
 
-  return [...mainPages, ...seoPages, ...blogPosts];
+  // Dynamic category pages
+  let categoryPages = [];
+  try {
+    const { data: categories } = await supabase
+      .from('categories')
+      .select('slug, updated_at')
+      .order('sequence', { ascending: true });
+
+    if (categories) {
+      categoryPages = categories.map((cat) => ({
+        url: `${baseUrl}/product/${cat.slug}`,
+        lastModified: cat.updated_at ? new Date(cat.updated_at) : new Date(),
+        changeFrequency: "weekly",
+        priority: 0.8,
+      }));
+    }
+  } catch (e) {
+    console.error("Sitemap: Failed to fetch categories", e);
+  }
+
+  // Dynamic product pages
+  let productPages = [];
+  try {
+    const products = await getProductData();
+    const productsArray = Array.isArray(products) ? products : [];
+
+    const { data: categories } = await supabase
+      .from('categories')
+      .select('name, slug');
+
+    const catSlugMap = {};
+    if (categories) {
+      categories.forEach((c) => {
+        catSlugMap[c.name.toLowerCase()] = c.slug;
+      });
+    }
+
+    productPages = productsArray
+      .filter((p) => p.slug && p.category)
+      .map((p) => {
+        const catSlug = catSlugMap[p.category.toLowerCase()] || p.category.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+        return {
+          url: `${baseUrl}/product/${catSlug}/${p.slug}`,
+          lastModified: new Date(),
+          changeFrequency: "monthly",
+          priority: 0.7,
+        };
+      });
+  } catch (e) {
+    console.error("Sitemap: Failed to fetch products", e);
+  }
+
+  return [...mainPages, ...seoPages, ...blogPosts, ...categoryPages, ...productPages];
 }

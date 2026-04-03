@@ -45,7 +45,7 @@ export default function ContactForm() {
             name="name"
             required
             placeholder="Your full name"
-            className="w-full px-4 py-3 rounded-lg bg-[color:var(--color-bg-secondary)] border border-[color:var(--color-border)] text-[color:var(--color-foreground)] text-sm focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600/20 transition-colors placeholder:text-slate-600"
+            className="w-full px-4 py-3 rounded-lg bg-[color:var(--color-bg-secondary)] border border-[color:var(--color-border)] text-[color:var(--color-foreground)] text-sm focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600/20 transition-colors placeholder:text-slate-600"
           />
         </div>
         <div>
@@ -55,7 +55,7 @@ export default function ContactForm() {
             name="phone"
             required
             placeholder="Your phone number"
-            className="w-full px-4 py-3 rounded-lg bg-[color:var(--color-bg-secondary)] border border-[color:var(--color-border)] text-[color:var(--color-foreground)] text-sm focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600/20 transition-colors placeholder:text-slate-600"
+            className="w-full px-4 py-3 rounded-lg bg-[color:var(--color-bg-secondary)] border border-[color:var(--color-border)] text-[color:var(--color-foreground)] text-sm focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600/20 transition-colors placeholder:text-slate-600"
           />
         </div>
       </div>
@@ -66,7 +66,7 @@ export default function ContactForm() {
           type="email"
           name="email"
           placeholder="your@email.com"
-          className="w-full px-4 py-3 rounded-lg bg-[color:var(--color-bg-secondary)] border border-[color:var(--color-border)] text-[color:var(--color-foreground)] text-sm focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600/20 transition-colors placeholder:text-slate-600"
+          className="w-full px-4 py-3 rounded-lg bg-[color:var(--color-bg-secondary)] border border-[color:var(--color-border)] text-[color:var(--color-foreground)] text-sm focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600/20 transition-colors placeholder:text-slate-600"
         />
       </div>
 
@@ -75,7 +75,7 @@ export default function ContactForm() {
         <select
           name="service"
           required
-          className="w-full px-4 py-3 rounded-lg bg-[color:var(--color-bg-secondary)] border border-[color:var(--color-border)] text-[color:var(--color-foreground)] text-sm focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600/20 transition-colors"
+          className="w-full px-4 py-3 rounded-lg bg-[color:var(--color-bg-secondary)] border border-[color:var(--color-border)] text-[color:var(--color-foreground)] text-sm focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600/20 transition-colors"
         >
           <option value="">Select a service</option>
           <option value="led-lighting">LED Lighting Manufacturing</option>
@@ -94,7 +94,7 @@ export default function ContactForm() {
           required
           rows={5}
           placeholder="Describe your project requirements, quantity, specifications, etc."
-          className="w-full px-4 py-3 rounded-lg bg-[color:var(--color-bg-secondary)] border border-[color:var(--color-border)] text-[color:var(--color-foreground)] text-sm focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600/20 transition-colors placeholder:text-slate-600 resize-y"
+          className="w-full px-4 py-3 rounded-lg bg-[color:var(--color-bg-secondary)] border border-[color:var(--color-border)] text-[color:var(--color-foreground)] text-sm focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600/20 transition-colors placeholder:text-slate-600 resize-y"
         />
       </div>
 
@@ -113,13 +113,13 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={loading}
-        className="w-full px-6 py-3.5 rounded-lg bg-gradient-to-r from-emerald-600 to-emerald-800 text-white font-semibold hover:-translate-y-0.5 hover:shadow-[0_6px_25px_rgba(22,101,52,0.25)] focus:-translate-y-0.5 transition-all cursor-pointer border-none text-sm disabled:opacity-70 disabled:cursor-not-allowed"
+        className="w-full px-6 py-3.5 rounded-lg bg-gradient-to-r from-green-600 to-green-800 text-white font-semibold hover:-translate-y-0.5 hover:shadow-[0_6px_25px_rgba(22,101,52,0.25)] focus:-translate-y-0.5 transition-all cursor-pointer border-none text-sm disabled:opacity-70 disabled:cursor-not-allowed"
       >
         {loading ? "Sending Enquiry..." : "Submit Enquiry →"}
       </button>
 
       <p className="text-xs text-slate-600 text-center">
-        Or call us directly at <a href="tel:+919922996236" className="text-emerald-400 no-underline">+91 9922996236</a>
+        Or call us directly at <a href="tel:+919922996236" className="text-green-400 no-underline">+91 9922996236</a>
       </p>
     </form>
   );

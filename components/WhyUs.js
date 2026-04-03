@@ -85,8 +85,8 @@ export default function WhyUs() {
           >
             <div className="rounded-2xl overflow-hidden h-[500px] relative shadow-2xl">
               <Image
-                src="/slider/factory.jpg"
-                alt="Majestic LED Street Light Pole Infrastructure"
+                src="/main/solarpanels.webp"
+                alt="Sudeep Engineers Manufacturing Facility"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"

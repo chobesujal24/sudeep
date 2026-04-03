@@ -278,7 +278,7 @@ export default function BlogManager() {
 
               {/* Cover Image Upload */}
               <section className="bg-[#F8FAFC] p-6 rounded-xl border border-[#E2E8F0]">
-                <label className="block text-xs font-bold text-[#475569] uppercase mb-3 border-l-2 border-[#38BDF8] pl-2">Featured Image</label>
+                <label className="block text-xs font-bold text-[#475569] uppercase mb-3 border-l-2 border-[#15803d] pl-2">Featured Image</label>
                 <div className="flex flex-col md:flex-row gap-6 items-center">
                   <div className="w-full md:w-1/3">
                     {featuredImage ? (
@@ -296,11 +296,11 @@ export default function BlogManager() {
                     <input type="file" accept="image/*" onChange={handleImageUpload} disabled={uploading} className="text-sm file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-[#E0F2FE] file:text-[#0284C7] hover:file:bg-[#BAE6FD] cursor-pointer" />
                     {uploading && (
                       <div className="w-full bg-gray-200 rounded-full h-2.5">
-                        <div className="bg-[#38BDF8] h-2.5 rounded-full" style={{ width: `${uploadProgress}%` }}></div>
+                        <div className="bg-[#15803d] h-2.5 rounded-full" style={{ width: `${uploadProgress}%` }}></div>
                       </div>
                     )}
                     <div className="text-xs text-[#64748B]">Or paste an image URL:</div>
-                    <input type="text" value={featuredImage} onChange={e => setFeaturedImage(e.target.value)} className="w-full p-2 text-sm border border-[#CBD5E1] rounded outline-none focus:border-[#38BDF8]" placeholder="https://..." />
+                    <input type="text" value={featuredImage} onChange={e => setFeaturedImage(e.target.value)} className="w-full p-2 text-sm border border-[#CBD5E1] rounded outline-none focus:border-[#15803d]" placeholder="https://..." />
                   </div>
                 </div>
               </section>
