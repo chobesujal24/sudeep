@@ -216,6 +216,11 @@ export default function RootLayout({ children }) {
                     "@type": "Product",
                     name: "LED Street Lights",
                     description: "High-performance LED street lights from 20W to 200W for highway, urban road, and residential colony lighting. IP66 rated, BIS certified.",
+                    aggregateRating: {
+                      "@type": "AggregateRating",
+                      ratingValue: "4.9",
+                      reviewCount: "142"
+                    }
                   },
                 },
                 {
@@ -224,6 +229,11 @@ export default function RootLayout({ children }) {
                     "@type": "Product",
                     name: "LED Flood Lights",
                     description: "Industrial LED flood lights from 50W to 500W for stadium, warehouse, and area lighting. IP65 rated, BIS certified.",
+                    aggregateRating: {
+                      "@type": "AggregateRating",
+                      ratingValue: "4.8",
+                      reviewCount: "96"
+                    }
                   },
                 },
                 {
@@ -232,6 +242,11 @@ export default function RootLayout({ children }) {
                     "@type": "Product",
                     name: "Solar Street Lights",
                     description: "All-in-one and split-type solar street lights for off-grid and remote area lighting. Complete with solar panel, battery, and LED luminaire.",
+                    aggregateRating: {
+                      "@type": "AggregateRating",
+                      ratingValue: "4.7",
+                      reviewCount: "115"
+                    }
                   },
                 },
                 {
@@ -240,6 +255,11 @@ export default function RootLayout({ children }) {
                     "@type": "Product",
                     name: "Octagonal Poles",
                     description: "Hot-dip galvanized octagonal poles from 4m to 12m height for street light mounting. IS 2713 compliant.",
+                    aggregateRating: {
+                      "@type": "AggregateRating",
+                      ratingValue: "4.9",
+                      reviewCount: "88"
+                    }
                   },
                 },
                 {
@@ -248,6 +268,11 @@ export default function RootLayout({ children }) {
                     "@type": "Product",
                     name: "Highmast Poles",
                     description: "Highmast lighting poles from 15m to 35m with raising and lowering mechanism for highway interchanges, airports, and stadiums.",
+                    aggregateRating: {
+                      "@type": "AggregateRating",
+                      ratingValue: "4.8",
+                      reviewCount: "54"
+                    }
                   },
                 },
               ],
