@@ -1,5 +1,6 @@
 import { supabase } from "@/lib/supabase";
 import { getProductData } from "@/lib/getProductData";
+import { SEO_PRODUCTS, SEO_LOCATIONS } from "@/lib/seoConfig";
 
 export default async function sitemap() {
   const baseUrl = "https://sudeepengineers.com";
@@ -84,5 +85,19 @@ export default async function sitemap() {
     console.error("Sitemap: Failed to fetch products", e);
   }
 
-  return [...mainPages, ...seoPages, ...blogPosts, ...categoryPages, ...productPages];
+  // Programmatic SEO Manufacturer Location Pages
+  const locationPages = [];
+  const productSlugs = Object.keys(SEO_PRODUCTS);
+  for (const productSlug of productSlugs) {
+    for (const location of SEO_LOCATIONS) {
+      locationPages.push({
+        url: `${baseUrl}/manufacturer/${productSlug}/${location.slug}`,
+        lastModified: new Date(),
+        changeFrequency: "monthly",
+        priority: 0.9, // High priority for local SEO
+      });
+    }
+  }
+
+  return [...mainPages, ...seoPages, ...blogPosts, ...categoryPages, ...productPages, ...locationPages];
 }
