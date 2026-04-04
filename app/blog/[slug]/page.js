@@ -102,33 +102,34 @@ export default async function BlogPost({ params }) {
         }}
       />
 
-      <section className="pt-32 pb-16 relative overflow-hidden bg-slate-50 border-b border-slate-200">
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-30 pointer-events-none">
-           <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute w-full h-full text-green-100 fill-current">
-              <polygon points="0,100 100,0 100,100" />
-           </svg>
+      <section className="pt-36 pb-20 relative overflow-hidden bg-slate-900 border-b border-green-900/30">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+           {/* Abstract Corporate Green Mesh/Glow */}
+           <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-green-500/10 blur-[120px]"></div>
+           <div className="absolute top-[60%] -right-[10%] w-[40%] h-[50%] rounded-full bg-emerald-500/10 blur-[100px]"></div>
+           <div className="absolute inset-0 bg-[url('/noise.png')] opacity-5 mix-blend-overlay"></div>
         </div>
         <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
-          <nav className="text-xs text-slate-500 mb-8 flex justify-center gap-2 overflow-x-auto whitespace-nowrap hide-scrollbar">
-            <Link href="/" className="hover:text-green-700 font-medium transition-colors shrink-0">Home</Link>
-            <span className="shrink-0 text-slate-300">/</span>
-            <Link href="/blog" className="hover:text-green-700 font-medium transition-colors shrink-0">Blog</Link>
-            <span className="shrink-0 text-slate-300">/</span>
-            <span className="text-slate-800 font-bold truncate max-w-[200px] sm:max-w-none">{post.title}</span>
+          <nav className="text-xs text-slate-400 mb-8 flex justify-center gap-2 overflow-x-auto whitespace-nowrap hide-scrollbar">
+            <Link href="/" className="hover:text-green-400 font-medium transition-colors shrink-0">Home</Link>
+            <span className="shrink-0 text-slate-600">/</span>
+            <Link href="/blog" className="hover:text-green-400 font-medium transition-colors shrink-0">Blog</Link>
+            <span className="shrink-0 text-slate-600">/</span>
+            <span className="text-white font-bold truncate max-w-[200px] sm:max-w-none">{post.title}</span>
           </nav>
           
           {post.tag && (
-             <span className="inline-block bg-green-50 border border-green-200 rounded-full px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest text-green-700 shadow-sm mb-6">
+             <span className="inline-block bg-green-400/10 border border-green-400/20 rounded-full px-5 py-2 text-[10px] font-bold uppercase tracking-widest text-green-400 shadow-sm backdrop-blur-sm mb-6">
                {post.tag}
              </span>
           )}
           
-          <h1 className="text-3xl md:text-5xl font-extrabold mb-6 text-slate-900 tracking-tight leading-[1.15]">
+          <h1 className="text-3xl md:text-5xl font-extrabold mb-6 text-white tracking-tight leading-tight">
             {post.title}
           </h1>
           
-          <div className="flex items-center justify-center gap-4 text-sm text-slate-500 font-bold uppercase tracking-wider">
-            {publishDate && <span>{publishDate}</span>}
+          <div className="flex items-center justify-center gap-4 text-sm text-slate-400 font-medium uppercase tracking-wider">
+            {publishDate && <span>Published on {publishDate}</span>}
           </div>
         </div>
       </section>
@@ -153,7 +154,7 @@ export default async function BlogPost({ params }) {
       <section className={`py-16 md:py-24 bg-white ${!post.featuredImage ? "pt-16" : "pt-16"}`}>
         <div className="max-w-3xl mx-auto px-6">
           <div
-            className="prose prose-slate prose-lg max-w-none prose-headings:font-bold prose-headings:text-slate-900 prose-a:text-green-700 hover:prose-a:text-green-600 prose-img:rounded-xl"
+            className="prose prose-slate md:prose-lg max-w-none prose-headings:font-bold prose-headings:text-slate-900 prose-a:text-green-600 hover:prose-a:text-green-700 prose-img:rounded-2xl prose-img:shadow-xl prose-img:border prose-img:border-slate-100 prose-p:leading-relaxed prose-li:marker:text-green-600 prose-blockquote:border-green-600 prose-blockquote:bg-green-50 prose-blockquote:py-2 prose-blockquote:px-6 prose-blockquote:rounded-r-xl prose-blockquote:not-italic prose-blockquote:text-slate-700"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
           <div className="mt-20 pt-10 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-6">

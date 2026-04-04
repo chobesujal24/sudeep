@@ -63,22 +63,23 @@ export default async function BlogPage() {
       />
 
       {/* Page Hero */}
-      <section className="pt-32 pb-16 relative overflow-hidden bg-slate-50 border-b border-slate-200">
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-30 pointer-events-none">
-           <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute w-full h-full text-green-100 fill-current">
-              <polygon points="0,100 100,0 100,100" />
-           </svg>
+      <section className="pt-36 pb-20 relative overflow-hidden bg-slate-900 border-b border-green-900/30">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+           {/* Abstract Corporate Green Mesh/Glow */}
+           <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-green-500/10 blur-[120px]"></div>
+           <div className="absolute top-[60%] -right-[10%] w-[40%] h-[50%] rounded-full bg-emerald-500/10 blur-[100px]"></div>
+           <div className="absolute inset-0 bg-[url('/noise.png')] opacity-5 mix-blend-overlay"></div>
         </div>
         <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-          <nav className="text-xs text-slate-500 mb-6 flex justify-center gap-2">
-            <Link href="/" className="hover:text-green-700 font-medium transition-colors">Home</Link>
-            <span className="text-slate-300">/</span><span className="text-slate-800 font-bold">Blog</span>
+          <nav className="text-xs text-slate-400 mb-8 flex justify-center gap-2">
+            <Link href="/" className="hover:text-green-400 font-medium transition-colors">Home</Link>
+            <span className="text-slate-600">/</span><span className="text-white font-bold">Blog</span>
           </nav>
-          <span className="inline-block text-xs font-bold uppercase tracking-[0.3em] text-green-700 bg-green-50 border border-green-200 px-4 py-1.5 rounded-full mb-6 shadow-sm">Industry Updates</span>
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-6 text-slate-900 tracking-tight">
-            Engineering <span className="text-green-700">Insights</span>
+          <span className="inline-block text-[10px] font-bold uppercase tracking-[0.3em] text-green-400 bg-green-400/10 border border-green-400/20 px-5 py-2 rounded-full mb-8 shadow-sm backdrop-blur-sm">Industry Updates</span>
+          <h1 className="text-4xl md:text-6xl font-extrabold mb-6 text-white tracking-tight leading-tight">
+            Engineering <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-300 drop-shadow-sm">Insights</span>
           </h1>
-          <p className="text-slate-600 text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="text-slate-300 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
             Expert articles, project case studies, and latest trends in solar energy, sustainable manufacturing, and industrial LED lighting infrastructure.
           </p>
         </div>
@@ -92,15 +93,16 @@ export default async function BlogPage() {
               <Link
                 href={`/blog/${post.slug}`}
                 key={post.id || i}
-                className="group flex flex-col bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-green-300 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                className="group flex flex-col bg-white border border-slate-100 rounded-3xl overflow-hidden shadow-lg shadow-slate-200/40 hover:border-green-200 hover:shadow-2xl hover:shadow-green-900/10 hover:-translate-y-2 transition-all duration-500"
               >
-                <div className="h-[240px] bg-slate-100 relative overflow-hidden flex items-center justify-center">
+                <div className="h-[260px] bg-slate-100 relative overflow-hidden flex items-center justify-center">
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                   {post.featuredImage ? (
                     <Image
                       src={post.featuredImage}
                       alt={post.title}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                      className="object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
                     />
                   ) : (
                     <div className="w-full h-full bg-slate-900 flex items-center justify-center">
@@ -108,7 +110,7 @@ export default async function BlogPage() {
                     </div>
                   )}
                   {post.tag && (
-                    <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm border border-slate-200 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-green-700 shadow-sm">
+                    <div className="absolute top-5 left-5 bg-white/95 backdrop-blur-md border border-white/20 px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest text-green-800 shadow-md z-20">
                       {post.tag}
                     </div>
                   )}

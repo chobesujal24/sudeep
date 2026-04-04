@@ -35,11 +35,13 @@ export default async function sitemap() {
 
   // Dynamic category pages
   let categoryPages = [];
+  let fetchedCategories = null;
   try {
     const { data: categories } = await supabase
       .from('categories')
       .select('slug, updated_at')
       .order('sequence', { ascending: true });
+    fetchedCategories = categories;
 
     if (categories) {
       categoryPages = categories.map((cat) => ({
@@ -55,9 +57,11 @@ export default async function sitemap() {
 
   // Dynamic product pages
   let productPages = [];
+  let fetchedProductsArray = [];
   try {
     const products = await getProductData();
     const productsArray = Array.isArray(products) ? products : [];
+    fetchedProductsArray = productsArray;
 
     const { data: categories } = await supabase
       .from('categories')
@@ -87,8 +91,19 @@ export default async function sitemap() {
 
   // Programmatic SEO Manufacturer Location Pages
   const locationPages = [];
-  const productSlugs = Object.keys(SEO_PRODUCTS);
-  for (const productSlug of productSlugs) {
+  
+  // Combine hardcoded products with dynamically fetched ones from DB
+  const dynamicCategories = typeof fetchedCategories !== 'undefined' && fetchedCategories ? fetchedCategories.map(c => c.slug) : [];
+  const dynamicProducts = typeof fetchedProductsArray !== 'undefined' && fetchedProductsArray ? fetchedProductsArray.map(p => p.slug) : [];
+  
+  const allProductSlugs = new Set([
+    ...Object.keys(SEO_PRODUCTS),
+    ...dynamicCategories,
+    ...dynamicProducts
+  ]);
+
+  for (const productSlug of allProductSlugs) {
+    if (!productSlug) continue;
     for (const location of SEO_LOCATIONS) {
       locationPages.push({
         url: `${baseUrl}/manufacturer/${productSlug}/${location.slug}`,
