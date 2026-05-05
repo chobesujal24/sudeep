@@ -7,11 +7,11 @@ import Image from "next/image";
  */
 const IMAGES = [
   {
-    src: "/slider/user-req-1.jpg",
+    src: "/slider/user-req-1.webp",
     alt: "LED Street Light Infrastructure Project by Sudeep Engineers",
   },
   {
-    src: "/slider/rajasthan-solar.jpg",
+    src: "/slider/rajasthan-solar.webp",
     alt: "Solar LED Street Light Installation in Rajasthan",
   },
   {

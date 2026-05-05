@@ -19,35 +19,35 @@ const industries = [
     title: "Construction & Real Estate",
     desc: "Complete lighting and solar infrastructure solutions for residential, commercial, and industrial construction projects across India.",
     services: ["Commercial LED Lighting", "Solar Power Infrastructure", "Highmast Area Lighting", "Security Parameter Lighting"],
-    image: "/main/industry-construction.png"
+    image: "/main/industry-construction.webp"
   },
   {
     icon: <Globe color="currentColor" size={48} />,
     title: "Highways & Infrastructure",
     desc: "Heavy-duty engineered lighting for infrastructure development including highways, flyovers, and public utility projects. Trusted by agencies and contractors.",
     services: ["LED Street Lighting systems", "Octagonal Poles", "Solar Street Lights", "Smart City Lighting"],
-    image: "/main/industry-highways.png"
+    image: "/main/industry-highways.webp"
   },
   {
     icon: <Factory color="currentColor" size={48} />,
     title: "Industrial Plants",
     desc: "Custom LED lighting and solar solutions for industrial facilities. We supply robust, IP66 rated fixtures to keep production lines bright and energy efficient.",
     services: ["LED High Bay Lights", "Industrial Flood Lights", "Solar Roof Installations", "Warehouse Lighting"],
-    image: "/main/industry-plants.png"
+    image: "/main/industry-plants.webp"
   },
   {
     icon: <Settings color="currentColor" size={48} />,
     title: "Sports & Stadiums",
     desc: "Precision illumination for professional sporting arenas and community grounds. Engineered to deliver uniform lux levels without glare.",
     services: ["Stadium Flood Lights", "Highmast Lifting Carriages", "Sports Complex Lighting", "Auditorium Lighting"],
-    image: "/main/industry-stadium.png"
+    image: "/main/industry-stadium.webp"
   },
   {
     icon: <Landmark color="currentColor" size={48} />,
     title: "Government & Municipal",
     desc: "As an MSME registered company, we deliver large-scale lighting and solar infrastructure for municipal and state government smart-city initiatives.",
     services: ["Smart City LED Networks", "Public Parks & Post Tops", "Government Building Solar", "Street Light Installation"],
-    image: "/main/industry-government.png"
+    image: "/main/industry-government.webp"
   },
 ];
 

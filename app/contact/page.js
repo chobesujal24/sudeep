@@ -144,7 +144,7 @@ export default function ContactPage() {
             <div className="animate-on-scroll delay-2">
               <h2 className="font-heading font-bold text-2xl mb-2">Our Location</h2>
               <p className="text-[color:var(--color-text-secondary)] text-sm mb-6">
-                Visit our manufacturing facility in Waluj MIDC, Aurangabad. We are specialists in LED and Solar projects.
+                 Manufacturing facility in Waluj MIDC, Aurangabad. We are specialists in LED and Solar projects.
               </p>
               <div className="rounded-2xl overflow-hidden border border-[color:var(--color-border)] h-[450px]">
                 <iframe

@@ -76,7 +76,7 @@ export default async function ProductCategories() {
           <div className="hidden lg:block w-[400px] h-[250px] relative border border-slate-700 bg-slate-800 p-2">
             <div className="relative w-full h-full">
               <Image
-                src="/product-hero-section.png"
+                src="/product-hero-section.webp"
                 alt="Sudeep Engineers Industrial Lighting Catalog"
                 fill
                 className="object-cover grayscale hover:grayscale-0 transition-all duration-500"

@@ -167,7 +167,7 @@ export default async function CategoryPage({ params }) {
       <section className="relative min-h-[45vh] flex items-center justify-center overflow-hidden bg-slate-900">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/product-hero-section.png"
+            src="/product-hero-section.webp"
             alt={`${category.name} - Sudeep Engineers Manufacturing`}
             fill
             className="object-cover opacity-40"

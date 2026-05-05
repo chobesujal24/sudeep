@@ -91,7 +91,7 @@ export default function AboutPage() {
             </div>
             <div className="animate-on-scroll delay-2">
               <div className="rounded-2xl overflow-hidden border border-[#E2E8F0] h-[400px] relative">
-                <Image src="/main/rajasthan-solar.jpg" alt="Sudeep Engineers Solar Infrastructure" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+                <Image src="/main/rajasthan-solar.webp" alt="Sudeep Engineers Solar Infrastructure" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
               </div>
             </div>
           </div>
