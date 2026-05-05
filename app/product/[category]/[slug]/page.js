@@ -5,7 +5,7 @@ import { Icons } from "@/components/Icons";
 import { getProductData } from "@/lib/getProductData";
 import { supabase } from "@/lib/supabase";
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60; // ISR: cache page, refresh data every 60s in background
 
 export async function generateMetadata({ params }) {
   const { category: categorySlug, slug } = await params;

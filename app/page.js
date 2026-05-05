@@ -7,6 +7,18 @@ import BigImageGallery from "@/components/BigImageGallery";
 import WhyUs from "@/components/WhyUs";
 import CTABanner from "@/components/CTABanner";
 
+export const metadata = {
+  title: "Sudeep Engineers — LED Street Light, Flood Light, Solar Light & Pole Manufacturer in India | Aurangabad",
+  description:
+    "India's leading manufacturer of LED street lights, LED flood lights, LED highbay lights, solar street lights, highmast poles, octagonal poles, and solar infrastructure. ISO 9001:2015 certified, BIS approved, GeM registered. Serving BHEL, NTPC, Indian Railways from Waluj MIDC, Aurangabad, Maharashtra.",
+  openGraph: {
+    title: "Sudeep Engineers — LED Street Light, Flood Light & Solar Manufacturer India",
+    description:
+      "ISO 9001:2015 certified manufacturer of LED street lights, flood lights, highbay lights, solar street lights, highmast poles & octagonal poles. OEM manufacturer from Aurangabad, Maharashtra.",
+    url: "https://sudeepengineers.com",
+  },
+};
+
 /*
  * HomePage — Server Component.
  * Clean, professional homepage with proper SEO structure.

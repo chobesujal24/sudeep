@@ -22,6 +22,11 @@ const footerLinks = {
     { href: "/services", label: "OEM/ODM Manufacturing" },
     { href: "/contact", label: "Customer Support" },
   ],
+  seoPages: [
+    { href: "/led-light-manufacturer-aurangabad", label: "LED Manufacturer Aurangabad" },
+    { href: "/solar-street-light-manufacturer", label: "Solar Street Light Manufacturer" },
+    { href: "/street-light-pole-manufacturer", label: "Pole Manufacturer India" },
+  ],
 };
 
 export default function Footer() {
@@ -29,7 +34,7 @@ export default function Footer() {
     <footer className="relative border-t border-green-100/30 text-slate-900 overflow-hidden" 
       style={{ background: "url('/main/footer_bg.png') center/cover no-repeat" }}>
       <div className="max-w-6xl mx-auto px-6 py-16 lg:py-20 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-10 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-16">
 
           {/* Brand Column */}
           <div className="lg:col-span-1">
@@ -89,11 +94,11 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Support Column */}
+          {/* Manufacturing Column (SEO Landing Pages) */}
           <div>
-            <h4 className="font-bold text-green-900 text-sm mb-6 uppercase tracking-[0.2em]">Support</h4>
+            <h4 className="font-bold text-green-900 text-sm mb-6 uppercase tracking-[0.2em]">Manufacturing</h4>
             <ul className="space-y-3">
-              {footerLinks.support.map((link, i) => (
+              {footerLinks.seoPages.map((link, i) => (
                 <li key={i}>
                   <Link href={link.href} className="text-sm text-slate-600 hover:text-green-700 font-medium transition-colors inline-flex items-center gap-1 group">
                     <span className="w-0 group-hover:w-2 h-px bg-green-600 transition-all duration-300" />
@@ -111,6 +116,21 @@ export default function Footer() {
                 Contact Us →
               </Link>
             </div>
+          </div>
+
+          {/* Support Column */}
+          <div>
+            <h4 className="font-bold text-green-900 text-sm mb-6 uppercase tracking-[0.2em]">Support</h4>
+            <ul className="space-y-3">
+              {footerLinks.support.map((link, i) => (
+                <li key={i}>
+                  <Link href={link.href} className="text-sm text-slate-600 hover:text-green-700 font-medium transition-colors inline-flex items-center gap-1 group">
+                    <span className="w-0 group-hover:w-2 h-px bg-green-600 transition-all duration-300" />
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 

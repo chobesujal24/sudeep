@@ -10,7 +10,15 @@ export const metadata = {
   title: "Industrial LED Lighting & Solar Blog | Sudeep Engineers",
   description:
     "Insights, case studies, and industry updates on LED lighting manufacturing, solar street lights, and highmast pole infrastructure in India.",
-  keywords: "led lighting blog, solar street light blog, highmast pole lighting, street light manufacturer india, led manufacturing updates",
+  keywords: [
+    "led lighting blog",
+    "solar street light blog",
+    "highmast pole lighting",
+    "street light manufacturer india",
+    "led manufacturing updates",
+    "solar energy blog india",
+    "industrial led lighting",
+  ],
   alternates: { canonical: "https://sudeepengineers.com/blog" },
   openGraph: {
     title: "Engineering Insights & News | Sudeep Engineers Blog",

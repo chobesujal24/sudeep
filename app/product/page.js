@@ -2,11 +2,22 @@ import Link from "next/link";
 import Image from "next/image";
 import { supabase } from "@/lib/supabase";
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60; // ISR: cache page, refresh data every 60s in background
 
 export const metadata = {
   title: "LED & Solar Products — Street Lights, Flood Lights, Highmast, Poles | Sudeep Engineers",
   description: "Browse our complete product catalog: LED street lights, LED flood lights, LED highbay lights, solar street lights, octagonal poles, highmast poles, and solar infrastructure. BIS certified, ISO 9001:2015 manufacturer in Aurangabad.",
+  keywords: [
+    "led street light",
+    "led flood light",
+    "led highbay light",
+    "solar street light",
+    "octagonal pole",
+    "highmast pole",
+    "led manufacturer products",
+    "solar infrastructure products",
+    "bis certified led lights",
+  ],
   alternates: { canonical: "https://sudeepengineers.com/product" },
   openGraph: {
     title: "LED & Solar Product Catalog | Sudeep Engineers India",

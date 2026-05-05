@@ -6,11 +6,20 @@ export const metadata = {
   title: "About Us - LED Lighting & Solar Infrastructure",
   description:
     "Learn about Sudeep Engineers — a trusted MSME LED lighting and Solar Infrastructure manufacturer in Waluj MIDC, Aurangabad, Maharashtra. Established 2019.",
+  keywords: [
+    "about sudeep engineers",
+    "led manufacturer aurangabad",
+    "solar manufacturer maharashtra",
+    "msme led company",
+    "waluj midc manufacturer",
+    "led lighting company india",
+  ],
   alternates: { canonical: "https://sudeepengineers.com/about" },
   openGraph: {
     title: "About Sudeep Engineers | India's Leading Lighting Manufacturer",
     description:
       "Trusted LED lighting & Solar Infrastructure manufacturer in Waluj MIDC, Aurangabad since 2019.",
+    images: [{ url: "/logo.png", width: 400, height: 400, alt: "Sudeep Engineers Logo" }],
   },
 };
 
@@ -232,7 +241,7 @@ export default function AboutPage() {
               <div className="w-14 h-14 rounded-lg bg-[color:var(--color-primary)]/10 border border-[color:var(--color-primary)]/15 flex items-center justify-center text-[color:var(--color-primary)] mb-6">
                 <Telescope className="w-7 h-7" />
               </div>
-              <h2 className="font-heading font-bold text-2xl mb-4 text-[color:var(--color-foreground)]">Short description</h2>
+              <h2 className="font-heading font-bold text-2xl mb-4 text-[color:var(--color-foreground)]">Company Overview</h2>
               <p className="text-[color:var(--color-text-secondary)] opacity-80 leading-relaxed">
                 Sudeep Engineers is a Proprietorship Firm incorporated on 04-Jun-2019, having its registered office located at Aurangabad, Maharashtra.
                 The major activity of Sudeep Engineers is Manufacturing, Sub-classified into Manufacture of LED infrastructure and solar power assemblies.

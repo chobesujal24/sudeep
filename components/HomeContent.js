@@ -9,12 +9,12 @@ import FAQ from "@/components/FAQ";
 import { supabase } from "@/lib/supabase";
 
 const services = [
-  { image: "/main/wiki-LED_street_light.webp", title: "LED Street Lights", desc: "High-efficiency street lighting for urban & highway infrastructure." },
-  { image: "/main/floodlight.webp", title: "LED Flood Lights", desc: "Powerful flood lighting for stadiums, warehouses, and industrial areas." },
-  { image: "/main/highbay.webp", title: "LED HighBay Lights", desc: "Premium high-bay lighting for factories and large indoor spaces." },
-  { image: "/main/solarled.webp", title: "Solar Street Lights", desc: "Self-sustained solar-powered street lighting for eco-friendly installations." },
-  { image: "/main/highmastclean.webp", title: "LED Highmast", desc: "Towering highmast lighting systems for highways and airports." },
-  { image: "/main/solarhighmast.webp", title: "Solar Highmast", desc: "Solar-powered highmast lighting for remote and off-grid locations." }
+  { image: "/main/wiki-LED_street_light.webp", title: "LED Street Lights", desc: "High-efficiency street lighting for urban & highway infrastructure.", link: "/led-light-manufacturer-aurangabad" },
+  { image: "/main/floodlight.webp", title: "LED Flood Lights", desc: "Powerful flood lighting for stadiums, warehouses, and industrial areas.", link: "/product" },
+  { image: "/main/highbay.webp", title: "LED HighBay Lights", desc: "Premium high-bay lighting for factories and large indoor spaces.", link: "/product" },
+  { image: "/main/solarled.webp", title: "Solar Street Lights", desc: "Self-sustained solar-powered street lighting for eco-friendly installations.", link: "/solar-street-light-manufacturer" },
+  { image: "/main/highmastclean.webp", title: "LED Highmast", desc: "Towering highmast lighting systems for highways and airports.", link: "/street-light-pole-manufacturer" },
+  { image: "/main/solarhighmast.webp", title: "Solar Highmast", desc: "Solar-powered highmast lighting for remote and off-grid locations.", link: "/solar-street-light-manufacturer" }
 ];
 
 const featuredClients = [
@@ -126,7 +126,7 @@ export default function HomeContent() {
                   <div className="p-6">
                     <h3 className="font-semibold text-lg text-slate-900 mb-2">{s.title}</h3>
                     <p className="text-slate-500 text-sm leading-relaxed mb-4">{s.desc}</p>
-                    <Link href="/product" className="text-sm font-semibold text-green-600 hover:text-green-700 transition-colors inline-flex items-center gap-1.5 group/link">
+                    <Link href={s.link} className="text-sm font-semibold text-green-600 hover:text-green-700 transition-colors inline-flex items-center gap-1.5 group/link">
                       View Details <span className="group-hover/link:translate-x-0.5 transition-transform">→</span>
                     </Link>
                   </div>

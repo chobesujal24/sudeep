@@ -7,6 +7,11 @@ export const metadata = {
     "Top LED light manufacturer in Aurangabad. Sudeep Engineers makes LED street lights, flood lights & pixel LED lighting. Energy-efficient, durable industrial LED solutions.",
   keywords: "led light manufacturer aurangabad, led street light aurangabad, led flood light manufacturer, industrial led lighting aurangabad, led manufacturer waluj midc",
   alternates: { canonical: "https://sudeepengineers.com/led-light-manufacturer-aurangabad" },
+  openGraph: {
+    title: "LED Light Manufacturer in Aurangabad | Street Lights & Flood Lights | Sudeep Engineers",
+    description: "Top LED light manufacturer in Aurangabad. LED street lights, flood lights & pixel LED from Sudeep Engineers, Waluj MIDC.",
+    images: [{ url: "/logo.png", width: 400, height: 400, alt: "Sudeep Engineers - LED Manufacturer Aurangabad" }],
+  },
 };
 
 export default function LEDManufacturerAurangabad() {
@@ -17,6 +22,23 @@ export default function LEDManufacturerAurangabad() {
         name: "LED Lighting Products",
         manufacturer: { "@type": "Organization", name: "Sudeep Engineers", address: { "@type": "PostalAddress", addressLocality: "Aurangabad", addressRegion: "Maharashtra" }},
         description: "High-quality LED street lights, flood lights, and pixel LED lighting manufactured in Aurangabad.",
+      })}} />
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org", "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: "https://sudeepengineers.com" },
+          { "@type": "ListItem", position: 2, name: "LED Light Manufacturer Aurangabad", item: "https://sudeepengineers.com/led-light-manufacturer-aurangabad" },
+        ],
+      })}} />
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org", "@type": "FAQPage",
+        mainEntity: [
+          { "@type": "Question", name: "What LED products does Sudeep Engineers manufacture in Aurangabad?", acceptedAnswer: { "@type": "Answer", text: "Sudeep Engineers manufactures LED street lights (20W-200W), LED flood lights (50W-500W), and pixel LED lighting in Waluj MIDC, Aurangabad. All products are energy-efficient, IP65/IP66 rated, and BIS certified." }},
+          { "@type": "Question", name: "Why choose a local LED manufacturer in Aurangabad?", acceptedAnswer: { "@type": "Answer", text: "Choosing a local LED manufacturer in Aurangabad means faster delivery, direct factory pricing without middlemen, easy after-sales support, and the ability to visit the manufacturing facility for quality inspection." }},
+          { "@type": "Question", name: "Are Sudeep Engineers LED lights BIS certified?", acceptedAnswer: { "@type": "Answer", text: "Yes, Sudeep Engineers holds BIS certification for LED street lights, LED flood lights, LED highbay lights, and LED drivers. We are also ISO 9001:2015 certified and GeM registered." }},
+        ],
       })}} />
 
       <section className="pt-32 pb-16 relative overflow-hidden" style={{ background: "var(--color-background)" }}>

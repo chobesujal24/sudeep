@@ -6,7 +6,20 @@ export const metadata = {
   title: "Contact Us - Get a Free Quote for Engineering Services",
   description:
     "Contact Sudeep Engineers for LED lighting and solar infrastructure quotes. Visit us at Waluj MIDC, Aurangabad or call for inquiries.",
+  keywords: [
+    "contact sudeep engineers",
+    "led light manufacturer contact",
+    "solar street light quote",
+    "led manufacturer aurangabad contact",
+    "oem led lighting quote india",
+  ],
   alternates: { canonical: "https://sudeepengineers.com/contact" },
+  openGraph: {
+    title: "Contact Sudeep Engineers — Get a Free Quote",
+    description:
+      "Reach out for LED street light, flood light, solar street light, and pole manufacturing quotes. Factory in Waluj MIDC, Aurangabad.",
+    images: [{ url: "/logo.png", width: 400, height: 400, alt: "Sudeep Engineers Logo" }],
+  },
 };
 
 const contactInfo = [
@@ -47,6 +60,29 @@ export default function ContactPage() {
             itemListElement: [
               { "@type": "ListItem", position: 1, name: "Home", item: "https://sudeepengineers.com" },
               { "@type": "ListItem", position: 2, name: "Contact", item: "https://sudeepengineers.com/contact" },
+            ],
+          }),
+        }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "@id": "https://sudeepengineers.com/#organization",
+            name: "Sudeep Engineers",
+            url: "https://sudeepengineers.com",
+            contactPoint: [
+              {
+                "@type": "ContactPoint",
+                telephone: "+91-9922996236",
+                contactType: "sales",
+                email: "info@sudeepengineers.com",
+                areaServed: "IN",
+                availableLanguage: ["English", "Hindi", "Marathi"],
+              },
             ],
           }),
         }}

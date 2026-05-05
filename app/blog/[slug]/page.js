@@ -97,7 +97,26 @@ export default async function BlogPost({ params }) {
             dateModified: post.updated_at ? new Date(post.updated_at).toISOString() : "",
             image: post.featuredImage ? [post.featuredImage] : [],
             author: { "@type": "Organization", name: "Sudeep Engineers" },
-            publisher: { "@type": "Organization", name: "Sudeep Engineers" },
+            publisher: { "@type": "Organization", name: "Sudeep Engineers", logo: { "@type": "ImageObject", url: "https://sudeepengineers.com/logo.png" } },
+            mainEntityOfPage: {
+              "@type": "WebPage",
+              "@id": `https://sudeepengineers.com/blog/${resolvedParams.slug}`,
+            },
+          }),
+        }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://sudeepengineers.com" },
+              { "@type": "ListItem", position: 2, name: "Blog", item: "https://sudeepengineers.com/blog" },
+              { "@type": "ListItem", position: 3, name: post.title, item: `https://sudeepengineers.com/blog/${resolvedParams.slug}` },
+            ],
           }),
         }}
       />

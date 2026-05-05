@@ -126,9 +126,8 @@ export const metadata = {
     },
   },
   alternates: { canonical: "https://sudeepengineers.com" },
-  verification: {
-    google: "",
-  },
+  // Add Google Search Console verification code here when available
+  // verification: { google: "your-verification-code" },
 };
 
 export default function RootLayout({ children }) {
@@ -137,6 +136,8 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
         
         {/* Organization Schema */}
@@ -173,7 +174,7 @@ export default function RootLayout({ children }) {
               },
               areaServed: [
                 { "@type": "Country", name: "India" },
-                { "@type": "State", name: "Maharashtra" },
+                { "@type": "AdministrativeArea", name: "Maharashtra" },
               ],
               knowsAbout: [
                 "LED Street Lights",
@@ -328,6 +329,20 @@ export default function RootLayout({ children }) {
               url: "https://sudeepengineers.com",
               description: "LED street light, flood light, solar street light & pole manufacturer in India",
               publisher: { "@id": "https://sudeepengineers.com/#organization" },
+            }),
+          }}
+        />
+
+        {/* BreadcrumbList Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: "https://sudeepengineers.com" },
+              ],
             }),
           }}
         />
