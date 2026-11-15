@@ -46,7 +46,7 @@ export default async function sitemap() {
   try {
     const { data: categories, error } = await supabase
       .from('categories')
-      .select('slug, updated_at')
+      .select('slug')
       .order('sequence', { ascending: true });
     if (error) throw error;
     fetchedCategories = categories;
@@ -54,7 +54,6 @@ export default async function sitemap() {
     if (categories) {
       categoryPages = categories.map((cat) => ({
         url: `${baseUrl}/product/${cat.slug}`,
-        lastModified: cat.updated_at ? new Date(cat.updated_at) : new Date(),
         changeFrequency: "weekly",
         priority: 0.8,
       }));
