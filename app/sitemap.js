@@ -2,6 +2,8 @@ import { supabase } from "@/lib/supabase";
 import { getProductData } from "@/lib/getProductData";
 import { SEO_PRODUCTS, SEO_LOCATIONS } from "@/lib/seoConfig";
 
+export const revalidate = 3600;
+
 export default async function sitemap() {
   const baseUrl = "https://sudeepengineers.com";
 
@@ -23,24 +25,30 @@ export default async function sitemap() {
     { url: `${baseUrl}/street-light-pole-manufacturer`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
   ];
 
-  const blogPosts = [
-    "best-led-lighting-industrial-use",
-    "benefits-local-manufacturing-waluj-midc",
-  ].map((slug) => ({
-    url: `${baseUrl}/blog/${slug}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly",
-    priority: 0.6,
-  }));
+  let blogPosts = [];
+  try {
+    const { data, error } = await supabase.from('blogs').select('slug, updated_at, created_at').eq('status', 'Published');
+    if (error) throw error;
+    blogPosts = (data || []).filter((post) => post.slug).map((post) => ({
+      url: `${baseUrl}/blog/${encodeURIComponent(post.slug)}`,
+      lastModified: post.updated_at || post.created_at || undefined,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    }));
+  } catch (error) {
+    console.error("Sitemap: Failed to fetch published posts", error);
+    if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) throw error;
+  }
 
   // Dynamic category pages
   let categoryPages = [];
   let fetchedCategories = null;
   try {
-    const { data: categories } = await supabase
+    const { data: categories, error } = await supabase
       .from('categories')
       .select('slug, updated_at')
       .order('sequence', { ascending: true });
+    if (error) throw error;
     fetchedCategories = categories;
 
     if (categories) {
@@ -53,6 +61,7 @@ export default async function sitemap() {
     }
   } catch (e) {
     console.error("Sitemap: Failed to fetch categories", e);
+    if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) throw e;
   }
 
   // Dynamic product pages
@@ -63,9 +72,10 @@ export default async function sitemap() {
     const productsArray = Array.isArray(products) ? products : [];
     fetchedProductsArray = productsArray;
 
-    const { data: categories } = await supabase
+    const { data: categories, error } = await supabase
       .from('categories')
       .select('name, slug');
+    if (error) throw error;
 
     const catSlugMap = {};
     if (categories) {
@@ -75,9 +85,9 @@ export default async function sitemap() {
     }
 
     productPages = productsArray
-      .filter((p) => p.slug && p.category)
+      .filter((p) => p.slug && p.category && catSlugMap[p.category.toLowerCase()])
       .map((p) => {
-        const catSlug = catSlugMap[p.category.toLowerCase()] || p.category.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+        const catSlug = catSlugMap[p.category.toLowerCase()];
         return {
           url: `${baseUrl}/product/${catSlug}/${p.slug}`,
           lastModified: new Date(),
@@ -87,6 +97,7 @@ export default async function sitemap() {
       });
   } catch (e) {
     console.error("Sitemap: Failed to fetch products", e);
+    if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) throw e;
   }
 
   // Programmatic SEO Manufacturer Location Pages

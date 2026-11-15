@@ -1,8 +1,9 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
 import { Icons } from "@/components/Icons";
 import { supabase } from "@/lib/supabase";
+import { saveCatalog } from "@/lib/catalog.mjs";
 import AdminSidebar from "@/components/admin/AdminSidebar";
 import Dashboard from "@/components/admin/Dashboard";
 import CategoriesManager from "@/components/admin/CategoriesManager";
@@ -23,6 +24,11 @@ export default function AdminDashboard() {
   const [authError, setAuthError] = useState("");
   const [activeTab, setActiveTab] = useState("dashboard");
   const [products, setProducts] = useState([]);
+  const catalogSaving = useRef(false);
+  const [catalogSnapshot, setCatalogSnapshot] = useState(null);
+  const [catalogState, setCatalogState] = useState("loading");
+  const [catalogError, setCatalogError] = useState("");
+  const [catalogRetry, setCatalogRetry] = useState(0);
   const [loading, setLoading] = useState(true);
   const [editingIndex, setEditingIndex] = useState(null);
   const [formData, setFormData] = useState({});
@@ -84,35 +90,49 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     if (!isAuthenticated) return;
-    const fetchProducts = async () => {
+    let active = true;
+    async function loadCatalog() {
       try {
-        const { data: dbData } = await supabase.from("settings").select("data").eq("id", "productData").single();
-        if (dbData?.data?.products?.length > 0) {
-          setProducts(dbData.data.products);
-        } else {
-          const res = await fetch("/api/product");
-          const data = await res.json();
-          if (Array.isArray(data) && data.length > 0) {
-            setProducts(data);
-            await supabase.from("settings").upsert({ id: "productData", data: { products: data } });
-          }
+        const [catalog, categories] = await Promise.all([
+          supabase.from("settings").select("data").eq("id", "productData").maybeSingle(),
+          supabase.from("categories").select("*").order("name"),
+        ]);
+        if (catalog.error) throw catalog.error;
+        if (categories.error) throw categories.error;
+        if (catalog.data && (!catalog.data.data || !Array.isArray(catalog.data.data.products))) {
+          throw new Error("Catalog data is invalid; saving is disabled to protect existing data.");
         }
-
-        // Also fetch categories for the dropdown
-        const { data: catData } = await supabase.from("categories").select("*").order("name");
-        if (catData) setDbCategories(catData);
-
+        if (!active) return;
+        setCatalogSnapshot(catalog.data?.data ?? null);
+        setProducts(catalog.data?.data?.products ?? []);
+        setDbCategories(categories.data ?? []);
+        setCatalogState("ready");
+        setCatalogError("");
       } catch (error) {
-        console.error("Failed to fetch products/categories:", error);
-        try {
-          const res = await fetch("/api/product");
-          const data = await res.json();
-          if (Array.isArray(data)) setProducts(data);
-        } catch (e) { console.error("API fallback also failed:", e); }
+        if (active) { setCatalogState("error"); setCatalogError(error.message || "Unable to load the catalog."); }
       }
-    };
-    fetchProducts();
-  }, [isAuthenticated]);
+    }
+    loadCatalog();
+    return () => { active = false; };
+  }, [isAuthenticated, catalogRetry]);
+
+  const persistCatalog = async (updatedProducts) => {
+    if (catalogState !== "ready" || catalogSaving.current) throw new Error("The catalog is unavailable or a save is already in progress.");
+    catalogSaving.current = true;
+    setCatalogState("saving");
+    try {
+      const next = await saveCatalog(supabase, catalogSnapshot, updatedProducts);
+      setCatalogSnapshot(next);
+      setProducts(updatedProducts);
+      setCatalogState("ready");
+    } catch (error) {
+      setCatalogState("error");
+      setCatalogError(error.message);
+      throw error;
+    } finally {
+      catalogSaving.current = false;
+    }
+  };
 
   const handleSave = async () => {
     try {
@@ -127,9 +147,7 @@ export default function AdminDashboard() {
         return seqA - seqB;
       });
 
-      const { error } = await supabase.from("settings").upsert({ id: "productData", data: { products: updatedProducts } });
-      if (error) throw error;
-      setProducts(updatedProducts);
+      await persistCatalog(updatedProducts);
       setEditingIndex(null);
       setFormData({});
       alert("Products updated successfully!");
@@ -142,9 +160,7 @@ export default function AdminDashboard() {
     if (!confirm("Are you sure you want to delete this product?")) return;
     try {
       const updatedProducts = products.filter((_, i) => i !== index);
-      const { error } = await supabase.from("settings").upsert({ id: "productData", data: { products: updatedProducts } });
-      if (error) throw error;
-      setProducts(updatedProducts);
+      await persistCatalog(updatedProducts);
       alert("Product deleted!");
     } catch (error) { alert("Error deleting product."); }
   };
@@ -185,7 +201,8 @@ export default function AdminDashboard() {
     if (dragIndex === dropIndex && !targetCategory) return;
     
     const updatedProducts = [...products];
-    const item = updatedProducts.splice(dragIndex, 1)[0];
+    if (!Number.isInteger(dragIndex) || dragIndex < 0 || dragIndex >= updatedProducts.length) return;
+    const item = { ...updatedProducts.splice(dragIndex, 1)[0] };
     
     // Update category if dropped on a category header or another category's product
     if (targetCategory) {
@@ -206,9 +223,7 @@ export default function AdminDashboard() {
     const resequenced = updatedProducts.map((p, idx) => ({ ...p, sequence: (idx + 1) * 10 }));
     
     try {
-      const { error } = await supabase.from("settings").upsert({ id: "productData", data: { products: resequenced } });
-      if (error) throw error;
-      setProducts(resequenced);
+      await persistCatalog(resequenced);
     } catch (error) {
       alert("Error updating order: " + error.message);
     }
@@ -255,7 +270,19 @@ export default function AdminDashboard() {
   }
 
   // Product editor content
-  const renderProductEditor = () => (
+  const renderProductEditor = () => catalogState !== "ready" ? (
+    <div role="alert" className="p-8 bg-white rounded-xl border border-slate-200">
+      <p>{catalogState === "error" ? `Catalog unavailable: ${catalogError}` : "Loading catalog..."}</p>
+      {catalogState === "error" && Object.keys(formData).length > 0 && <div className="mt-4">
+        <label htmlFor="unsaved-product" className="block font-semibold">Copy your unsaved product data before reloading:</label>
+        <textarea id="unsaved-product" readOnly value={JSON.stringify(formData, null, 2)} className="mt-2 w-full h-48 p-3 border rounded font-mono text-sm" />
+      </div>}
+      {catalogState === "error" && <button className="mt-4 text-green-700 underline" onClick={() => {
+        if (Object.keys(formData).length && !confirm("Reloading will discard your unsaved product changes. Continue?")) return;
+        setEditingIndex(null); setFormData({}); setCatalogState("loading"); setCatalogRetry((n) => n + 1);
+      }}>Reload catalog</button>}
+    </div>
+  ) : (
     <div className="flex flex-col lg:flex-row gap-8">
       {/* LEFT – Product List */}
       <div className="w-full lg:w-1/4 flex flex-col gap-4">

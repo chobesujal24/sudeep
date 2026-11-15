@@ -4,19 +4,31 @@ import ImageGallery from "@/components/ImageGallery";
 import { Icons } from "@/components/Icons";
 import { getProductData } from "@/lib/getProductData";
 import { supabase } from "@/lib/supabase";
+import { getSiteSettings } from "@/lib/getSiteSettings";
+import { whatsappNumber, safeWebUrl } from "@/lib/siteSettings.mjs";
+import { jsonForHtml } from "@/lib/sanitizeBlogHtml.mjs";
 
 export const revalidate = 60; // ISR: cache page, refresh data every 60s in background
 
+async function findProduct(categorySlug, slug) {
+  const [{ data: category, error }, products] = await Promise.all([
+    supabase.from('categories').select('name').eq('slug', categorySlug).maybeSingle(),
+    getProductData(),
+  ]);
+  if (error) throw new Error("Categories are temporarily unavailable.");
+  if (!category?.name) return { product: null, category: null, products };
+  const product = products.find((p) => p.slug?.toLowerCase() === slug.toLowerCase() && p.category?.toLowerCase() === category.name.toLowerCase());
+  return { product, category, products };
+}
+
 export async function generateMetadata({ params }) {
   const { category: categorySlug, slug } = await params;
-  const products = await getProductData();
-  const productsArray = Array.isArray(products) ? products : [];
-  const product = productsArray.find((p) => p.slug.toLowerCase() === slug.toLowerCase());
+  const { product } = await findProduct(categorySlug, slug);
 
   if (!product) return {};
 
-  const title = `${product.name} — ${product.category} | Sudeep Engineers`;
-  const description = `${product.description} Manufactured by Sudeep Engineers, Aurangabad. ISO 9001:2015 certified, BIS approved. Request OEM pricing.`;
+  const title = product.metaTitle || `${product.name} — ${product.category} | Sudeep Engineers`;
+  const description = product.metaDescription || `${product.description} Manufactured by Sudeep Engineers, Aurangabad. ISO 9001:2015 certified, BIS approved. Request OEM pricing.`;
 
   return {
     title,
@@ -43,22 +55,15 @@ export async function generateMetadata({ params }) {
 export default async function ProductPage({ params }) {
   const { category: categorySlug, slug } = await params;
   
-  const products = await getProductData();
-  const productsArray = Array.isArray(products) ? products : [];
-  
-  const product = productsArray.find((p) => p.slug.toLowerCase() === slug.toLowerCase());
+  const { product, category, products: productsArray } = await findProduct(categorySlug, slug);
+  if (!product) notFound();
+  const categoryName = category.name;
+  const models = Array.isArray(product.models) ? product.models.filter((model) => safeWebUrl(model?.tds)) : [];
+  const catalogs = Array.isArray(product.catalogs) ? product.catalogs.filter((url) => safeWebUrl(url)) : [];
+  const specs = Array.isArray(product.specs) ? product.specs.filter(Boolean) : [];
+  const applications = Array.isArray(product.applications) ? product.applications.filter(Boolean) : [];
 
-  if (!product) {
-    notFound();
-  }
-
-  const { data: categoryData } = await supabase
-    .from('categories')
-    .select('name')
-    .eq('slug', categorySlug)
-    .single();
-
-  const categoryName = categoryData?.name || product.category;
+  const site = await getSiteSettings();
 
   // Find related products in same category
   const relatedProducts = productsArray
@@ -71,7 +76,7 @@ export default async function ProductPage({ params }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+          __html: jsonForHtml({
             "@context": "https://schema.org",
             "@type": "Product",
             name: product.name,
@@ -105,7 +110,7 @@ export default async function ProductPage({ params }) {
                 name: "Sudeep Engineers",
               },
             },
-            additionalProperty: (product.specs || []).map(spec => ({
+            additionalProperty: specs.map(spec => ({
               "@type": "PropertyValue",
               name: spec.label,
               value: spec.value,
@@ -118,7 +123,7 @@ export default async function ProductPage({ params }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+          __html: jsonForHtml({
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
@@ -184,7 +189,7 @@ export default async function ProductPage({ params }) {
                 
                 <div className="bg-white border border-slate-200 rounded-lg overflow-hidden">
                   <div className="grid grid-cols-1 divide-y divide-slate-200">
-                    {product.specs.map((spec, idx) => (
+                    {specs.map((spec, idx) => (
                       <div key={idx} className={`grid grid-cols-3 ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50'}`}>
                         <div className="col-span-1 border-r border-slate-200 p-4 font-bold text-slate-700 uppercase tracking-wide text-xs flex items-center">
                           {spec.label}
@@ -207,7 +212,7 @@ export default async function ProductPage({ params }) {
                   Ideal Applications
                 </h2>
                 <div className="flex flex-wrap gap-3">
-                  {product.applications.map((app, idx) => (
+                  {applications.map((app, idx) => (
                     <span
                       key={idx}
                       className="bg-white border border-slate-200 text-slate-700 text-sm font-bold uppercase tracking-wider px-4 py-2 rounded-lg"
@@ -219,7 +224,7 @@ export default async function ProductPage({ params }) {
               </div>
 
               {/* Documentation Downloads */}
-              {(product.models?.length > 0 || (product.catalogs && product.catalogs.length > 0)) && (
+              {(models.length > 0 || catalogs.length > 0) && (
                 <div className="mb-12 flex flex-col gap-4">
                   <h2 className="text-xl font-extrabold text-slate-900 mb-2 uppercase tracking-tight flex items-center gap-3">
                     <span className="w-8 h-8 bg-rose-100 flex items-center justify-center rounded text-rose-700">
@@ -229,8 +234,7 @@ export default async function ProductPage({ params }) {
                   </h2>
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {product.models && product.models.length > 0 ? (
-                      product.models.map((model, idx) => (
+                    {models.map((model, idx) => (
                         <a
                           key={idx}
                           href={model.tds}
@@ -251,9 +255,8 @@ export default async function ProductPage({ params }) {
                             <Icons.Envelope className="w-5 h-5" />
                           </span>
                         </a>
-                      ))
-                    ) : (
-                      product.catalogs.map((catalog, idx) => (
+                      ))}
+                    {catalogs.map((catalog, idx) => (
                         <a
                           key={idx}
                           href={catalog}
@@ -273,8 +276,7 @@ export default async function ProductPage({ params }) {
                             Download →
                           </span>
                         </a>
-                      ))
-                    )}
+                      ))}
                   </div>
                 </div>
               )}
@@ -287,7 +289,7 @@ export default async function ProductPage({ params }) {
                 </div>
                 <div className="flex gap-4 w-full sm:w-auto">
                   <a
-                    href={`https://wa.me/919922996236?text=Hello%2C%20I%20need%20a%20quotation%20for%20${encodeURIComponent(product.name)}.`}
+                    href={`https://wa.me/${whatsappNumber(site.whatsapp)}?text=Hello%2C%20I%20need%20a%20quotation%20for%20${encodeURIComponent(product.name)}.`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3 bg-[#25D366] text-white font-bold text-sm uppercase tracking-wider hover:bg-[#20BE5A] transition-colors rounded-lg"

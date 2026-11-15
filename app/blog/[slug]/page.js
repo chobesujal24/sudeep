@@ -29,23 +29,12 @@ export async function generateStaticParams() {
 }
 
 async function getPostBySlug(slug) {
-  try {
-    const { data, error } = await supabase
-      .from('blogs')
-      .select('*')
-      .eq('slug', slug)
-      .limit(1)
-      .single();
-      
-    if (error || !data) {
-      return null;
-    }
-    
-    return transformUrls(data);
-  } catch (error) {
-    console.error("Error fetching post by slug:", error);
-    return null;
+  const { data, error } = await supabase.from('blogs').select('*').eq('slug', slug).eq('status', 'Published').maybeSingle();
+  if (error) {
+    console.error("Error fetching post:", error);
+    throw new Error("Articles are temporarily unavailable.");
   }
+  return data ? transformUrls(data) : null;
 }
 
 export async function generateMetadata({ params }) {
@@ -127,7 +116,6 @@ export default async function BlogPost({ params }) {
            {/* Abstract Corporate Green Mesh/Glow */}
            <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-green-500/10 blur-[120px]"></div>
            <div className="absolute top-[60%] -right-[10%] w-[40%] h-[50%] rounded-full bg-emerald-500/10 blur-[100px]"></div>
-           <div className="absolute inset-0 bg-[url('/noise.png')] opacity-5 mix-blend-overlay"></div>
         </div>
         <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
           <nav className="text-xs text-slate-400 mb-8 flex justify-center gap-2 overflow-x-auto whitespace-nowrap hide-scrollbar">

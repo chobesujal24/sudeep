@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import ProductFilterView from "@/components/ProductFilterView";
 import { getProductData } from "@/lib/getProductData";
 import { supabase } from "@/lib/supabase";
+import { jsonForHtml } from "@/lib/sanitizeBlogHtml.mjs";
 
 export const revalidate = 60; // ISR: cache page, refresh data every 60s in background
 
@@ -76,7 +77,7 @@ export default async function CategoryPage({ params }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+          __html: jsonForHtml({
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
@@ -92,7 +93,7 @@ export default async function CategoryPage({ params }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+          __html: jsonForHtml({
             "@context": "https://schema.org",
             "@type": "CollectionPage",
             name: `${category.name} — Sudeep Engineers`,
@@ -132,7 +133,7 @@ export default async function CategoryPage({ params }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+          __html: jsonForHtml({
             "@context": "https://schema.org",
             "@type": "FAQPage",
             mainEntity: [

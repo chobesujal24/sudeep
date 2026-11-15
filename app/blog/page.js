@@ -30,6 +30,7 @@ export const metadata = {
 export default async function BlogPage() {
   // Fetch posts from Supabase Server-Side
   let posts = [];
+  let postsUnavailable = false;
 
   try {
     const { data, error } = await supabase
@@ -42,6 +43,7 @@ export default async function BlogPage() {
     if (data) posts = transformUrls(data);
   } catch (error) {
     console.error("Error fetching blogs from Supabase:", error);
+    postsUnavailable = true;
   }
 
   // Format date helper
@@ -76,7 +78,6 @@ export default async function BlogPage() {
            {/* Abstract Corporate Green Mesh/Glow */}
            <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-green-500/10 blur-[120px]"></div>
            <div className="absolute top-[60%] -right-[10%] w-[40%] h-[50%] rounded-full bg-emerald-500/10 blur-[100px]"></div>
-           <div className="absolute inset-0 bg-[url('/noise.png')] opacity-5 mix-blend-overlay"></div>
         </div>
         <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
           <nav className="text-xs text-slate-400 mb-8 flex justify-center gap-2">
@@ -141,8 +142,8 @@ export default async function BlogPage() {
             {posts.length === 0 && (
               <div className="col-span-full py-24 text-center border-2 border-dashed border-slate-200 rounded-3xl bg-slate-50">
                 <svg className="w-16 h-16 mx-auto text-slate-300 mb-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" /></svg>
-                <h3 className="text-2xl font-bold text-slate-900 mb-2">Check back later</h3>
-                <p className="text-slate-500 max-w-sm mx-auto">We are currently preparing new engineering insights and articles. Stay tuned!</p>
+                <h3 className="text-2xl font-bold text-slate-900 mb-2">{postsUnavailable ? "Articles temporarily unavailable" : "Check back later"}</h3>
+                <p className="text-slate-500 max-w-sm mx-auto">{postsUnavailable ? "Please try again shortly." : "We are currently preparing new engineering insights and articles. Stay tuned!"}</p>
               </div>
             )}
           </div>

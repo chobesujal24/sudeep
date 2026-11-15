@@ -2,9 +2,11 @@
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { animate } from "framer-motion";
+import useReducedMotion from "./useReducedMotion";
 
 export default function ScrollAnimations() {
   const pathname = usePathname();
+  const reducedMotion = useReducedMotion();
   const observerRef = useRef(null);
 
   useEffect(() => {
@@ -14,6 +16,10 @@ export default function ScrollAnimations() {
     }
 
     const elements = document.querySelectorAll(".animate-on-scroll:not(.animated)");
+    if (reducedMotion) {
+      elements.forEach((el) => { el.classList.add("animated"); el.style.opacity = "1"; el.style.transform = "none"; });
+      return;
+    }
 
     observerRef.current = new IntersectionObserver(
       (entries) => {
@@ -65,7 +71,7 @@ export default function ScrollAnimations() {
         observerRef.current.disconnect();
       }
     };
-  }, [pathname]);
+  }, [pathname, reducedMotion]);
 
   return null;
 }

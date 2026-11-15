@@ -76,7 +76,7 @@ export default function ServicesPage() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/main/ef51007f-a9cb-4195-96cc-ea488edfe5b9-0003.webp"
+            src="/services_hero_bg1.webp"
             alt="LED and Solar Services"
             fill
             priority

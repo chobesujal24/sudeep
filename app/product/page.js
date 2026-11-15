@@ -112,7 +112,7 @@ export default async function ProductCategories() {
                   {/* Image Container */}
                   <div className="relative h-[280px] w-full border-b border-slate-100 p-6 flex items-center justify-center bg-white overflow-hidden">
                     <Image 
-                      src={cat.image || "/placeholder-image.jpg"} 
+                      src={cat.image || "/placeholder-image.svg"}
                       alt={cat.name} 
                       fill 
                       className="object-contain p-6" 

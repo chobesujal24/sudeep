@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import useReducedMotion from "./useReducedMotion";
 
 /*
  * Premium Hero Image Slider — Clean crossfade with subtle zoom.
@@ -22,13 +23,15 @@ const IMAGES = [
 
 export default function HeroSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
+    if (reducedMotion) return;
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % IMAGES.length);
     }, 6000);
     return () => clearInterval(interval);
-  }, []);
+  }, [reducedMotion]);
 
   return (
     <div className="absolute inset-0 z-0 overflow-hidden bg-slate-950">

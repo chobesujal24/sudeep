@@ -6,6 +6,9 @@ import CTABanner from "@/components/CTABanner";
 import { Shield, MapPin, Award, Truck, CheckCircle2 } from "lucide-react";
 import { SEO_PRODUCTS, SEO_LOCATIONS } from "@/lib/seoConfig";
 import { supabase } from "@/lib/supabase";
+import { publicProducts } from "@/lib/catalog.mjs";
+import { getSiteSettings } from "@/lib/getSiteSettings";
+import { jsonForHtml } from "@/lib/sanitizeBlogHtml.mjs";
 
 export const revalidate = 86400; // Cache these pages heavily (1 day)
 
@@ -28,7 +31,7 @@ const getDynamicSEOItems = unstable_cache(async () => {
       desc: cat.description || `Industrial ${cat.name} solutions for municipal and government applications.`,
     };
   }
-  for (const prod of productsResult.data?.data?.products || []) {
+  for (const prod of publicProducts(productsResult.data?.data?.products)) {
     if (prod.slug && !items[prod.slug] && prod.name) {
       items[prod.slug] = {
         name: prod.name,
@@ -101,6 +104,8 @@ export default async function ProgrammaticManufacturerPage({ params }) {
     notFound();
   }
 
+  const site = await getSiteSettings();
+
   // Generate localized schema
   const localBusinessSchema = {
     "@context": "https://schema.org",
@@ -108,7 +113,7 @@ export default async function ProgrammaticManufacturerPage({ params }) {
     "name": `Sudeep Engineers - ${product.name} Manufacturer`,
     "description": `OEM Manufacturer of ${product.plural} servicing municipal and industrial clients in ${location.name}, ${location.state}.`,
     "url": `https://sudeepengineers.com/manufacturer/${resolvedParams.product}/${resolvedParams.location}`,
-    "telephone": "+91-9922996236",
+    "telephone": site.phone,
     "areaServed": {
       "@type": "City",
       "name": location.name
@@ -128,7 +133,7 @@ export default async function ProgrammaticManufacturerPage({ params }) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        dangerouslySetInnerHTML={{ __html: jsonForHtml(localBusinessSchema) }}
       />
 
       <article className="min-h-screen bg-slate-50 pb-20">

@@ -1,4 +1,6 @@
 "use client";
+import { useSiteSettings } from "@/components/SiteSettingsProvider";
+import { phoneHref } from "@/lib/siteSettings.mjs";
 import Link from "next/link";
 import { Phone } from "lucide-react";
 
@@ -7,6 +9,7 @@ import { Phone } from "lucide-react";
  */
 
 export default function CTABanner() {
+  const site = useSiteSettings();
   return (
     <section className="py-20 md:py-28 bg-slate-900" aria-label="Call to action">
       <div className="max-w-3xl mx-auto px-6 text-center">
@@ -38,7 +41,7 @@ export default function CTABanner() {
         <div className="mt-8 flex items-center justify-center gap-2 text-slate-500 text-sm">
           <Phone size={14} className="text-green-400" />
           <span>Or call:</span>
-          <a href="tel:+919922996236" className="font-semibold text-white hover:text-green-400 transition-colors">+91 9922996236</a>
+          <a href={phoneHref(site.phone)} className="font-semibold text-white hover:text-green-400 transition-colors">{site.phone}</a>
         </div>
       </div>
     </section>

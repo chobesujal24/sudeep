@@ -1,9 +1,12 @@
 "use client";
+import { useSiteSettings } from "@/components/SiteSettingsProvider";
+import { phoneHref, whatsappNumber } from "@/lib/siteSettings.mjs";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Icons } from "./Icons";
 
 export default function FloatingButtons() {
+  const site = useSiteSettings();
   const [showTop, setShowTop] = useState(false);
 
   useEffect(() => {
@@ -17,7 +20,7 @@ export default function FloatingButtons() {
       {/* Floating action buttons */}
       <div className="fixed bottom-6 right-6 z-40 flex flex-col gap-3">
         <motion.a
-          href="https://wa.me/919922996236?text=Hello%2C%20I%20need%20a%20quote%20for%20LED%20lighting"
+          href={`https://wa.me/${whatsappNumber(site.whatsapp)}?text=Hello%2C%20I%20need%20a%20quote%20for%20LED%20lighting`}
           target="_blank"
           rel="noopener noreferrer"
           className="w-[52px] h-[52px] rounded-full bg-[#25d366] text-white flex items-center justify-center text-2xl shadow-[0_4px_15px_rgba(0,0,0,0.3)] no-underline"
@@ -31,7 +34,7 @@ export default function FloatingButtons() {
           <Icons.WhatsApp className="w-6 h-6" />
         </motion.a>
         <motion.a
-          href="tel:+919922996236"
+          href={phoneHref(site.phone)}
           className="w-[52px] h-[52px] rounded-full bg-green-600 text-white flex items-center justify-center text-2xl shadow-[0_4px_15px_rgba(0,0,0,0.3)] no-underline"
           aria-label="Call us"
           title="Call us"

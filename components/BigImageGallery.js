@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import useReducedMotion from "./useReducedMotion";
 
 const bigImages = [
   { src: "/main/bigimage1.webp", title: "Heavy Duty HighBay Assembly" },
@@ -13,14 +14,16 @@ const bigImages = [
 
 export default function BigImageGallery() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const reducedMotion = useReducedMotion();
 
   /* Auto-play */
   useEffect(() => {
+    if (reducedMotion) return;
     const timer = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % bigImages.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, [activeIndex]);
+  }, [activeIndex, reducedMotion]);
 
   return (
     <section className="py-12 md:py-20 lg:py-28 bg-slate-50" aria-label="Product showcase gallery">

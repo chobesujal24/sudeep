@@ -1,6 +1,9 @@
 import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
 import { MapPin, Phone, Mail, MessageCircle } from "lucide-react";
+import { getSiteSettings } from "@/lib/getSiteSettings";
+import { phoneHref, whatsappNumber } from "@/lib/siteSettings.mjs";
+import { jsonForHtml } from "@/lib/sanitizeBlogHtml.mjs";
 
 export const metadata = {
   title: "Contact Us - Get a Free Quote for Engineering Services",
@@ -22,39 +25,39 @@ export const metadata = {
   },
 };
 
-const contactInfo = [
+export default async function ContactPage() {
+  const site = await getSiteSettings();
+  const contactInfo = [
   {
     icon: <MapPin color="currentColor" size={24} />,
     title: "Visit Our Facility",
-    content: "Waluj MIDC, Aurangabad,\nMaharashtra 431136, India",
+    content: site.address,
   },
   {
     icon: <Phone color="currentColor" size={24} />,
     title: "Call Us",
-    content: "+91 9922996236",
-    link: "tel:+919922996236",
+    content: site.phone,
+    link: phoneHref(site.phone),
   },
   {
     icon: <Mail color="currentColor" size={24} />,
     title: "Email Us",
-    content: "info@sudeepengineers.com",
-    link: "mailto:info@sudeepengineers.com",
+    content: site.email,
+    link: `mailto:${site.email}`,
   },
   {
     icon: <MessageCircle color="currentColor" size={24} />,
     title: "WhatsApp",
     content: "Chat with us on WhatsApp",
-    link: "https://api.whatsapp.com/send/?phone=919922996236&text=Hello%20Sudeep%20Engineers,%20I%20have%20an%20enquiry",
+    link: `https://wa.me/${whatsappNumber(site.whatsapp)}?text=Hello%20Sudeep%20Engineers%2C%20I%20have%20an%20enquiry`,
   },
 ];
-
-export default function ContactPage() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+          __html: jsonForHtml({
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
@@ -68,7 +71,7 @@ export default function ContactPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+          __html: jsonForHtml({
             "@context": "https://schema.org",
             "@type": "Organization",
             "@id": "https://sudeepengineers.com/#organization",
@@ -77,9 +80,9 @@ export default function ContactPage() {
             contactPoint: [
               {
                 "@type": "ContactPoint",
-                telephone: "+91-9922996236",
+                telephone: site.phone,
                 contactType: "sales",
-                email: "info@sudeepengineers.com",
+                email: site.email,
                 areaServed: "IN",
                 availableLanguage: ["English", "Hindi", "Marathi"],
               },
