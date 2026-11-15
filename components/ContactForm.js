@@ -81,8 +81,6 @@ export default function ContactForm() {
           <option value="led-lighting">LED Lighting Manufacturing</option>
           <option value="solar-infrastructure">Solar Power Infrastructure</option>
           <option value="custom-engineering">Custom Engineering Solutions</option>
-          <option value="custom-engineering">Custom Engineering Solutions</option>
-          <option value="led-lighting">LED Lighting Manufacturing</option>
           <option value="other">Other</option>
         </select>
       </div>

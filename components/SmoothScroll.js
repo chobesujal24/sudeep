@@ -1,35 +1,43 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import Lenis from "lenis";
 
-/*
- * SmoothScroll — Initializes Lenis smooth scrolling.
- * Integrates with the browser's requestAnimationFrame loop.
- */
 export default function SmoothScroll() {
-  const lenisRef = useRef(null);
-
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: "vertical",
-      gestureOrientation: "vertical",
-      smoothWheel: true,
-      touchMultiplier: 2,
-    });
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let lenis;
+    let frameId;
 
-    lenisRef.current = lenis;
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
+    function stop() {
+      if (frameId !== undefined) cancelAnimationFrame(frameId);
+      frameId = undefined;
+      lenis?.destroy();
+      lenis = undefined;
     }
-    requestAnimationFrame(raf);
 
+    function update() {
+      stop();
+      if (reducedMotion.matches) return;
+      lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: "vertical",
+        gestureOrientation: "vertical",
+        smoothWheel: true,
+        touchMultiplier: 2,
+      });
+      function raf(time) {
+        lenis.raf(time);
+        frameId = requestAnimationFrame(raf);
+      }
+      frameId = requestAnimationFrame(raf);
+    }
+
+    update();
+    reducedMotion.addEventListener("change", update);
     return () => {
-      lenis.destroy();
-      lenisRef.current = null;
+      reducedMotion.removeEventListener("change", update);
+      stop();
     };
   }, []);
 

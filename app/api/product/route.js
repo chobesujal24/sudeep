@@ -8,6 +8,6 @@ export async function GET() {
     return Response.json(products);
   } catch (error) {
     console.error("GET /api/product error:", error);
-    return Response.json({ error: "Failed to fetch products" }, { status: 500 });
+    return Response.json({ error: "Failed to fetch products" }, { status: 503 });
   }
 }

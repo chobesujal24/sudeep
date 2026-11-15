@@ -1,0 +1,11 @@
+# Security and deployment checklist
+
+The admin portal now uses Google sign-in through Supabase; the former browser-side username/password login has been removed. Before deploying, verify that Google OAuth and the `/admin` redirect URL are configured in Supabase and that an authorized administrator can sign in. Removing a client-side login does **not** protect the database by itself.
+
+- Audit Supabase Row Level Security and Storage policies. Only verified, authorized admin accounts should be able to modify products, categories, blogs, settings and stored files, or read/update/delete leads. Test with anonymous users and authenticated non-admin users. Public read access should be limited to intentionally public content; lead submission should allow only the minimum required insert. Enforce authorization in Supabase, not in the client-side email list.
+- The former password was exposed in shipped code and Git history. Rotate it anywhere it may have been reused, and consider previous deployments and cached bundles exposed. Enable MFA for Cloudflare and administrator identity accounts.
+- The public contact form submits directly to Supabase. Review validation, abuse prevention and database permissions; a client-only CAPTCHA is not sufficient to protect direct database requests.
+- Monitor `info@sudeepengineers.com` for security reports, or replace the contact in `public/.well-known/security.txt` with a monitored security mailbox. Renew its `Expires` date before it lapses and confirm the file is served over HTTPS.
+- In Cloudflare, investigate unproxied web records and restrict the origin to Cloudflare where applicable. Do not proxy mail or non-HTTP records without checking compatibility. Verify the actual HTTPS HSTS header on all relevant hostnames before changing preload or subdomain settings.
+- Set up DMARC after reviewing SPF, DKIM and legitimate email senders. Start in monitoring mode and review reports before enforcement. Evaluate Bot Fight Mode and AI crawler controls against legitimate visitors and integrations.
+- Confirm the Supabase environment variables are set in the deployment and test categories, product pages, enquiry submission and admin sign-in. The local build without these variables uses a placeholder and cannot validate production data access.

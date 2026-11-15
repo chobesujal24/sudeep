@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import { supabase } from "@/lib/supabase";
 import { transformUrls } from "@/lib/getProductData";
+import { jsonForHtml, sanitizeBlogHtml } from "@/lib/sanitizeBlogHtml.mjs";
 
 export const revalidate = 60; // Revalidate every 60 seconds
 
@@ -88,7 +89,7 @@ export default async function BlogPost({ params }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+          __html: jsonForHtml({
             "@context": "https://schema.org",
             "@type": "Article",
             headline: post.title,
@@ -109,7 +110,7 @@ export default async function BlogPost({ params }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+          __html: jsonForHtml({
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
@@ -174,7 +175,7 @@ export default async function BlogPost({ params }) {
         <div className="max-w-3xl mx-auto px-6">
           <div
             className="prose prose-slate md:prose-lg max-w-none prose-headings:font-bold prose-headings:text-slate-900 prose-a:text-green-600 hover:prose-a:text-green-700 prose-img:rounded-2xl prose-img:shadow-xl prose-img:border prose-img:border-slate-100 prose-p:leading-relaxed prose-li:marker:text-green-600 prose-blockquote:border-green-600 prose-blockquote:bg-green-50 prose-blockquote:py-2 prose-blockquote:px-6 prose-blockquote:rounded-r-xl prose-blockquote:not-italic prose-blockquote:text-slate-700"
-            dangerouslySetInnerHTML={{ __html: post.content }}
+            dangerouslySetInnerHTML={{ __html: sanitizeBlogHtml(post.content) }}
           />
           <div className="mt-20 pt-10 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-6">
             <Link href="/blog" className="text-slate-500 text-sm font-bold no-underline hover:text-green-700 flex items-center gap-2 group transition-colors">

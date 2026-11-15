@@ -27,15 +27,18 @@ export const metadata = {
 
 export default async function ProductCategories() {
   let categories = [];
+  let categoriesUnavailable = false;
   try {
     const { data, error } = await supabase
       .from('categories')
       .select('*')
       .order('sequence', { ascending: true })
       .order('created_at', { ascending: true });
+    if (error) throw error;
     if (data) categories = data;
   } catch (e) {
     console.error("Error fetching categories:", e);
+    categoriesUnavailable = true;
   }
 
   return (
@@ -142,7 +145,7 @@ export default async function ProductCategories() {
 
           {categories.length === 0 && (
             <div className="text-center py-32 bg-white border border-slate-200">
-              <p className="text-slate-500 tracking-widest uppercase text-sm font-bold">No categories found in catalog.</p>
+              <p className="text-slate-500 tracking-widest uppercase text-sm font-bold">{categoriesUnavailable ? "Categories are temporarily unavailable. Please try again shortly." : "No categories found in catalog."}</p>
             </div>
           )}
         </div>
