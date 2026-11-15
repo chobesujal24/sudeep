@@ -1,56 +1,56 @@
 import { notFound } from "next/navigation";
+import { unstable_cache } from "next/cache";
+import { cache } from "react";
 import Link from "next/link";
 import CTABanner from "@/components/CTABanner";
 import { Shield, MapPin, Award, Truck, CheckCircle2 } from "lucide-react";
 import { SEO_PRODUCTS, SEO_LOCATIONS } from "@/lib/seoConfig";
 import { supabase } from "@/lib/supabase";
-import { getProductData } from "@/lib/getProductData";
 
 export const revalidate = 86400; // Cache these pages heavily (1 day)
 
-// Helper to get ALL dynamically mapped products + categories + static ones
-async function getSEOItems() {
-  const items = { ...SEO_PRODUCTS };
+// Share the database lookup across manufacturer pages rather than refetching it
+// for every product/location pair. Do not cache failed lookups.
+const getDynamicSEOItems = unstable_cache(async () => {
+  const [categoriesResult, productsResult] = await Promise.all([
+    supabase.from('categories').select('name, slug, description'),
+    supabase.from('settings').select('data').eq('id', 'productData').maybeSingle(),
+  ]);
+  if (categoriesResult.error) throw categoriesResult.error;
+  if (productsResult.error) throw productsResult.error;
 
+  const items = {};
+  for (const cat of categoriesResult.data || []) {
+    items[cat.slug] = {
+      name: cat.name,
+      plural: cat.name,
+      specs: "Premium OEM Manufacturing & Infrastructure",
+      desc: cat.description || `Industrial ${cat.name} solutions for municipal and government applications.`,
+    };
+  }
+  for (const prod of productsResult.data?.data?.products || []) {
+    if (prod.slug && !items[prod.slug] && prod.name) {
+      items[prod.slug] = {
+        name: prod.name,
+        plural: prod.name,
+        specs: prod.wattage ? `${prod.wattage} Options, IP66, BIS` : "Custom Specifications Built to Order",
+        desc: prod.description || `High-performance ${prod.name} for highway, infrastructure, and smart city projects.`,
+      };
+    }
+  }
+  return items;
+}, ["manufacturer-seo-items"], { revalidate: 3600 });
+
+const getSEOItems = cache(async () => {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) return { ...SEO_PRODUCTS };
   try {
-    const { data: categories } = await supabase.from('categories').select('name, slug, description');
-    if (categories) {
-      categories.forEach(cat => {
-        if (!items[cat.slug]) {
-          items[cat.slug] = {
-             name: cat.name,
-             plural: cat.name,
-             specs: "Premium OEM Manufacturing & Infrastructure",
-             desc: cat.description || `Industrial ${cat.name} solutions for municipal and government applications.`
-          };
-        }
-      });
-    }
-
-    const { data: dbData } = await supabase
-      .from('settings')
-      .select('data')
-      .eq('id', 'productData')
-      .single();
-
-    if (dbData && dbData.data && Array.isArray(dbData.data.products)) {
-       dbData.data.products.forEach(prod => {
-          if (!items[prod.slug] && prod.name) {
-             items[prod.slug] = {
-                name: prod.name,
-                plural: `${prod.name}`,
-                specs: prod.wattage ? `${prod.wattage} Options, IP66, BIS` : "Custom Specifications Built to Order",
-                desc: prod.description || `High-performance ${prod.name} for highway, infrastructure, and smart city projects.`
-             };
-          }
-       });
-    }
+    const dynamicItems = await getDynamicSEOItems();
+    return { ...dynamicItems, ...SEO_PRODUCTS };
   } catch (error) {
     console.warn("Failed to fetch dynamic products for SEO:", error);
+    return { ...SEO_PRODUCTS };
   }
-
-  return items;
-}
+});
 
 // 1. Generate Static Params to pre-build all Database Product x Location pages
 export async function generateStaticParams() {

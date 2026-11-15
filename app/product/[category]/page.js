@@ -10,12 +10,13 @@ export const revalidate = 60; // ISR: cache page, refresh data every 60s in back
 export async function generateMetadata({ params }) {
   const { category: categorySlug } = await params;
   
-  const { data: category } = await supabase
+  const { data: category, error: categoryError } = await supabase
     .from('categories')
     .select('*')
     .eq('slug', categorySlug)
-    .single();
+    .maybeSingle();
 
+  if (categoryError) throw new Error("Categories are temporarily unavailable.");
   if (!category) return { title: "Category Not Found" };
 
   const title = `${category.name} — LED & Solar OEM Manufacturer | Sudeep Engineers`;
@@ -45,12 +46,13 @@ export async function generateMetadata({ params }) {
 export default async function CategoryPage({ params }) {
   const { category: categorySlug } = await params;
 
-  const { data: category } = await supabase
+  const { data: category, error: categoryError } = await supabase
     .from('categories')
     .select('*')
     .eq('slug', categorySlug)
-    .single();
+    .maybeSingle();
 
+  if (categoryError) throw new Error("Categories are temporarily unavailable.");
   if (!category) {
     notFound();
   }

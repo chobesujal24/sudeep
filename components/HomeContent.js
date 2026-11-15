@@ -47,6 +47,8 @@ const allClients = [
 
 export default function HomeContent() {
   const [categories, setCategories] = useState([]);
+  const [categoryStatus, setCategoryStatus] = useState("loading");
+  const [categoryRetry, setCategoryRetry] = useState(0);
   const [showAllClients, setShowAllClients] = useState(false);
 
   const OFFICIAL_DOCUMENTS = [
@@ -69,24 +71,27 @@ export default function HomeContent() {
   }, [showAllClients]);
 
   useEffect(() => {
+    let active = true;
     async function fetchCategories() {
+      setCategoryStatus("loading");
       try {
         const { data, error } = await supabase
           .from('categories')
           .select('*')
           .order('sequence', { ascending: true });
-          
-        if (error) {
-          console.error("Supabase Error [HomeContent]:", error.message, error.details, error.hint);
-          throw error;
+        if (error) throw error;
+        if (active) {
+          setCategories(data || []);
+          setCategoryStatus("success");
         }
-        if (data) setCategories(data);
       } catch (err) {
         console.error("Failed to fetch featured categories:", err);
+        if (active) setCategoryStatus("error");
       }
     }
     fetchCategories();
-  }, []);
+    return () => { active = false; };
+  }, [categoryRetry]);
 
   // Duplicate for infinite scroll
   const marqueeClients = [...allClients, ...allClients];
@@ -160,7 +165,7 @@ export default function HomeContent() {
             </p>
           </motion.div>
  
-          {categories.length > 0 ? (
+          {categoryStatus === "success" && categories.length > 0 ? (
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-5">
               {categories.map((cat, idx) => (
                 <motion.div
@@ -197,8 +202,13 @@ export default function HomeContent() {
               ))}
             </div>
           ) : (
-            <div className="h-[200px] flex items-center justify-center bg-white rounded-2xl border border-slate-100">
-              <span className="text-slate-400 font-medium text-sm">Loading Categories...</span>
+            <div role="status" className="min-h-[200px] flex flex-col gap-3 items-center justify-center bg-white rounded-2xl border border-slate-100">
+              <span className="text-slate-500 font-medium text-sm">
+                {categoryStatus === "loading" ? "Loading categories..." : categoryStatus === "error" ? "Categories are temporarily unavailable." : "No categories available yet."}
+              </span>
+              {categoryStatus === "error" && (
+                <button type="button" onClick={() => setCategoryRetry((count) => count + 1)} className="text-green-700 font-semibold underline">Try again</button>
+              )}
             </div>
           )}
         </div>

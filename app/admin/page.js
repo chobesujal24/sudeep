@@ -11,6 +11,8 @@ import LeadsManager from "@/components/admin/LeadsManager";
 import SeoSettings from "@/components/admin/SeoSettings";
 import SiteSettings from "@/components/admin/SiteSettings";
 
+const ALLOWED_EMAILS = ["chobesujal24@gmail.com", "sudeepengineers@gmail.com"];
+
 const BlogManager = dynamic(() => import("@/components/admin/BlogManager"), {
   loading: () => <div className="p-10 text-center font-bold text-[#64748B]">Loading Blog CMS...</div>,
   ssr: false,
@@ -18,8 +20,6 @@ const BlogManager = dynamic(() => import("@/components/admin/BlogManager"), {
 
 export default function AdminDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const [authError, setAuthError] = useState("");
   const [activeTab, setActiveTab] = useState("dashboard");
   const [products, setProducts] = useState([]);
@@ -29,9 +29,24 @@ export default function AdminDashboard() {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [dbCategories, setDbCategories] = useState([]);
 
-  const ALLOWED_EMAILS = ["chobesujal24@gmail.com", "sudeepengineers@gmail.com"];
-
   useEffect(() => {
+    const handleSession = (session) => {
+      if (session?.user) {
+        if (ALLOWED_EMAILS.includes(session.user.email)) {
+          setIsAuthenticated(true);
+          setAuthError("");
+        } else {
+          setIsAuthenticated(false);
+          setAuthError(`Access Denied: ${session.user.email} is not authorized.`);
+          // Note: we let them stay signed in to Supabase technically, but they can't see the dashboard.
+        }
+      } else {
+        setIsAuthenticated(false);
+        setAuthError("");
+      }
+      setLoading(false);
+    };
+
     const checkUser = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       handleSession(session);
@@ -46,57 +61,6 @@ export default function AdminDashboard() {
       authListener?.subscription.unsubscribe();
     };
   }, []);
-
-  const handleSession = (session) => {
-    if (session?.user) {
-      if (ALLOWED_EMAILS.includes(session.user.email)) {
-        setIsAuthenticated(true);
-        setAuthError("");
-      } else {
-        setIsAuthenticated(false);
-        setAuthError(`Access Denied: ${session.user.email} is not authorized.`);
-        // Note: we let them stay signed in to Supabase technically, but they can't see the dashboard.
-      }
-    } else {
-      setIsAuthenticated(false);
-      setAuthError("");
-    }
-    setLoading(false);
-  };
-
-  const MAX_ATTEMPTS = 6;
-  const ATTEMPT_WINDOW_MS = 60 * 60 * 1000; // 1 hour
-
-  const handleManualLogin = (e) => {
-    e.preventDefault();
-    
-    // Check rate limit
-    const now = Date.now();
-    let attempts = JSON.parse(localStorage.getItem("admin_login_attempts") || "[]");
-    
-    // Filter attempts to only those within the 1-hour window
-    attempts = attempts.filter((timestamp) => now - timestamp < ATTEMPT_WINDOW_MS);
-    
-    if (attempts.length >= MAX_ATTEMPTS) {
-      const oldestAttempt = Math.min(...attempts);
-      const waitTimeMinutes = Math.ceil((ATTEMPT_WINDOW_MS - (now - oldestAttempt)) / 60000);
-      setAuthError(`Rate limit exceeded. Please try again in ${waitTimeMinutes} minutes.`);
-      localStorage.setItem("admin_login_attempts", JSON.stringify(attempts));
-      return;
-    }
-
-    // Record this attempt
-    attempts.push(now);
-    localStorage.setItem("admin_login_attempts", JSON.stringify(attempts));
-
-    // Validate credentials
-    if (username === "sudeep" && password === "sudeep@2424") {
-      setIsAuthenticated(true);
-      setAuthError("");
-    } else {
-      setAuthError(`Invalid credentials. ${MAX_ATTEMPTS - attempts.length} attempts remaining.`);
-    }
-  };
 
   const signInWithGoogle = async () => {
     setAuthError("");
@@ -118,35 +82,37 @@ export default function AdminDashboard() {
     setIsAuthenticated(false);
   };
 
-  useEffect(() => { if (isAuthenticated) fetchProducts(); }, [isAuthenticated]);
-
-  const fetchProducts = async () => {
-    try {
-      const { data: dbData } = await supabase.from("settings").select("data").eq("id", "productData").single();
-      if (dbData?.data?.products?.length > 0) {
-        setProducts(dbData.data.products);
-      } else {
-        const res = await fetch("/api/product");
-        const data = await res.json();
-        if (Array.isArray(data) && data.length > 0) {
-          setProducts(data);
-          await supabase.from("settings").upsert({ id: "productData", data: { products: data } });
-        }
-      }
-
-      // Also fetch categories for the dropdown
-      const { data: catData } = await supabase.from("categories").select("*").order("name");
-      if (catData) setDbCategories(catData);
-
-    } catch (error) {
-      console.error("Failed to fetch products/categories:", error);
+  useEffect(() => {
+    if (!isAuthenticated) return;
+    const fetchProducts = async () => {
       try {
-        const res = await fetch("/api/product");
-        const data = await res.json();
-        if (Array.isArray(data)) setProducts(data);
-      } catch (e) { console.error("API fallback also failed:", e); }
-    }
-  };
+        const { data: dbData } = await supabase.from("settings").select("data").eq("id", "productData").single();
+        if (dbData?.data?.products?.length > 0) {
+          setProducts(dbData.data.products);
+        } else {
+          const res = await fetch("/api/product");
+          const data = await res.json();
+          if (Array.isArray(data) && data.length > 0) {
+            setProducts(data);
+            await supabase.from("settings").upsert({ id: "productData", data: { products: data } });
+          }
+        }
+
+        // Also fetch categories for the dropdown
+        const { data: catData } = await supabase.from("categories").select("*").order("name");
+        if (catData) setDbCategories(catData);
+
+      } catch (error) {
+        console.error("Failed to fetch products/categories:", error);
+        try {
+          const res = await fetch("/api/product");
+          const data = await res.json();
+          if (Array.isArray(data)) setProducts(data);
+        } catch (e) { console.error("API fallback also failed:", e); }
+      }
+    };
+    fetchProducts();
+  }, [isAuthenticated]);
 
   const handleSave = async () => {
     try {
@@ -272,38 +238,16 @@ export default function AdminDashboard() {
               Sign in with Google
             </button>
             
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-[#CBD5E1]"></div></div>
-              <div className="relative flex justify-center text-sm"><span className="px-2 bg-white text-[#94A3B8]">Or continue with credentials</span></div>
-            </div>
-
-            <form onSubmit={handleManualLogin} className="space-y-4">
-              <div>
-                <label className="block text-xs font-bold text-[#475569] uppercase mb-1">Username</label>
-                <input type="text" value={username} onChange={(e) => setUsername(e.target.value)}
-                  className="w-full p-3 border border-[#CBD5E1] rounded-lg focus:ring-2 focus:ring-[#166534]/30 outline-none text-[#0F172A]" placeholder="Enter username" />
+            {authError && (
+              <div role="alert" className="bg-red-50 py-3 px-4 rounded-lg border border-red-100">
+                <p className="text-red-600 text-xs font-bold text-center mb-1">{authError}</p>
+                {authError.includes("Access Denied") && (
+                  <button type="button" onClick={handleLogout} className="w-full text-xs text-red-500 hover:text-red-700 underline font-medium mt-1">
+                    Sign out to try another account
+                  </button>
+                )}
               </div>
-              <div>
-                <label className="block text-xs font-bold text-[#475569] uppercase mb-1">Password</label>
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}
-                  className="w-full p-3 border border-[#CBD5E1] rounded-lg focus:ring-2 focus:ring-[#166534]/30 outline-none text-[#0F172A]" placeholder="Enter password" />
-              </div>
-              
-              {authError && (
-                <div className="bg-red-50 py-3 px-4 rounded-lg border border-red-100">
-                  <p className="text-red-600 text-xs font-bold text-center mb-1">{authError}</p>
-                  {authError.includes("Access Denied") && (
-                    <button type="button" onClick={handleLogout} className="w-full text-xs text-red-500 hover:text-red-700 underline font-medium mt-1">
-                      Sign out to try another account
-                    </button>
-                  )}
-                </div>
-              )}
-              
-              <button type="submit" className="w-full py-3 bg-[#0F172A] hover:bg-[#1E293B] text-white rounded-lg font-bold shadow-md transition-all">
-                Login
-              </button>
-            </form>
+            )}
           </div>
         </div>
       </div>
