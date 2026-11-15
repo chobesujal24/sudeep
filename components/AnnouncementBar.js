@@ -8,7 +8,7 @@
 const announcements = [
   "ISO 9001:2015 Certified",
   "MSME & Udyam Registered",
-  "500+ Projects Delivered PAN India",
+  "Projects Delivered PAN India",
   "BIS Certified LED Products",
   "GeM Approved Supplier",
   "7+ Years of Excellence",

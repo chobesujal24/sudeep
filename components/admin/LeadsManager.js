@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/lib/supabase";
 import { Eye, Trash2, CheckCircle, Mail } from "lucide-react";
 
@@ -7,17 +7,27 @@ export default function LeadsManager() {
   const [leads, setLeads] = useState([]);
   const [loading, setLoading] = useState(true);
   const [viewing, setViewing] = useState(null);
+  const [loadError, setLoadError] = useState("");
 
-  useEffect(() => { fetchLeads(); }, []);
-
-  const fetchLeads = async () => {
+  const fetchLeads = useCallback(async () => {
+    setLoading(true);
+    setLoadError("");
     try {
       const { data, error } = await supabase.from("leads").select("*").order("created_at", { ascending: false });
-      if (data) setLeads(data);
-      // Silently handle missing table — user needs to create it in Supabase
-    } catch (e) { /* table may not exist yet */ }
-    setLoading(false);
-  };
+      if (error) throw error;
+      setLeads(data || []);
+    } catch (error) {
+      setLoadError(error.message || "Unable to load inquiries.");
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    let active = true;
+    Promise.resolve().then(() => { if (active) fetchLeads(); });
+    return () => { active = false; };
+  }, [fetchLeads]);
 
   const handleDelete = async (id) => {
     if (!confirm("Delete this lead?")) return;
@@ -33,6 +43,8 @@ export default function LeadsManager() {
   };
 
   if (loading) return <div className="p-10 text-center text-[#64748B] font-bold">Loading leads...</div>;
+
+  if (loadError) return <div role="alert" className="p-8">Unable to load inquiries: {loadError} <button type="button" className="text-green-700 underline" onClick={fetchLeads}>Retry</button></div>;
 
   return (
     <div>
@@ -58,7 +70,7 @@ export default function LeadsManager() {
         </div>
       )}
 
-      <div className="bg-white border border-[#E2E8F0] rounded-xl shadow-sm overflow-hidden">
+      <div className="bg-white border border-[#E2E8F0] rounded-xl shadow-sm overflow-x-auto">
         <table className="w-full text-sm">
           <thead><tr className="bg-[#F8FAFC] border-b border-[#E2E8F0]">
             <th className="text-left p-4 text-xs font-bold text-[#475569] uppercase">Name</th>

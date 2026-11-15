@@ -1,4 +1,6 @@
 "use client";
+import { useSiteSettings } from "@/components/SiteSettingsProvider";
+import { phoneHref } from "@/lib/siteSettings.mjs";
 import Link from "next/link";
 import { Icons } from "./Icons";
 
@@ -30,6 +32,7 @@ const footerLinks = {
 };
 
 export default function Footer() {
+  const site = useSiteSettings();
   return (
     <footer className="relative border-t border-green-100/30 text-slate-900 overflow-hidden" 
       style={{ background: "url('/main/footer_bg.webp') center/cover no-repeat" }}>
@@ -40,26 +43,30 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-6">
               <img
-                src="/logo.png"
-                alt="Sudeep Engineers"
+                src={site.logo}
+                alt={site.companyName}
                 className="h-32 w-auto object-contain logo-green"
               />
             </Link>
+            <p className="font-bold text-slate-900 mb-2">{site.companyName}</p>
             <p className="text-slate-600 text-sm leading-relaxed max-w-xs mb-6 font-medium">
               Premium LED lighting and solar solutions. ISO 9001:2015 certified, BIS approved. MSME and GeM registered partner for India&apos;s infrastructure projects.
             </p>
             <div className="space-y-3 text-sm">
               <div className="flex items-start gap-3">
                 <Icons.Location className="w-4 h-4 text-green-700 shrink-0 mt-0.5" />
-                <span className="text-slate-600 font-medium">Waluj MIDC, Aurangabad,<br />Maharashtra 431136</span>
+                <span className="text-slate-600 font-medium">{site.address}</span>
               </div>
               <div className="flex items-center gap-3">
                 <Icons.Phone className="w-4 h-4 text-green-700 shrink-0" />
-                <a href="tel:+919922996236" className="text-slate-600 hover:text-green-800 transition-colors font-semibold tracking-wide">+91 9922996236</a>
+                <a href={phoneHref(site.phone)} className="text-slate-600 hover:text-green-800 transition-colors font-semibold tracking-wide">{site.phone}</a>
               </div>
               <div className="flex items-center gap-3">
                 <Icons.Envelope className="w-4 h-4 text-green-700 shrink-0" />
-                <a href="mailto:info@sudeepengineers.com" className="text-slate-600 hover:text-green-800 transition-colors font-medium">info@sudeepengineers.com</a>
+                <a href={`mailto:${site.email}`} className="text-slate-600 hover:text-green-800 transition-colors font-medium">{site.email}</a>
+              </div>
+              <div className="flex flex-wrap gap-3 pt-2">
+                {["facebook", "instagram", "linkedin", "youtube"].filter((key) => site[key]).map((key) => <a key={key} href={site[key]} target="_blank" rel="noopener noreferrer" className="capitalize text-green-700 hover:underline">{key}</a>)}
               </div>
             </div>
           </div>

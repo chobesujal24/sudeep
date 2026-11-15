@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/lib/supabase";
 import { Upload, Copy, Trash2, Image as ImageIcon, Check } from "lucide-react";
 
@@ -9,16 +9,20 @@ export default function MediaLibrary() {
   const [uploading, setUploading] = useState(false);
   const [copied, setCopied] = useState(null);
 
-  useEffect(() => { fetchFiles(); }, []);
-
-  const fetchFiles = async () => {
+  const fetchFiles = useCallback(async () => {
     try {
       const { data, error } = await supabase.storage.from("images").list("uploads", { limit: 100, sortBy: { column: "created_at", order: "desc" } });
       if (data) setFiles(data.filter(f => f.name !== ".emptyFolderPlaceholder"));
       if (error) console.error("List files error:", error);
     } catch (e) { console.error(e); }
     setLoading(false);
-  };
+  }, []);
+
+  useEffect(() => {
+    let active = true;
+    Promise.resolve().then(() => { if (active) fetchFiles(); });
+    return () => { active = false; };
+  }, [fetchFiles]);
 
   const handleUpload = async (fileList) => {
     setUploading(true);

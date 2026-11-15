@@ -1,8 +1,11 @@
 "use client";
+import { useSiteSettings } from "@/components/SiteSettingsProvider";
+import { phoneHref } from "@/lib/siteSettings.mjs";
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
 
 export default function ContactForm() {
+  const site = useSiteSettings();
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -12,7 +15,8 @@ export default function ContactForm() {
     setLoading(true);
     setError(null);
 
-    const formData = new FormData(e.target);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
     const leadData = {
       name: formData.get("name"),
       phone: formData.get("phone"),
@@ -25,11 +29,11 @@ export default function ContactForm() {
       if (sbError) throw sbError;
       
       setSubmitted(true);
-      e.target.reset();
+      form.reset();
       setTimeout(() => setSubmitted(false), 5000);
     } catch (err) {
       console.error("Error submitting lead:", JSON.stringify(err, null, 2));
-      setError(`Database Error: ${err.message || "Failed to insert lead"}. Make sure the 'leads' table exists in Supabase with RLS policies allowing anon inserts.`);
+      setError("We could not send your enquiry. Please try again or call us.");
     } finally {
       setLoading(false);
     }
@@ -39,9 +43,10 @@ export default function ContactForm() {
     <form onSubmit={handleSubmit} className="space-y-5">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-xs font-semibold text-[color:var(--color-text-secondary)] mb-1.5">Full Name *</label>
+          <label htmlFor="contact-name" className="block text-xs font-semibold text-[color:var(--color-text-secondary)] mb-1.5">Full Name *</label>
           <input
             type="text"
+            id="contact-name"
             name="name"
             required
             placeholder="Your full name"
@@ -49,9 +54,10 @@ export default function ContactForm() {
           />
         </div>
         <div>
-          <label className="block text-xs font-semibold text-[color:var(--color-text-secondary)] mb-1.5">Phone Number *</label>
+          <label htmlFor="contact-phone" className="block text-xs font-semibold text-[color:var(--color-text-secondary)] mb-1.5">Phone Number *</label>
           <input
             type="tel"
+            id="contact-phone"
             name="phone"
             required
             placeholder="Your phone number"
@@ -61,9 +67,10 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label className="block text-xs font-semibold text-[color:var(--color-text-secondary)] mb-1.5">Email Address</label>
+        <label htmlFor="contact-email" className="block text-xs font-semibold text-[color:var(--color-text-secondary)] mb-1.5">Email Address</label>
         <input
           type="email"
+          id="contact-email"
           name="email"
           placeholder="your@email.com"
           className="w-full px-4 py-3 rounded-lg bg-[color:var(--color-bg-secondary)] border border-[color:var(--color-border)] text-[color:var(--color-foreground)] text-sm focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600/20 transition-colors placeholder:text-slate-600"
@@ -71,8 +78,9 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label className="block text-xs font-semibold text-[color:var(--color-text-secondary)] mb-1.5">Service Required *</label>
+        <label htmlFor="contact-service" className="block text-xs font-semibold text-[color:var(--color-text-secondary)] mb-1.5">Service Required *</label>
         <select
+          id="contact-service"
           name="service"
           required
           className="w-full px-4 py-3 rounded-lg bg-[color:var(--color-bg-secondary)] border border-[color:var(--color-border)] text-[color:var(--color-foreground)] text-sm focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600/20 transition-colors"
@@ -86,8 +94,9 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label className="block text-xs font-semibold text-[color:var(--color-text-secondary)] mb-1.5">Project Details *</label>
+        <label htmlFor="contact-details" className="block text-xs font-semibold text-[color:var(--color-text-secondary)] mb-1.5">Project Details *</label>
         <textarea
+          id="contact-details"
           name="details"
           required
           rows={5}
@@ -97,13 +106,13 @@ export default function ContactForm() {
       </div>
 
       {error && (
-        <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 text-red-500 text-sm text-center">
+        <div role="alert" className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 text-red-500 text-sm text-center">
           ⚠️ {error}
         </div>
       )}
 
       {submitted && (
-        <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4 text-green-500 font-medium text-sm text-center">
+        <div role="status" className="bg-green-500/10 border border-green-500/20 rounded-lg p-4 text-green-500 font-medium text-sm text-center">
           ✅ Thank you for your enquiry! We&apos;ll get back to you within 24 hours.
         </div>
       )}
@@ -117,7 +126,7 @@ export default function ContactForm() {
       </button>
 
       <p className="text-xs text-slate-600 text-center">
-        Or call us directly at <a href="tel:+919922996236" className="text-green-400 no-underline">+91 9922996236</a>
+        Or call us directly at <a href={phoneHref(site.phone)} className="text-green-400 no-underline">{site.phone}</a>
       </p>
     </form>
   );

@@ -5,8 +5,12 @@ import FloatingButtons from "@/components/FloatingButtons";
 import ScrollAnimations from "@/components/ScrollAnimations";
 import SmoothScroll from "@/components/SmoothScroll";
 import AnnouncementBar from "@/components/AnnouncementBar";
+import { SiteSettingsProvider } from "@/components/SiteSettingsProvider";
+import { getSiteSettings, getSettings } from "@/lib/getSiteSettings";
+import { safeWebUrl } from "@/lib/siteSettings.mjs";
+import { jsonForHtml } from "@/lib/sanitizeBlogHtml.mjs";
 
-export const metadata = {
+const baseMetadata = {
   metadataBase: new URL("https://sudeepengineers.com"),
   title: {
     default: "Sudeep Engineers — LED Street Light, Flood Light, Solar Light & Pole Manufacturer in India | Aurangabad",
@@ -99,14 +103,14 @@ export const metadata = {
     title: "Sudeep Engineers — LED Street Light, Flood Light & Solar Manufacturer India",
     description:
       "ISO 9001:2015 certified manufacturer of LED street lights, flood lights, highbay lights, solar street lights, highmast poles & octagonal poles. Serving BHEL, NTPC, Indian Railways. OEM manufacturer from Aurangabad, Maharashtra.",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Sudeep Engineers — LED & Solar Pole Manufacturer India" }],
+    images: [{ url: "/product-hero-section.webp", alt: "Sudeep Engineers — LED & Solar Pole Manufacturer India" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Sudeep Engineers — LED & Solar Lighting Manufacturer India",
     description:
       "India's trusted LED street light, flood light, highbay & solar street light manufacturer. ISO certified, BIS approved, GeM registered. Octagonal poles, highmast poles.",
-    images: ["/og-image.jpg"],
+    images: ["/product-hero-section.webp"],
   },
   icons: {
     icon: "/logo.png",
@@ -129,7 +133,17 @@ export const metadata = {
   // verification: { google: "your-verification-code" },
 };
 
-export default function RootLayout({ children }) {
+export const revalidate = 60;
+export async function generateMetadata() {
+  const seo = await getSettings("seoSettings");
+  const image = safeWebUrl(seo.ogImage, "/product-hero-section.webp");
+  const verification = typeof seo.googleVerification === "string" ? seo.googleVerification.replace(/^google-site-verification=/, "").trim() : "";
+  return { ...baseMetadata, openGraph: { ...baseMetadata.openGraph, images: [{ url: image }] },
+    twitter: { ...baseMetadata.twitter, images: [image] }, ...(verification ? { verification: { google: verification } } : {}) };
+}
+
+export default async function RootLayout({ children }) {
+  const site = await getSiteSettings();
   return (
     <html lang="en">
       <head>
@@ -143,19 +157,19 @@ export default function RootLayout({ children }) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: jsonForHtml({
               "@context": "https://schema.org",
               "@type": "Organization",
               "@id": "https://sudeepengineers.com/#organization",
-              name: "Sudeep Engineers",
-              legalName: "Sudeep Engineers",
+              name: site.companyName,
+              legalName: site.companyName,
               description:
                 "India's leading manufacturer of LED street lights, LED flood lights, LED highbay lights, solar street lights, highmast poles, octagonal poles, conical poles, and complete solar infrastructure. ISO 9001:2015 certified, BIS approved, MSME registered, GeM registered company in Waluj MIDC, Aurangabad, Maharashtra.",
               url: "https://sudeepengineers.com",
               logo: "https://sudeepengineers.com/logo.png",
               image: "https://sudeepengineers.com/logo.png",
-              telephone: "+91-9922996236",
-              email: "info@sudeepengineers.com",
+              telephone: site.phone,
+              email: site.email,
               foundingDate: "2019",
               numberOfEmployees: { "@type": "QuantitativeValue", minValue: 50, maxValue: 200 },
               address: {
@@ -216,11 +230,6 @@ export default function RootLayout({ children }) {
                     "@type": "Product",
                     name: "LED Street Lights",
                     description: "High-performance LED street lights from 20W to 200W for highway, urban road, and residential colony lighting. IP66 rated, BIS certified.",
-                    aggregateRating: {
-                      "@type": "AggregateRating",
-                      ratingValue: "4.9",
-                      reviewCount: "142"
-                    }
                   },
                 },
                 {
@@ -229,11 +238,6 @@ export default function RootLayout({ children }) {
                     "@type": "Product",
                     name: "LED Flood Lights",
                     description: "Industrial LED flood lights from 50W to 500W for stadium, warehouse, and area lighting. IP65 rated, BIS certified.",
-                    aggregateRating: {
-                      "@type": "AggregateRating",
-                      ratingValue: "4.8",
-                      reviewCount: "96"
-                    }
                   },
                 },
                 {
@@ -242,11 +246,6 @@ export default function RootLayout({ children }) {
                     "@type": "Product",
                     name: "Solar Street Lights",
                     description: "All-in-one and split-type solar street lights for off-grid and remote area lighting. Complete with solar panel, battery, and LED luminaire.",
-                    aggregateRating: {
-                      "@type": "AggregateRating",
-                      ratingValue: "4.7",
-                      reviewCount: "115"
-                    }
                   },
                 },
                 {
@@ -255,11 +254,6 @@ export default function RootLayout({ children }) {
                     "@type": "Product",
                     name: "Octagonal Poles",
                     description: "Hot-dip galvanized octagonal poles from 4m to 12m height for street light mounting. IS 2713 compliant.",
-                    aggregateRating: {
-                      "@type": "AggregateRating",
-                      ratingValue: "4.9",
-                      reviewCount: "88"
-                    }
                   },
                 },
                 {
@@ -268,11 +262,6 @@ export default function RootLayout({ children }) {
                     "@type": "Product",
                     name: "Highmast Poles",
                     description: "Highmast lighting poles from 15m to 35m with raising and lowering mechanism for highway interchanges, airports, and stadiums.",
-                    aggregateRating: {
-                      "@type": "AggregateRating",
-                      ratingValue: "4.8",
-                      reviewCount: "54"
-                    }
                   },
                 },
               ],
@@ -284,14 +273,14 @@ export default function RootLayout({ children }) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: jsonForHtml({
               "@context": "https://schema.org",
               "@type": "LocalBusiness",
               "@id": "https://sudeepengineers.com/#localbusiness",
               name: "Sudeep Engineers",
               image: "https://sudeepengineers.com/logo.png",
-              telephone: "+91-9922996236",
-              email: "info@sudeepengineers.com",
+              telephone: site.phone,
+              email: site.email,
               priceRange: "$$",
               address: {
                 "@type": "PostalAddress",
@@ -320,7 +309,7 @@ export default function RootLayout({ children }) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: jsonForHtml({
               "@context": "https://schema.org",
               "@type": "WebSite",
               "@id": "https://sudeepengineers.com/#website",
@@ -336,7 +325,7 @@ export default function RootLayout({ children }) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: jsonForHtml({
               "@context": "https://schema.org",
               "@type": "BreadcrumbList",
               itemListElement: [
@@ -347,6 +336,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="antialiased">
+        <SiteSettingsProvider value={site}>
         <SmoothScroll />
         <AnnouncementBar />
         <Navbar />
@@ -354,6 +344,7 @@ export default function RootLayout({ children }) {
         <Footer />
         <FloatingButtons />
         <ScrollAnimations />
+        </SiteSettingsProvider>
       </body>
     </html>
   );

@@ -6,8 +6,10 @@ import HomeContent from "@/components/HomeContent";
 import BigImageGallery from "@/components/BigImageGallery";
 import WhyUs from "@/components/WhyUs";
 import CTABanner from "@/components/CTABanner";
+import { getSettings } from "@/lib/getSiteSettings";
+import { safeWebUrl } from "@/lib/siteSettings.mjs";
 
-export const metadata = {
+const defaultMetadata = {
   title: "Sudeep Engineers — LED Street Light, Flood Light, Solar Light & Pole Manufacturer in India | Aurangabad",
   description:
     "India's leading manufacturer of LED street lights, LED flood lights, LED highbay lights, solar street lights, highmast poles, octagonal poles, and solar infrastructure. ISO 9001:2015 certified, BIS approved, GeM registered. Serving BHEL, NTPC, Indian Railways from Waluj MIDC, Aurangabad, Maharashtra.",
@@ -18,6 +20,16 @@ export const metadata = {
     url: "https://sudeepengineers.com",
   },
 };
+
+export async function generateMetadata() {
+  const seo = await getSettings("seoSettings");
+  const title = typeof seo.metaTitle === "string" && seo.metaTitle.trim() || defaultMetadata.title;
+  const description = typeof seo.metaDescription === "string" && seo.metaDescription.trim() || defaultMetadata.description;
+  const image = safeWebUrl(seo.ogImage, "/product-hero-section.webp");
+  return { ...defaultMetadata, title, description,
+    openGraph: { ...defaultMetadata.openGraph, title, description, images: [{ url: image }] },
+    twitter: { card: "summary_large_image", title, description, images: [image] } };
+}
 
 /*
  * HomePage — Server Component.
@@ -65,7 +77,7 @@ export default function HomePage() {
 
           <p className="text-white/70 text-base md:text-lg md:leading-relaxed font-light max-w-2xl mb-10 text-center" itemProp="description">
             India&apos;s trusted OEM manufacturer of high-performance LED Street Lights, Flood Lights, 
-            Highbay Systems, and Solar Infrastructure — serving BHEL, NTPC, Indian Railways &amp; 500+ projects nationwide.
+            Highbay Systems, and Solar Infrastructure — serving BHEL, NTPC, Indian Railways and projects nationwide.
           </p>
 
           {/* CTAs */}
@@ -90,7 +102,7 @@ export default function HomePage() {
           <div className="max-w-5xl mx-auto px-6 py-4 flex justify-center items-center gap-8 md:gap-12 text-[10px] md:text-[11px] font-medium text-white/40 uppercase tracking-[0.2em]">
             <span>MSME Registered</span>
             <span className="hidden sm:inline text-white/10">|</span>
-            <span className="hidden sm:inline">500+ Projects</span>
+            <span className="hidden sm:inline">Projects Nationwide</span>
             <span className="hidden md:inline text-white/10">|</span>
             <span className="hidden md:inline">PAN India Delivery</span>
             <span className="hidden lg:inline text-white/10">|</span>
@@ -186,7 +198,7 @@ export default function HomePage() {
                   { label: "BIS Certified", sub: "LED Street, Flood, Highbay, Drivers" },
                   { label: "GeM Registered", sub: "Govt e-Marketplace Approved" },
                   { label: "MSME / Udyam", sub: "Micro Enterprise" },
-                  { label: "500+ Projects", sub: "PAN India Delivery" },
+                  { label: "Projects Nationwide", sub: "PAN India Delivery" },
                   { label: "OEM / ODM", sub: "Custom Manufacturing" },
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">

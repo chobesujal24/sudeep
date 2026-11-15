@@ -9,13 +9,15 @@ export default function SeoSettings() {
   const [form, setForm] = useState({ ...defaults });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [loadError, setLoadError] = useState("");
 
   useEffect(() => {
     async function load() {
       try {
-        const { data } = await supabase.from("settings").select("data").eq("id", "seoSettings").single();
+        const { data, error } = await supabase.from("settings").select("data").eq("id", "seoSettings").maybeSingle();
+        if (error) throw error;
         if (data?.data) setForm({ ...defaults, ...data.data });
-      } catch (e) { console.error(e); }
+      } catch (e) { setLoadError(e.message || "Unable to load settings."); }
       setLoading(false);
     }
     load();
@@ -32,6 +34,8 @@ export default function SeoSettings() {
   };
 
   if (loading) return <div className="p-10 text-center text-[#64748B] font-bold">Loading...</div>;
+
+  if (loadError) return <div role="alert" className="p-8">Unable to load settings: {loadError}. Reload the page to retry; saving is disabled to protect existing data.</div>;
 
   return (
     <div>

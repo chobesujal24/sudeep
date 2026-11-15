@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/lib/supabase";
 import { Plus, Trash2, Save, X } from "lucide-react";
 
@@ -11,16 +11,20 @@ export default function CategoriesManager() {
   const [editing, setEditing] = useState(null); // null | index | "new"
   const [form, setForm] = useState({ ...empty });
 
-  useEffect(() => { fetchCategories(); }, []);
-
-  const fetchCategories = async () => {
+  const fetchCategories = useCallback(async () => {
     try {
       const { data, error } = await supabase.from("categories").select("*").order("sequence", { ascending: true }).order("created_at", { ascending: true });
       if (data) setCategories(data);
       // Silently handle missing table — user needs to create it in Supabase
     } catch (e) { /* table may not exist yet */ }
     setLoading(false);
-  };
+  }, []);
+
+  useEffect(() => {
+    let active = true;
+    Promise.resolve().then(() => { if (active) fetchCategories(); });
+    return () => { active = false; };
+  }, [fetchCategories]);
 
   const autoSlug = (name) => name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
@@ -163,7 +167,7 @@ export default function CategoriesManager() {
                 </td>
               </tr>
             ))}
-            {categories.length === 0 && <tr><td colSpan={4} className="p-8 text-center text-[#94A3B8]">No categories yet. Click "Add Category" to create one.</td></tr>}
+            {categories.length === 0 && <tr><td colSpan={4} className="p-8 text-center text-[#94A3B8]">No categories yet. Click &quot;Add Category&quot; to create one.</td></tr>}
           </tbody>
         </table>
       </div>

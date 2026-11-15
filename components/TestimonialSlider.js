@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import useReducedMotion from "./useReducedMotion";
 
 const testimonials = [
   {
@@ -32,21 +33,24 @@ const testimonials = [
 export default function TestimonialSlider() {
   const [current, setCurrent] = useState(0);
   const intervalRef = useRef(null);
+  const reducedMotion = useReducedMotion();
 
   const goTo = (index) => setCurrent(index);
 
   useEffect(() => {
+    if (reducedMotion) return;
     intervalRef.current = setInterval(() => {
       setCurrent((prev) => (prev + 1) % testimonials.length);
     }, 5000);
     return () => clearInterval(intervalRef.current);
-  }, []);
+  }, [reducedMotion]);
 
   return (
     <div
       className="relative overflow-hidden"
       onMouseEnter={() => clearInterval(intervalRef.current)}
       onMouseLeave={() => {
+        if (reducedMotion) return;
         intervalRef.current = setInterval(() => {
           setCurrent((prev) => (prev + 1) % testimonials.length);
         }, 5000);

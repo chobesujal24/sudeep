@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { supabase } from "@/lib/supabase";
 
@@ -25,11 +25,7 @@ export default function BlogManager() {
 
   const editorRef = useRef(null);
 
-  useEffect(() => {
-    fetchPosts();
-  }, []);
-
-  const fetchPosts = async () => {
+  const fetchPosts = useCallback(async () => {
     setLoading(true);
     try {
       const { data, error } = await supabase
@@ -45,7 +41,13 @@ export default function BlogManager() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    let active = true;
+    Promise.resolve().then(() => { if (active) fetchPosts(); });
+    return () => { active = false; };
+  }, [fetchPosts]);
 
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];

@@ -1,12 +1,12 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FileCheck, X } from "lucide-react";
 import { motion } from "framer-motion";
-import TestimonialSlider from "@/components/TestimonialSlider";
 import FAQ from "@/components/FAQ";
 import { supabase } from "@/lib/supabase";
+import useModalFocus from "./useModalFocus";
 
 const services = [
   { image: "/main/wiki-LED_street_light.webp", title: "LED Street Lights", desc: "High-efficiency street lighting for urban & highway infrastructure.", link: "/led-light-manufacturer-aurangabad" },
@@ -50,6 +50,8 @@ export default function HomeContent() {
   const [categoryStatus, setCategoryStatus] = useState("loading");
   const [categoryRetry, setCategoryRetry] = useState(0);
   const [showAllClients, setShowAllClients] = useState(false);
+  const clientsPanel = useRef(null);
+  useModalFocus(showAllClients, clientsPanel, () => setShowAllClients(false));
 
   const OFFICIAL_DOCUMENTS = [
     { file: "BIS CERTIFICATE SUDEEP Flood Light.pdf", title: "BIS Certificate — Flood Lights" },
@@ -60,15 +62,6 @@ export default function HomeContent() {
     { file: "SUDEEP BIFMA.pdf", title: "BIFMA Standards Compliance" },
     { file: "TRADEMARK CERTIFICATE.pdf", title: "Trademark Registration" },
   ];
-
-  useEffect(() => {
-    if (showAllClients) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => { document.body.style.overflow = 'unset'; };
-  }, [showAllClients]);
 
   useEffect(() => {
     let active = true;
@@ -178,7 +171,7 @@ export default function HomeContent() {
                   <Link href={`/product/${cat.slug}`} className="group block bg-white rounded-xl border border-slate-100 hover:border-green-200 hover:shadow-lg transition-all duration-300 overflow-hidden hover:-translate-y-1 flex flex-col">
                     <div className="aspect-[4/3] bg-slate-50 p-4 flex items-center justify-center relative">
                       <img 
-                        src={cat.image || "https://placehold.co/600x400/f8fafc/94a3b8?text=Category"} 
+                        src={cat.image || "/placeholder-image.svg"}
                         alt={cat.name} 
                         className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500 mix-blend-multiply" 
                         loading="lazy"
@@ -289,14 +282,14 @@ export default function HomeContent() {
       {showAllClients && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onClick={() => setShowAllClients(false)} />
-          <div className="relative bg-white rounded-2xl w-full max-w-4xl max-h-[85vh] shadow-2xl flex flex-col overflow-hidden">
+          <div ref={clientsPanel} role="dialog" aria-modal="true" aria-labelledby="clients-title" className="relative bg-white rounded-2xl w-full max-w-4xl max-h-[85vh] shadow-2xl flex flex-col overflow-hidden">
             <div className="flex items-center justify-between p-6 border-b border-slate-100">
               <div>
-                <h3 className="text-xl font-bold text-slate-900">Our Clients</h3>
+                <h3 id="clients-title" className="text-xl font-bold text-slate-900">Our Clients</h3>
                 <p className="text-sm text-slate-500 mt-1">{allClients.length} organizations trust Sudeep Engineers</p>
               </div>
               <button 
-                onClick={() => setShowAllClients(false)} 
+                onClick={() => setShowAllClients(false)} aria-label="Close clients dialog"
                 className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:text-slate-900 hover:bg-slate-200 transition-colors"
               >
                 <X size={18} />
@@ -320,15 +313,16 @@ export default function HomeContent() {
       )}
 
       {/* ═══ TESTIMONIALS & FAQ ═══ */}
-      <section className="py-20 md:py-28 bg-slate-50" aria-label="Testimonials and FAQ">
+      <section className="py-20 md:py-28 bg-slate-50" aria-label="Project support and FAQ">
         <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16">
           <div>
             <div className="mb-8">
-              <span className="text-[11px] font-semibold uppercase tracking-[0.3em] text-green-600 mb-3 block">Reviews</span>
-              <h2 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">What Our Clients Say</h2>
+              <span className="text-[11px] font-semibold uppercase tracking-[0.3em] text-green-600 mb-3 block">Our Approach</span>
+              <h2 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">Built for Your Project</h2>
             </div>
             <div className="bg-white rounded-2xl border border-slate-100 p-6 md:p-8">
-              <TestimonialSlider />
+              <p className="text-slate-600 leading-relaxed">Tell us about your lighting or solar requirements, and our team can help you explore the right solution.</p>
+              <Link href="/contact" className="inline-flex mt-6 font-semibold text-green-700 underline">Discuss your project →</Link>
             </div>
           </div>
           <div>
