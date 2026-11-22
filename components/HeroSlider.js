@@ -12,10 +12,6 @@ const IMAGES = [
     alt: "LED Street Light Infrastructure Project by Sudeep Engineers",
   },
   {
-    src: "/slider/rajasthan-solar.webp",
-    alt: "Solar LED Street Light Installation in Rajasthan",
-  },
-  {
     src: "/slider/post-top-led.webp",
     alt: "Premium LED Post Top Light Systems",
   },

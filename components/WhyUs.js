@@ -1,10 +1,11 @@
 "use client";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { CheckCircle } from "lucide-react";
 
 /*
  * WhyUs — Engineering excellence section.
- * Focused on LED lighting & Solar.
+ * Two-column layout: text + image. Focused on LED lighting & Solar.
  */
 
 const advantages = [
@@ -29,7 +30,8 @@ export default function WhyUs() {
       />
 
       <div className="relative z-10 w-full px-6" style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        <div className="max-w-3xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          {/* Text column */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -74,6 +76,32 @@ export default function WhyUs() {
             </ul>
           </motion.div>
 
+          {/* Image column */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.33, 1, 0.68, 1] }}
+          >
+            <div className="rounded-2xl overflow-hidden h-[500px] relative shadow-2xl">
+              <Image
+                src="/main/solarpanels.webp"
+                alt="Sudeep Engineers Manufacturing Facility"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                unoptimized
+              />
+              {/* Gradient overlay at bottom */}
+              <div
+                className="absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.4) 100%)",
+                }}
+              />
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
