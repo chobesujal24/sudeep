@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import ProductImage from "@/components/ProductImage";
 import { supabase } from "@/lib/supabase";
 
 export const revalidate = 60; // ISR: cache page, refresh data every 60s in background
@@ -111,10 +112,9 @@ export default async function ProductCategories() {
                 <div className="flex flex-col h-full">
                   {/* Image Container */}
                   <div className="relative h-[280px] w-full border-b border-slate-100 p-6 flex items-center justify-center bg-white overflow-hidden">
-                    <Image 
+                    <ProductImage
                       src={cat.image || "/placeholder-image.svg"}
                       alt={cat.name} 
-                      fill 
                       className="object-contain p-6" 
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ImageGallery from "@/components/ImageGallery";
+import ProductImage from "@/components/ProductImage";
 import { Icons } from "@/components/Icons";
 import { getProductData } from "@/lib/getProductData";
 import { supabase } from "@/lib/supabase";
@@ -273,9 +274,9 @@ export default async function ProductPage({ params }) {
                     href={`/product/${categorySlug}/${rp.slug}`}
                     className="group block bg-white border border-slate-200 rounded-xl overflow-hidden hover:shadow-lg hover:border-green-200 transition-all hover:-translate-y-1"
                   >
-                    <div className="aspect-square bg-slate-50 p-4 flex items-center justify-center">
+                    <div className="relative aspect-square bg-slate-50 p-4 flex items-center justify-center overflow-hidden">
                       {rp.images?.[0] ? (
-                        <img src={rp.images[0]} alt={rp.name} className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform" />
+                        <ProductImage src={rp.images[0]} alt={rp.name} unoptimized sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" className="object-contain p-4 group-hover:scale-105 transition-transform" />
                       ) : (
                         <div className="text-slate-300 text-4xl">💡</div>
                       )}

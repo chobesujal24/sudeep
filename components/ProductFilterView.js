@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from 'react';
-import Image from 'next/image';
+import ProductImage from '@/components/ProductImage';
 import Link from 'next/link';
 import { Search, X } from 'lucide-react';
 
@@ -75,10 +75,10 @@ export default function ProductFilterView({ products, dbCatMap, basePath }) {
               {/* Image */}
               <div className="relative h-56 bg-white overflow-hidden flex items-center justify-center p-4">
                 {product.images?.[0] ? (
-                  <Image 
+                  <ProductImage
                     src={product.images[0]} 
                     alt={product.name}
-                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                     unoptimized
                     className="object-contain p-4 opacity-90 group-hover:opacity-100 transition-all duration-300"
                   />
