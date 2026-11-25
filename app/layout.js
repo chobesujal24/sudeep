@@ -14,7 +14,7 @@ const baseMetadata = {
   metadataBase: new URL("https://sudeepengineers.com"),
   title: {
     default: "Sudeep Engineers — LED Street Light, Flood Light, Solar Light & Pole Manufacturer in India | Aurangabad",
-    template: "%s | Sudeep Engineers — LED & Solar Manufacturer India",
+    template: "%s | Sudeep Engineers",
   },
   description:
     "India's leading manufacturer of LED street lights, LED flood lights, LED highbay lights, solar street lights, highmast poles, octagonal poles, and solar infrastructure. ISO 9001:2015 certified, BIS approved, GeM registered. Serving BHEL, NTPC, Indian Railways from Waluj MIDC, Aurangabad, Maharashtra.",
@@ -98,7 +98,6 @@ const baseMetadata = {
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://sudeepengineers.com",
     siteName: "Sudeep Engineers",
     title: "Sudeep Engineers — LED Street Light, Flood Light & Solar Manufacturer India",
     description:
@@ -128,7 +127,6 @@ const baseMetadata = {
       "max-snippet": -1,
     },
   },
-  alternates: { canonical: "https://sudeepengineers.com" },
   // Add Google Search Console verification code here when available
   // verification: { google: "your-verification-code" },
 };
@@ -223,48 +221,6 @@ export default async function RootLayout({ children }) {
                 { "@type": "EducationalOccupationalCredential", credentialCategory: "Trademark Registration" },
               ],
               sameAs: [],
-              makesOffer: [
-                {
-                  "@type": "Offer",
-                  itemOffered: {
-                    "@type": "Product",
-                    name: "LED Street Lights",
-                    description: "High-performance LED street lights from 20W to 200W for highway, urban road, and residential colony lighting. IP66 rated, BIS certified.",
-                  },
-                },
-                {
-                  "@type": "Offer",
-                  itemOffered: {
-                    "@type": "Product",
-                    name: "LED Flood Lights",
-                    description: "Industrial LED flood lights from 50W to 500W for stadium, warehouse, and area lighting. IP65 rated, BIS certified.",
-                  },
-                },
-                {
-                  "@type": "Offer",
-                  itemOffered: {
-                    "@type": "Product",
-                    name: "Solar Street Lights",
-                    description: "All-in-one and split-type solar street lights for off-grid and remote area lighting. Complete with solar panel, battery, and LED luminaire.",
-                  },
-                },
-                {
-                  "@type": "Offer",
-                  itemOffered: {
-                    "@type": "Product",
-                    name: "Octagonal Poles",
-                    description: "Hot-dip galvanized octagonal poles from 4m to 12m height for street light mounting. IS 2713 compliant.",
-                  },
-                },
-                {
-                  "@type": "Offer",
-                  itemOffered: {
-                    "@type": "Product",
-                    name: "Highmast Poles",
-                    description: "Highmast lighting poles from 15m to 35m with raising and lowering mechanism for highway interchanges, airports, and stadiums.",
-                  },
-                },
-              ],
             }),
           }}
         />
@@ -321,19 +277,6 @@ export default async function RootLayout({ children }) {
           }}
         />
 
-        {/* BreadcrumbList Schema */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: jsonForHtml({
-              "@context": "https://schema.org",
-              "@type": "BreadcrumbList",
-              itemListElement: [
-                { "@type": "ListItem", position: 1, name: "Home", item: "https://sudeepengineers.com" },
-              ],
-            }),
-          }}
-        />
       </head>
       <body className="antialiased">
         <SiteSettingsProvider value={site}>

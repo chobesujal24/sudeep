@@ -72,53 +72,6 @@ export default async function ProductPage({ params }) {
 
   return (
     <div className="bg-slate-50 min-h-screen">
-      {/* Product Schema.org */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: jsonForHtml({
-            "@context": "https://schema.org",
-            "@type": "Product",
-            name: product.name,
-            image: product.images,
-            description: product.description,
-            brand: {
-              "@type": "Brand",
-              name: "Sudeep Engineers",
-            },
-            manufacturer: {
-              "@type": "Organization",
-              name: "Sudeep Engineers",
-              url: "https://sudeepengineers.com",
-              address: {
-                "@type": "PostalAddress",
-                streetAddress: "Waluj MIDC",
-                addressLocality: "Aurangabad",
-                addressRegion: "Maharashtra",
-                postalCode: "431136",
-                addressCountry: "IN",
-              },
-            },
-            category: product.category,
-            offers: {
-              "@type": "Offer",
-              url: `https://sudeepengineers.com/product/${categorySlug}/${product.slug}`,
-              priceCurrency: "INR",
-              availability: "https://schema.org/InStock",
-              seller: {
-                "@type": "Organization",
-                name: "Sudeep Engineers",
-              },
-            },
-            additionalProperty: specs.map(spec => ({
-              "@type": "PropertyValue",
-              name: spec.label,
-              value: spec.value,
-            })),
-          }),
-        }}
-      />
-
       {/* Breadcrumb Schema */}
       <script
         type="application/ld+json"

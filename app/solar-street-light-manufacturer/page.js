@@ -18,29 +18,10 @@ export default function SolarStreetLightManufacturer() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
-        "@context": "https://schema.org", "@type": "Product",
-        name: "Solar Street Light",
-        manufacturer: { "@type": "Organization", name: "Sudeep Engineers", address: { "@type": "PostalAddress", addressLocality: "Aurangabad", addressRegion: "Maharashtra" }},
-        description: "All-in-one and split-type solar street lights manufactured in Aurangabad, India. Complete with solar panel, lithium battery, MPPT controller, and LED luminaire.",
-        category: "Solar Lighting",
-        brand: { "@type": "Brand", name: "Sudeep Engineers" },
-      })}} />
-
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         "@context": "https://schema.org", "@type": "BreadcrumbList",
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Home", item: "https://sudeepengineers.com" },
           { "@type": "ListItem", position: 2, name: "Solar Street Light Manufacturer", item: "https://sudeepengineers.com/solar-street-light-manufacturer" },
-        ],
-      })}} />
-
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
-        "@context": "https://schema.org", "@type": "FAQPage",
-        mainEntity: [
-          { "@type": "Question", name: "What types of solar street lights does Sudeep Engineers manufacture?", acceptedAnswer: { "@type": "Answer", text: "Sudeep Engineers manufactures all-in-one solar street lights (12W to 120W), integrated solar street lights, split-type solar LED street lights, and solar highmast systems. All products include high-efficiency monocrystalline solar panels, lithium-ion batteries, MPPT charge controllers, and high-lumen LED luminaires." }},
-          { "@type": "Question", name: "What is the warranty on solar street lights?", acceptedAnswer: { "@type": "Answer", text: "Our solar street lights come with a comprehensive warranty covering the LED luminaire, solar panel, battery, and charge controller. Standard warranty is 2-5 years depending on the product configuration. Extended warranty options are available for government and large-scale projects." }},
-          { "@type": "Question", name: "Can Sudeep Engineers supply solar street lights for government projects?", acceptedAnswer: { "@type": "Answer", text: "Yes. Sudeep Engineers is registered on GeM (Government e-Marketplace) and is qualified for government tenders. We have supplied solar street lights for municipal corporations, smart city projects, and rural electrification programs across India." }},
-          { "@type": "Question", name: "What is the cost of solar street light in India?", acceptedAnswer: { "@type": "Answer", text: "Solar street light prices in India range from ₹5,000 to ₹50,000+ depending on wattage, battery capacity, pole height, and configuration. Contact Sudeep Engineers for competitive OEM pricing with bulk order discounts." }},
         ],
       })}} />
 

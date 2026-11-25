@@ -24,16 +24,6 @@ export default function PolesManufacturer() {
         ],
       })}} />
 
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
-        "@context": "https://schema.org", "@type": "FAQPage",
-        mainEntity: [
-          { "@type": "Question", name: "What types of street light poles does Sudeep Engineers manufacture?", acceptedAnswer: { "@type": "Answer", text: "Sudeep Engineers manufactures octagonal poles (4m-12m), conical poles, swaged poles, tabular poles, decorative poles, and highmast poles (15m-35m). All poles are available in mild steel with hot-dip galvanized finish as per IS 4759 standards." }},
-          { "@type": "Question", name: "What is the height range of highmast poles?", acceptedAnswer: { "@type": "Answer", text: "Our highmast poles are available from 15 meters to 35 meters height with manual or motorized raising and lowering mechanism. They are used for highway interchanges, airports, stadiums, and large industrial areas." }},
-          { "@type": "Question", name: "Are the poles IS 2713 compliant?", acceptedAnswer: { "@type": "Answer", text: "Yes, all our tubular steel poles comply with IS 2713 (Tubular Steel Poles for Overhead Power Lines) specifications. The galvanization process follows IS 4759 standards." }},
-          { "@type": "Question", name: "Can you supply poles with foundation design?", acceptedAnswer: { "@type": "Answer", text: "Yes, we provide complete pole installation packages including foundation design drawings, anchor bolt cages, base plates, and installation guidelines. Custom foundation designs are available based on soil conditions and wind loading requirements." }},
-        ],
-      })}} />
-
       {/* Hero */}
       <section className="pt-32 pb-16 relative overflow-hidden bg-slate-50">
         <div className="max-w-7xl mx-auto px-6 relative z-10">

@@ -1,6 +1,5 @@
 import { supabase } from "@/lib/supabase";
 import { getProductData } from "@/lib/getProductData";
-import { SEO_PRODUCTS, SEO_LOCATIONS } from "@/lib/seoConfig";
 
 export const revalidate = 3600;
 
@@ -9,20 +8,20 @@ export default async function sitemap() {
 
   // Static pages
   const mainPages = [
-    { url: baseUrl, lastModified: new Date(), changeFrequency: "weekly", priority: 1.0 },
-    { url: `${baseUrl}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/services`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
-    { url: `${baseUrl}/product`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
-    { url: `${baseUrl}/industries`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${baseUrl}/certifications`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
-    { url: `${baseUrl}/blog`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
-    { url: `${baseUrl}/contact`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: baseUrl, changeFrequency: "weekly", priority: 1.0 },
+    { url: `${baseUrl}/about`, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/services`, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${baseUrl}/product`, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${baseUrl}/industries`, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${baseUrl}/certifications`, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${baseUrl}/blog`, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${baseUrl}/contact`, changeFrequency: "monthly", priority: 0.8 },
   ];
 
   const seoPages = [
-    { url: `${baseUrl}/led-light-manufacturer-aurangabad`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/solar-street-light-manufacturer`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/street-light-pole-manufacturer`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/led-light-manufacturer-aurangabad`, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/solar-street-light-manufacturer`, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/street-light-pole-manufacturer`, changeFrequency: "monthly", priority: 0.8 },
   ];
 
   let blogPosts = [];
@@ -42,17 +41,15 @@ export default async function sitemap() {
 
   // Dynamic category pages
   let categoryPages = [];
-  let fetchedCategories = null;
   try {
     const { data: categories, error } = await supabase
       .from('categories')
       .select('slug')
       .order('sequence', { ascending: true });
     if (error) throw error;
-    fetchedCategories = categories;
 
     if (categories) {
-      categoryPages = categories.map((cat) => ({
+      categoryPages = categories.filter((cat) => cat.slug).map((cat) => ({
         url: `${baseUrl}/product/${cat.slug}`,
         changeFrequency: "weekly",
         priority: 0.8,
@@ -65,11 +62,9 @@ export default async function sitemap() {
 
   // Dynamic product pages
   let productPages = [];
-  let fetchedProductsArray = [];
   try {
     const products = await getProductData();
     const productsArray = Array.isArray(products) ? products : [];
-    fetchedProductsArray = productsArray;
 
     const { data: categories, error } = await supabase
       .from('categories')
@@ -89,7 +84,6 @@ export default async function sitemap() {
         const catSlug = catSlugMap[p.category.toLowerCase()];
         return {
           url: `${baseUrl}/product/${catSlug}/${p.slug}`,
-          lastModified: new Date(),
           changeFrequency: "monthly",
           priority: 0.7,
         };
@@ -99,30 +93,6 @@ export default async function sitemap() {
     if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) throw e;
   }
 
-  // Programmatic SEO Manufacturer Location Pages
-  const locationPages = [];
-  
-  // Combine hardcoded products with dynamically fetched ones from DB
-  const dynamicCategories = typeof fetchedCategories !== 'undefined' && fetchedCategories ? fetchedCategories.map(c => c.slug) : [];
-  const dynamicProducts = typeof fetchedProductsArray !== 'undefined' && fetchedProductsArray ? fetchedProductsArray.map(p => p.slug) : [];
-  
-  const allProductSlugs = new Set([
-    ...Object.keys(SEO_PRODUCTS),
-    ...dynamicCategories,
-    ...dynamicProducts
-  ]);
-
-  for (const productSlug of allProductSlugs) {
-    if (!productSlug) continue;
-    for (const location of SEO_LOCATIONS) {
-      locationPages.push({
-        url: `${baseUrl}/manufacturer/${productSlug}/${location.slug}`,
-        lastModified: new Date(),
-        changeFrequency: "monthly",
-        priority: 0.9, // High priority for local SEO
-      });
-    }
-  }
-
-  return [...mainPages, ...seoPages, ...blogPosts, ...categoryPages, ...productPages, ...locationPages];
+  // Templated location pages remain accessible, but are not promoted in the sitemap.
+  return [...mainPages, ...seoPages, ...blogPosts, ...categoryPages, ...productPages];
 }
