@@ -4,7 +4,7 @@ export default function robots() {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/_next/", "/private/", "/admin/"],
+        disallow: ["/api/", "/private/", "/admin"],
       },
     ],
     sitemap: "https://sudeepengineers.com/sitemap.xml",

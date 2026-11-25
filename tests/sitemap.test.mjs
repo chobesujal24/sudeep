@@ -6,8 +6,7 @@ import { readFile } from 'node:fs/promises';
 // actual categories schema without requiring production Supabase credentials.
 const source = (await readFile(new URL('../app/sitemap.js', import.meta.url), 'utf8'))
   .replace('import { supabase } from "@/lib/supabase";', 'const supabase = globalThis.__sitemapMocks.supabase;')
-  .replace('import { getProductData } from "@/lib/getProductData";', 'const getProductData = globalThis.__sitemapMocks.getProductData;')
-  .replace('import { SEO_PRODUCTS, SEO_LOCATIONS } from "@/lib/seoConfig";', 'const { SEO_PRODUCTS, SEO_LOCATIONS } = globalThis.__sitemapMocks;');
+  .replace('import { getProductData } from "@/lib/getProductData";', 'const getProductData = globalThis.__sitemapMocks.getProductData;');
 
 function mockSupabase(categoryFailure = null) {
   return {
@@ -51,7 +50,9 @@ test('sitemap generates category and product entries without categories.updated_
     assert.equal(category.lastModified, undefined);
     assert.ok(entries.some((entry) => entry.url.endsWith('/product/lighting/lamp')));
     assert.ok(entries.some((entry) => entry.url.endsWith('/blog/published')));
-    assert.ok(entries.some((entry) => entry.url.endsWith('/manufacturer/lighting/mumbai')));
+    assert.ok(!entries.some((entry) => entry.url.includes('/manufacturer/')));
+    assert.equal(entries.find((entry) => entry.url.endsWith('/product/lighting/lamp')).lastModified, undefined);
+    assert.equal(entries.find((entry) => entry.url === 'https://sudeepengineers.com').lastModified, undefined);
   } finally {
     if (previousUrl === undefined) delete process.env.NEXT_PUBLIC_SUPABASE_URL;
     else process.env.NEXT_PUBLIC_SUPABASE_URL = previousUrl;

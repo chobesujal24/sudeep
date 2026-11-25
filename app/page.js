@@ -10,9 +10,10 @@ import { getSettings } from "@/lib/getSiteSettings";
 import { safeWebUrl } from "@/lib/siteSettings.mjs";
 
 const defaultMetadata = {
-  title: "Sudeep Engineers — LED Street Light, Flood Light, Solar Light & Pole Manufacturer in India | Aurangabad",
+  title: { absolute: "LED & Solar Lighting Manufacturer | Sudeep Engineers" },
   description:
-    "India's leading manufacturer of LED street lights, LED flood lights, LED highbay lights, solar street lights, highmast poles, octagonal poles, and solar infrastructure. ISO 9001:2015 certified, BIS approved, GeM registered. Serving BHEL, NTPC, Indian Railways from Waluj MIDC, Aurangabad, Maharashtra.",
+    "Explore LED street lights, flood lights, solar lighting and poles from Sudeep Engineers, a manufacturer in Waluj MIDC, Aurangabad. Request a quote.",
+  alternates: { canonical: "https://sudeepengineers.com" },
   openGraph: {
     title: "Sudeep Engineers — LED Street Light, Flood Light & Solar Manufacturer India",
     description:
@@ -27,8 +28,8 @@ export async function generateMetadata() {
   const description = typeof seo.metaDescription === "string" && seo.metaDescription.trim() || defaultMetadata.description;
   const image = safeWebUrl(seo.ogImage, "/product-hero-section.webp");
   return { ...defaultMetadata, title, description,
-    openGraph: { ...defaultMetadata.openGraph, title, description, images: [{ url: image }] },
-    twitter: { card: "summary_large_image", title, description, images: [image] } };
+    openGraph: { ...defaultMetadata.openGraph, title: typeof title === "string" ? title : title.absolute, description, images: [{ url: image }] },
+    twitter: { card: "summary_large_image", title: typeof title === "string" ? title : title.absolute, description, images: [image] } };
 }
 
 /*

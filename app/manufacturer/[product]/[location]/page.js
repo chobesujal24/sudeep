@@ -7,8 +7,6 @@ import { Shield, MapPin, Award, Truck, CheckCircle2 } from "lucide-react";
 import { SEO_PRODUCTS, SEO_LOCATIONS } from "@/lib/seoConfig";
 import { supabase } from "@/lib/supabase";
 import { publicProducts } from "@/lib/catalog.mjs";
-import { getSiteSettings } from "@/lib/getSiteSettings";
-import { jsonForHtml } from "@/lib/sanitizeBlogHtml.mjs";
 
 export const revalidate = 86400; // Cache these pages heavily (1 day)
 
@@ -36,7 +34,7 @@ const getDynamicSEOItems = unstable_cache(async () => {
       items[prod.slug] = {
         name: prod.name,
         plural: prod.name,
-        specs: prod.wattage ? `${prod.wattage} Options, IP66, BIS` : "Custom Specifications Built to Order",
+        specs: prod.wattage ? `${prod.wattage} Options` : "Custom Specifications Built to Order",
         desc: prod.description || `High-performance ${prod.name} for highway, infrastructure, and smart city projects.`,
       };
     }
@@ -104,38 +102,8 @@ export default async function ProgrammaticManufacturerPage({ params }) {
     notFound();
   }
 
-  const site = await getSiteSettings();
-
-  // Generate localized schema
-  const localBusinessSchema = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness", // We use LocalBusiness mapped to areaServed instead of pricing
-    "name": `Sudeep Engineers - ${product.name} Manufacturer`,
-    "description": `OEM Manufacturer of ${product.plural} servicing municipal and industrial clients in ${location.name}, ${location.state}.`,
-    "url": `https://sudeepengineers.com/manufacturer/${resolvedParams.product}/${resolvedParams.location}`,
-    "telephone": site.phone,
-    "areaServed": {
-      "@type": "City",
-      "name": location.name
-    },
-    "knowsAbout": product.name,
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Waluj MIDC",
-      "addressLocality": "Aurangabad",
-      "addressRegion": "Maharashtra",
-      "postalCode": "431136",
-      "addressCountry": "IN"
-    }
-  };
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: jsonForHtml(localBusinessSchema) }}
-      />
-
       <article className="min-h-screen bg-slate-50 pb-20">
         {/* Dynamic Hero Section */}
         <section className="pt-32 pb-20 relative overflow-hidden bg-white border-b border-slate-200">

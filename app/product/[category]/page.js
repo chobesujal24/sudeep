@@ -104,64 +104,10 @@ export default async function CategoryPage({ params }) {
               itemListElement: filteredProducts.slice(0, 30).map((p, i) => ({
                 "@type": "ListItem",
                 position: i + 1,
-                item: {
-                  "@type": "Product",
-                  name: p.name,
-                  description: p.description,
-                  url: `https://sudeepengineers.com/product/${categorySlug}/${p.slug}`,
-                  image: p.images?.[0] || "",
-                  brand: { "@type": "Brand", name: "Sudeep Engineers" },
-                  manufacturer: {
-                    "@type": "Organization",
-                    name: "Sudeep Engineers",
-                    url: "https://sudeepengineers.com",
-                  },
-                  offers: {
-                    "@type": "Offer",
-                    availability: "https://schema.org/InStock",
-                    priceCurrency: "INR",
-                    url: `https://sudeepengineers.com/product/${categorySlug}/${p.slug}`,
-                  },
-                },
+                url: `https://sudeepengineers.com/product/${categorySlug}/${p.slug}`,
+                name: p.name,
               })),
             },
-          }),
-        }}
-      />
-
-      {/* FAQ Schema for category if applicable */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: jsonForHtml({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: [
-              {
-                "@type": "Question",
-                name: `What types of ${category.name} does Sudeep Engineers manufacture?`,
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: `Sudeep Engineers manufactures a comprehensive range of ${category.name} including models suitable for highways, urban roads, industrial areas, and commercial spaces. All products are ISO 9001:2015 certified and BIS approved.`,
-                },
-              },
-              {
-                "@type": "Question",
-                name: `Are Sudeep Engineers' ${category.name} BIS certified?`,
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: `Yes, all our ${category.name} products meet BIS (Bureau of Indian Standards) requirements. We hold valid BIS certificates for our LED lighting product range.`,
-                },
-              },
-              {
-                "@type": "Question",
-                name: `Can I get custom ${category.name} manufactured?`,
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: `Absolutely. We offer OEM/ODM manufacturing for custom ${category.name} with specific wattages, dimensions, and photometric requirements. Contact us with your specifications for a quote.`,
-                },
-              },
-            ],
           }),
         }}
       />
