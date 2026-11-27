@@ -533,17 +533,6 @@ h1, h2, h3, h4, h5, h6 {
   animation: number-shimmer 4s ease-in-out infinite;
 }
 
-/* ========================================
-   HERO 3D — Canvas container
-   ======================================== */
-
-.hero-3d-container {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-}
-
 /* Hero particle overlay */
 .hero-particles {
   position: absolute;
@@ -643,15 +632,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .logo-scroll-track:hover {
   animation-play-state: paused;
-}
-
-/* ========================================
-   TESTIMONIALS
-   ======================================== */
-
-.testimonial-track {
-  display: flex;
-  transition: transform 0.5s ease;
 }
 
 /* ========================================
